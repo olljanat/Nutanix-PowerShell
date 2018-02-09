@@ -34,15 +34,14 @@ namespace Nutanix {
       request.PreAuthenticate = true;
       string username = "admin"; // XXX
       string password = "Nutanix.123"; // XXX
-      String encoded = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(username + ":" + password));
-      // String encoded = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("UTF-8").GetBytes(username + ":" + password));
-      request.Headers.Add("Authorization", "Basic " + encoded);
+      var encoding = System.Text.Encoding.GetEncoding("UTF-8");
+      var encodedAuth = encoding.GetBytes(username + ":" + password);
+      String authHeader = System.Convert.ToBase64String(encodedAuth);
+      request.Headers.Add("Authorization", "Basic " + authHeader);
       request.Headers.Add("Content-Type","application/json");
       request.Headers.Add("Accept", "application/json");
 
       if (!string.IsNullOrEmpty(requestBody) && requestMethod.Equals("POST")) {
-        var encoding = new UTF8Encoding();
-        // var bytes = Encoding.GetEncoding("iso-8859-1").GetBytes(requestBody);
         var bytes = Encoding.GetEncoding("UTF-8").GetBytes(requestBody);
         request.ContentLength = bytes.Length;
         using (var writeStream = request.GetRequestStream()) {
@@ -82,17 +81,48 @@ namespace Nutanix {
     }
     private string name;
 
+    [Parameter()]
+    public string Uuid {
+      get { return uuid; }
+      set { uuid = value; }
+    }
+    private string uuid;
+
     protected override void ProcessRecord() {
-      if (String.IsNullOrEmpty(name)) {
+      if (String.IsNullOrEmpty(name) && String.IsNullOrEmpty(uuid)) {
         // If no params specified, then get all VMs.
-        Util.RestCall("/vms/list", "POST", "{}");
-      } else {
-        // If no params specified, then get VM with 'name'.
-        var requestBody = "{\"filter\": \"vm_name==" + name + "\"}";
-        Util.RestCall("/vms/list", "POST", requestBody);
-        // TODO: parse JSON response and then create Vm object.
-        // WriteObject(new Vm("Trevor", "Sullivan"));
+        GetAllVms();
+        return;
       }
+
+      if (!String.IsNullOrEmpty(uuid)) {
+        GetVmByUuid(uuid);
+        return;
+      }
+
+      if (!String.IsNullOrEmpty(name)) {
+        GetVmByName(name);
+        return;
+      }
+    }
+
+    public static void GetAllVms() {
+      Util.RestCall("/vms/list", "POST", "{}");
+    }
+
+    // If no params specified, then get VM with 'name'.
+    public static void GetVmByName(string name) {
+      var requestBody = "{\"filter\": \"vm_name==" + name + "\"}";
+      Util.RestCall("/vms/list", "POST", requestBody);
+      // TODO: parse JSON response and then create Vm object.
+      // WriteObject(new Vm("Trevor", "Sullivan"));
+    }
+
+    public static void GetVmByUuid(string uuid) {
+      // TODO: validate using UUID regexes that 'uuid' is in correct format.
+      Util.RestCall("/vms/" + uuid, "GET", "");
+      // TODO: parse JSON response and then create Vm object.
+      // WriteObject(new Vm("Trevor", "Sullivan"));
     }
   }
 }

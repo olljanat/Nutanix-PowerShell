@@ -12,5 +12,8 @@ $ClusterIp = "10.4.48.97"
 # Get all VMs.
 Get-VM
 
-# Get VM with this name.
+# Get VM using name.
 Get-VM -Name 'Vm-source07'
+
+# Get VM using uuid.
+Get-VM -Uuid '2ca93e66-6b4c-4b21-a6bc-e991897bbe89'
