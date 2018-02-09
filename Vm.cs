@@ -28,12 +28,12 @@ namespace Nutanix {
 
       // TODO: arg ClusterIp
       var request = WebRequest.Create(
-        "https://10.7.255.141:9440/api/nutanix/v3" + urlPath);
+        "https://feature-c1:9440/api/nutanix/v3" + urlPath);
 
       request.Method = requestMethod;
       request.PreAuthenticate = true;
-      string username = "admin";
-      string password = "Nutanix.123";
+      string username = "admin"; // XXX
+      string password = "Nutanix.123"; // XXX
       String encoded = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(username + ":" + password));
       // String encoded = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("UTF-8").GetBytes(username + ":" + password));
       request.Headers.Add("Authorization", "Basic " + encoded);
@@ -75,21 +75,23 @@ namespace Nutanix {
 
   [CmdletAttribute(VerbsCommon.Get, "Vm")]
   public class GetVmCmdlet : Cmdlet {
-    [Parameter(Position = 0, Mandatory = false)]
-    public string VmName {
-      get { return vmName; }
-      set { vmName = value; }
+    [Parameter()]
+    public string Name {
+      get { return name; }
+      set { name = value; }
     }
-    private string vmName;
+    private string name;
 
     protected override void ProcessRecord() {
-      // If no params specified, then get all VMs.
-      // TODO: use the convenience function for "isNullOrEmpty"
-      if (vmName == null || vmName.Length == 0) {
+      if (String.IsNullOrEmpty(name)) {
+        // If no params specified, then get all VMs.
         Util.RestCall("/vms/list", "POST", "{}");
       } else {
+        // If no params specified, then get VM with 'name'.
+        var requestBody = "{\"filter\": \"vm_name==" + name + "\"}";
+        Util.RestCall("/vms/list", "POST", requestBody);
+        // TODO: parse JSON response and then create Vm object.
         // WriteObject(new Vm("Trevor", "Sullivan"));
-        Console.WriteLine("Hello World! " + vmName); // XXX
       }
     }
   }

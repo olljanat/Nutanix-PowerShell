@@ -13,5 +13,4 @@ $ClusterIp = "10.4.48.97"
 Get-VM
 
 # Get VM with this name.
-Get-VM 'Vm-source07'
-
+Get-VM -Name 'Vm-source07'
