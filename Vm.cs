@@ -4,6 +4,11 @@ using System.IO;
 using System.Net;
 using System.Text;
 
+public class VimException : Exception {
+    public VimException():base() { }
+    public VimException (string message): base(message) { }
+}
+
 namespace Nutanix {
   public class Vm {
     public Vm() {
@@ -70,6 +75,12 @@ namespace Nutanix {
         Console.WriteLine(responseValue);
       }
     }
+
+    // TODO:
+    public static bool IsValidUuid(string uuid) {
+      // Validate 'uuid' string.
+      return true;
+    }
   }
 
   [CmdletAttribute(VerbsCommon.Get, "Vm")]
@@ -106,11 +117,14 @@ namespace Nutanix {
       }
     }
 
+    // Grab all VMs.
+    // REST: /vms/list
     public static void GetAllVms() {
       Util.RestCall("/vms/list", "POST", "{}");
     }
 
     // If no params specified, then get VM with 'name'.
+    // REST: /vms/list
     public static void GetVmByName(string name) {
       var requestBody = "{\"filter\": \"vm_name==" + name + "\"}";
       Util.RestCall("/vms/list", "POST", requestBody);
@@ -118,9 +132,55 @@ namespace Nutanix {
       // WriteObject(new Vm("Trevor", "Sullivan"));
     }
 
+    // Get Vm using 'uuid'.
+    // REST: /vms/{uuid}
     public static void GetVmByUuid(string uuid) {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
       Util.RestCall("/vms/" + uuid, "GET", "");
+      // TODO: parse JSON response and then create Vm object.
+      // WriteObject(new Vm("Trevor", "Sullivan"));
+    }
+  }
+
+  [CmdletAttribute(VerbsCommon.Remove, "Vm")]
+  public class RemoveVmCmdlet : Cmdlet {
+    [Parameter()]
+    public string Name {
+      get { return name; }
+      set { name = value; }
+    }
+    private string name;
+
+    [Parameter()]
+    public string Uuid {
+      get { return uuid; }
+      set { uuid = value; }
+    }
+    private string uuid;
+
+    protected override void ProcessRecord() {
+      if (String.IsNullOrEmpty(name) && String.IsNullOrEmpty(uuid)) {
+        // TODO: return error
+        return;
+      }
+
+      if (!String.IsNullOrEmpty(uuid)) {
+        DeleteVmByUuid(uuid);
+        return;
+      }
+
+      // TODO:
+      // if (!String.IsNullOrEmpty(name)) {
+      //   DeleteVmByName(name);
+      //   return;
+      // }
+    }
+
+    // Delete Vm using 'uuid'.
+    // REST: /vms/{uuid}
+    public static void DeleteVmByUuid(string uuid) {
+      // TODO: validate using UUID regexes that 'uuid' is in correct format.
+      Util.RestCall("/vms/" + uuid, "DELETE", "");
       // TODO: parse JSON response and then create Vm object.
       // WriteObject(new Vm("Trevor", "Sullivan"));
     }
