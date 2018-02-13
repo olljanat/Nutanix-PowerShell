@@ -4,6 +4,8 @@ using System.IO;
 using System.Net;
 using System.Text;
 
+using Newtonsoft.Json;
+
 // This is the exception that VMware's PowerCLI throws on error.
 public class VimException : Exception {
   public VimException():base() { }
@@ -12,7 +14,11 @@ public class VimException : Exception {
 
 namespace Nutanix {
   public class Vm {
-    public Vm() {
+    public string Name;
+    public string Uuid;
+    public Vm(dynamic json) {
+      Name = json.spec.name;
+      Uuid = json.metadata.uuid;
     }
   }
 
@@ -24,7 +30,8 @@ namespace Nutanix {
         true;
     }
 
-    public static void RestCall(
+    // Returns the JSON response a string. Responsibility of caller to parse.
+    public static dynamic RestCall(
       string urlPath,
       string requestMethod,
       string requestBody) {
@@ -56,8 +63,6 @@ namespace Nutanix {
       }
 
       using (var response = (HttpWebResponse) request.GetResponse()) {
-        var responseValue = string.Empty;
-
         if (response.StatusCode != HttpStatusCode.OK &&
             response.StatusCode != HttpStatusCode.Accepted) {
           var message = String.Format(
@@ -69,14 +74,12 @@ namespace Nutanix {
         using (var responseStream = response.GetResponseStream()) {
           if (responseStream != null) {
             using (var reader = new StreamReader(responseStream)) {
-              responseValue = reader.ReadToEnd();
+              return JsonConvert.DeserializeObject(reader.ReadToEnd());
             }
           }
         }
-
-        // TODO: parse JSON
-        Console.WriteLine(responseValue);
       }
+      return null;
     }
 
     // TODO:
@@ -155,12 +158,12 @@ namespace Nutanix {
       }
 
       if (!String.IsNullOrEmpty(Uuid)) {
-        GetVmByUuid(Uuid);
+        WriteObject(GetVmByUuid(Uuid));
         return;
       }
 
       if (!String.IsNullOrEmpty(Name)) {
-        GetVmByName(Name);
+        WriteObject(GetVmByName(Name));
         return;
       }
     }
@@ -173,20 +176,19 @@ namespace Nutanix {
 
     // If no params specified, then get VM with 'name'.
     // REST: /vms/list
-    public static void GetVmByName(string name) {
-      var requestBody = "{\"filter\": \"vm_name==" + name + "\"}";
-      Util.RestCall("/vms/list", "POST", requestBody);
-      // TODO: parse JSON response and then create Vm object.
-      // WriteObject(new Vm("Trevor", "Sullivan"));
+    public static Vm GetVmByName(string name) {
+      var reqBody = "{\"filter\": \"vm_name==" + name + "\"}";
+      var json = Util.RestCall("/vms/list", "POST", reqBody);
+      // TODO: check len of 'entities'.
+      return new Vm(json.entities[0]);
     }
 
     // Get Vm using 'uuid'.
     // REST: /vms/{uuid}
-    public static void GetVmByUuid(string uuid) {
+    public static Vm GetVmByUuid(string uuid) {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      Util.RestCall("/vms/" + uuid, "GET", "");
-      // TODO: parse JSON response and then create Vm object.
-      // WriteObject(new Vm("Trevor", "Sullivan"));
+      var json = Util.RestCall("/vms/" + uuid, "GET", "" /* requestBody */);
+      return new Vm(json.entities[0]);
     }
   }
 
@@ -205,24 +207,30 @@ namespace Nutanix {
       }
 
       if (!String.IsNullOrEmpty(Uuid)) {
+        // TODO: WriteObject Task
         DeleteVmByUuid(Uuid);
         return;
       }
 
-      // TODO:
-      // if (!String.IsNullOrEmpty(Name)) {
-      //   DeleteVmByName(Name);
-      //   return;
-      // }
+      if (!String.IsNullOrEmpty(Name)) {
+        // TODO: WriteObject Task
+        DeleteVmByName(Name);
+        return;
+      }
     }
 
     // Delete Vm using 'uuid'.
     // REST: /vms/{uuid}
     public static void DeleteVmByUuid(string uuid) {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      Util.RestCall("/vms/" + uuid, "DELETE", "");
-      // TODO: parse JSON response and then create Vm object.
-      // WriteObject(new Vm("Trevor", "Sullivan"));
+      Util.RestCall("/vms/" + uuid, "DELETE", "" /* requestBody */);
+    }
+
+    // If no params specified, then get VM with 'name'.
+    // REST: /vms/list
+    public static void DeleteVmByName(string name) {
+      var vm = GetVmCmdlet.GetVmByName(name);
+      Util.RestCall("/vms/" + vm.Uuid, "DELETE", "" /* requestBody */);
     }
   }
 }
