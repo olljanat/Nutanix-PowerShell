@@ -13,11 +13,32 @@ public class VimException : Exception {
 }
 
 namespace Nutanix {
+  // VMware's struct definition.
+  // https://www.vmware.com/support/developer/PowerCLI/PowerCLI41U1/html/VirtualMachine.html
   public class Vm {
+    public const string PowerState_ON = "ON";
+    public const string PowerState_OFF = "OFF";
+
     public string Name;
     public string Uuid;
+    public string HardwareClockTimezone;
+    public int? NumSockets;
+    public int? MemoryMB;
+    public int? NumVcpusPerSocket;
+    public dynamic json;
     public Vm(dynamic json) {
+
+      // Special property 'json' stores the original json.
+      this.json = json;
+      this.json.Property("status").Remove();
+      this.json.api_version = "3.1";
+
+      // Fill in field.
       Name = json.spec.name;
+      NumSockets = json.spec.resources.num_sockets;
+      MemoryMB = json.spec.resources.memory_size_mib;
+      NumVcpusPerSocket = json.spec.resources.num_vcpus_per_socket;
+      HardwareClockTimezone = json.spec.resources.hardware_clock_timezone;
       Uuid = json.metadata.uuid;
     }
   }
@@ -54,7 +75,7 @@ namespace Nutanix {
       request.Headers.Add("Content-Type","application/json");
       request.Headers.Add("Accept", "application/json");
 
-      if (!string.IsNullOrEmpty(requestBody) && requestMethod.Equals("POST")) {
+      if (!string.IsNullOrEmpty(requestBody)) {
         var bytes = Encoding.GetEncoding("UTF-8").GetBytes(requestBody);
         request.ContentLength = bytes.Length;
         using (var writeStream = request.GetRequestStream()) {
@@ -179,7 +200,9 @@ namespace Nutanix {
     public static Vm GetVmByName(string name) {
       var reqBody = "{\"filter\": \"vm_name==" + name + "\"}";
       var json = Util.RestCall("/vms/list", "POST", reqBody);
-      // TODO: check len of 'entities'.
+      if (json.entities.Count == 0) {
+        return null;
+      }
       return new Vm(json.entities[0]);
     }
 
@@ -188,7 +211,24 @@ namespace Nutanix {
     public static Vm GetVmByUuid(string uuid) {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
       var json = Util.RestCall("/vms/" + uuid, "GET", "" /* requestBody */);
-      return new Vm(json.entities[0]);
+      return new Vm(json);
+    }
+  }
+
+  [CmdletAttribute("Start", "Vm")]
+  public class StartVmCmdlet : Cmdlet {
+    [Parameter()]
+    public string Uuid { get; set; } = "";
+
+    [Parameter()]
+    public Vm VM { get; set; } = null;
+
+    protected override void ProcessRecord() {
+      // TODO: maybe should not rely on 'json' to generate request?
+      VM.json.spec.resources.power_state = Vm.PowerState_ON;
+      VM.json.api_version = "3.1";
+      // TODO: return Task object from the RestCall.
+      Util.RestCall("/vms/" + VM.Uuid, "PUT", VM.json.ToString());
     }
   }
 
@@ -230,7 +270,10 @@ namespace Nutanix {
     // REST: /vms/list
     public static void DeleteVmByName(string name) {
       var vm = GetVmCmdlet.GetVmByName(name);
-      Util.RestCall("/vms/" + vm.Uuid, "DELETE", "" /* requestBody */);
+      if (vm != null) {
+        // Util.RestCall("/vms/" + vm.uuid, "DELETE", "" /* requestBody */);
+        Util.RestCall("/vms/" + vm.Uuid, "DELETE", "" /* requestBody */);
+      }
     }
   }
 }
