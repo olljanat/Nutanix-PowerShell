@@ -7,6 +7,14 @@ Import-Module ./build/NtnxPoshSDK.dll
 $ClusterIp = "10.4.48.97"
 $TestVmName = "__CreatedViaSDK__"
 
+# XXX
+# Get all VMs.
+$Password = ConvertTo-SecureString 'Nutanix.123' -AsPlainText -Force
+New-NTNX -Server $ClusterIp -UserName admin -Password $Password -AcceptInvalidSslCerts
+echo "Get all VMs..."
+Get-Vm
+exit # XXX
+
 #------------------------------------------------------------------------------
 # Create VM.
 #------------------------------------------------------------------------------

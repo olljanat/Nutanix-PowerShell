@@ -44,6 +44,13 @@ namespace Nutanix {
   }
 
   public class Util {
+    public static string server;
+
+    // Holds username and password.
+    // TODO: might need to GC pscreds.Password (SecureString) using Dispose
+    // method.
+    public static System.Management.Automation.PSCredential pscreds;
+
     // NOTE: only use this function during development.
     public static void TestOnlyIgnoreCerts() {
       ServicePointManager.ServerCertificateValidationCallback +=
@@ -57,17 +64,19 @@ namespace Nutanix {
       string requestMethod,
       string requestBody) {
 
-      // TODO: we should be checking certificates...
-      TestOnlyIgnoreCerts();
+      // TODO: also check 'pscreds' for null.
+      if (String.IsNullOrEmpty(server) || Util.pscreds == null) {
+        // TODO: throw exception.
+        return null;
+      }
 
-      // TODO: arg ClusterIp
       var request = WebRequest.Create(
-        "https://feature-c1:9440/api/nutanix/v3" + urlPath);
-
+        "https://" + Util.server + ":9440/api/nutanix/v3" + urlPath);
       request.Method = requestMethod;
       request.PreAuthenticate = true;
-      string username = "admin"; // XXX
-      string password = "Nutanix.123"; // XXX
+      var creds = Util.pscreds.GetNetworkCredential();
+      string username = creds.UserName;
+      string password = creds.Password;
       var encoding = System.Text.Encoding.GetEncoding("UTF-8");
       var encodedAuth = encoding.GetBytes(username + ":" + password);
       String authHeader = System.Convert.ToBase64String(encodedAuth);
@@ -107,6 +116,46 @@ namespace Nutanix {
     public static bool IsValidUuid(string uuid) {
       // Validate 'uuid' string.
       return true;
+    }
+  }
+
+  [CmdletAttribute(VerbsCommon.New, "NTNX")]
+  public class ConnectNTNX : Cmdlet {
+    [Parameter()]
+    public string Server { get; set; } = "";
+
+    [Parameter()]
+    public string UserName { get; set; } = "";
+
+    // TODO: note that 'Password' should be the result of
+    // 'ConvertTo-SecureString'
+    [Parameter()]
+    public System.Security.SecureString Password { get; set; } =
+      new System.Security.SecureString();
+
+    [Parameter()]
+    public SwitchParameter AcceptInvalidSslCerts
+    {
+      get { return acceptInvalidSslCerts; }
+      set { acceptInvalidSslCerts = value; }
+    }
+    private bool acceptInvalidSslCerts;
+
+    protected override void ProcessRecord() {
+      Connect(Server, UserName, Password, acceptInvalidSslCerts);
+    }
+
+    // Save authentication info.
+    public static void Connect(
+      string server, string username, System.Security.SecureString password,
+      bool acceptinvalidsslcerts) {
+
+      if (acceptinvalidsslcerts) {
+        Util.TestOnlyIgnoreCerts();
+      }
+      Util.server = server;
+      Util.pscreds = new System.Management.Automation.PSCredential(
+        username, password);
     }
   }
 
