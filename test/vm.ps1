@@ -13,7 +13,8 @@ $TestVmName = "__CreatedViaSDK__"
 
 echo "Creating VM..."
 # TODO: get image uuid via /images REST
-New-Vm -Name $TestVmName -ImageUuid 'c4240283-62f6-40b5-ae78-82fd825bdeaa'
+New-Vm -Name $TestVmName -ImageUuid '39ad7a2d-08f8-4bfa-976c-9f07ddfac672' `
+  -NetworkUuid 'd3f69934-7d11-4347-8075-6048ce5425f9'
 # TODO: wait using Task poll instead of sleep.
 echo "Sleeping 15 seconds for VM to finish creating..."
 Start-Sleep -Seconds 15

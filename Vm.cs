@@ -131,6 +131,11 @@ namespace Nutanix {
     [Parameter(Mandatory=true)]
     public string ImageUuid { get; set; } = "";
 
+    // TODO: allow creation of non-networked VMs by creating 'nic_list' iff
+    // 'NetworkUuid' was passed in.
+    [Parameter(Mandatory=true)]
+    public string NetworkUuid { get; set; } = "";
+
     protected override void ProcessRecord() {
       // TODO: make cluster_reference required if talking to PC. But not needed
       // if talking to PE.
@@ -153,6 +158,14 @@ namespace Nutanix {
                 },
                 ""device_properties"": {
                   ""device_type"": ""DISK""
+                }
+              }
+            ],
+            ""nic_list"": [
+              {
+                ""subnet_reference"": {
+                  ""kind"": ""subnet"",
+                  ""uuid"": """ + NetworkUuid + @"""
                 }
               }
             ]
