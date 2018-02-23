@@ -15,7 +15,7 @@ sdk:
 		-out:$(BUILD_DIR)/NtnxPoshSDK.dll \
 		-reference:/usr/local/share/PackageManagement/NuGet/Packages/Microsoft.PowerShell.5.ReferenceAssemblies.1.1.0/lib/net4/System.Management.Automation.dll \
 		-reference:/usr/local/share/PackageManagement/NuGet/Packages/Newtonsoft.Json.10.0.3/lib/net45/Newtonsoft.Json.dll \
-		Vm.cs
+		*.cs
 
 .PHONY: clean
 clean:
