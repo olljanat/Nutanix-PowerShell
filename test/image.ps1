@@ -16,3 +16,5 @@ New-NTNX -Server $ClusterIp -UserName admin -Password $Password `
 # Get all VMs.
 echo "Get all Images..."
 Get-Image
+
+Get-Image -Uuid 'ddf96624-438a-4d9c-94ec-823570224f69'

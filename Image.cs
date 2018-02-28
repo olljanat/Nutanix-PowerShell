@@ -34,8 +34,22 @@ public class Image {
 
 [CmdletAttribute(VerbsCommon.Get, "Image")]
 public class GetImageCmdlet : Cmdlet {
+  [Parameter()]
+  public string Uuid { get; set; } = "";
+
   protected override void ProcessRecord() {
+    if (!String.IsNullOrEmpty(Uuid)) {
+      WriteObject(GetImageByUuid(Uuid));
+      return;
+    }
+
     WriteObject(GetAllImages());
+  }
+
+  public static Image GetImageByUuid(string uuid) {
+    // TODO: validate using UUID regexes that 'uuid' is in correct format.
+    var json = Util.RestCall("/images/" + uuid, "GET", "" /* requestBody */);
+    return new Image(json);
   }
 
   public static Image[] GetAllImages() {
