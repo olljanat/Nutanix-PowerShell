@@ -6,7 +6,6 @@ all: sdk
 
 # TODO: Powershell SDK should be 6.0 instead of 5.0, but 6.0 is not easily
 # available via 'Install-Package' yet.
-# TODO: compile more files than just 'Vm.cs'.
 .PHONY: sdk
 sdk:
 	mkdir -p $(BUILD_DIR)
