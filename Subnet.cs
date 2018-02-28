@@ -34,7 +34,6 @@ public class Subnet {
 
 [CmdletAttribute(VerbsCommon.Get, "VirtualSwitch")]
 public class GetSubnetCmdlet : Cmdlet {
-
   // TODO: Name parameter to specify the names of subnets to retrieve.
 
   protected override void ProcessRecord() {
@@ -46,13 +45,33 @@ public class GetSubnetCmdlet : Cmdlet {
     if (json.entities.Count == 0) {
       return new Subnet[0];
     }
-    Console.WriteLine("break A: number of entities:" +
-      json.entities.Count.ToString()); // XXX
     Subnet[] subnets = new Subnet[json.entities.Count];
     for (int i = 0; i < json.entities.Count; ++i) {
       subnets[i] = new Subnet(json.entities[i]);
     }
     return subnets;
+  }
+}
+
+[CmdletAttribute(VerbsCommon.Remove, "VirtualSwitch")]
+public class DeleteSubnetCmdlet : Cmdlet {
+  [Parameter()]
+  public string Uuid { get; set; } = "";
+
+  // TODO: Confirm, WhatIf params.
+  // https://www.vmware.com/support/developer/PowerCLI/PowerCLI41U1/html/Remove-VirtualSwitch.html
+
+  protected override void ProcessRecord() {
+    if (!String.IsNullOrEmpty(Uuid)) {
+      // TODO: WriteObject Task
+      DeleteSubnetByUuid(Uuid);
+      return;
+    }
+  }
+
+  public static void DeleteSubnetByUuid(string uuid) {
+    // TODO: validate using UUID regexes that 'uuid' is in correct format.
+    Util.RestCall("/subnets/" + uuid, "DELETE", "" /* requestBody */);
   }
 }
 

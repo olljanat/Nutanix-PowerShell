@@ -17,3 +17,8 @@ New-NTNX -Server $ClusterIp -UserName admin -Password $Password `
 echo "Get all Subnets..."
 Get-VirtualSwitch
 
+#------------------------------------------------------------------------------
+# DELETE paths.
+#------------------------------------------------------------------------------
+
+Remove-VirtualSwitch -Uuid 'ddf96624-438a-4d9c-94ec-823570224f69'
