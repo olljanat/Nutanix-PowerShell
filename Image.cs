@@ -65,4 +65,23 @@ public class GetImageCmdlet : Cmdlet {
   }
 }
 
+[CmdletAttribute(VerbsCommon.Remove, "Image")]
+public class DeleteImageCmdlet : Cmdlet {
+  [Parameter()]
+  public string Uuid { get; set; } = "";
+
+  protected override void ProcessRecord() {
+    if (!String.IsNullOrEmpty(Uuid)) {
+      // TODO: WriteObject Task
+      DeleteImageByUuid(Uuid);
+      return;
+    }
+  }
+
+  public static void DeleteImageByUuid(string uuid) {
+    // TODO: validate using UUID regexes that 'uuid' is in correct format.
+    Util.RestCall("/images/" + uuid, "DELETE", "" /* requestBody */);
+  }
+}
+
 }
