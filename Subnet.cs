@@ -35,9 +35,22 @@ public class Subnet {
 [CmdletAttribute(VerbsCommon.Get, "VirtualSwitch")]
 public class GetSubnetCmdlet : Cmdlet {
   // TODO: Name parameter to specify the names of subnets to retrieve.
+  [Parameter()]
+  public string Uuid { get; set; } = "";
 
   protected override void ProcessRecord() {
+    if (!String.IsNullOrEmpty(Uuid)) {
+      WriteObject(GetSubnetByUuid(Uuid));
+      return;
+    }
+
     WriteObject(GetAllSubnets());
+  }
+
+  public static Subnet GetSubnetByUuid(string uuid) {
+    // TODO: validate using UUID regexes that 'uuid' is in correct format.
+    var json = Util.RestCall("/subnets/" + uuid, "GET", "" /* requestBody */);
+    return new Subnet(json);
   }
 
   public static Subnet[] GetAllSubnets() {
