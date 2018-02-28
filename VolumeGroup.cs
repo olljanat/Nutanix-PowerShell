@@ -65,5 +65,23 @@ public class GetVolumeGroupCmdlet : Cmdlet {
   }
 }
 
+[CmdletAttribute(VerbsCommon.Remove, "VolumeGroup")]
+public class DeleteVolumeGroupCmdlet : Cmdlet {
+  [Parameter()]
+  public string Uuid { get; set; } = "";
+
+  protected override void ProcessRecord() {
+    if (!String.IsNullOrEmpty(Uuid)) {
+      // TODO: WriteObject Task
+      DeleteVolumeGroupByUuid(Uuid);
+      return;
+    }
+  }
+
+  public static void DeleteVolumeGroupByUuid(string uuid) {
+    // TODO: validate using UUID regexes that 'uuid' is in correct format.
+    Util.RestCall("/volume_groups/" + uuid, "DELETE", "" /* requestBody */);
+  }
 }
 
+}
