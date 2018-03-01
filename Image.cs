@@ -28,6 +28,36 @@ public class Image {
   }
 }
 
+[CmdletAttribute(VerbsCommon.New, "Image")]
+public class NewImageCmdlet : Cmdlet {
+  [Parameter()]
+  public string Name { get; set; } = "";
+
+  [Parameter()]
+  public string URL { get; set; } = "";
+
+  [Parameter()]
+  public string Description { get; set; } = "";
+
+  protected override void ProcessRecord() {
+    Util.RestCall("/images", "POST", @"{
+      ""api_version"": ""3.0"",
+      ""metadata"": {
+        ""kind"": ""image"",
+        ""name"": """ + Name + @"""
+      },
+      ""spec"": {
+        ""description"": """ + Description + @""",
+        ""name"": """ + Name + @""",
+        ""resources"": {
+          ""image_type"": ""DISK_IMAGE"",
+          ""source_uri"": """ + URL + @""",
+        }
+      }
+    }");
+  }
+}
+
 [CmdletAttribute(VerbsCommon.Get, "Image")]
 public class GetImageCmdlet : Cmdlet {
   [Parameter()]
