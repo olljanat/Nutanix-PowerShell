@@ -51,7 +51,7 @@ public class NewImageCmdlet : Cmdlet {
         ""name"": """ + Name + @""",
         ""resources"": {
           ""image_type"": ""DISK_IMAGE"",
-          ""source_uri"": """ + URL + @""",
+          ""source_uri"": """ + URL + @"""
         }
       }
     }");

@@ -28,6 +28,38 @@ public class Subnet {
   }
 }
 
+[CmdletAttribute(VerbsCommon.New, "VirtualSwitch")]
+public class NewSubnetCmdlet : Cmdlet {
+  [Parameter()]
+  public string Name { get; set; } = "";
+
+  [Parameter()]
+  public string VlanId { get; set; } = "";
+
+  [Parameter()]
+  public string Description { get; set; } = "";
+
+  protected override void ProcessRecord() {
+    Util.RestCall("/subnets", "POST", @"{
+      ""api_version"": ""3.0"",
+      ""metadata"": {
+        ""kind"": ""subnet"",
+        ""name"": """ + Name + @"""
+      },
+      ""spec"": {
+        ""description"": """ + Description + @""",
+        ""name"": """ + Name + @""",
+        ""resources"": {
+          ""subnet_type"": ""VLAN"",
+          ""ip_config"": ""{}"",
+          ""vlan_id"": """ + VlanId + @""",
+          ""name"": """ + Name + @"""
+        }
+      }
+    }");
+  }
+}
+
 [CmdletAttribute(VerbsCommon.Get, "VirtualSwitch")]
 public class GetSubnetCmdlet : Cmdlet {
   // TODO: Name parameter to specify the names of subnets to retrieve.
