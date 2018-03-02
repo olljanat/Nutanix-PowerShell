@@ -176,7 +176,7 @@ public class StartVmCmdlet : Cmdlet {
   protected override void ProcessRecord() {
     // TODO: maybe should not rely on 'json' to generate request?
     VM.json.spec.resources.power_state = Vm.PowerState_ON;
-    VM.json.api_version = "3.1";
+    VM.json.api_version = "3.1"; // TODO: remove api_version field set.
     // TODO: return Task object from the RestCall.
     Util.RestCall("/vms/" + VM.Uuid, "PUT", VM.json.ToString());
   }
@@ -221,9 +221,42 @@ public class RemoveVmCmdlet : Cmdlet {
   public static void DeleteVmByName(string name) {
     var vm = GetVmCmdlet.GetVmByName(name);
     if (vm != null) {
-      // Util.RestCall("/vms/" + vm.uuid, "DELETE", "" /* requestBody */);
       Util.RestCall("/vms/" + vm.Uuid, "DELETE", "" /* requestBody */);
     }
+  }
+}
+
+[CmdletAttribute(VerbsCommon.New, "Vm")]
+public class SetVmCmdlet : Cmdlet {
+  [Parameter()]
+  public Vm VM { get; set; } = null;
+
+  [Parameter()]
+  public string Name { get; set; } = null;
+
+  [Parameter()]
+  public string Description { get; set; } = null;
+
+  [Parameter()]
+  public int? MemoryMB { get; set; } = null;
+
+  // TODO: figure out Nutanix's analog for NumCpu. NumVcpusPerSocket is not
+  // correct.
+
+  protected override void ProcessRecord() {
+    // TODO: maybe should not rely on 'json' to generate request?
+    if (Name != null) {
+      VM.json.spec.name = Name;
+    }
+    if (Description != null) {
+      VM.json.spec.description = Description;
+    }
+    if (MemoryMB != null) {
+      VM.json.spec.resources.memory_size_mib = MemoryMB;
+    }
+    VM.json.api_version = "3.1";
+    // TODO: return Task object from the RestCall.
+    Util.RestCall("/vms/" + VM.Uuid, "PUT", VM.json.ToString());
   }
 }
 
