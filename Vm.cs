@@ -226,7 +226,7 @@ public class RemoveVmCmdlet : Cmdlet {
   }
 }
 
-[CmdletAttribute(VerbsCommon.New, "Vm")]
+[CmdletAttribute(VerbsCommon.Set, "Vm")]
 public class SetVmCmdlet : Cmdlet {
   [Parameter()]
   public Vm VM { get; set; } = null;

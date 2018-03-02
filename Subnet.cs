@@ -116,4 +116,28 @@ public class DeleteSubnetCmdlet : Cmdlet {
   }
 }
 
+[CmdletAttribute(VerbsCommon.Set, "VirtualSwitch")]
+public class SetSubnetCmdlet : Cmdlet {
+  [Parameter()]
+  public Subnet Subnet { get; set; } = null;
+
+  [Parameter()]
+  public string Name { get; set; } = null;
+
+  [Parameter()]
+  public string VlanId { get; set; } = null;
+
+  protected override void ProcessRecord() {
+    if (Name != null) {
+      Subnet.json.spec.name = Name;
+    }
+    if (VlanId != null) {
+      Subnet.json.spec.resources.vlan_id = VlanId;
+    }
+    Subnet.json.api_version = "3.1";
+    Util.RestCall("/subnets/" + Subnet.Uuid, "PUT", Subnet.json.ToString());
+  }
+
+}
+
 }
