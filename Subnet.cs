@@ -118,7 +118,7 @@ public class DeleteSubnetCmdlet : Cmdlet {
 
 [CmdletAttribute(VerbsCommon.Set, "VirtualSwitch")]
 public class SetSubnetCmdlet : Cmdlet {
-  [Parameter()]
+  [Parameter(Mandatory=true)]
   public Subnet Subnet { get; set; } = null;
 
   [Parameter()]

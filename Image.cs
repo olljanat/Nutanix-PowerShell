@@ -22,7 +22,6 @@ public class Image {
     this.json.api_version = "3.1";
 
     Name = json.spec.name;
-    Id = json.spec.resources.vlan_id;
     Uuid = json.metadata.uuid;
     Uid = Uuid;
   }
@@ -107,6 +106,23 @@ public class DeleteImageCmdlet : Cmdlet {
   public static void DeleteImageByUuid(string uuid) {
     // TODO: validate using UUID regexes that 'uuid' is in correct format.
     Util.RestCall("/images/" + uuid, "DELETE", "" /* requestBody */);
+  }
+}
+
+[CmdletAttribute(VerbsCommon.Set, "Image")]
+public class SetImageCmdlet : Cmdlet {
+  [Parameter(Mandatory=true)]
+  public Image Image { get; set; } = null;
+
+  [Parameter()]
+  public string Name { get; set; } = null;
+
+  protected override void ProcessRecord() {
+    if (Name != null) {
+      Image.json.spec.name = Name;
+    }
+    Image.json.api_version = "3.1";
+    Util.RestCall("/images/" + Image.Uuid, "PUT", Image.json.ToString());
   }
 }
 

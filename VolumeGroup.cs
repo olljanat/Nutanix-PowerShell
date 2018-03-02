@@ -22,7 +22,6 @@ public class VolumeGroup {
     this.json.api_version = "3.1";
 
     Name = json.spec.name;
-    Id = json.spec.resources.vlan_id;
     Uuid = json.metadata.uuid;
     Uid = Uuid;
   }
