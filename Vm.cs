@@ -116,7 +116,7 @@ public class GetVmCmdlet : Cmdlet {
   protected override void ProcessRecord() {
     if (String.IsNullOrEmpty(Name) && String.IsNullOrEmpty(Uuid)) {
       // If no params specified, then get all VMs.
-      GetAllVms();
+      WriteObject(GetAllVms());
       return;
     }
 
