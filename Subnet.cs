@@ -39,6 +39,9 @@ public class NewSubnetCmdlet : Cmdlet {
   [Parameter()]
   public string Description { get; set; } = "";
 
+  [Parameter()]
+  public Cluster Cluster { get; set; } = null;
+
   // Prints out REST URL and then exits. Does not make REST call.
   [Parameter()]
   public SwitchParameter Trace
