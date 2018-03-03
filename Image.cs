@@ -62,9 +62,17 @@ public class GetImageCmdlet : Cmdlet {
   [Parameter()]
   public string Uuid { get; set; } = "";
 
+  [Parameter()]
+  public string Name { get; set; } = "";
+
   protected override void ProcessRecord() {
     if (!String.IsNullOrEmpty(Uuid)) {
       WriteObject(GetImageByUuid(Uuid));
+      return;
+    }
+
+    if (!String.IsNullOrEmpty(Name)) {
+      WriteObject(GetImageByName(Name));
       return;
     }
 
@@ -76,6 +84,18 @@ public class GetImageCmdlet : Cmdlet {
     var json = Util.RestCall("/images/" + uuid, "GET", "" /* requestBody */);
     return new Image(json);
   }
+
+  // If no params specified, then get image with 'name'.
+  // REST: /images/list
+  public static Image GetImageByName(string name) {
+    var reqBody = "{\"filter\": \"name==" + name + "\"}";
+    var json = Util.RestCall("/images/list", "POST", reqBody);
+    if (json.entities.Count == 0) {
+      return null;
+    }
+    return new Image(json.entities[0]);
+  }
+
 
   public static Image[] GetAllImages() {
     var json = Util.RestCall("/images/list", "POST", "{}");
