@@ -30,4 +30,5 @@ Remove-Image -Uuid 'ddf96624-438a-4d9c-94ec-823570224f69'
 #------------------------------------------------------------------------------
 
 $image_url = 'http://earth.corp.nutanix.com/acro_images/automation/ahv_guest_os/DSK/centos73_vdisk.raw'
-New-Image -Name centos73 -URL $image_url -Description 'FROM SDK'
+$image_name = 'centos73'
+New-Image -Name $image_name -URL $image_url -Description 'FROM SDK'

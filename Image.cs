@@ -38,8 +38,19 @@ public class NewImageCmdlet : Cmdlet {
   [Parameter()]
   public string Description { get; set; } = "";
 
+  // Prints out REST URL and then exits. Does not make REST call.
+  [Parameter()]
+  public SwitchParameter Trace
+  {
+    get { return trace; }
+    set { trace = value; }
+  }
+  private bool trace;
+
   protected override void ProcessRecord() {
-    Util.RestCall("/images", "POST", @"{
+    var url = "/images";
+    var method = "POST";
+    var str = @"{
       ""api_version"": ""3.0"",
       ""metadata"": {
         ""kind"": ""image"",
@@ -53,7 +64,14 @@ public class NewImageCmdlet : Cmdlet {
           ""source_uri"": """ + URL + @"""
         }
       }
-    }");
+    }";
+
+    if (trace) {
+      Console.WriteLine(method + " " + url);
+      Console.WriteLine(str);
+      return;
+    }
+    Util.RestCall(url, method, str);
   }
 }
 

@@ -93,9 +93,17 @@ public class GetSubnetCmdlet : Cmdlet {
   [Parameter()]
   public string Uuid { get; set; } = "";
 
+  [Parameter()]
+  public string Name { get; set; } = "";
+
   protected override void ProcessRecord() {
     if (!String.IsNullOrEmpty(Uuid)) {
       WriteObject(GetSubnetByUuid(Uuid));
+      return;
+    }
+
+    if (!String.IsNullOrEmpty(Name)) {
+      WriteObject(GetSubnetByName(Name));
       return;
     }
 
@@ -106,6 +114,17 @@ public class GetSubnetCmdlet : Cmdlet {
     // TODO: validate using UUID regexes that 'uuid' is in correct format.
     var json = Util.RestCall("/subnets/" + uuid, "GET", "" /* requestBody */);
     return new Subnet(json);
+  }
+
+  // If no params specified, then get subnet with 'name'.
+  // REST: /subnets/list
+  public static Subnet GetSubnetByName(string name) {
+    var reqBody = "{\"filter\": \"name==" + name + "\"}";
+    var json = Util.RestCall("/subnets/list", "POST", reqBody);
+    if (json.entities.Count == 0) {
+      return null;
+    }
+    return new Subnet(json.entities[0]);
   }
 
   public static Subnet[] GetAllSubnets() {
