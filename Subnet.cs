@@ -1,5 +1,6 @@
 using System.Management.Automation;
 using System;
+using Newtonsoft.Json;
 
 namespace Nutanix {
 
@@ -54,7 +55,7 @@ public class NewSubnetCmdlet : Cmdlet {
   protected override void ProcessRecord() {
     var url = "/subnets";
     var method = "POST";
-    var data = @"{
+    var str = @"{
       ""api_version"": ""3.0"",
       ""metadata"": {
         ""kind"": ""subnet"",
@@ -66,16 +67,23 @@ public class NewSubnetCmdlet : Cmdlet {
         ""resources"": {
           ""subnet_type"": ""VLAN"",
           ""vlan_id"": " + VlanId + @",
-          ""name"": """ + Name + @"""
         }
       }
     }";
+    dynamic json = JsonConvert.DeserializeObject(str);
+    if (Cluster != null) {
+      json.spec.cluster_reference = new Newtonsoft.Json.Linq.JObject();
+      json.spec.cluster_reference.kind = "cluster";
+      json.spec.cluster_reference.uuid = Cluster.Uuid;
+      json.spec.cluster_reference.name = Cluster.Name;
+    }
+
     if (trace) {
       Console.WriteLine(method + " " + url);
-      Console.WriteLine(data);
+      Console.WriteLine(json.ToString());
       return;
     }
-    Util.RestCall(url, method, data);
+    Util.RestCall(url, method, json.ToString());
   }
 }
 
