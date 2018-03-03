@@ -39,8 +39,19 @@ public class NewSubnetCmdlet : Cmdlet {
   [Parameter()]
   public string Description { get; set; } = "";
 
+  // Prints out REST URL and then exits. Does not make REST call.
+  [Parameter()]
+  public SwitchParameter Trace
+  {
+    get { return trace; }
+    set { trace = value; }
+  }
+  private bool trace;
+
   protected override void ProcessRecord() {
-    Util.RestCall("/subnets", "POST", @"{
+    var url = "/subnets";
+    var method = "POST";
+    var data = @"{
       ""api_version"": ""3.0"",
       ""metadata"": {
         ""kind"": ""subnet"",
@@ -51,12 +62,17 @@ public class NewSubnetCmdlet : Cmdlet {
         ""name"": """ + Name + @""",
         ""resources"": {
           ""subnet_type"": ""VLAN"",
-          ""ip_config"": ""{}"",
-          ""vlan_id"": """ + VlanId + @""",
+          ""vlan_id"": " + VlanId + @",
           ""name"": """ + Name + @"""
         }
       }
-    }");
+    }";
+    if (trace) {
+      Console.WriteLine(method + " " + url);
+      Console.WriteLine(data);
+      return;
+    }
+    Util.RestCall(url, method, data);
   }
 }
 
