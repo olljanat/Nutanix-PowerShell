@@ -4,10 +4,16 @@
 
 # Assume running from $TOP, so the DLL will be in build dir.
 Import-Module ./build/NtnxPoshSDK.dll -force
-$ClusterIp = "10.4.50.1"
+$ClusterIp = '10.7.255.141'
 $Password = ConvertTo-SecureString 'Nutanix.123' -AsPlainText -Force
 New-NTNX -Server $ClusterIp -UserName admin -Password $Password `
   -AcceptInvalidSslCerts
+
+#------------------------------------------------------------------------------
+# Test image variables.
+#------------------------------------------------------------------------------
+$image_name = 'centos73'
+$image_url = 'http://earth.corp.nutanix.com/acro_images/automation/ahv_guest_os/DSK/centos73_vdisk.raw'
 
 #------------------------------------------------------------------------------
 # GET paths.
@@ -17,18 +23,17 @@ New-NTNX -Server $ClusterIp -UserName admin -Password $Password `
 echo "Get all Images..."
 Get-Image
 
-Get-Image -Uuid 'ddf96624-438a-4d9c-94ec-823570224f69'
+$image = Get-Image -Name $image_name
+Get-Image -Uuid $image.Uuid
 
 #------------------------------------------------------------------------------
 # DELETE paths.
 #------------------------------------------------------------------------------
 
-Remove-Image -Uuid 'ddf96624-438a-4d9c-94ec-823570224f69'
+Remove-Image -Uuid $image.Uuid
 
 #------------------------------------------------------------------------------
 # POST paths.
 #------------------------------------------------------------------------------
 
-$image_url = 'http://earth.corp.nutanix.com/acro_images/automation/ahv_guest_os/DSK/centos73_vdisk.raw'
-$image_name = 'centos73'
 New-Image -Name $image_name -URL $image_url -Description 'FROM SDK'
