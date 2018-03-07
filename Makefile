@@ -30,6 +30,6 @@ clean:
 	rm -rf $(BUILD_DIR)
 
 .PHONY: realclean
-clean:
+realclean:
 	rm -rf $(BUILD_DIR)
 	rm -rf $(DEPS_DIR)
