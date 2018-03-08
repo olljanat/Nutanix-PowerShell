@@ -83,7 +83,8 @@ public class NewSubnetCmdlet : Cmdlet {
       Console.WriteLine(json.ToString());
       return;
     }
-    Util.RestCall(url, method, json.ToString());
+    // TODO: should use Task.
+    WriteObject(Task.FromUuidInJson(Util.RestCall(url, method, json.ToString())));
   }
 }
 
