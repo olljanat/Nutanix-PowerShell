@@ -12,6 +12,9 @@ public class Task {
   public string ProgressMessage;
   public string OperationType;
   public int PercentageComplete;
+  public int DefaultPollTimeoutSecs = 2147483;
+  public int DefaultPollIntervalMs = 500;
+  public dynamic json;
   public Task(dynamic json) {
     Uuid = json.uuid;
     Status = json.status;
@@ -21,6 +24,31 @@ public class Task {
     ProgressMessage = json.progress_message;
     OperationType = json.operation_type;
     PercentageComplete = json.percentage_complete;
+    this.json = json;
+  }
+
+  public Task(string uuid) {
+    Uuid = uuid;
+  }
+
+  public static Task FromUuidInJson(dynamic json) {
+    return new Task(json.status.execution_context.task_uuid.ToString());
+  }
+
+  public Task Wait() {
+    return Wait(DefaultPollTimeoutSecs);
+  }
+
+  public Task Wait(int timeoutSecs) {
+    DateTime start = DateTime.Now;
+    while ((DateTime.Now - start).TotalMilliseconds < timeoutSecs * 1000) {
+      System.Threading.Thread.Sleep(DefaultPollIntervalMs);
+      var task = GetTaskCmdlet.GetTaskByUuid(Uuid);
+      if (task.Status != "RUNNING") {
+        return task;
+      }
+    }
+    return null;
   }
 }
 

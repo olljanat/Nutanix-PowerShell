@@ -12,8 +12,15 @@ New-NTNX -Server $ClusterIp -UserName admin -Password $Password `
 #------------------------------------------------------------------------------
 # Test image variables.
 #------------------------------------------------------------------------------
-$image_name = 'centos73'
-$image_url = 'http://earth.corp.nutanix.com/acro_images/automation/ahv_guest_os/DSK/centos73_vdisk.raw'
+$ImageName = 'centos73'
+$ImageName2 = 'centos73-sdk'
+$ImageUrl = 'http://earth.corp.nutanix.com/acro_images/automation/ahv_guest_os/DSK/centos73_vdisk.raw'
+
+#------------------------------------------------------------------------------
+# POST paths.
+#------------------------------------------------------------------------------
+
+New-Image -Name $ImageName -URL $ImageUrl -Description 'FROM SDK'
 
 #------------------------------------------------------------------------------
 # GET paths.
@@ -23,17 +30,17 @@ $image_url = 'http://earth.corp.nutanix.com/acro_images/automation/ahv_guest_os/
 echo "Get all Images..."
 Get-Image
 
-$image = Get-Image -Name $image_name
-Get-Image -Uuid $image.Uuid
+$Image = Get-Image -Name $ImageName
+Get-Image -Uuid $Image.Uuid
+
+#------------------------------------------------------------------------------
+# PUT paths.
+#------------------------------------------------------------------------------
+
+Set-Image -Image $Image -Name $ImageName2
 
 #------------------------------------------------------------------------------
 # DELETE paths.
 #------------------------------------------------------------------------------
 
-Remove-Image -Uuid $image.Uuid
-
-#------------------------------------------------------------------------------
-# POST paths.
-#------------------------------------------------------------------------------
-
-New-Image -Name $image_name -URL $image_url -Description 'FROM SDK'
+Remove-Image -Uuid $Image.Uuid

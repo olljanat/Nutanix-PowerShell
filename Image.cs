@@ -47,6 +47,14 @@ public class NewImageCmdlet : Cmdlet {
   }
   private bool trace;
 
+  [Parameter()]
+  public SwitchParameter RunAsync
+  {
+    get { return runAsync; }
+    set { runAsync = value; }
+  }
+  private bool runAsync;
+
   protected override void ProcessRecord() {
     var url = "/images";
     var method = "POST";
@@ -71,7 +79,12 @@ public class NewImageCmdlet : Cmdlet {
       Console.WriteLine(str);
       return;
     }
-    Util.RestCall(url, method, str);
+    var task = Task.FromUuidInJson(Util.RestCall(url, method, str));
+    if (runAsync) {
+      WriteObject(task);
+    } else {
+      WriteObject(task.Wait());
+    }
   }
 }
 
@@ -155,12 +168,26 @@ public class SetImageCmdlet : Cmdlet {
   [Parameter()]
   public string Name { get; set; } = null;
 
+  [Parameter()]
+  public SwitchParameter RunAsync
+  {
+    get { return runAsync; }
+    set { runAsync = value; }
+  }
+  private bool runAsync;
+
   protected override void ProcessRecord() {
     if (Name != null) {
       Image.json.spec.name = Name;
     }
     Image.json.api_version = "3.1";
-    Util.RestCall("/images/" + Image.Uuid, "PUT", Image.json.ToString());
+    var task = Task.FromUuidInJson(
+      Util.RestCall("/images/" + Image.Uuid, "PUT", Image.json.ToString())));
+    if (runAsync) {
+      WriteObject(task);
+    } else {
+      WriteObject(task.Wait());
+    }
   }
 }
 

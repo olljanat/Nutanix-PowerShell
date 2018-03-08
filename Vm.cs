@@ -26,7 +26,6 @@ public class Vm {
 
     // Special property 'json' stores the original json.
     this.json = json;
-    this.json.Property("status").Remove();
     this.json.api_version = "3.1";
 
     // Fill in field.
@@ -68,7 +67,7 @@ public class NewVmCmdlet : Cmdlet {
   protected override void ProcessRecord() {
     // TODO: make cluster_reference required if talking to PC. But not needed
     // if talking to PE.
-    Util.RestCall("/vms", "POST", @"{
+    WriteObject(Task.FromUuidInJson(Util.RestCall("/vms", "POST", @"{
       ""api_version"": ""3.0"",
       ""metadata"": {
         ""kind"": ""vm""
@@ -101,7 +100,7 @@ public class NewVmCmdlet : Cmdlet {
         },
         ""name"": """ + Name + @"""
       }
-    }");
+    }")));
   }
 }
 
@@ -178,7 +177,8 @@ public class StartVmCmdlet : Cmdlet {
     VM.json.spec.resources.power_state = Vm.PowerState_ON;
     VM.json.api_version = "3.1"; // TODO: remove api_version field set.
     // TODO: return Task object from the RestCall.
-    Util.RestCall("/vms/" + VM.Uuid, "PUT", VM.json.ToString());
+    WriteObject(Task.FromUuidInJson(
+      Util.RestCall("/vms/" + VM.Uuid, "PUT", VM.json.ToString())));
   }
 }
 
@@ -198,31 +198,32 @@ public class RemoveVmCmdlet : Cmdlet {
 
     if (!String.IsNullOrEmpty(Uuid)) {
       // TODO: WriteObject Task
-      DeleteVmByUuid(Uuid);
+      WriteObject(DeleteVmByUuid(Uuid));
       return;
     }
 
     if (!String.IsNullOrEmpty(Name)) {
       // TODO: WriteObject Task
-      DeleteVmByName(Name);
+      WriteObject(DeleteVmByName(Name));
       return;
     }
   }
 
   // Delete Vm using 'uuid'.
   // REST: /vms/{uuid}
-  public static void DeleteVmByUuid(string uuid) {
+  public static Task DeleteVmByUuid(string uuid) {
     // TODO: validate using UUID regexes that 'uuid' is in correct format.
-    Util.RestCall("/vms/" + uuid, "DELETE", "" /* requestBody */);
+    return Task.FromUuidInJson(Util.RestCall("/vms/" + uuid, "DELETE", ""));
   }
 
   // If no params specified, then get VM with 'name'.
   // REST: /vms/list
-  public static void DeleteVmByName(string name) {
+  public static Task DeleteVmByName(string name) {
     var vm = GetVmCmdlet.GetVmByName(name);
     if (vm != null) {
-      Util.RestCall("/vms/" + vm.Uuid, "DELETE", "" /* requestBody */);
+      return Task.FromUuidInJson(Util.RestCall("/vms/" + vm.Uuid, "DELETE", ""));
     }
+    return null;
   }
 }
 
@@ -256,7 +257,8 @@ public class SetVmCmdlet : Cmdlet {
     }
     VM.json.api_version = "3.1";
     // TODO: return Task object from the RestCall.
-    Util.RestCall("/vms/" + VM.Uuid, "PUT", VM.json.ToString());
+    WriteObject(Task.FromUuidInJson(
+      Util.RestCall("/vms/" + VM.Uuid, "PUT", VM.json.ToString())));
   }
 }
 
