@@ -121,14 +121,25 @@ public class GetImageCmdlet : Cmdlet {
   public static Image GetImageByName(string name) {
     var reqBody = "{\"filter\": \"name==" + name + "\"}";
     var json = Util.RestCall("/images/list", "POST", reqBody);
-    if (json.entities.Count == 0) {
-      return null;
+    var images = FromJson(json);
+    if (images.Length > 0) {
+      return images[0];
     }
-    return new Image(json.entities[0]);
+    return null;
+  }
+
+  public static Image[] GetImagesByName(string name) {
+    var reqBody = "{\"filter\": \"name==" + name + "\"}";
+    var json = Util.RestCall("/images/list", "POST", reqBody);
+    return FromJson(json);
   }
 
   public static Image[] GetAllImages() {
     var json = Util.RestCall("/images/list", "POST", "{}");
+    return FromJson(json);
+  }
+
+  public static Image[] FromJson(dynamic json) {
     if (json.entities.Count == 0) {
       return new Image[0];
     }

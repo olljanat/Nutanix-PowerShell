@@ -117,6 +117,16 @@ public class NewVmCmdlet : Cmdlet {
       json.spec.disk_list[0].data_source_reference.uuid = ImageUuid;
     } else if (!String.IsNullOrEmpty(ImageName)) {
       // TODO: grab images by name.
+      var images = GetImageCmdlet.GetImagesByName(ImageName);
+      if (images.Length > 1) {
+        Console.WriteLine("Ambiguous: found more than 1 VM with the same name");
+        for (int i = 0; i < images.Length; ++i) {
+          Console.WriteLine("Image " + i.ToString() + ": " + images[i].Uuid);
+          return;
+        }
+      } else {
+        json.spec.disk_list[0].data_source_reference.uuid = images[0].Uuid;
+      }
     }
 
     if (trace) {
