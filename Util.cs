@@ -72,9 +72,18 @@ public class Util {
     return null;
   }
 
+  public static void PrintTrace(
+    string urlPath,
+    string requestMethod,
+    string requestBody) {
+    Console.WriteLine(requestMethod + " " + urlPath);
+    Console.WriteLine(requestBody);
+  }
+
   // TODO:
   public static bool IsValidUuid(string uuid) {
     // Validate 'uuid' string.
     return true;
   }
+
 }

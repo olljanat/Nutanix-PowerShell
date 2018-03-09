@@ -1,5 +1,6 @@
 ﻿using System.Management.Automation;
 using System;
+using Newtonsoft.Json;
 
 // This is the exception that VMware's PowerCLI throws on error.
 public class VimException : Exception {
@@ -55,19 +56,30 @@ public class NewVmCmdlet : Cmdlet {
   [Parameter()]
   public string PowerState { get; set; } = "OFF";
 
-  // TODO: remove Mandatory. Allow a user to get image uuid via name.
-  [Parameter(Mandatory=true)]
+  [Parameter()]
   public string ImageUuid { get; set; } = "";
 
   // TODO: allow creation of non-networked VMs by creating 'nic_list' iff
   // 'NetworkUuid' was passed in.
-  [Parameter(Mandatory=true)]
+  [Parameter()]
   public string NetworkUuid { get; set; } = "";
 
+  [Parameter()]
+  public string ImageName { get; set; } = "";
+
+  // Prints out REST URL and then exits. Does not make REST call.
+  [Parameter()]
+  public SwitchParameter Trace
+  {
+    get { return trace; }
+    set { trace = value; }
+  }
+  private bool trace;
+
   protected override void ProcessRecord() {
-    // TODO: make cluster_reference required if talking to PC. But not needed
-    // if talking to PE.
-    WriteObject(Task.FromUuidInJson(Util.RestCall("/vms", "POST", @"{
+    var url = "/vms";
+    var method = "POST";
+    var str = @"{
       ""api_version"": ""3.0"",
       ""metadata"": {
         ""kind"": ""vm""
@@ -81,8 +93,7 @@ public class NewVmCmdlet : Cmdlet {
           ""disk_list"": [
             {
               ""data_source_reference"": {
-                ""kind"": ""image"",
-                ""uuid"": """ + ImageUuid + @"""
+                ""kind"": ""image""
               },
               ""device_properties"": {
                 ""device_type"": ""DISK""
@@ -100,7 +111,22 @@ public class NewVmCmdlet : Cmdlet {
         },
         ""name"": """ + Name + @"""
       }
-    }")));
+    }";
+    dynamic json = JsonConvert.DeserializeObject(str);
+    if (!String.IsNullOrEmpty(ImageUuid)) {
+      json.spec.disk_list[0].data_source_reference.uuid = ImageUuid;
+    } else if (!String.IsNullOrEmpty(ImageName)) {
+      // TODO: grab images by name.
+    }
+
+    if (trace) {
+      Util.PrintTrace(url, method, str);
+      return;
+    }
+
+    // TODO: make cluster_reference required if talking to PC. But not needed
+    // if talking to PE.
+    WriteObject(Task.FromUuidInJson(Util.RestCall(url, method, str)));
   }
 }
 

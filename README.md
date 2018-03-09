@@ -4,7 +4,7 @@ powershell provider
 Install Dependencies
 --------------------
 
-Make sure nuget is installed (check via `which nuget`)
+Make sure nuget is installed (check via `which nuget`).
 
     make deps
 

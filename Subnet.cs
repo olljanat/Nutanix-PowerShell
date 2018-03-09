@@ -79,12 +79,12 @@ public class NewSubnetCmdlet : Cmdlet {
     }
 
     if (trace) {
-      Console.WriteLine(method + " " + url);
-      Console.WriteLine(json.ToString());
+      Util.PrintTrace(url, method, json.ToString());
       return;
     }
     // TODO: should use Task.
-    WriteObject(Task.FromUuidInJson(Util.RestCall(url, method, json.ToString())));
+    WriteObject(
+      Task.FromUuidInJson(Util.RestCall(url, method, json.ToString())));
   }
 }
 

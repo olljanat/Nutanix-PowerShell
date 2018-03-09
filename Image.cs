@@ -127,7 +127,6 @@ public class GetImageCmdlet : Cmdlet {
     return new Image(json.entities[0]);
   }
 
-
   public static Image[] GetAllImages() {
     var json = Util.RestCall("/images/list", "POST", "{}");
     if (json.entities.Count == 0) {
@@ -182,7 +181,7 @@ public class SetImageCmdlet : Cmdlet {
     }
     Image.json.api_version = "3.1";
     var task = Task.FromUuidInJson(
-      Util.RestCall("/images/" + Image.Uuid, "PUT", Image.json.ToString())));
+      Util.RestCall("/images/" + Image.Uuid, "PUT", Image.json.ToString()));
     if (runAsync) {
       WriteObject(task);
     } else {

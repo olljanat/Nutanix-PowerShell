@@ -14,16 +14,18 @@ sdk:
 	mcs \
 		-target:library \
 		-out:$(BUILD_DIR)/NtnxPoshSDK.dll \
-		-reference:$(TOP)/deps/Microsoft.PowerShell.5.ReferenceAssemblies.1.1.0/lib/net4/System.Management.Automation.dll \
-		-reference:$(TOP)/deps/Newtonsoft.Json.10.0.3/lib/net40/Newtonsoft.Json.dll \
+		-reference:$(DEPS_DIR)/NETStandard.Library.NETFramework.2.0.0-preview2-25405-01/build/net461/lib/netstandard.dll \
+		-reference:$(DEPS_DIR)/PowerShellStandard.Library.5.1.0-preview-01/lib/netstandard2.0/System.Management.Automation.dll \
+		-reference:$(DEPS_DIR)/Newtonsoft.Json.10.0.3/lib/net40/Newtonsoft.Json.dll \
 		*.cs
 	cp NtnxPoshSDK.dll-Help.xml $(BUILD_DIR)/NtnxPoshSDK.dll-Help.xml
 
 # Install dependencies.
 .PHONY: deps
 deps:
+	nuget install -OutputDirectory deps NETStandard.Library.NETFramework -Version 2.0.0-preview2-25405-01
 	nuget install -OutputDirectory deps Newtonsoft.Json -Version 10.0.3
-	nuget install -OutputDirectory deps Microsoft.PowerShell.5.ReferenceAssemblies -Version 1.1.0
+	nuget install -OutputDirectory deps PowerShellStandard.Library -Version 5.1.0-preview-01
 
 .PHONY: clean
 clean:
