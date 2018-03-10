@@ -301,18 +301,16 @@ public class RemoveVmCmdlet : Cmdlet {
     }
 
     if (String.IsNullOrEmpty(Name) && String.IsNullOrEmpty(Uuid)) {
-      // TODO: return error
+      throw new Exception("Need -Name or -Uuid");
       return;
     }
 
     if (!String.IsNullOrEmpty(Uuid)) {
-      // TODO: WriteObject Task
       WriteObject(DeleteVmByUuid(Uuid));
       return;
     }
 
     if (!String.IsNullOrEmpty(Name)) {
-      // TODO: WriteObject Task
       WriteObject(DeleteVmByName(Name));
       return;
     }
