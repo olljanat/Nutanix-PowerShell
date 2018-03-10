@@ -52,23 +52,40 @@ public class Util {
       }
     }
 
-    using (var response = (HttpWebResponse) request.GetResponse()) {
-      if (response.StatusCode != HttpStatusCode.OK &&
-          response.StatusCode != HttpStatusCode.Accepted) {
-        var message = String.Format(
-          "Request failed. StatusCode {0}", response.StatusCode);
-        throw new ApplicationException(message);
-      }
+    try {
+      using (var response = (HttpWebResponse) request.GetResponse()) {
+        if (response.StatusCode != HttpStatusCode.OK &&
+            response.StatusCode != HttpStatusCode.Accepted) {
+          var message = String.Format(
+            "Request failed. StatusCode {0}", response.StatusCode);
+          throw new ApplicationException(message);
+        }
 
-      // grab the response
-      using (var responseStream = response.GetResponseStream()) {
-        if (responseStream != null) {
-          using (var reader = new StreamReader(responseStream)) {
-            return JsonConvert.DeserializeObject(reader.ReadToEnd());
+        // grab the response
+        using (var responseStream = response.GetResponseStream()) {
+          if (responseStream != null) {
+            using (var reader = new StreamReader(responseStream)) {
+              return JsonConvert.DeserializeObject(reader.ReadToEnd());
+            }
           }
         }
       }
+    } catch(WebException ex) {
+      var response = (HttpWebResponse) ex.Response;
+      using (var responseStream = response.GetResponseStream()) {
+        if (responseStream != null) {
+          using (var reader = new StreamReader(responseStream)) {
+            var json = JsonConvert.DeserializeObject(reader.ReadToEnd());
+            // Print request + response to help user debug.
+            Console.WriteLine(requestMethod + " " + urlPath  + ":\n" +
+              requestBody);
+            Console.WriteLine(json.ToString());
+          }
+        }
+      }
+      throw ex;
     }
+
     return null;
   }
 

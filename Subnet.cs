@@ -97,18 +97,28 @@ public class GetSubnetCmdlet : Cmdlet {
   [Parameter()]
   public string Name { get; set; } = "";
 
+  [Parameter()]
+  public int? Max { get; set; } = null;
+
   protected override void ProcessRecord() {
     if (!String.IsNullOrEmpty(Uuid)) {
       WriteObject(GetSubnetByUuid(Uuid));
       return;
     }
 
-    if (!String.IsNullOrEmpty(Name)) {
-      WriteObject(GetSubnetByName(Name));
-      return;
-    }
+    WriteObject(GetAllSubnets(BuildRequestBody()));
+  }
 
-    WriteObject(GetAllSubnets());
+  // Given the parameters, build request body for '/subnets/list'.
+  public dynamic BuildRequestBody() {
+    dynamic json = JsonConvert.DeserializeObject("{}");
+    if (Max != null) {
+      json.length = Max;
+    }
+    if (!String.IsNullOrEmpty(Name)) {
+      json.filter = "name==" + Name;
+    }
+    return json;
   }
 
   public static Subnet GetSubnetByUuid(string uuid) {
@@ -117,19 +127,19 @@ public class GetSubnetCmdlet : Cmdlet {
     return new Subnet(json);
   }
 
-  // If no params specified, then get subnet with 'name'.
-  // REST: /subnets/list
-  public static Subnet GetSubnetByName(string name) {
-    var reqBody = "{\"filter\": \"name==" + name + "\"}";
-    var json = Util.RestCall("/subnets/list", "POST", reqBody);
-    if (json.entities.Count == 0) {
-      return null;
-    }
-    return new Subnet(json.entities[0]);
+  public static Subnet[] GetSubnetsByName(string name) {
+    return GetAllSubnets("{\"filter\": \"name==" + name + "\"}");
   }
 
-  public static Subnet[] GetAllSubnets() {
-    var json = Util.RestCall("/subnets/list", "POST", "{}");
+  public static Subnet[] GetAllSubnets(dynamic jsonReqBody) {
+    return GetAllSubnets(jsonReqBody.ToString());
+  }
+
+  public static Subnet[] GetAllSubnets(string reqBody) {
+    return FromJson(Util.RestCall("/images/list", "POST", reqBody));
+  }
+
+  public static Subnet[] FromJson(dynamic json) {
     if (json.entities.Count == 0) {
       return new Subnet[0];
     }

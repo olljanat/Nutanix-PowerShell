@@ -4,12 +4,11 @@
 
 # Assume running from $TOP, so the DLL will be in build dir.
 Import-Module ./build/NtnxPoshSDK.dll -force
-$ClusterIp = "10.4.48.97"
-$TestVmName = "__CreatedViaSDK__"
+$ClusterIp = '10.7.255.141'
+$VmName = "__CreatedViaSDK__"
 $Password = ConvertTo-SecureString 'Nutanix.123' -AsPlainText -Force
-
 #------------------------------------------------------------------------------
-# Test authenticatino
+# Test authentication
 #------------------------------------------------------------------------------
 New-NTNX -Server $ClusterIp -UserName admin -Password $Password `
   -AcceptInvalidSslCerts
@@ -18,13 +17,14 @@ New-NTNX -Server $ClusterIp -UserName admin -Password $Password `
 # Create VM.
 #------------------------------------------------------------------------------
 
+$ImageName = 'centos73'
+$NetworkName = 'VM Management Network'
+$Clusters = Get-Cluster
+$Cluster = $Clusters[0]
+
 echo "Creating VM..."
-# TODO: get image uuid via /images REST
-New-Vm -Name $TestVmName -ImageUuid '39ad7a2d-08f8-4bfa-976c-9f07ddfac672' `
-  -NetworkUuid 'd3f69934-7d11-4347-8075-6048ce5425f9'
-# TODO: wait using Task poll instead of sleep.
-echo "Sleeping 15 seconds for VM to finish creating..."
-Start-Sleep -Seconds 15
+New-Vm -Cluster $Cluster -Name $VmName -ImageName $ImageName -NetworkName `
+  $NetworkName
 
 #------------------------------------------------------------------------------
 # GET paths.
@@ -36,7 +36,7 @@ Get-Vm
 
 # Get VM using name.
 echo "Get Test VM using name..."
-$TestVm = Get-Vm -Name $TestVmName
+$TestVm = Get-Vm -Name $VmName
 echo "Got:"
 $TestVm
 
@@ -59,4 +59,4 @@ Start-Sleep -Seconds 20
 #------------------------------------------------------------------------------
 
 echo "Delete Test VM..."
-Remove-Vm -Name $TestVmName
+Remove-Vm -Name $VmName

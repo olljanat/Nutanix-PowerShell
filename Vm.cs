@@ -59,13 +59,25 @@ public class NewVmCmdlet : Cmdlet {
   [Parameter()]
   public string ImageUuid { get; set; } = "";
 
-  // TODO: allow creation of non-networked VMs by creating 'nic_list' iff
-  // 'NetworkUuid' was passed in.
   [Parameter()]
   public string NetworkUuid { get; set; } = "";
 
   [Parameter()]
+  public string NetworkName { get; set; } = "";
+
+  [Parameter()]
   public string ImageName { get; set; } = "";
+
+  [Parameter()]
+  public Cluster Cluster { get; set; } = null;
+
+  [Parameter()]
+  public SwitchParameter RunAsync
+  {
+    get { return runAsync; }
+    set { runAsync = value; }
+  }
+  private bool runAsync;
 
   // Prints out REST URL and then exits. Does not make REST call.
   [Parameter()]
@@ -103,8 +115,7 @@ public class NewVmCmdlet : Cmdlet {
           ""nic_list"": [
             {
               ""subnet_reference"": {
-                ""kind"": ""subnet"",
-                ""uuid"": """ + NetworkUuid + @"""
+                ""kind"": ""subnet""
               }
             }
           ]
@@ -113,30 +124,85 @@ public class NewVmCmdlet : Cmdlet {
       }
     }";
     dynamic json = JsonConvert.DeserializeObject(str);
-    if (!String.IsNullOrEmpty(ImageUuid)) {
-      json.spec.disk_list[0].data_source_reference.uuid = ImageUuid;
-    } else if (!String.IsNullOrEmpty(ImageName)) {
-      // TODO: grab images by name.
-      var images = GetImageCmdlet.GetImagesByName(ImageName);
-      if (images.Length > 1) {
-        Console.WriteLine("Ambiguous: found more than 1 VM with the same name");
-        for (int i = 0; i < images.Length; ++i) {
-          Console.WriteLine("Image " + i.ToString() + ": " + images[i].Uuid);
-          return;
-        }
-      } else {
-        json.spec.disk_list[0].data_source_reference.uuid = images[0].Uuid;
-      }
+    if (!AddImage(json, ImageUuid, ImageName)) {
+      return;
+    }
+    if (!AddNetwork(json, NetworkUuid, NetworkName)) {
+      return;
+    }
+    if (!AddCluster(json, Cluster)) {
+      return;
     }
 
     if (trace) {
-      Util.PrintTrace(url, method, str);
+      Util.PrintTrace(url, method, json.ToString());
       return;
     }
 
     // TODO: make cluster_reference required if talking to PC. But not needed
     // if talking to PE.
-    WriteObject(Task.FromUuidInJson(Util.RestCall(url, method, str)));
+    var task = Task.FromUuidInJson(Util.RestCall(url, method, json.ToString()));
+    if (runAsync) {
+      WriteObject(task);
+    } else {
+      WriteObject(task.Wait());
+    }
+  }
+
+  public static bool AddImage(
+    dynamic json, string ImageUuid, string ImageName) {
+
+    if (!String.IsNullOrEmpty(ImageUuid)) {
+      json.spec.resources.disk_list[0].data_source_reference.uuid = ImageUuid;
+    } else if (!String.IsNullOrEmpty(ImageName)) {
+      // TODO: grab images by name.
+      var images = GetImageCmdlet.GetImagesByName(ImageName);
+      if (images.Length > 1) {
+        Console.WriteLine(
+          "Ambiguous: found more than 1 image with the same name");
+        for (int i = 0; i < images.Length; ++i) {
+          Console.WriteLine("Image " + i.ToString() + ": " + images[i].Uuid);
+        }
+        return false;
+      } else {
+        json.spec.resouces.disk_list[0].data_source_reference.uuid =
+          images[0].Uuid;
+      }
+    }
+    return true;
+  }
+
+  public static bool AddNetwork(
+    dynamic json, string NetworkUuid, string NetworkName) {
+
+    if (!String.IsNullOrEmpty(NetworkUuid)) {
+      json.spec.resources.nic_list[0].subnet_reference.uuid = NetworkUuid;
+    } else if (!String.IsNullOrEmpty(NetworkName)) {
+      // TODO: grab images by name.
+      var networks = GetSubnetCmdlet.GetSubnetsByName(NetworkName);
+      if (networks.Length > 1) {
+        Console.WriteLine(
+          "Ambiguous: found more than 1 Subnet with the same name");
+        for (int i = 0; i < networks.Length; ++i) {
+          Console.WriteLine("Network " + i.ToString() + ": " + networks[i].Uuid);
+        }
+        return false;
+      } else {
+        json.spec.resources.nic_list[0].subnet_source_reference.uuid =
+          networks[0].Uuid;
+      }
+    }
+    return true;
+  }
+
+  public static bool AddCluster(dynamic json, Cluster Cluster) {
+    if (Cluster != null) {
+      json.spec.cluster_reference = new Newtonsoft.Json.Linq.JObject();
+      json.spec.cluster_reference.kind = "cluster";
+      json.spec.cluster_reference.uuid = Cluster.Uuid;
+      json.spec.cluster_reference.name = Cluster.Name;
+    }
+    return true;
   }
 }
 
@@ -226,7 +292,14 @@ public class RemoveVmCmdlet : Cmdlet {
   [Parameter()]
   public string Uuid { get; set; } = "";
 
+  [Parameter(Mandatory=true, ValueFromPipeline=true)]
+  public Vm VM { get; set; } = null;
+
   protected override void ProcessRecord() {
+    if (VM != null) {
+      Uuid = VM.Uuid;
+    }
+
     if (String.IsNullOrEmpty(Name) && String.IsNullOrEmpty(Uuid)) {
       // TODO: return error
       return;
@@ -265,7 +338,7 @@ public class RemoveVmCmdlet : Cmdlet {
 
 [CmdletAttribute(VerbsCommon.Set, "Vm")]
 public class SetVmCmdlet : Cmdlet {
-  [Parameter(Mandatory=true)]
+  [Parameter(Mandatory=true, ValueFromPipeline=true)]
   public Vm VM { get; set; } = null;
 
   [Parameter()]
@@ -292,6 +365,7 @@ public class SetVmCmdlet : Cmdlet {
       VM.json.spec.resources.memory_size_mib = MemoryMB;
     }
     VM.json.api_version = "3.1";
+    VM.json.Property("status").Remove();
     // TODO: return Task object from the RestCall.
     WriteObject(Task.FromUuidInJson(
       Util.RestCall("/vms/" + VM.Uuid, "PUT", VM.json.ToString())));

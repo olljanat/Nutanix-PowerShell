@@ -1,5 +1,6 @@
 using System.Management.Automation;
 using System;
+using Newtonsoft.Json;
 
 namespace Nutanix {
 
@@ -96,18 +97,28 @@ public class GetImageCmdlet : Cmdlet {
   [Parameter()]
   public string Name { get; set; } = "";
 
+  [Parameter()]
+  public int? Max { get; set; } = null;
+
   protected override void ProcessRecord() {
     if (!String.IsNullOrEmpty(Uuid)) {
       WriteObject(GetImageByUuid(Uuid));
       return;
     }
 
-    if (!String.IsNullOrEmpty(Name)) {
-      WriteObject(GetImageByName(Name));
-      return;
-    }
+    WriteObject(GetAllImages(BuildRequestBody()));
+  }
 
-    WriteObject(GetAllImages());
+  // Given the parameters, build request body for '/images/list'.
+  public dynamic BuildRequestBody() {
+    dynamic json = JsonConvert.DeserializeObject("{}");
+    if (Max != null) {
+      json.length = Max;
+    }
+    if (!String.IsNullOrEmpty(Name)) {
+      json.filter = "name==" + Name;
+    }
+    return json;
   }
 
   public static Image GetImageByUuid(string uuid) {
@@ -116,27 +127,16 @@ public class GetImageCmdlet : Cmdlet {
     return new Image(json);
   }
 
-  // If no params specified, then get image with 'name'.
-  // REST: /images/list
-  public static Image GetImageByName(string name) {
-    var reqBody = "{\"filter\": \"name==" + name + "\"}";
-    var json = Util.RestCall("/images/list", "POST", reqBody);
-    var images = FromJson(json);
-    if (images.Length > 0) {
-      return images[0];
-    }
-    return null;
-  }
-
   public static Image[] GetImagesByName(string name) {
-    var reqBody = "{\"filter\": \"name==" + name + "\"}";
-    var json = Util.RestCall("/images/list", "POST", reqBody);
-    return FromJson(json);
+    return GetAllImages("{\"filter\": \"name==" + name + "\"}");
   }
 
-  public static Image[] GetAllImages() {
-    var json = Util.RestCall("/images/list", "POST", "{}");
-    return FromJson(json);
+  public static Image[] GetAllImages(dynamic jsonReqBody) {
+    return GetAllImages(jsonReqBody.ToString());
+  }
+
+  public static Image[] GetAllImages(string reqBody) {
+    return FromJson(Util.RestCall("/images/list", "POST", reqBody));
   }
 
   public static Image[] FromJson(dynamic json) {
