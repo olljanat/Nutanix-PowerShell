@@ -7,17 +7,15 @@ Import-Module ./build/NtnxPoshSDK.dll -force
 $ClusterIp = '10.7.255.141'
 $VmName = '4k-rand-io'
 $Password = ConvertTo-SecureString 'Nutanix.123' -AsPlainText -Force
-#------------------------------------------------------------------------------
-# Test authentication
-#------------------------------------------------------------------------------
 New-NTNX -Server $ClusterIp -UserName admin -Password $Password `
   -AcceptInvalidSslCerts
 
-# Test as passed in param.
+# Test passing VM via parameter.
 echo "Pass VM as parameter"
 $VM = Get-VM -Name $VmName
 $VM.json.spec.resources.power_state = "ON"
 Set-VM -VM $VM
 
+# Test passing VM via pipeline.
 echo "Pass VM to pipeline"
 Get-VM -Name $VmName | % { $_.json.spec.resources.power_state = "ON" } | Set-VM

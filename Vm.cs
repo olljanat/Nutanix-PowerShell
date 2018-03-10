@@ -252,7 +252,10 @@ public class GetVmCmdlet : Cmdlet {
     var reqBody = "{\"filter\": \"vm_name==" + name + "\"}";
     var json = Util.RestCall("/vms/list", "POST", reqBody);
     if (json.entities.Count == 0) {
-      return null;
+      throw new Exception("VM not found.");
+    }
+    if (json.entities.Count > 1) {
+      throw new Exception("More than 1 VM found.");
     }
     return new Vm(json.entities[0]);
   }
@@ -286,7 +289,7 @@ public class StartVmCmdlet : Cmdlet {
     VM.json.spec.resources.power_state = Vm.PowerState_ON;
     VM.json.api_version = "3.1"; // TODO: remove api_version field set.
     var task = Task.FromUuidInJson(
-      Util.RestCall("/vms/" + VM.Uuid, "PUT", VM.json.ToString())));
+      Util.RestCall("/vms/" + VM.Uuid, "PUT", VM.json.ToString()));
     if (runAsync) {
       WriteObject(task);
     } else {

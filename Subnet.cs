@@ -106,7 +106,9 @@ public class GetSubnetCmdlet : Cmdlet {
       return;
     }
 
-    WriteObject(GetAllSubnets(BuildRequestBody()));
+    var subnets = GetAllSubnets(BuildRequestBody());
+    CheckResult(subnets);
+    WriteObject(subnets);
   }
 
   // Given the parameters, build request body for '/subnets/list'.
@@ -119,6 +121,12 @@ public class GetSubnetCmdlet : Cmdlet {
       json.filter = "name==" + Name;
     }
     return json;
+  }
+
+  public void CheckResult(Subnet[] subnets) {
+    if (!String.IsNullOrEmpty(Name) && subnets.Length > 1) {
+      throw new Exception("Found duplicate subnets");
+    }
   }
 
   public static Subnet GetSubnetByUuid(string uuid) {

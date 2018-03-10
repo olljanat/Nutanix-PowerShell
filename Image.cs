@@ -106,7 +106,9 @@ public class GetImageCmdlet : Cmdlet {
       return;
     }
 
-    WriteObject(GetAllImages(BuildRequestBody()));
+    var images = GetAllImages(BuildRequestBody());
+    CheckResult(images);
+    WriteObject(images);
   }
 
   // Given the parameters, build request body for '/images/list'.
@@ -119,6 +121,12 @@ public class GetImageCmdlet : Cmdlet {
       json.filter = "name==" + Name;
     }
     return json;
+  }
+
+  public void CheckResult(Image[] images) {
+    if (!String.IsNullOrEmpty(Name) && images.Length > 1) {
+      throw new Exception("Found duplicate images");
+    }
   }
 
   public static Image GetImageByUuid(string uuid) {
