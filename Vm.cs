@@ -274,13 +274,24 @@ public class StartVmCmdlet : Cmdlet {
   [Parameter()]
   public Vm VM { get; set; } = null;
 
+  [Parameter()]
+  public SwitchParameter RunAsync
+  {
+    get { return runAsync; }
+    set { runAsync = value; }
+  }
+  private bool runAsync;
+
   protected override void ProcessRecord() {
-    // TODO: maybe should not rely on 'json' to generate request?
     VM.json.spec.resources.power_state = Vm.PowerState_ON;
     VM.json.api_version = "3.1"; // TODO: remove api_version field set.
-    // TODO: return Task object from the RestCall.
-    WriteObject(Task.FromUuidInJson(
+    var task = Task.FromUuidInJson(
       Util.RestCall("/vms/" + VM.Uuid, "PUT", VM.json.ToString())));
+    if (runAsync) {
+      WriteObject(task);
+    } else {
+      WriteObject(task.Wait());
+    }
   }
 }
 
