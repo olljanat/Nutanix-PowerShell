@@ -144,18 +144,8 @@ public class GetImageCmdlet : Cmdlet {
   }
 
   public static Image[] GetAllImages(string reqBody) {
-    return FromJson(Util.RestCall("/images/list", "POST", reqBody));
-  }
-
-  public static Image[] FromJson(dynamic json) {
-    if (json.entities.Count == 0) {
-      return new Image[0];
-    }
-    Image[] images = new Image[json.entities.Count];
-    for (int i = 0; i < json.entities.Count; ++i) {
-      images[i] = new Image(json.entities[i]);
-    }
-    return images;
+    return Util.FromJson<Image>(Util.RestCall("/images/list", "POST", reqBody),
+      (Func<dynamic, Image>) (j => new Image(j)));
   }
 }
 

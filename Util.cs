@@ -1,8 +1,11 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
 using Newtonsoft.Json;
+using System.Linq;
 
 public class Util {
   public static string server;
@@ -102,5 +105,11 @@ public class Util {
     // Validate 'uuid' string.
     return true;
   }
+
+  public static T[] FromJson<T>(dynamic json, Func<dynamic, T> creator) {
+    return ((IEnumerable<T>) Enumerable.Select(json.entities,
+      (Func<dynamic, T>)(entity => creator(entity)))).ToArray();
+  }
+
 
 }

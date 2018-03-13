@@ -144,18 +144,9 @@ public class GetSubnetCmdlet : Cmdlet {
   }
 
   public static Subnet[] GetAllSubnets(string reqBody) {
-    return FromJson(Util.RestCall("/images/list", "POST", reqBody));
-  }
-
-  public static Subnet[] FromJson(dynamic json) {
-    if (json.entities.Count == 0) {
-      return new Subnet[0];
-    }
-    Subnet[] subnets = new Subnet[json.entities.Count];
-    for (int i = 0; i < json.entities.Count; ++i) {
-      subnets[i] = new Subnet(json.entities[i]);
-    }
-    return subnets;
+    return Util.FromJson<Subnet>(
+      Util.RestCall("/subnets/list", "POST", reqBody),
+      (Func<dynamic, Subnet>) (j => new Subnet(j)));
   }
 }
 
