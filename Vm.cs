@@ -79,15 +79,6 @@ public class NewVmCmdlet : Cmdlet {
   }
   private bool runAsync;
 
-  // Prints out REST URL and then exits. Does not make REST call.
-  [Parameter()]
-  public SwitchParameter Trace
-  {
-    get { return trace; }
-    set { trace = value; }
-  }
-  private bool trace;
-
   protected override void ProcessRecord() {
     var url = "/vms";
     var method = "POST";
@@ -134,10 +125,7 @@ public class NewVmCmdlet : Cmdlet {
       return;
     }
 
-    if (trace) {
-      Util.PrintTrace(url, method, json.ToString());
-      return;
-    }
+    WriteDebug(Util.RestCallTrace(url, method, json.ToString()));
 
     // TODO: make cluster_reference required if talking to PC. But not needed
     // if talking to PE.
@@ -254,9 +242,10 @@ public class GetVmCmdlet : Cmdlet {
     if (json.entities.Count == 0) {
       throw new Exception("VM not found.");
     }
-    if (json.entities.Count > 1) {
-      throw new Exception("More than 1 VM found.");
-    }
+    // TODO: reconsider if we want to throw error on more than 1 VM.
+    // if (json.entities.Count > 1) {
+    //   throw new Exception("More than 1 VM found.");
+    // }
     return new Vm(json.entities[0]);
   }
 

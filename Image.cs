@@ -39,15 +39,6 @@ public class NewImageCmdlet : Cmdlet {
   [Parameter()]
   public string Description { get; set; } = "";
 
-  // Prints out REST URL and then exits. Does not make REST call.
-  [Parameter()]
-  public SwitchParameter Trace
-  {
-    get { return trace; }
-    set { trace = value; }
-  }
-  private bool trace;
-
   [Parameter()]
   public SwitchParameter RunAsync
   {
@@ -75,11 +66,7 @@ public class NewImageCmdlet : Cmdlet {
       }
     }";
 
-    if (trace) {
-      Console.WriteLine(method + " " + url);
-      Console.WriteLine(str);
-      return;
-    }
+    WriteDebug(Util.RestCallTrace(url, method, str));
     var task = Task.FromUuidInJson(Util.RestCall(url, method, str));
     if (runAsync) {
       WriteObject(task);

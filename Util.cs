@@ -100,6 +100,13 @@ public class Util {
     Console.WriteLine(requestBody);
   }
 
+  public static string RestCallTrace(
+    string urlPath,
+    string requestMethod,
+    string requestBody) {
+    return requestMethod + " " + urlPath + "\n" + requestBody;
+  }
+
   // TODO:
   public static bool IsValidUuid(string uuid) {
     // Validate 'uuid' string.

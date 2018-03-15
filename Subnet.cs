@@ -43,15 +43,6 @@ public class NewSubnetCmdlet : Cmdlet {
   [Parameter()]
   public Cluster Cluster { get; set; } = null;
 
-  // Prints out REST URL and then exits. Does not make REST call.
-  [Parameter()]
-  public SwitchParameter Trace
-  {
-    get { return trace; }
-    set { trace = value; }
-  }
-  private bool trace;
-
   protected override void ProcessRecord() {
     var url = "/subnets";
     var method = "POST";
@@ -78,10 +69,7 @@ public class NewSubnetCmdlet : Cmdlet {
       json.spec.cluster_reference.name = Cluster.Name;
     }
 
-    if (trace) {
-      Util.PrintTrace(url, method, json.ToString());
-      return;
-    }
+    WriteDebug(Util.RestCallTrace(url, method, json.ToString()));
     // TODO: should use Task.
     WriteObject(
       Task.FromUuidInJson(Util.RestCall(url, method, json.ToString())));
