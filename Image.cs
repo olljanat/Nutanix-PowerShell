@@ -111,6 +111,7 @@ public class GetImageCmdlet : Cmdlet {
   }
 
   public void CheckResult(Image[] images) {
+    return; // TODO: consider whether throwing duplicate exception is good idea.
     if (!String.IsNullOrEmpty(Name) && images.Length > 1) {
       throw new Exception("Found duplicate images");
     }
@@ -157,7 +158,7 @@ public class DeleteImageCmdlet : Cmdlet {
 
 [CmdletAttribute(VerbsCommon.Set, "Image")]
 public class SetImageCmdlet : Cmdlet {
-  [Parameter(Mandatory=true)]
+  [Parameter(Mandatory=true, ValueFromPipeline=true)]
   public Image Image { get; set; } = null;
 
   [Parameter()]

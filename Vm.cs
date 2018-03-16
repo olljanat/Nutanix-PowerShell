@@ -153,7 +153,7 @@ public class NewVmCmdlet : Cmdlet {
         }
         return false;
       } else {
-        json.spec.resouces.disk_list[0].data_source_reference.uuid =
+        json.spec.resources.disk_list[0].data_source_reference.uuid =
           images[0].Uuid;
       }
     }
@@ -176,7 +176,7 @@ public class NewVmCmdlet : Cmdlet {
         }
         return false;
       } else {
-        json.spec.resources.nic_list[0].subnet_source_reference.uuid =
+        json.spec.resources.nic_list[0].subnet_reference.uuid =
           networks[0].Uuid;
       }
     }

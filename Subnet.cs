@@ -112,6 +112,7 @@ public class GetSubnetCmdlet : Cmdlet {
   }
 
   public void CheckResult(Subnet[] subnets) {
+    return; // TODO: consider whether throwing duplicate exception is good idea.
     if (!String.IsNullOrEmpty(Name) && subnets.Length > 1) {
       throw new Exception("Found duplicate subnets");
     }
