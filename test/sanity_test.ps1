@@ -8,3 +8,8 @@ $ClusterIp = '10.7.255.141'
 $Password = ConvertTo-SecureString 'Nutanix.123' -AsPlainText -Force
 New-NTNX -Server $ClusterIp -UserName admin -Password $Password `
   -AcceptInvalidSslCerts
+echo "The module has been automatically imported"
+echo "You have been automatically connected to cluster 10.7.255.141"
+echo "Try running this command: Get-VM"
+echo "Or this command: Get-Help Get-VM"
+echo ""
