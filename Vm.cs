@@ -28,7 +28,10 @@ public class Vm {
     // Special property 'json' stores the original json.
     this.json = json;
     this.json.api_version = "3.1";
+    SetFromJson(json);
+  }
 
+  public void SetFromJson(dynamic json) {
     // Fill in field.
     Name = json.spec.name;
     NumSockets = json.spec.resources.num_sockets;

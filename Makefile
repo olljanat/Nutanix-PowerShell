@@ -27,6 +27,10 @@ deps:
 	nuget install -OutputDirectory deps Newtonsoft.Json -Version 10.0.3
 	nuget install -OutputDirectory deps PowerShellStandard.Library -Version 5.1.0-preview-01
 
+.PHONY: image
+image:
+	sudo docker build .
+
 .PHONY: clean
 clean:
 	rm -rf $(BUILD_DIR)
