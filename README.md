@@ -25,6 +25,18 @@ If you're reading this, you're in on the ground floor. Really, the parking garag
 
 In the short term, we'll be adding our full requirements list as we build our our documentation, and start baking in a proper readme, etc.
 
+Quick Install
+-------------
+
+Just try out the Docker image?
+
+    sudo docker run -it kasprosian/ntnx-powershell bash
+
+Then inside the container:
+
+    cd /Powershell
+    sh test/sanity_test.sh
+
 Install Dependencies
 --------------------
 
