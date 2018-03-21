@@ -29,7 +29,7 @@ deps:
 
 .PHONY: image
 image:
-	sudo docker build .
+	sudo docker build -t NtnxSDK .
 
 .PHONY: clean
 clean:
