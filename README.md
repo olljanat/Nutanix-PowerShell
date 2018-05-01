@@ -1,4 +1,5 @@
 # Nutanix PowerShell
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/nutanix/PowerShell.svg?columns=all)](https://waffle.io/nutanix/PowerShell)
 What, Why, and Goals
 --------------------
 Nutanix is committed to making PowerShell a first-class feature. In service of that goal, Nutanix is planning to deprecate the existing PowerShell cmdlets, in favor of this fully open source project.
