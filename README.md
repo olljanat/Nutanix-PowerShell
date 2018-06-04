@@ -6,9 +6,7 @@ NOTE: This PowerShell modu is currently tech preview as of 9 May 2018. See "Curr
 
 #### Project, Build, Quality Status
 
-[![Waffle.io - Columns and their card count](https://badge.waffle.io/nutanix/PowerShell.svg?columns=all)](https://waffle.io/nutanix/PowerShell)
-
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/31363a609f9e422097824a083e983357)](https://www.codacy.com/app/JonKohler/PowerShell?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nutanix/PowerShell&amp;utm_campaign=Badge_Grade)
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/nutanix/PowerShell.svg?columns=all)](https://waffle.io/nutanix/PowerShell) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/31363a609f9e422097824a083e983357)](https://www.codacy.com/app/JonKohler/PowerShell?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nutanix/PowerShell&amp;utm_campaign=Badge_Grade)
 
 | Master                                                                                                                                                          | Develop                                                                                                                                                           |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
