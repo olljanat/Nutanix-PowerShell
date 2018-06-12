@@ -14,15 +14,23 @@ namespace Nutanix
   public class Task
   {
     public string Uuid { get; set; } = string.Empty;
+
     public string Status { get; set; } = string.Empty;
+
     public string StartTime { get; set; } = string.Empty;
+
     public string CreationTime { get; set; } = string.Empty;
+
     public string CompletionTime { get; set; } = string.Empty;
+
     public string ProgressMessage { get; set; } = string.Empty;
+
     public string OperationType { get; set; } = string.Empty;
+
     public int PercentageComplete { get; set; }
+
     public int DefaultPollTimeoutSecs { get; set; } = 2147483;
-    public int DefaultPollIntervalMs = 500;
+    private int DefaultPollIntervalMs = 500;
     public dynamic json { get; set; }
     public Task(dynamic json)
     {
