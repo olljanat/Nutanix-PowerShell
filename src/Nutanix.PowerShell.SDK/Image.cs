@@ -9,7 +9,7 @@
 using System;
 using System.Management.Automation;
 
-using Newtonsoft.Json;
+using Newtonsoft.json;
 
 namespace Nutanix
 {
@@ -21,20 +21,20 @@ namespace Nutanix
     // 'Uid' is VMware's equivalent field for Nutanix's Uuid.
     public string Uid;
     public string Uuid;
-    public dynamic Json { get; set; }
+    public dynamic json { get; set; }
 
     // TODO Mtu, NumPorts, ExtensionData, NumPortsAvailable, Key, Nic, VMHostId,
     // VMHost, VMHostUid, Nic
 
-    public Image(dynamic Json)
+    public Image(dynamic json)
     {
-      // Special property 'Json' stores the original Json.
-      this.Json = Json;
-      this.Json.Property("status").Remove();
-      this.Json.api_version = "3.1";
+      // Special property 'json' stores the original json.
+      this.json = json;
+      this.json.Property("status").Remove();
+      this.json.api_version = "3.1";
 
-      Name = Json.spec.name;
-      Uuid = Json.metadata.uuid;
+      Name = json.spec.name;
+      Uuid = json.metadata.uuid;
       Uid = Uuid;
     }
   }
@@ -120,16 +120,16 @@ namespace Nutanix
     // Given the parameters, build request body for '/images/list'.
     public dynamic BuildRequestBody()
     {
-      dynamic Json = JsonConvert.DeserializeObject("{}");
+      dynamic json = JsonConvert.DeserializeObject("{}");
       if (Max != null)
       {
-        Json.length = Max;
+        json.length = Max;
       }
       if (!string.IsNullOrEmpty(Name))
       {
-        Json.filter = "name==" + Name;
+        json.filter = "name==" + Name;
       }
-      return Json;
+      return json;
     }
 
     public void CheckResult(Image[] images)
@@ -144,8 +144,8 @@ namespace Nutanix
     public static Image GetImageByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      var Json = Util.RestCall("/images/" + uuid, "GET", string.Empty /* requestBody */ );
-      return new Image(Json);
+      var json = Util.RestCall("/images/" + uuid, "GET", string.Empty /* requestBody */ );
+      return new Image(json);
     }
 
     public static Image[] GetImagesByName(string name)
@@ -209,11 +209,11 @@ namespace Nutanix
     {
       if (Name != null)
       {
-        Image.Json.spec.name = Name;
+        Image.json.spec.name = Name;
       }
-      Image.Json.api_version = "3.1";
+      Image.json.api_version = "3.1";
       var task = Task.FromUuidInJson(
-        Util.RestCall("/images/" + Image.Uuid, "PUT", Image.Json.ToString()));
+        Util.RestCall("/images/" + Image.Uuid, "PUT", Image.json.ToString()));
       if (runAsync)
       {
         WriteObject(task);

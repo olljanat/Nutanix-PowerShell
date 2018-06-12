@@ -9,7 +9,7 @@
 using System;
 using System.Management.Automation;
 
-using Newtonsoft.Json;
+using Newtonsoft.json;
 
 namespace Nutanix
 {
@@ -21,21 +21,21 @@ namespace Nutanix
     // 'Uid' is VMware's equivalent field for Nutanix's Uuid.
     public string Uid;
     public string Uuid;
-    public dynamic Json { get; set; }
+    public dynamic json { get; set; }
 
     // TODO Mtu, NumPorts, ExtensionData, NumPortsAvailable, Key, Nic, VMHostId,
     // VMHost, VMHostUid, Nic
 
-    public Subnet(dynamic Json)
+    public Subnet(dynamic json)
     {
-      // Special property 'Json' stores the original Json.
-      this.Json = Json;
-      this.Json.Property("status").Remove();
-      this.Json.api_version = "3.1";
+      // Special property 'json' stores the original json.
+      this.json = json;
+      this.json.Property("status").Remove();
+      this.json.api_version = "3.1";
 
-      Name = Json.spec.name;
-      Id = Json.spec.resources.vlan_id;
-      Uuid = Json.metadata.uuid;
+      Name = json.spec.name;
+      Id = json.spec.resources.vlan_id;
+      Uuid = json.metadata.uuid;
       Uid = Uuid;
     }
   }
@@ -74,19 +74,19 @@ namespace Nutanix
         }
       }
     }";
-      dynamic Json = JsonConvert.DeserializeObject(str);
+      dynamic json = JsonConvert.DeserializeObject(str);
       if (Cluster != null)
       {
-        Json.spec.cluster_reference = new Newtonsoft.Json.Linq.JObject();
-        Json.spec.cluster_reference.kind = "cluster";
-        Json.spec.cluster_reference.uuid = Cluster.Uuid;
-        Json.spec.cluster_reference.name = Cluster.Name;
+        json.spec.cluster_reference = new Newtonsoft.json.Linq.JObject();
+        json.spec.cluster_reference.kind = "cluster";
+        json.spec.cluster_reference.uuid = Cluster.Uuid;
+        json.spec.cluster_reference.name = Cluster.Name;
       }
 
-      WriteDebug(Util.RestCallTrace(url, method, Json.ToString()));
+      WriteDebug(Util.RestCallTrace(url, method, json.ToString()));
       // TODO: should use Task.
       WriteObject(
-        Task.FromUuidInJson(Util.RestCall(url, method, Json.ToString())));
+        Task.FromUuidInJson(Util.RestCall(url, method, json.ToString())));
     }
   }
 
@@ -119,16 +119,16 @@ namespace Nutanix
     // Given the parameters, build request body for '/subnets/list'.
     public dynamic BuildRequestBody()
     {
-      dynamic Json = JsonConvert.DeserializeObject("{}");
+      dynamic json = JsonConvert.DeserializeObject("{}");
       if (Max != null)
       {
-        Json.length = Max;
+        json.length = Max;
       }
       if (!string.IsNullOrEmpty(Name))
       {
-        Json.filter = "name==" + Name;
+        json.filter = "name==" + Name;
       }
-      return Json;
+      return json;
     }
 
     public void CheckResult(Subnet[] subnets)
@@ -143,8 +143,8 @@ namespace Nutanix
     public static Subnet GetSubnetByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      var Json = Util.RestCall("/subnets/" + uuid, "GET", string.Empty /* requestBody */ );
-      return new Subnet(Json);
+      var json = Util.RestCall("/subnets/" + uuid, "GET", string.Empty /* requestBody */ );
+      return new Subnet(json);
     }
 
     public static Subnet[] GetSubnetsByName(string name)
@@ -207,14 +207,14 @@ namespace Nutanix
     {
       if (Name != null)
       {
-        Subnet.Json.spec.name = Name;
+        Subnet.json.spec.name = Name;
       }
       if (VlanId != null)
       {
-        Subnet.Json.spec.resources.vlan_id = VlanId;
+        Subnet.json.spec.resources.vlan_id = VlanId;
       }
-      Subnet.Json.api_version = "3.1";
-      Util.RestCall("/subnets/" + Subnet.Uuid, "PUT", Subnet.Json.ToString());
+      Subnet.json.api_version = "3.1";
+      Util.RestCall("/subnets/" + Subnet.Uuid, "PUT", Subnet.json.ToString());
     }
 
   }

@@ -14,7 +14,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 
-using Newtonsoft.Json;
+using Newtonsoft.json;
 
 public class Util
 {
@@ -56,8 +56,8 @@ public class Util
     var encodedAuth = encoding.GetBytes(username + ":" + password);
     string authHeader = System.Convert.ToBase64String(encodedAuth);
     request.Headers.Add("Authorization", "Basic " + authHeader);
-    request.Headers.Add("Content-Type", "application/Json");
-    request.Headers.Add("Accept", "application/Json");
+    request.Headers.Add("Content-Type", "application/json");
+    request.Headers.Add("Accept", "application/json");
     request.Headers.Add("X-Nutanix-Client-Type", "Nutanix.PowerShell.SDK");
 
     if (!string.IsNullOrEmpty(requestBody))
@@ -104,11 +104,11 @@ public class Util
         {
           using (var reader = new StreamReader(responseStream))
           {
-            var Json = JsonConvert.DeserializeObject(reader.ReadToEnd());
+            var json = JsonConvert.DeserializeObject(reader.ReadToEnd());
             // Print request + response to help user debug.
             Console.WriteLine(requestMethod + " " + urlPath + ":\n" +
               requestBody);
-            Console.WriteLine(Json.ToString());
+            Console.WriteLine(json.ToString());
           }
         }
       }
@@ -141,9 +141,9 @@ public class Util
     return true;
   }
 
-  public static T[] FromJson<T>(dynamic Json, Func<dynamic, T> creator)
+  public static T[] FromJson<T>(dynamic json, Func<dynamic, T> creator)
   {
-    return ((IEnumerable<T>) Enumerable.Select(Json.entities,
+    return ((IEnumerable<T>) Enumerable.Select(json.entities,
       (Func<dynamic, T>)(entity => creator(entity)))).ToArray();
   }
 }
