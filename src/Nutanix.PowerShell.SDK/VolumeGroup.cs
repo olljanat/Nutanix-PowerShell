@@ -69,7 +69,7 @@ public class GetVolumeGroupCmdlet : Cmdlet {
   public string Uuid { get; set; } = string.Empty;
 
   protected override void ProcessRecord() {
-    if (!String.IsNullOrEmpty(Uuid)) {
+    if (!string.IsNullOrEmpty(Uuid)) {
       WriteObject(GetVolumeGroupByUuid(Uuid));
       return;
     }
@@ -102,7 +102,7 @@ public class DeleteVolumeGroupCmdlet : Cmdlet {
   public string Uuid { get; set; } = string.Empty;
 
   protected override void ProcessRecord() {
-    if (!String.IsNullOrEmpty(Uuid)) {
+    if (!string.IsNullOrEmpty(Uuid)) {
       // TODO: WriteObject Task
       DeleteVolumeGroupByUuid(Uuid);
       return;

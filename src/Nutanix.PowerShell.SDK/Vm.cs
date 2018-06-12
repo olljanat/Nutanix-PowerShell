@@ -137,9 +137,9 @@ public class NewVmCmdlet : Cmdlet {
   public static bool AddImage(
     dynamic json, string ImageUuid, string ImageName) {
 
-    if (!String.IsNullOrEmpty(ImageUuid)) {
+    if (!string.IsNullOrEmpty(ImageUuid)) {
       json.spec.resources.disk_list[0].data_source_reference.uuid = ImageUuid;
-    } else if (!String.IsNullOrEmpty(ImageName)) {
+    } else if (!string.IsNullOrEmpty(ImageName)) {
       // TODO: grab images by name.
       var images = GetImageCmdlet.GetImagesByName(ImageName);
       if (images.Length > 1) {
@@ -160,9 +160,9 @@ public class NewVmCmdlet : Cmdlet {
   public static bool AddNetwork(
     dynamic json, string NetworkUuid, string NetworkName) {
 
-    if (!String.IsNullOrEmpty(NetworkUuid)) {
+    if (!string.IsNullOrEmpty(NetworkUuid)) {
       json.spec.resources.nic_list[0].subnet_reference.uuid = NetworkUuid;
-    } else if (!String.IsNullOrEmpty(NetworkName)) {
+    } else if (!string.IsNullOrEmpty(NetworkName)) {
       // TODO: grab images by name.
       var networks = GetSubnetCmdlet.GetSubnetsByName(NetworkName);
       if (networks.Length > 1) {
@@ -200,18 +200,18 @@ public class GetVmCmdlet : Cmdlet {
   public string Uuid { get; set; } = string.Empty;
 
   protected override void ProcessRecord() {
-    if (String.IsNullOrEmpty(Name) && String.IsNullOrEmpty(Uuid)) {
+    if (string.IsNullOrEmpty(Name) && string.IsNullOrEmpty(Uuid)) {
       // If no params specified, then get all VMs.
       WriteObject(GetAllVms());
       return;
     }
 
-    if (!String.IsNullOrEmpty(Uuid)) {
+    if (!string.IsNullOrEmpty(Uuid)) {
       WriteObject(GetVmByUuid(Uuid));
       return;
     }
 
-    if (!String.IsNullOrEmpty(Name)) {
+    if (!string.IsNullOrEmpty(Name)) {
       WriteObject(GetVmByName(Name));
       return;
     }
@@ -300,17 +300,17 @@ public class RemoveVmCmdlet : Cmdlet {
       Uuid = VM.Uuid;
     }
 
-    if (String.IsNullOrEmpty(Name) && String.IsNullOrEmpty(Uuid)) {
+    if (string.IsNullOrEmpty(Name) && string.IsNullOrEmpty(Uuid)) {
       throw new Exception("Need -Name or -Uuid");
       return;
     }
 
-    if (!String.IsNullOrEmpty(Uuid)) {
+    if (!string.IsNullOrEmpty(Uuid)) {
       WriteObject(DeleteVmByUuid(Uuid));
       return;
     }
 
-    if (!String.IsNullOrEmpty(Name)) {
+    if (!string.IsNullOrEmpty(Name)) {
       WriteObject(DeleteVmByName(Name));
       return;
     }

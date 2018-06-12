@@ -88,7 +88,7 @@ public class GetImageCmdlet : Cmdlet {
   public int? Max { get; set; }
 
   protected override void ProcessRecord() {
-    if (!String.IsNullOrEmpty(Uuid)) {
+    if (!string.IsNullOrEmpty(Uuid)) {
       WriteObject(GetImageByUuid(Uuid));
       return;
     }
@@ -104,7 +104,7 @@ public class GetImageCmdlet : Cmdlet {
     if (Max != null) {
       json.length = Max;
     }
-    if (!String.IsNullOrEmpty(Name)) {
+    if (!string.IsNullOrEmpty(Name)) {
       json.filter = "name==" + Name;
     }
     return json;
@@ -112,7 +112,7 @@ public class GetImageCmdlet : Cmdlet {
 
   public void CheckResult(Image[] images) {
     return; // TODO: consider whether throwing duplicate exception is good idea.
-    if (!String.IsNullOrEmpty(Name) && images.Length > 1) {
+    if (!string.IsNullOrEmpty(Name) && images.Length > 1) {
       throw new Exception("Found duplicate images");
     }
   }
@@ -143,7 +143,7 @@ public class DeleteImageCmdlet : Cmdlet {
   public string Uuid { get; set; } = string.Empty;
 
   protected override void ProcessRecord() {
-    if (!String.IsNullOrEmpty(Uuid)) {
+    if (!string.IsNullOrEmpty(Uuid)) {
       // TODO: WriteObject Task
       DeleteImageByUuid(Uuid);
       return;

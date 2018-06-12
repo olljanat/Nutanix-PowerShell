@@ -89,7 +89,7 @@ public class GetSubnetCmdlet : Cmdlet {
   public int? Max { get; set; }
 
   protected override void ProcessRecord() {
-    if (!String.IsNullOrEmpty(Uuid)) {
+    if (!string.IsNullOrEmpty(Uuid)) {
       WriteObject(GetSubnetByUuid(Uuid));
       return;
     }
@@ -105,7 +105,7 @@ public class GetSubnetCmdlet : Cmdlet {
     if (Max != null) {
       json.length = Max;
     }
-    if (!String.IsNullOrEmpty(Name)) {
+    if (!string.IsNullOrEmpty(Name)) {
       json.filter = "name==" + Name;
     }
     return json;
@@ -113,7 +113,7 @@ public class GetSubnetCmdlet : Cmdlet {
 
   public void CheckResult(Subnet[] subnets) {
     return; // TODO: consider whether throwing duplicate exception is good idea.
-    if (!String.IsNullOrEmpty(Name) && subnets.Length > 1) {
+    if (!string.IsNullOrEmpty(Name) && subnets.Length > 1) {
       throw new Exception("Found duplicate subnets");
     }
   }
@@ -148,7 +148,7 @@ public class DeleteSubnetCmdlet : Cmdlet {
   // https://www.vmware.com/support/developer/PowerCLI/PowerCLI41U1/html/Remove-VirtualSwitch.html
 
   protected override void ProcessRecord() {
-    if (!String.IsNullOrEmpty(Uuid)) {
+    if (!string.IsNullOrEmpty(Uuid)) {
       // TODO: WriteObject Task
       DeleteSubnetByUuid(Uuid);
       return;

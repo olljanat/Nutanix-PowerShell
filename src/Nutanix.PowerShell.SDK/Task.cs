@@ -61,7 +61,7 @@ public class GetTaskCmdlet : Cmdlet {
   public Task Task { get; set; }
 
   protected override void ProcessRecord() {
-    if (!String.IsNullOrEmpty(Uuid)) {
+    if (!string.IsNullOrEmpty(Uuid)) {
       WriteObject(GetTaskByUuid(Uuid));
       return;
     }

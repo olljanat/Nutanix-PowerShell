@@ -28,7 +28,7 @@ public class Util {
     string requestMethod,
     string requestBody) {
 
-    if (String.IsNullOrEmpty(server) || Util.pscreds == null) {
+    if (string.IsNullOrEmpty(server) || Util.pscreds == null) {
       // TODO: throw exception.
       return null;
     }
@@ -42,7 +42,7 @@ public class Util {
     string password = creds.Password;
     var encoding = System.Text.Encoding.GetEncoding("UTF-8");
     var encodedAuth = encoding.GetBytes(username + ":" + password);
-    String authHeader = System.Convert.ToBase64String(encodedAuth);
+    string authHeader = System.Convert.ToBase64String(encodedAuth);
     request.Headers.Add("Authorization", "Basic " + authHeader);
     request.Headers.Add("Content-Type","application/json");
     request.Headers.Add("Accept", "application/json");
@@ -60,7 +60,7 @@ public class Util {
       using (var response = (HttpWebResponse) request.GetResponse()) {
         if (response.StatusCode != HttpStatusCode.OK &&
             response.StatusCode != HttpStatusCode.Accepted) {
-          var message = String.Format(
+          var message = string.Format(
             "Request failed. StatusCode {0}", response.StatusCode);
           throw new ApplicationException(message);
         }
