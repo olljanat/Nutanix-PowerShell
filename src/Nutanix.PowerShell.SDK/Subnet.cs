@@ -2,8 +2,10 @@ using System;
 using System.Management.Automation;
 using Newtonsoft.Json;
 
-namespace Nutanix {
-  public class Subnet {
+namespace Nutanix
+{
+  public class Subnet
+  {
     public string Name { get; set; } = string.Empty;
     public string Id { get; set; } = string.Empty;
 
@@ -15,7 +17,8 @@ namespace Nutanix {
     // TODO Mtu, NumPorts, ExtensionData, NumPortsAvailable, Key, Nic, VMHostId,
     // VMHost, VMHostUid, Nic
 
-    public Subnet (dynamic json) {
+    public Subnet (dynamic json)
+    {
       // Special property 'json' stores the original json.
       this.json = json;
       this.json.Property ("status").Remove ();
@@ -29,7 +32,8 @@ namespace Nutanix {
   }
 
   [CmdletAttribute (VerbsCommon.New, "VirtualSwitch")]
-  public class NewSubnetCmdlet : Cmdlet {
+  public class NewSubnetCmdlet : Cmdlet
+  {
     [Parameter]
     public string Name { get; set; } = string.Empty;
 
@@ -42,7 +46,8 @@ namespace Nutanix {
     [Parameter]
     public Cluster Cluster { get; set; }
 
-    protected override void ProcessRecord () {
+    protected override void ProcessRecord ()
+    {
       var url = "/subnets";
       var method = "POST";
       var str = @"{
@@ -61,7 +66,8 @@ namespace Nutanix {
       }
     }";
       dynamic json = JsonConvert.DeserializeObject (str);
-      if (Cluster != null) {
+      if (Cluster != null)
+      {
         json.spec.cluster_reference = new Newtonsoft.Json.Linq.JObject ();
         json.spec.cluster_reference.kind = "cluster";
         json.spec.cluster_reference.uuid = Cluster.Uuid;
@@ -76,7 +82,8 @@ namespace Nutanix {
   }
 
   [CmdletAttribute (VerbsCommon.Get, "VirtualSwitch")]
-  public class GetSubnetCmdlet : Cmdlet {
+  public class GetSubnetCmdlet : Cmdlet
+  {
     // TODO: Name parameter to specify the names of subnets to retrieve.
     [Parameter]
     public string Uuid { get; set; } = string.Empty;
@@ -87,8 +94,10 @@ namespace Nutanix {
     [Parameter]
     public int? Max { get; set; }
 
-    protected override void ProcessRecord () {
-      if (!string.IsNullOrEmpty (Uuid)) {
+    protected override void ProcessRecord ()
+    {
+      if (!string.IsNullOrEmpty (Uuid))
+      {
         WriteObject (GetSubnetByUuid (Uuid));
         return;
       }
@@ -99,39 +108,48 @@ namespace Nutanix {
     }
 
     // Given the parameters, build request body for '/subnets/list'.
-    public dynamic BuildRequestBody () {
+    public dynamic BuildRequestBody ()
+    {
       dynamic json = JsonConvert.DeserializeObject ("{}");
-      if (Max != null) {
+      if (Max != null)
+      {
         json.length = Max;
       }
-      if (!string.IsNullOrEmpty (Name)) {
+      if (!string.IsNullOrEmpty (Name))
+      {
         json.filter = "name==" + Name;
       }
       return json;
     }
 
-    public void CheckResult (Subnet[] subnets) {
+    public void CheckResult (Subnet[] subnets)
+    {
       return; // TODO: consider whether throwing duplicate exception is good idea.
-      if (!string.IsNullOrEmpty (Name) && subnets.Length > 1) {
+      if (!string.IsNullOrEmpty (Name) && subnets.Length > 1)
+      {
         throw new Exception ("Found duplicate subnets");
       }
     }
 
-    public static Subnet GetSubnetByUuid (string uuid) {
+    public static Subnet GetSubnetByUuid (string uuid)
+    {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
       var json = Util.RestCall ("/subnets/" + uuid, "GET", "" /* requestBody */ );
       return new Subnet (json);
     }
 
-    public static Subnet[] GetSubnetsByName (string name) {
+    public static Subnet[] GetSubnetsByName (string name)
+    {
       return GetAllSubnets ("{\"filter\": \"name==" + name + "\"}");
     }
 
-    public static Subnet[] GetAllSubnets (dynamic jsonReqBody) {
+    public static Subnet[] GetAllSubnets (dynamic jsonReqBody)
+    {
       return GetAllSubnets (jsonReqBody.ToString ());
     }
 
-    public static Subnet[] GetAllSubnets (string reqBody) {
+    public static Subnet[] GetAllSubnets (string reqBody)
+    {
       return Util.FromJson<Subnet> (
         Util.RestCall ("/subnets/list", "POST", reqBody),
         (Func<dynamic, Subnet>) (j => new Subnet (j)));
@@ -139,29 +157,34 @@ namespace Nutanix {
   }
 
   [CmdletAttribute (VerbsCommon.Remove, "VirtualSwitch")]
-  public class DeleteSubnetCmdlet : Cmdlet {
+  public class DeleteSubnetCmdlet : Cmdlet
+  {
     [Parameter]
     public string Uuid { get; set; } = string.Empty;
 
     // TODO: Confirm, WhatIf params.
     // https://www.vmware.com/support/developer/PowerCLI/PowerCLI41U1/html/Remove-VirtualSwitch.html
 
-    protected override void ProcessRecord () {
-      if (!string.IsNullOrEmpty (Uuid)) {
+    protected override void ProcessRecord ()
+    {
+      if (!string.IsNullOrEmpty (Uuid))
+      {
         // TODO: WriteObject Task
         DeleteSubnetByUuid (Uuid);
         return;
       }
     }
 
-    public static void DeleteSubnetByUuid (string uuid) {
+    public static void DeleteSubnetByUuid (string uuid)
+    {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
       Util.RestCall ("/subnets/" + uuid, "DELETE", "" /* requestBody */ );
     }
   }
 
   [CmdletAttribute (VerbsCommon.Set, "VirtualSwitch")]
-  public class SetSubnetCmdlet : Cmdlet {
+  public class SetSubnetCmdlet : Cmdlet
+  {
     [Parameter (Mandatory = true)]
     public Subnet Subnet { get; set; }
 
@@ -171,11 +194,14 @@ namespace Nutanix {
     [Parameter]
     public string VlanId { get; set; }
 
-    protected override void ProcessRecord () {
-      if (Name != null) {
+    protected override void ProcessRecord ()
+    {
+      if (Name != null)
+      {
         Subnet.json.spec.name = Name;
       }
-      if (VlanId != null) {
+      if (VlanId != null)
+      {
         Subnet.json.spec.resources.vlan_id = VlanId;
       }
       Subnet.json.api_version = "3.1";

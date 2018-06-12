@@ -1,31 +1,39 @@
 using System;
 using System.Management.Automation;
 
-namespace Nutanix {
-  public class Cluster {
+namespace Nutanix
+{
+  public class Cluster
+  {
     public string Name;
     public string Uuid;
-    public Cluster (dynamic json) {
+    public Cluster (dynamic json)
+    {
       Uuid = json.metadata.uuid;
       Name = json.spec.name;
     }
   }
 
   [CmdletAttribute (VerbsCommon.Get, "Cluster")]
-  public class GetClusterCmdlet : Cmdlet {
-    protected override void ProcessRecord () {
+  public class GetClusterCmdlet : Cmdlet
+  {
+    protected override void ProcessRecord ()
+    {
       WriteObject (GetAllClusters ());
     }
 
     // Grab all VMs.
     // REST: /clusters/list
-    public static Cluster[] GetAllClusters () {
+    public static Cluster[] GetAllClusters ()
+    {
       var json = Util.RestCall ("/clusters/list", "POST", "{}");
-      if (json.entities.Count == 0) {
+      if (json.entities.Count == 0)
+      {
         return new Cluster[0];
       }
       Cluster[] clusters = new Cluster[json.entities.Count];
-      for (int i = 0; i < json.entities.Count; ++i) {
+      for (int i = 0; i < json.entities.Count; ++i)
+      {
         clusters[i] = new Cluster (json.entities[i]);
       }
       return clusters;
@@ -33,7 +41,8 @@ namespace Nutanix {
   }
 
   [CmdletAttribute (VerbsCommunications.Connect, "Cluster")]
-  public class ConnectClusterCmdlet : Cmdlet {
+  public class ConnectClusterCmdlet : Cmdlet
+  {
     [Parameter]
     public string Server { get; set; } = string.Empty;
 
@@ -47,22 +56,26 @@ namespace Nutanix {
       new System.Security.SecureString ();
 
     [Parameter]
-    public SwitchParameter AcceptInvalidSslCerts {
+    public SwitchParameter AcceptInvalidSslCerts
+    {
       get { return acceptInvalidSslCerts; }
       set { acceptInvalidSslCerts = value; }
     }
     private bool acceptInvalidSslCerts;
 
-    protected override void ProcessRecord () {
+    protected override void ProcessRecord ()
+    {
       Connect (Server, UserName, Password, acceptInvalidSslCerts);
     }
 
     // Save authentication info.
     public static void Connect (
       string server, string username, System.Security.SecureString password,
-      bool acceptinvalidsslcerts) {
+      bool acceptinvalidsslcerts)
+    {
 
-      if (acceptinvalidsslcerts) {
+      if (acceptinvalidsslcerts)
+      {
         Util.TestOnlyIgnoreCerts ();
       }
       Util.server = server;

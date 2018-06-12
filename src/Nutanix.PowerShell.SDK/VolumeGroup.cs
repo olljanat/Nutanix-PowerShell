@@ -1,8 +1,10 @@
 using System;
 using System.Management.Automation;
 
-namespace Nutanix {
-  public class VolumeGroup {
+namespace Nutanix
+{
+  public class VolumeGroup
+  {
     public string Name { get; set; } = string.Empty;
     public string Id { get; set; } = string.Empty;
 
@@ -14,7 +16,8 @@ namespace Nutanix {
     // TODO Mtu, NumPorts, ExtensionData, NumPortsAvailable, Key, Nic, VMHostId,
     // VMHost, VMHostUid, Nic
 
-    public VolumeGroup (dynamic json) {
+    public VolumeGroup (dynamic json)
+    {
       // Special property 'json' stores the original json.
       this.json = json;
       this.json.Property ("status").Remove ();
@@ -27,11 +30,13 @@ namespace Nutanix {
   }
 
   [CmdletAttribute (VerbsCommon.New, "VolumeGroup")]
-  public class NewVolumeGroupCmdlet : Cmdlet {
+  public class NewVolumeGroupCmdlet : Cmdlet
+  {
     [Parameter]
     public string Name { get; set; } = string.Empty;
 
-    protected override void ProcessRecord () {
+    protected override void ProcessRecord ()
+    {
       // // TODO: make cluster_reference required if talking to PC. But not needed
       // // if talking to PE.
       // Util.RestCall("/volume_groups", "POST", @"{
@@ -63,12 +68,15 @@ namespace Nutanix {
   }
 
   [CmdletAttribute (VerbsCommon.Get, "VolumeGroup")]
-  public class GetVolumeGroupCmdlet : Cmdlet {
+  public class GetVolumeGroupCmdlet : Cmdlet
+  {
     [Parameter]
     public string Uuid { get; set; } = string.Empty;
 
-    protected override void ProcessRecord () {
-      if (!string.IsNullOrEmpty (Uuid)) {
+    protected override void ProcessRecord ()
+    {
+      if (!string.IsNullOrEmpty (Uuid))
+      {
         WriteObject (GetVolumeGroupByUuid (Uuid));
         return;
       }
@@ -76,19 +84,23 @@ namespace Nutanix {
       WriteObject (GetAllVolumeGroups ());
     }
 
-    public static VolumeGroup GetVolumeGroupByUuid (string uuid) {
+    public static VolumeGroup GetVolumeGroupByUuid (string uuid)
+    {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
       var json = Util.RestCall ("/volume_groups/" + uuid, "GET", "" /* requestBody */ );
       return new VolumeGroup (json);
     }
 
-    public static VolumeGroup[] GetAllVolumeGroups () {
+    public static VolumeGroup[] GetAllVolumeGroups ()
+    {
       var json = Util.RestCall ("/volume_groups/list", "POST", "{}");
-      if (json.entities.Count == 0) {
+      if (json.entities.Count == 0)
+      {
         return new VolumeGroup[0];
       }
       VolumeGroup[] volume_groups = new VolumeGroup[json.entities.Count];
-      for (int i = 0; i < json.entities.Count; ++i) {
+      for (int i = 0; i < json.entities.Count; ++i)
+      {
         volume_groups[i] = new VolumeGroup (json.entities[i]);
       }
       return volume_groups;
@@ -96,19 +108,23 @@ namespace Nutanix {
   }
 
   [CmdletAttribute (VerbsCommon.Remove, "VolumeGroup")]
-  public class DeleteVolumeGroupCmdlet : Cmdlet {
+  public class DeleteVolumeGroupCmdlet : Cmdlet
+  {
     [Parameter]
     public string Uuid { get; set; } = string.Empty;
 
-    protected override void ProcessRecord () {
-      if (!string.IsNullOrEmpty (Uuid)) {
+    protected override void ProcessRecord ()
+    {
+      if (!string.IsNullOrEmpty (Uuid))
+      {
         // TODO: WriteObject Task
         DeleteVolumeGroupByUuid (Uuid);
         return;
       }
     }
 
-    public static void DeleteVolumeGroupByUuid (string uuid) {
+    public static void DeleteVolumeGroupByUuid (string uuid)
+    {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
       Util.RestCall ("/volume_groups/" + uuid, "DELETE", "" /* requestBody */ );
     }
