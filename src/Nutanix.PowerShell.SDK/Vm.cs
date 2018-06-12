@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Management.Automation;
+
 using Newtonsoft.Json;
 
 namespace Nutanix
@@ -371,7 +372,7 @@ namespace Nutanix
     public static Task DeleteVmByUuid (string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      return Task.FromUuidInJson (Util.RestCall ("/vms/" + uuid, "DELETE", ""));
+      return Task.FromUuidInJson (Util.RestCall ("/vms/" + uuid, "DELETE", string.Empty));
     }
 
     // If no params specified, then get VM with 'name'.
@@ -381,7 +382,7 @@ namespace Nutanix
       var vm = GetVmCmdlet.GetVmByName (name);
       if (vm != null)
       {
-        return Task.FromUuidInJson (Util.RestCall ("/vms/" + vm.Uuid, "DELETE", ""));
+        return Task.FromUuidInJson (Util.RestCall ("/vms/" + vm.Uuid, "DELETE", string.Empty));
       }
       return null;
     }
