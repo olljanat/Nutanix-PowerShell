@@ -290,7 +290,7 @@ namespace Nutanix
     public static Vm GetVmByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      var json = Util.RestCall("/vms/" + uuid, "GET", string.Empty /* requestBody */ );
+      var json = Util.RestCall("/vms/" + uuid, "GET", string.Empty /* requestBody */);
       return new Vm(json);
     }
   }

@@ -135,7 +135,7 @@ namespace Nutanix
     public static Subnet GetSubnetByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      var json = Util.RestCall("/subnets/" + uuid, "GET", string.Empty /* requestBody */ );
+      var json = Util.RestCall("/subnets/" + uuid, "GET", string.Empty /* requestBody */);
       return new Subnet(json);
     }
 
@@ -179,7 +179,7 @@ namespace Nutanix
     public static void DeleteSubnetByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      Util.RestCall("/subnets/" + uuid, "DELETE", string.Empty /* requestBody */ );
+      Util.RestCall("/subnets/" + uuid, "DELETE", string.Empty /* requestBody */);
     }
   }
 
