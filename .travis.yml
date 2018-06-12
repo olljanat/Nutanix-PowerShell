@@ -4,6 +4,9 @@ language: csharp
 git:
   depth: 1
 
+mono: none
+dotnet: 2.1
+
 stages:
   - warm up dependencies
   # - sanity testing
