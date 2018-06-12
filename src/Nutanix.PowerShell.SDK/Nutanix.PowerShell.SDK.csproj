@@ -5,6 +5,8 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <Description>Nutanix PowerShell SDK</Description>
     <PackageId>Nutanix.PowerShell.SDK</PackageId>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DocumentationFile>bin\dog-test.XML</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
