@@ -9,7 +9,7 @@
 using System;
 using System.Management.Automation;
 
-using Newtonsoft.json;
+using Newtonsoft.Json;
 
 namespace Nutanix
 {
@@ -217,7 +217,7 @@ namespace Nutanix
     {
       if (Cluster != null)
       {
-        json.spec.cluster_reference = new Newtonsoft.json.Linq.JObject();
+        json.spec.cluster_reference = new Newtonsoft.Json.Linq.JObject();
         json.spec.cluster_reference.kind = "cluster";
         json.spec.cluster_reference.uuid = Cluster.Uuid;
         json.spec.cluster_reference.name = Cluster.Name;

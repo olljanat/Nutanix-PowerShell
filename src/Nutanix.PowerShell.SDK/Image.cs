@@ -9,7 +9,7 @@
 using System;
 using System.Management.Automation;
 
-using Newtonsoft.json;
+using Newtonsoft.Json;
 
 namespace Nutanix
 {

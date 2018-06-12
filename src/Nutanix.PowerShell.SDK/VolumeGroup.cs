@@ -19,7 +19,7 @@ namespace Nutanix
     // 'Uid' is VMware's equivalent field for Nutanix's Uuid.
     public string Uid { get; set; } = string.Empty;
     public string Uuid { get; set; } = string.Empty;
-    public dynamic json { get; set; }
+    public dynamic Json { get; set; }
 
     // TODO Mtu, NumPorts, ExtensionData, NumPortsAvailable, Key, Nic, VMHostId,
     // VMHost, VMHostUid, Nic
@@ -27,9 +27,9 @@ namespace Nutanix
     public VolumeGroup(dynamic json)
     {
       // Special property 'json' stores the original json.
-      this.json = json;
-      this.json.Property("status").Remove();
-      this.json.api_version = "3.1";
+      this.Json = json;
+      this.Json.Property("status").Remove();
+      this.Json.api_version = "3.1";
 
       Name = json.spec.name;
       Uuid = json.metadata.uuid;
