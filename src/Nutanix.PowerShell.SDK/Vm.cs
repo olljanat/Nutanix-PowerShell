@@ -156,7 +156,6 @@ namespace Nutanix
     public static bool AddImage(
       dynamic json, string imageUuid, string imageName)
     {
-
       if (!string.IsNullOrEmpty(imageUuid))
       {
         json.spec.resources.disk_list[0].data_source_reference.uuid = imageUuid;
@@ -187,7 +186,6 @@ namespace Nutanix
     public static bool AddNetwork(
       dynamic json, string networkUuid, string networkName)
     {
-
       if (!string.IsNullOrEmpty(networkUuid))
       {
         json.spec.resources.nic_list[0].subnet_reference.uuid = networkUuid;
@@ -286,6 +284,7 @@ namespace Nutanix
       {
         throw new Exception("VM not found.");
       }
+
       // TODO: reconsider if we want to throw error on more than 1 VM.
       // if (json.entities.Count > 1) {
       //   throw new Exception("More than 1 VM found.");
@@ -431,6 +430,7 @@ namespace Nutanix
       }
       VM.json.api_version = "3.1";
       VM.json.Property("status").Remove();
+
       // TODO: return Task object from the RestCall.
       WriteObject(Task.FromUuidInJson(
         Util.RestCall("/vms/" + VM.Uuid, "PUT", VM.json.ToString())));
