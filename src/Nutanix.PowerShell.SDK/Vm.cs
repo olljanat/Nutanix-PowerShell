@@ -3,7 +3,6 @@ using System;
 using Newtonsoft.Json;
 
 namespace Nutanix {
-
 // VMware's struct definition.
 // https://www.vmware.com/support/developer/PowerCLI/PowerCLI41U1/html/VirtualMachine.html
 public class Vm {
@@ -18,7 +17,6 @@ public class Vm {
   public int? NumVcpusPerSocket { get; set; }
   public dynamic json { get; set; }
   public Vm(dynamic json) {
-
     // Special property 'json' stores the original json.
     this.json = json;
     this.json.api_version = "3.1";

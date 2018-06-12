@@ -2,7 +2,6 @@ using System.Management.Automation;
 using System;
 
 namespace Nutanix {
-
 public class Cluster {
   public string Name;
   public string Uuid;

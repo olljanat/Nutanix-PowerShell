@@ -3,7 +3,6 @@ using System;
 using Newtonsoft.Json;
 
 namespace Nutanix {
-
 public class Subnet {
   public string Name { get; set; } = string.Empty;
   public string Id { get; set; } = string.Empty;

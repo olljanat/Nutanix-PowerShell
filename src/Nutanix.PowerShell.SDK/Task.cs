@@ -2,7 +2,6 @@ using System.Management.Automation;
 using System;
 
 namespace Nutanix {
-
 public class Task {
   public string Uuid { get; set; } = string.Empty;
   public string Status { get; set; } = string.Empty;
