@@ -4,17 +4,17 @@ using System;
 namespace Nutanix {
 
 public class Task {
-  public string Uuid;
-  public string Status;
-  public string StartTime;
-  public string CreationTime;
-  public string CompletionTime;
-  public string ProgressMessage;
-  public string OperationType;
-  public int PercentageComplete;
-  public int DefaultPollTimeoutSecs = 2147483;
+  public string Uuid { get; set; } = "";
+  public string Status { get; set; } = "";
+  public string StartTime { get; set; } = "";
+  public string CreationTime { get; set; } = "";
+  public string CompletionTime { get; set; } = "";
+  public string ProgressMessage { get; set; } = "";
+  public string OperationType { get; set; } = "";
+  public int PercentageComplete { get; set; }
+  public int DefaultPollTimeoutSecs { get; set; } = 2147483;
   public int DefaultPollIntervalMs = 500;
-  public dynamic json;
+  public dynamic json { get; set; }
   public Task(dynamic json) {
     Uuid = json.uuid;
     Status = json.status;
@@ -58,7 +58,7 @@ public class GetTaskCmdlet : Cmdlet {
   public string Uuid { get; set; } = "";
 
   [Parameter()]
-  public Task Task { get; set; } = null;
+  public Task Task { get; set; }
 
   protected override void ProcessRecord() {
     if (!String.IsNullOrEmpty(Uuid)) {

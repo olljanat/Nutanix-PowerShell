@@ -4,13 +4,13 @@ using System;
 namespace Nutanix {
 
 public class VolumeGroup {
-  public string Name;
-  public string Id;
+  public string Name { get; set; } = "";
+  public string Id { get; set; } = "";
 
   // 'Uid' is VMware's equivalent field for Nutanix's Uuid.
-  public string Uid;
-  public string Uuid;
-  public dynamic json;
+  public string Uid { get; set; } = "";
+  public string Uuid { get; set; } = "";
+  public dynamic json { get; set; }
 
   // TODO Mtu, NumPorts, ExtensionData, NumPortsAvailable, Key, Nic, VMHostId,
   // VMHost, VMHostUid, Nic

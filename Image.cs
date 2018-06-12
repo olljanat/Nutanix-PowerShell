@@ -5,13 +5,13 @@ using Newtonsoft.Json;
 namespace Nutanix {
 
 public class Image {
-  public string Name;
-  public string Id;
+  public string Name { get; set; }
+  public string Id { get; set; }
 
   // 'Uid' is VMware's equivalent field for Nutanix's Uuid.
   public string Uid;
   public string Uuid;
-  public dynamic json;
+  public dynamic json { get; set; }
 
   // TODO Mtu, NumPorts, ExtensionData, NumPortsAvailable, Key, Nic, VMHostId,
   // VMHost, VMHostUid, Nic
@@ -85,7 +85,7 @@ public class GetImageCmdlet : Cmdlet {
   public string Name { get; set; } = "";
 
   [Parameter()]
-  public int? Max { get; set; } = null;
+  public int? Max { get; set; }
 
   protected override void ProcessRecord() {
     if (!String.IsNullOrEmpty(Uuid)) {
@@ -113,7 +113,7 @@ public class GetImageCmdlet : Cmdlet {
   public void CheckResult(Image[] images) {
     return; // TODO: consider whether throwing duplicate exception is good idea.
     if (!String.IsNullOrEmpty(Name) && images.Length > 1) {
-      throw new Exception("Found duplicate images");
+      throw new NtnxException("Found duplicate images");
     }
   }
 
@@ -159,10 +159,10 @@ public class DeleteImageCmdlet : Cmdlet {
 [CmdletAttribute(VerbsCommon.Set, "Image")]
 public class SetImageCmdlet : Cmdlet {
   [Parameter(Mandatory=true, ValueFromPipeline=true)]
-  public Image Image { get; set; } = null;
+  public Image Image { get; set; }
 
   [Parameter()]
-  public string Name { get; set; } = null;
+  public string Name { get; set; }
 
   [Parameter()]
   public SwitchParameter RunAsync

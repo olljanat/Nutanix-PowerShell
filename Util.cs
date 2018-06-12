@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 using System.Linq;
 
 public class Util {
-  public static string server;
+  public static string server { get; set; } = "";
 
   // Holds username and password.
   // TODO: might need to GC pscreds.Password (SecureString) using Dispose

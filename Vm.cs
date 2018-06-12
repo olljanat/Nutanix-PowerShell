@@ -2,27 +2,21 @@
 using System;
 using Newtonsoft.Json;
 
-// This is the exception that VMware's PowerCLI throws on error.
-public class VimException : Exception {
-  public VimException():base() { }
-  public VimException (string message): base(message) { }
-}
-
 namespace Nutanix {
 
 // VMware's struct definition.
 // https://www.vmware.com/support/developer/PowerCLI/PowerCLI41U1/html/VirtualMachine.html
 public class Vm {
-  public const string PowerState_ON = "ON";
-  public const string PowerState_OFF = "OFF";
+  public static string PowerState_ON = "ON";
+  public static string PowerState_OFF = "OFF";
 
-  public string Name;
-  public string Uuid;
-  public string HardwareClockTimezone;
-  public int? NumSockets;
-  public int? MemoryMB;
-  public int? NumVcpusPerSocket;
-  public dynamic json;
+  public string Name { get; set; }
+  public string Uuid { get; set; }
+  public string HardwareClockTimezone { get; set; }
+  public int? NumSockets { get; set; }
+  public int? MemoryMB { get; set; }
+  public int? NumVcpusPerSocket { get; set; }
+  public dynamic json { get; set; }
   public Vm(dynamic json) {
 
     // Special property 'json' stores the original json.
@@ -72,7 +66,7 @@ public class NewVmCmdlet : Cmdlet {
   public string ImageName { get; set; } = "";
 
   [Parameter()]
-  public Cluster Cluster { get; set; } = null;
+  public Cluster Cluster { get; set; }
 
   [Parameter()]
   public SwitchParameter RunAsync
@@ -267,7 +261,7 @@ public class StartVmCmdlet : Cmdlet {
   public string Uuid { get; set; } = "";
 
   [Parameter()]
-  public Vm VM { get; set; } = null;
+  public Vm VM { get; set; }
 
   [Parameter()]
   public SwitchParameter RunAsync
@@ -299,7 +293,7 @@ public class RemoveVmCmdlet : Cmdlet {
   public string Uuid { get; set; } = "";
 
   [Parameter(Mandatory=true, ValueFromPipeline=true)]
-  public Vm VM { get; set; } = null;
+  public Vm VM { get; set; }
 
   protected override void ProcessRecord() {
     if (VM != null) {
@@ -323,7 +317,7 @@ public class RemoveVmCmdlet : Cmdlet {
   }
 
   // Delete Vm using 'uuid'.
-  // REST: /vms/{uuid}
+  // REST path is /vms/{uuid}
   public static Task DeleteVmByUuid(string uuid) {
     // TODO: validate using UUID regexes that 'uuid' is in correct format.
     return Task.FromUuidInJson(Util.RestCall("/vms/" + uuid, "DELETE", ""));
@@ -343,16 +337,16 @@ public class RemoveVmCmdlet : Cmdlet {
 [CmdletAttribute(VerbsCommon.Set, "Vm")]
 public class SetVmCmdlet : Cmdlet {
   [Parameter(Mandatory=true, ValueFromPipeline=true)]
-  public Vm VM { get; set; } = null;
+  public Vm VM { get; set; }
 
   [Parameter()]
-  public string Name { get; set; } = null;
+  public string Name { get; set; }
 
   [Parameter()]
-  public string Description { get; set; } = null;
+  public string Description { get; set; }
 
   [Parameter()]
-  public int? MemoryMB { get; set; } = null;
+  public int? MemoryMB { get; set; }
 
   // TODO: figure out Nutanix's analog for NumCpu. NumVcpusPerSocket is not
   // correct.

@@ -5,13 +5,13 @@ using Newtonsoft.Json;
 namespace Nutanix {
 
 public class Subnet {
-  public string Name;
-  public string Id;
+  public string Name { get; set; } = "";
+  public string Id { get; set; } = "";
 
   // 'Uid' is VMware's equivalent field for Nutanix's Uuid.
   public string Uid;
   public string Uuid;
-  public dynamic json;
+  public dynamic json { get; set; }
 
   // TODO Mtu, NumPorts, ExtensionData, NumPortsAvailable, Key, Nic, VMHostId,
   // VMHost, VMHostUid, Nic
@@ -41,7 +41,7 @@ public class NewSubnetCmdlet : Cmdlet {
   public string Description { get; set; } = "";
 
   [Parameter()]
-  public Cluster Cluster { get; set; } = null;
+  public Cluster Cluster { get; set; }
 
   protected override void ProcessRecord() {
     var url = "/subnets";
@@ -86,7 +86,7 @@ public class GetSubnetCmdlet : Cmdlet {
   public string Name { get; set; } = "";
 
   [Parameter()]
-  public int? Max { get; set; } = null;
+  public int? Max { get; set; }
 
   protected override void ProcessRecord() {
     if (!String.IsNullOrEmpty(Uuid)) {
@@ -164,13 +164,13 @@ public class DeleteSubnetCmdlet : Cmdlet {
 [CmdletAttribute(VerbsCommon.Set, "VirtualSwitch")]
 public class SetSubnetCmdlet : Cmdlet {
   [Parameter(Mandatory=true)]
-  public Subnet Subnet { get; set; } = null;
+  public Subnet Subnet { get; set; }
 
   [Parameter()]
-  public string Name { get; set; } = null;
+  public string Name { get; set; }
 
   [Parameter()]
-  public string VlanId { get; set; } = null;
+  public string VlanId { get; set; }
 
   protected override void ProcessRecord() {
     if (Name != null) {
