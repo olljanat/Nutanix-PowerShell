@@ -17,11 +17,9 @@ namespace Nutanix
   // https://www.vmware.com/support/developer/PowerCLI/PowerCLI41U1/html/VirtualMachine.html
   public class Vm
   {
-    public static string powerStateON = "ON";
-
-    public static string powerStateOFF = "OFF";
-
     public string Name { get; set; }
+
+    public string PowerState { get; set; }
 
     public string Uuid { get; set; }
 
@@ -340,7 +338,7 @@ namespace Nutanix
 
     protected override void ProcessRecord()
     {
-      VM.Json.spec.resources.power_state = Vm.powerStateON;
+      VM.Json.spec.resources.power_state = "ON";
       VM.Json.api_version = "3.1"; // TODO: remove api_version field set.
       var task = Task.FromUuidInJson(
         Util.RestCall("/vms/" + VM.Uuid, "PUT", VM.Json.ToString()));
