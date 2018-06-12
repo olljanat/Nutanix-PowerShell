@@ -99,9 +99,9 @@ namespace Nutanix
       },
       ""spec"": {
         ""resources"": {
-          ""memory_size_mib"": " + MemorySizeMib.ToString()+ @",
-          ""num_vcpus_per_socket"": " + NumVcpusPerSocket.ToString()+ @",
-          ""num_sockets"": " + NumSockets.ToString()+ @",
+          ""memory_size_mib"": " + MemorySizeMib.ToString() + @",
+          ""num_vcpus_per_socket"": " + NumVcpusPerSocket.ToString() + @",
+          ""num_sockets"": " + NumSockets.ToString() + @",
           ""power_state"": """ + PowerState + @""",
           ""disk_list"": [
             {
@@ -171,7 +171,7 @@ namespace Nutanix
             "Ambiguous: found more than 1 image with the same name");
           for (int i = 0; i < images.Length; ++i)
           {
-            Console.WriteLine("Image " + i.ToString()+ ": " + images[i].Uuid);
+            Console.WriteLine("Image " + i.ToString() + ": " + images[i].Uuid);
           }
           return false;
         }
@@ -202,7 +202,7 @@ namespace Nutanix
             "Ambiguous: found more than 1 Subnet with the same name");
           for (int i = 0; i < networks.Length; ++i)
           {
-            Console.WriteLine("Network " + i.ToString()+ ": " + networks[i].Uuid);
+            Console.WriteLine("Network " + i.ToString() + ": " + networks[i].Uuid);
           }
           return false;
         }
@@ -239,7 +239,7 @@ namespace Nutanix
 
     protected override void ProcessRecord()
     {
-      if (string.IsNullOrEmpty(Name)&& string.IsNullOrEmpty(Uuid))
+      if (string.IsNullOrEmpty(Name) && string.IsNullOrEmpty(Uuid))
       {
         // If no params specified, then get all VMs.
         WriteObject(GetAllVms());
@@ -356,7 +356,7 @@ namespace Nutanix
         Uuid = VM.Uuid;
       }
 
-      if (string.IsNullOrEmpty(Name)&& string.IsNullOrEmpty(Uuid))
+      if (string.IsNullOrEmpty(Name) && string.IsNullOrEmpty(Uuid))
       {
         throw new Exception("Need -Name or -Uuid");
         return;

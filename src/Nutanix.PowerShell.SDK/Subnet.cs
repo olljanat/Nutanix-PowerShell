@@ -134,7 +134,7 @@ namespace Nutanix
     public void CheckResult(Subnet[] subnets)
     {
       return; // TODO: consider whether throwing duplicate exception is good idea.
-      if (!string.IsNullOrEmpty(Name)&& subnets.Length > 1)
+      if (!string.IsNullOrEmpty(Name) && subnets.Length > 1)
       {
         throw new Exception("Found duplicate subnets");
       }
@@ -161,7 +161,7 @@ namespace Nutanix
     {
       return Util.FromJson<Subnet>(
         Util.RestCall("/subnets/list", "POST", reqBody),
-        (Func<dynamic, Subnet>)(j => new Subnet(j)));
+        (Func<dynamic, Subnet>) (j => new Subnet(j)));
     }
   }
 
