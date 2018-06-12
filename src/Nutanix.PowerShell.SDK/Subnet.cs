@@ -31,16 +31,16 @@ public class Subnet {
 
 [CmdletAttribute(VerbsCommon.New, "VirtualSwitch")]
 public class NewSubnetCmdlet : Cmdlet {
-  [Parameter()]
+  [Parameter]
   public string Name { get; set; } = "";
 
-  [Parameter()]
+  [Parameter]
   public string VlanId { get; set; } = "";
 
-  [Parameter()]
+  [Parameter]
   public string Description { get; set; } = "";
 
-  [Parameter()]
+  [Parameter]
   public Cluster Cluster { get; set; }
 
   protected override void ProcessRecord() {
@@ -79,13 +79,13 @@ public class NewSubnetCmdlet : Cmdlet {
 [CmdletAttribute(VerbsCommon.Get, "VirtualSwitch")]
 public class GetSubnetCmdlet : Cmdlet {
   // TODO: Name parameter to specify the names of subnets to retrieve.
-  [Parameter()]
+  [Parameter]
   public string Uuid { get; set; } = "";
 
-  [Parameter()]
+  [Parameter]
   public string Name { get; set; } = "";
 
-  [Parameter()]
+  [Parameter]
   public int? Max { get; set; }
 
   protected override void ProcessRecord() {
@@ -141,7 +141,7 @@ public class GetSubnetCmdlet : Cmdlet {
 
 [CmdletAttribute(VerbsCommon.Remove, "VirtualSwitch")]
 public class DeleteSubnetCmdlet : Cmdlet {
-  [Parameter()]
+  [Parameter]
   public string Uuid { get; set; } = "";
 
   // TODO: Confirm, WhatIf params.
@@ -166,10 +166,10 @@ public class SetSubnetCmdlet : Cmdlet {
   [Parameter(Mandatory=true)]
   public Subnet Subnet { get; set; }
 
-  [Parameter()]
+  [Parameter]
   public string Name { get; set; }
 
-  [Parameter()]
+  [Parameter]
   public string VlanId { get; set; }
 
   protected override void ProcessRecord() {

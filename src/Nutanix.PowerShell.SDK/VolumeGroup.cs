@@ -29,7 +29,7 @@ public class VolumeGroup {
 
 [CmdletAttribute(VerbsCommon.New, "VolumeGroup")]
 public class NewVolumeGroupCmdlet : Cmdlet {
-  [Parameter()]
+  [Parameter]
   public string Name { get; set; } = "";
 
   protected override void ProcessRecord() {
@@ -65,7 +65,7 @@ public class NewVolumeGroupCmdlet : Cmdlet {
 
 [CmdletAttribute(VerbsCommon.Get, "VolumeGroup")]
 public class GetVolumeGroupCmdlet : Cmdlet {
-  [Parameter()]
+  [Parameter]
   public string Uuid { get; set; } = "";
 
   protected override void ProcessRecord() {
@@ -98,7 +98,7 @@ public class GetVolumeGroupCmdlet : Cmdlet {
 
 [CmdletAttribute(VerbsCommon.Remove, "VolumeGroup")]
 public class DeleteVolumeGroupCmdlet : Cmdlet {
-  [Parameter()]
+  [Parameter]
   public string Uuid { get; set; } = "";
 
   protected override void ProcessRecord() {

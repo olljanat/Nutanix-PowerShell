@@ -38,37 +38,37 @@ public class Vm {
 
 [CmdletAttribute(VerbsCommon.New, "Vm")]
 public class NewVmCmdlet : Cmdlet {
-  [Parameter()]
+  [Parameter]
   public string Name { get; set; } = "";
 
-  [Parameter()]
+  [Parameter]
   public int MemorySizeMib { get; set; } = 1024; // 1 GiB
 
-  [Parameter()]
+  [Parameter]
   public int NumSockets { get; set; } = 1;
 
-  [Parameter()]
+  [Parameter]
   public int NumVcpusPerSocket { get; set; } = 1;
 
-  [Parameter()]
+  [Parameter]
   public string PowerState { get; set; } = "OFF";
 
-  [Parameter()]
+  [Parameter]
   public string ImageUuid { get; set; } = "";
 
-  [Parameter()]
+  [Parameter]
   public string NetworkUuid { get; set; } = "";
 
-  [Parameter()]
+  [Parameter]
   public string NetworkName { get; set; } = "";
 
-  [Parameter()]
+  [Parameter]
   public string ImageName { get; set; } = "";
 
-  [Parameter()]
+  [Parameter]
   public Cluster Cluster { get; set; }
 
-  [Parameter()]
+  [Parameter]
   public SwitchParameter RunAsync
   {
     get { return runAsync; }
@@ -193,10 +193,10 @@ public class NewVmCmdlet : Cmdlet {
 
 [CmdletAttribute(VerbsCommon.Get, "Vm")]
 public class GetVmCmdlet : Cmdlet {
-  [Parameter()]
+  [Parameter]
   public string Name { get; set; } = "";
 
-  [Parameter()]
+  [Parameter]
   public string Uuid { get; set; } = "";
 
   protected override void ProcessRecord() {
@@ -257,13 +257,13 @@ public class GetVmCmdlet : Cmdlet {
 
 [CmdletAttribute("Start", "Vm")]
 public class StartVmCmdlet : Cmdlet {
-  [Parameter()]
+  [Parameter]
   public string Uuid { get; set; } = "";
 
-  [Parameter()]
+  [Parameter]
   public Vm VM { get; set; }
 
-  [Parameter()]
+  [Parameter]
   public SwitchParameter RunAsync
   {
     get { return runAsync; }
@@ -286,10 +286,10 @@ public class StartVmCmdlet : Cmdlet {
 
 [CmdletAttribute(VerbsCommon.Remove, "Vm")]
 public class RemoveVmCmdlet : Cmdlet {
-  [Parameter()]
+  [Parameter]
   public string Name { get; set; } = "";
 
-  [Parameter()]
+  [Parameter]
   public string Uuid { get; set; } = "";
 
   [Parameter(Mandatory=true, ValueFromPipeline=true)]
@@ -339,13 +339,13 @@ public class SetVmCmdlet : Cmdlet {
   [Parameter(Mandatory=true, ValueFromPipeline=true)]
   public Vm VM { get; set; }
 
-  [Parameter()]
+  [Parameter]
   public string Name { get; set; }
 
-  [Parameter()]
+  [Parameter]
   public string Description { get; set; }
 
-  [Parameter()]
+  [Parameter]
   public int? MemoryMB { get; set; }
 
   // TODO: figure out Nutanix's analog for NumCpu. NumVcpusPerSocket is not

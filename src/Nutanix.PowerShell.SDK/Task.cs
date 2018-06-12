@@ -54,10 +54,10 @@ public class Task {
 
 [CmdletAttribute(VerbsCommon.Get, "Task")]
 public class GetTaskCmdlet : Cmdlet {
-  [Parameter()]
+  [Parameter]
   public string Uuid { get; set; } = "";
 
-  [Parameter()]
+  [Parameter]
   public Task Task { get; set; }
 
   protected override void ProcessRecord() {

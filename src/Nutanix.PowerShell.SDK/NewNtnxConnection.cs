@@ -2,19 +2,19 @@ using System.Management.Automation;
 
 [CmdletAttribute(VerbsCommon.New, "NtnxConnection")]
 public class ConnectNTNX : Cmdlet {
-  [Parameter()]
+  [Parameter]
   public string Server { get; set; } = "";
 
-  [Parameter()]
+  [Parameter]
   public string UserName { get; set; } = "";
 
   // TODO: note that 'Password' should be the result of
   // 'ConvertTo-SecureString'
-  [Parameter()]
+  [Parameter]
   public System.Security.SecureString Password { get; set; } =
     new System.Security.SecureString();
 
-  [Parameter()]
+  [Parameter]
   public SwitchParameter AcceptInvalidSslCerts
   {
     get { return acceptInvalidSslCerts; }
