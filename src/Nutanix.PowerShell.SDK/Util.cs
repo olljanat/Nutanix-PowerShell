@@ -46,7 +46,7 @@ public class Util {
     request.Headers.Add("Authorization", "Basic " + authHeader);
     request.Headers.Add("Content-Type","application/json");
     request.Headers.Add("Accept", "application/json");
-    request.Headers.Add("X-Nutanix-Client-Type", "PowershellSDK");
+    request.Headers.Add("X-Nutanix-Client-Type", "Nutanix.PowerShell.SDK");
 
     if (!string.IsNullOrEmpty(requestBody)) {
       var bytes = Encoding.GetEncoding("UTF-8").GetBytes(requestBody);
