@@ -18,7 +18,7 @@ using Newtonsoft.Json;
 
 public class Util
 {
-  public static string server { get; set; } = string.Empty;
+  public static string Server { get; set; } = string.Empty;
 
   // Holds username and password.
   // TODO: might need to GC PSCreds.Password (SecureString) using Dispose
@@ -39,14 +39,14 @@ public class Util
     string requestMethod,
     string requestBody)
   {
-    if (string.IsNullOrEmpty(server) || Util.PSCreds == null)
+    if (string.IsNullOrEmpty(Server) || Util.PSCreds == null)
     {
       // TODO: throw exception.
       return null;
     }
 
     var request = WebRequest.Create(
-      "https://" + Util.server + ":9440/api/nutanix/v3" + urlPath);
+      "https://" + Util.Server + ":9440/api/nutanix/v3" + urlPath);
     request.Method = requestMethod;
     request.PreAuthenticate = true;
     var creds = Util.PSCreds.GetNetworkCredential();
@@ -72,7 +72,7 @@ public class Util
 
     try
     {
-      using (var response = (HttpWebResponse) request.GetResponse())
+      using (var response = (HttpWebResponse)request.GetResponse())
       {
         if (response.StatusCode != HttpStatusCode.OK &&
           response.StatusCode != HttpStatusCode.Accepted)
@@ -97,7 +97,7 @@ public class Util
     }
     catch (WebException ex)
     {
-      var response = (HttpWebResponse) ex.Response;
+      var response = (HttpWebResponse)ex.Response;
       using (var responseStream = response.GetResponseStream())
       {
         if (responseStream != null)
@@ -105,6 +105,7 @@ public class Util
           using (var reader = new StreamReader(responseStream))
           {
             var json = JsonConvert.DeserializeObject(reader.ReadToEnd());
+
             // Print request + response to help user debug.
             Console.WriteLine(requestMethod + " " + urlPath + ":\n" +
               requestBody);
@@ -112,8 +113,10 @@ public class Util
           }
         }
       }
+
       throw ex;
     }
+
     return null;
   }
 
@@ -143,7 +146,6 @@ public class Util
 
   public static T[] FromJson<T>(dynamic json, Func<dynamic, T> creator)
   {
-    return ((IEnumerable<T>) Enumerable.Select(json.entities,
-      (Func<dynamic, T>)(entity => creator(entity)))).ToArray();
+    return ((IEnumerable<T>) Enumerable.Select(json.entities, (Func<dynamic, T>)(entity => creator(entity)))).ToArray();
   }
 }
