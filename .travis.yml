@@ -4,9 +4,6 @@ language: csharp
 git:
   depth: 1
 
-mono: none
-dotnet: 2.1
-
 stages:
   - warm up dependencies
   # - sanity testing
@@ -16,9 +13,13 @@ stages:
 jobs:
   include:
     - stage: warm up dependencies
+      mono: latest
+      dotnet: 2.1
       script:
         - nuget update -self
-        - make deps
+        - nuget install -OutputDirectory deps NETStandard.Library.NETFramework
+        - nuget install -OutputDirectory deps Newtonsoft.Json
+        - nuget install -OutputDirectory deps PowerShellStandard.Library
     - stage: build
       script:
         - make sdk
@@ -28,3 +29,8 @@ matrix:
   allow_failures:
   - stage: sanity testing
   - script: make sanity
+  # include:
+  #   - dotnet: 2.1
+  #     mono: none
+  #     env: DOTNETCORE=1
+  #   - mono: latest
