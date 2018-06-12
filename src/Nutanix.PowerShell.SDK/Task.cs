@@ -33,7 +33,7 @@ namespace Nutanix
 
     private int defaultPollIntervalMs = 500;
 
-    public dynamic json { get; set; }
+    public dynamic Json { get; set; }
 
     public Task(dynamic json)
     {
@@ -45,7 +45,7 @@ namespace Nutanix
       ProgressMessage = json.progress_message;
       OperationType = json.operation_type;
       PercentageComplete = json.percentage_complete;
-      this.json = json;
+      this.Json = json;
     }
 
     public Task(string uuid)
