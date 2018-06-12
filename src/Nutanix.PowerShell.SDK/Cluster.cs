@@ -15,10 +15,10 @@ namespace Nutanix
   {
     public string Name;
     public string Uuid;
-    public Cluster(dynamic json)
+    public Cluster(dynamic Json)
     {
-      Uuid = json.metadata.uuid;
-      Name = json.spec.name;
+      Uuid = Json.metadata.uuid;
+      Name = Json.spec.name;
     }
   }
 
@@ -34,15 +34,15 @@ namespace Nutanix
     // REST: /clusters/list
     public static Cluster[] GetAllClusters()
     {
-      var json = Util.RestCall("/clusters/list", "POST", "{}");
-      if (json.entities.Count == 0)
+      var Json = Util.RestCall("/clusters/list", "POST", "{}");
+      if (Json.entities.Count == 0)
       {
         return new Cluster[0];
       }
-      Cluster[] clusters = new Cluster[json.entities.Count];
-      for (int i = 0; i < json.entities.Count; ++i)
+      Cluster[] clusters = new Cluster[Json.entities.Count];
+      for (int i = 0; i < Json.entities.Count; ++i)
       {
-        clusters[i] = new Cluster(json.entities[i]);
+        clusters[i] = new Cluster(Json.entities[i]);
       }
       return clusters;
     }

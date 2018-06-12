@@ -23,18 +23,18 @@ namespace Nutanix
     public int PercentageComplete { get; set; }
     public int DefaultPollTimeoutSecs { get; set; } = 2147483;
     public int DefaultPollIntervalMs = 500;
-    public dynamic json { get; set; }
-    public Task(dynamic json)
+    public dynamic Json { get; set; }
+    public Task(dynamic Json)
     {
-      Uuid = json.uuid;
-      Status = json.status;
-      StartTime = json.start_time;
-      CreationTime = json.creation_time;
-      CompletionTime = json.completion_time;
-      ProgressMessage = json.progress_message;
-      OperationType = json.operation_type;
-      PercentageComplete = json.percentage_complete;
-      this.json = json;
+      Uuid = Json.uuid;
+      Status = Json.status;
+      StartTime = Json.start_time;
+      CreationTime = Json.creation_time;
+      CompletionTime = Json.completion_time;
+      ProgressMessage = Json.progress_message;
+      OperationType = Json.operation_type;
+      PercentageComplete = Json.percentage_complete;
+      this.Json = Json;
     }
 
     public Task(string uuid)
@@ -42,9 +42,9 @@ namespace Nutanix
       Uuid = uuid;
     }
 
-    public static Task FromUuidInJson(dynamic json)
+    public static Task FromUuidInJson(dynamic Json)
     {
-      return new Task(json.status.execution_context.task_uuid.ToString());
+      return new Task(Json.status.execution_context.task_uuid.ToString());
     }
 
     public Task Wait()
@@ -64,6 +64,7 @@ namespace Nutanix
           return task;
         }
       }
+
       return null;
     }
   }
@@ -97,9 +98,8 @@ namespace Nutanix
     public static Task GetTaskByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      var json = Util.RestCall("/tasks/" + uuid, "GET", string.Empty /* requestBody */ );
-      return new Task(json);
+      var Json = Util.RestCall("/tasks/" + uuid, "GET", string.Empty /* requestBody */);
+      return new Task(Json);
     }
   }
-
 }

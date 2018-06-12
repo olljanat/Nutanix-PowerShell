@@ -26,24 +26,24 @@ namespace Nutanix
     public int? NumSockets { get; set; }
     public int? MemoryMB { get; set; }
     public int? NumVcpusPerSocket { get; set; }
-    public dynamic json { get; set; }
-    public Vm(dynamic json)
+    public dynamic Json { get; set; }
+    public Vm(dynamic Json)
     {
-      // Special property 'json' stores the original json.
-      this.json = json;
-      this.json.api_version = "3.1";
-      SetFromJson(json);
+      // Special property 'Json' stores the original Json.
+      this.Json = Json;
+      this.Json.api_version = "3.1";
+      SetFromJson(Json);
     }
 
-    public void SetFromJson(dynamic json)
+    public void SetFromJson(dynamic Json)
     {
       // Fill in field.
-      Name = json.spec.name;
-      NumSockets = json.spec.resources.num_sockets;
-      MemoryMB = json.spec.resources.memory_size_mib;
-      NumVcpusPerSocket = json.spec.resources.num_vcpus_per_socket;
-      HardwareClockTimezone = json.spec.resources.hardware_clock_timezone;
-      Uuid = json.metadata.uuid;
+      Name = Json.spec.name;
+      NumSockets = Json.spec.resources.num_sockets;
+      MemoryMB = Json.spec.resources.memory_size_mib;
+      NumVcpusPerSocket = Json.spec.resources.num_vcpus_per_socket;
+      HardwareClockTimezone = Json.spec.resources.hardware_clock_timezone;
+      Uuid = Json.metadata.uuid;
     }
   }
 
@@ -124,25 +124,25 @@ namespace Nutanix
         ""name"": """ + Name + @"""
       }
     }";
-      dynamic json = JsonConvert.DeserializeObject(str);
-      if (!AddImage(json, ImageUuid, ImageName))
+      dynamic Json = JsonConvert.DeserializeObject(str);
+      if (!AddImage(Json, ImageUuid, ImageName))
       {
         return;
       }
-      if (!AddNetwork(json, NetworkUuid, NetworkName))
+      if (!AddNetwork(Json, NetworkUuid, NetworkName))
       {
         return;
       }
-      if (!AddCluster(json, Cluster))
+      if (!AddCluster(Json, Cluster))
       {
         return;
       }
 
-      WriteDebug(Util.RestCallTrace(url, method, json.ToString()));
+      WriteDebug(Util.RestCallTrace(url, method, Json.ToString()));
 
       // TODO: make cluster_reference required if talking to PC. But not needed
       // if talking to PE.
-      var task = Task.FromUuidInJson(Util.RestCall(url, method, json.ToString()));
+      var task = Task.FromUuidInJson(Util.RestCall(url, method, Json.ToString()));
       if (runAsync)
       {
         WriteObject(task);
@@ -154,11 +154,11 @@ namespace Nutanix
     }
 
     public static bool AddImage(
-      dynamic json, string imageUuid, string imageName)
+      dynamic Json, string imageUuid, string imageName)
     {
       if (!string.IsNullOrEmpty(imageUuid))
       {
-        json.spec.resources.disk_list[0].data_source_reference.uuid = imageUuid;
+        Json.spec.resources.disk_list[0].data_source_reference.uuid = imageUuid;
       }
       else if (!string.IsNullOrEmpty(imageName))
       {
@@ -176,7 +176,7 @@ namespace Nutanix
         }
         else
         {
-          json.spec.resources.disk_list[0].data_source_reference.uuid =
+          Json.spec.resources.disk_list[0].data_source_reference.uuid =
             images[0].Uuid;
         }
       }
@@ -184,11 +184,11 @@ namespace Nutanix
     }
 
     public static bool AddNetwork(
-      dynamic json, string networkUuid, string networkName)
+      dynamic Json, string networkUuid, string networkName)
     {
       if (!string.IsNullOrEmpty(networkUuid))
       {
-        json.spec.resources.nic_list[0].subnet_reference.uuid = networkUuid;
+        Json.spec.resources.nic_list[0].subnet_reference.uuid = networkUuid;
       }
       else if (!string.IsNullOrEmpty(networkName))
       {
@@ -206,21 +206,21 @@ namespace Nutanix
         }
         else
         {
-          json.spec.resources.nic_list[0].subnet_reference.uuid =
+          Json.spec.resources.nic_list[0].subnet_reference.uuid =
             networks[0].Uuid;
         }
       }
       return true;
     }
 
-    public static bool AddCluster(dynamic json, Cluster Cluster)
+    public static bool AddCluster(dynamic Json, Cluster Cluster)
     {
       if (Cluster != null)
       {
-        json.spec.cluster_reference = new Newtonsoft.Json.Linq.JObject();
-        json.spec.cluster_reference.kind = "cluster";
-        json.spec.cluster_reference.uuid = Cluster.Uuid;
-        json.spec.cluster_reference.name = Cluster.Name;
+        Json.spec.cluster_reference = new Newtonsoft.Json.Linq.JObject();
+        Json.spec.cluster_reference.kind = "cluster";
+        Json.spec.cluster_reference.uuid = Cluster.Uuid;
+        Json.spec.cluster_reference.name = Cluster.Name;
       }
       return true;
     }
@@ -261,15 +261,15 @@ namespace Nutanix
     // REST: /vms/list
     public static Vm[] GetAllVms()
     {
-      var json = Util.RestCall("/vms/list", "POST", "{}");
-      if (json.entities.Count == 0)
+      var Json = Util.RestCall("/vms/list", "POST", "{}");
+      if (Json.entities.Count == 0)
       {
         return new Vm[0];
       }
-      Vm[] vms = new Vm[json.entities.Count];
-      for (int i = 0; i < json.entities.Count; ++i)
+      Vm[] vms = new Vm[Json.entities.Count];
+      for (int i = 0; i < Json.entities.Count; ++i)
       {
-        vms[i] = new Vm(json.entities[i]);
+        vms[i] = new Vm(Json.entities[i]);
       }
       return vms;
     }
@@ -279,17 +279,17 @@ namespace Nutanix
     public static Vm GetVmByName(string name)
     {
       var reqBody = "{\"filter\": \"vm_name==" + name + "\"}";
-      var json = Util.RestCall("/vms/list", "POST", reqBody);
-      if (json.entities.Count == 0)
+      var Json = Util.RestCall("/vms/list", "POST", reqBody);
+      if (Json.entities.Count == 0)
       {
         throw new Exception("VM not found.");
       }
 
       // TODO: reconsider if we want to throw error on more than 1 VM.
-      // if (json.entities.Count > 1) {
+      // if (Json.entities.Count > 1) {
       //   throw new Exception("More than 1 VM found.");
       // }
-      return new Vm(json.entities[0]);
+      return new Vm(Json.entities[0]);
     }
 
     // Get Vm using 'uuid'.
@@ -297,8 +297,8 @@ namespace Nutanix
     public static Vm GetVmByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      var json = Util.RestCall("/vms/" + uuid, "GET", string.Empty /* requestBody */ );
-      return new Vm(json);
+      var Json = Util.RestCall("/vms/" + uuid, "GET", string.Empty /* requestBody */ );
+      return new Vm(Json);
     }
   }
 
@@ -321,10 +321,10 @@ namespace Nutanix
 
     protected override void ProcessRecord()
     {
-      VM.json.spec.resources.power_state = Vm.PowerState_ON;
-      VM.json.api_version = "3.1"; // TODO: remove api_version field set.
+      VM.Json.spec.resources.power_state = Vm.PowerState_ON;
+      VM.Json.api_version = "3.1"; // TODO: remove api_version field set.
       var task = Task.FromUuidInJson(
-        Util.RestCall("/vms/" + VM.Uuid, "PUT", VM.json.ToString()));
+        Util.RestCall("/vms/" + VM.Uuid, "PUT", VM.Json.ToString()));
       if (runAsync)
       {
         WriteObject(task);
@@ -415,25 +415,25 @@ namespace Nutanix
 
     protected override void ProcessRecord()
     {
-      // TODO: maybe should not rely on 'json' to generate request?
+      // TODO: maybe should not rely on 'Json' to generate request?
       if (Name != null)
       {
-        VM.json.spec.name = Name;
+        VM.Json.spec.name = Name;
       }
       if (Description != null)
       {
-        VM.json.spec.description = Description;
+        VM.Json.spec.description = Description;
       }
       if (MemoryMB != null)
       {
-        VM.json.spec.resources.memory_size_mib = MemoryMB;
+        VM.Json.spec.resources.memory_size_mib = MemoryMB;
       }
-      VM.json.api_version = "3.1";
-      VM.json.Property("status").Remove();
+      VM.Json.api_version = "3.1";
+      VM.Json.Property("status").Remove();
 
       // TODO: return Task object from the RestCall.
       WriteObject(Task.FromUuidInJson(
-        Util.RestCall("/vms/" + VM.Uuid, "PUT", VM.json.ToString())));
+        Util.RestCall("/vms/" + VM.Uuid, "PUT", VM.Json.ToString())));
     }
   }
 }

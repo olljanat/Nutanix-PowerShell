@@ -19,20 +19,20 @@ namespace Nutanix
     // 'Uid' is VMware's equivalent field for Nutanix's Uuid.
     public string Uid { get; set; } = string.Empty;
     public string Uuid { get; set; } = string.Empty;
-    public dynamic json { get; set; }
+    public dynamic Json { get; set; }
 
     // TODO Mtu, NumPorts, ExtensionData, NumPortsAvailable, Key, Nic, VMHostId,
     // VMHost, VMHostUid, Nic
 
-    public VolumeGroup(dynamic json)
+    public VolumeGroup(dynamic Json)
     {
-      // Special property 'json' stores the original json.
-      this.json = json;
-      this.json.Property("status").Remove();
-      this.json.api_version = "3.1";
+      // Special property 'Json' stores the original Json.
+      this.Json = Json;
+      this.Json.Property("status").Remove();
+      this.Json.api_version = "3.1";
 
-      Name = json.spec.name;
-      Uuid = json.metadata.uuid;
+      Name = Json.spec.name;
+      Uuid = Json.metadata.uuid;
       Uid = Uuid;
     }
   }
@@ -95,21 +95,21 @@ namespace Nutanix
     public static VolumeGroup GetVolumeGroupByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      var json = Util.RestCall("/volume_groups/" + uuid, "GET", string.Empty /* requestBody */ );
-      return new VolumeGroup(json);
+      var Json = Util.RestCall("/volume_groups/" + uuid, "GET", string.Empty /* requestBody */ );
+      return new VolumeGroup(Json);
     }
 
     public static VolumeGroup[] GetAllVolumeGroups()
     {
-      var json = Util.RestCall("/volume_groups/list", "POST", "{}");
-      if (json.entities.Count == 0)
+      var Json = Util.RestCall("/volume_groups/list", "POST", "{}");
+      if (Json.entities.Count == 0)
       {
         return new VolumeGroup[0];
       }
-      VolumeGroup[] volume_groups = new VolumeGroup[json.entities.Count];
-      for (int i = 0; i < json.entities.Count; ++i)
+      VolumeGroup[] volume_groups = new VolumeGroup[Json.entities.Count];
+      for (int i = 0; i < Json.entities.Count; ++i)
       {
-        volume_groups[i] = new VolumeGroup(json.entities[i]);
+        volume_groups[i] = new VolumeGroup(Json.entities[i]);
       }
       return volume_groups;
     }

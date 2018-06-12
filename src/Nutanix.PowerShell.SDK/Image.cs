@@ -21,20 +21,20 @@ namespace Nutanix
     // 'Uid' is VMware's equivalent field for Nutanix's Uuid.
     public string Uid;
     public string Uuid;
-    public dynamic json { get; set; }
+    public dynamic Json { get; set; }
 
     // TODO Mtu, NumPorts, ExtensionData, NumPortsAvailable, Key, Nic, VMHostId,
     // VMHost, VMHostUid, Nic
 
-    public Image(dynamic json)
+    public Image(dynamic Json)
     {
-      // Special property 'json' stores the original json.
-      this.json = json;
-      this.json.Property("status").Remove();
-      this.json.api_version = "3.1";
+      // Special property 'Json' stores the original Json.
+      this.Json = Json;
+      this.Json.Property("status").Remove();
+      this.Json.api_version = "3.1";
 
-      Name = json.spec.name;
-      Uuid = json.metadata.uuid;
+      Name = Json.spec.name;
+      Uuid = Json.metadata.uuid;
       Uid = Uuid;
     }
   }
@@ -120,16 +120,16 @@ namespace Nutanix
     // Given the parameters, build request body for '/images/list'.
     public dynamic BuildRequestBody()
     {
-      dynamic json = JsonConvert.DeserializeObject("{}");
+      dynamic Json = JsonConvert.DeserializeObject("{}");
       if (Max != null)
       {
-        json.length = Max;
+        Json.length = Max;
       }
       if (!string.IsNullOrEmpty(Name))
       {
-        json.filter = "name==" + Name;
+        Json.filter = "name==" + Name;
       }
-      return json;
+      return Json;
     }
 
     public void CheckResult(Image[] images)
@@ -144,8 +144,8 @@ namespace Nutanix
     public static Image GetImageByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      var json = Util.RestCall("/images/" + uuid, "GET", string.Empty /* requestBody */ );
-      return new Image(json);
+      var Json = Util.RestCall("/images/" + uuid, "GET", string.Empty /* requestBody */ );
+      return new Image(Json);
     }
 
     public static Image[] GetImagesByName(string name)
@@ -153,9 +153,9 @@ namespace Nutanix
       return GetAllImages("{\"filter\": \"name==" + name + "\"}");
     }
 
-    public static Image[] GetAllImages(dynamic jsonReqBody)
+    public static Image[] GetAllImages(dynamic JsonReqBody)
     {
-      return GetAllImages(jsonReqBody.ToString());
+      return GetAllImages(JsonReqBody.ToString());
     }
 
     public static Image[] GetAllImages(string reqBody)
@@ -209,11 +209,11 @@ namespace Nutanix
     {
       if (Name != null)
       {
-        Image.json.spec.name = Name;
+        Image.Json.spec.name = Name;
       }
-      Image.json.api_version = "3.1";
+      Image.Json.api_version = "3.1";
       var task = Task.FromUuidInJson(
-        Util.RestCall("/images/" + Image.Uuid, "PUT", Image.json.ToString()));
+        Util.RestCall("/images/" + Image.Uuid, "PUT", Image.Json.ToString()));
       if (runAsync)
       {
         WriteObject(task);
