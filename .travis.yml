@@ -16,7 +16,6 @@ jobs:
       mono: latest
       dotnet: 2.1
       script:
-        - sudo nuget update -self
         - nuget install Newtonsoft.Json -Version 11.0.2
         - nuget install PowerShellStandard.Library -Version 5.1.0-preview-03
         - curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
@@ -36,11 +35,6 @@ matrix:
     - os: linux
       dist: trusty
       sudo: required
-  # include:
-  #   - dotnet: 2.1
-  #     mono: none
-  #     env: DOTNETCORE=1
-  #   - mono: latest
 
 # travis-ci will quit using the cache if an enviroment variable changes.
 # CACHE_VERSION is not used for anything other than invalidating the cache.
