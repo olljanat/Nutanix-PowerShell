@@ -5,8 +5,8 @@ using Newtonsoft.Json;
 namespace Nutanix {
 
 public class Subnet {
-  public string Name { get; set; } = "";
-  public string Id { get; set; } = "";
+  public string Name { get; set; } = string.Empty;
+  public string Id { get; set; } = string.Empty;
 
   // 'Uid' is VMware's equivalent field for Nutanix's Uuid.
   public string Uid;
@@ -32,13 +32,13 @@ public class Subnet {
 [CmdletAttribute(VerbsCommon.New, "VirtualSwitch")]
 public class NewSubnetCmdlet : Cmdlet {
   [Parameter]
-  public string Name { get; set; } = "";
+  public string Name { get; set; } = string.Empty;
 
   [Parameter]
-  public string VlanId { get; set; } = "";
+  public string VlanId { get; set; } = string.Empty;
 
   [Parameter]
-  public string Description { get; set; } = "";
+  public string Description { get; set; } = string.Empty;
 
   [Parameter]
   public Cluster Cluster { get; set; }
@@ -80,10 +80,10 @@ public class NewSubnetCmdlet : Cmdlet {
 public class GetSubnetCmdlet : Cmdlet {
   // TODO: Name parameter to specify the names of subnets to retrieve.
   [Parameter]
-  public string Uuid { get; set; } = "";
+  public string Uuid { get; set; } = string.Empty;
 
   [Parameter]
-  public string Name { get; set; } = "";
+  public string Name { get; set; } = string.Empty;
 
   [Parameter]
   public int? Max { get; set; }
@@ -142,7 +142,7 @@ public class GetSubnetCmdlet : Cmdlet {
 [CmdletAttribute(VerbsCommon.Remove, "VirtualSwitch")]
 public class DeleteSubnetCmdlet : Cmdlet {
   [Parameter]
-  public string Uuid { get; set; } = "";
+  public string Uuid { get; set; } = string.Empty;
 
   // TODO: Confirm, WhatIf params.
   // https://www.vmware.com/support/developer/PowerCLI/PowerCLI41U1/html/Remove-VirtualSwitch.html

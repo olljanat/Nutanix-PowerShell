@@ -31,13 +31,13 @@ public class Image {
 [CmdletAttribute(VerbsCommon.New, "Image")]
 public class NewImageCmdlet : Cmdlet {
   [Parameter]
-  public string Name { get; set; } = "";
+  public string Name { get; set; } = string.Empty;
 
   [Parameter]
-  public string URL { get; set; } = "";
+  public string URL { get; set; } = string.Empty;
 
   [Parameter]
-  public string Description { get; set; } = "";
+  public string Description { get; set; } = string.Empty;
 
   [Parameter]
   public SwitchParameter RunAsync
@@ -79,10 +79,10 @@ public class NewImageCmdlet : Cmdlet {
 [CmdletAttribute(VerbsCommon.Get, "Image")]
 public class GetImageCmdlet : Cmdlet {
   [Parameter]
-  public string Uuid { get; set; } = "";
+  public string Uuid { get; set; } = string.Empty;
 
   [Parameter]
-  public string Name { get; set; } = "";
+  public string Name { get; set; } = string.Empty;
 
   [Parameter]
   public int? Max { get; set; }
@@ -140,7 +140,7 @@ public class GetImageCmdlet : Cmdlet {
 [CmdletAttribute(VerbsCommon.Remove, "Image")]
 public class DeleteImageCmdlet : Cmdlet {
   [Parameter]
-  public string Uuid { get; set; } = "";
+  public string Uuid { get; set; } = string.Empty;
 
   protected override void ProcessRecord() {
     if (!String.IsNullOrEmpty(Uuid)) {

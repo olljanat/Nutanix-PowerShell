@@ -3,10 +3,10 @@ using System.Management.Automation;
 [CmdletAttribute(VerbsCommon.New, "NtnxConnection")]
 public class ConnectNTNX : Cmdlet {
   [Parameter]
-  public string Server { get; set; } = "";
+  public string Server { get; set; } = string.Empty;
 
   [Parameter]
-  public string UserName { get; set; } = "";
+  public string UserName { get; set; } = string.Empty;
 
   // TODO: note that 'Password' should be the result of
   // 'ConvertTo-SecureString'

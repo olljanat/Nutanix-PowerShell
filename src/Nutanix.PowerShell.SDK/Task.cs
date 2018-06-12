@@ -4,13 +4,13 @@ using System;
 namespace Nutanix {
 
 public class Task {
-  public string Uuid { get; set; } = "";
-  public string Status { get; set; } = "";
-  public string StartTime { get; set; } = "";
-  public string CreationTime { get; set; } = "";
-  public string CompletionTime { get; set; } = "";
-  public string ProgressMessage { get; set; } = "";
-  public string OperationType { get; set; } = "";
+  public string Uuid { get; set; } = string.Empty;
+  public string Status { get; set; } = string.Empty;
+  public string StartTime { get; set; } = string.Empty;
+  public string CreationTime { get; set; } = string.Empty;
+  public string CompletionTime { get; set; } = string.Empty;
+  public string ProgressMessage { get; set; } = string.Empty;
+  public string OperationType { get; set; } = string.Empty;
   public int PercentageComplete { get; set; }
   public int DefaultPollTimeoutSecs { get; set; } = 2147483;
   public int DefaultPollIntervalMs = 500;
@@ -55,7 +55,7 @@ public class Task {
 [CmdletAttribute(VerbsCommon.Get, "Task")]
 public class GetTaskCmdlet : Cmdlet {
   [Parameter]
-  public string Uuid { get; set; } = "";
+  public string Uuid { get; set; } = string.Empty;
 
   [Parameter]
   public Task Task { get; set; }

@@ -39,7 +39,7 @@ public class Vm {
 [CmdletAttribute(VerbsCommon.New, "Vm")]
 public class NewVmCmdlet : Cmdlet {
   [Parameter]
-  public string Name { get; set; } = "";
+  public string Name { get; set; } = string.Empty;
 
   [Parameter]
   public int MemorySizeMib { get; set; } = 1024; // 1 GiB
@@ -54,16 +54,16 @@ public class NewVmCmdlet : Cmdlet {
   public string PowerState { get; set; } = "OFF";
 
   [Parameter]
-  public string ImageUuid { get; set; } = "";
+  public string ImageUuid { get; set; } = string.Empty;
 
   [Parameter]
-  public string NetworkUuid { get; set; } = "";
+  public string NetworkUuid { get; set; } = string.Empty;
 
   [Parameter]
-  public string NetworkName { get; set; } = "";
+  public string NetworkName { get; set; } = string.Empty;
 
   [Parameter]
-  public string ImageName { get; set; } = "";
+  public string ImageName { get; set; } = string.Empty;
 
   [Parameter]
   public Cluster Cluster { get; set; }
@@ -194,10 +194,10 @@ public class NewVmCmdlet : Cmdlet {
 [CmdletAttribute(VerbsCommon.Get, "Vm")]
 public class GetVmCmdlet : Cmdlet {
   [Parameter]
-  public string Name { get; set; } = "";
+  public string Name { get; set; } = string.Empty;
 
   [Parameter]
-  public string Uuid { get; set; } = "";
+  public string Uuid { get; set; } = string.Empty;
 
   protected override void ProcessRecord() {
     if (String.IsNullOrEmpty(Name) && String.IsNullOrEmpty(Uuid)) {
@@ -258,7 +258,7 @@ public class GetVmCmdlet : Cmdlet {
 [CmdletAttribute("Start", "Vm")]
 public class StartVmCmdlet : Cmdlet {
   [Parameter]
-  public string Uuid { get; set; } = "";
+  public string Uuid { get; set; } = string.Empty;
 
   [Parameter]
   public Vm VM { get; set; }
@@ -287,10 +287,10 @@ public class StartVmCmdlet : Cmdlet {
 [CmdletAttribute(VerbsCommon.Remove, "Vm")]
 public class RemoveVmCmdlet : Cmdlet {
   [Parameter]
-  public string Name { get; set; } = "";
+  public string Name { get; set; } = string.Empty;
 
   [Parameter]
-  public string Uuid { get; set; } = "";
+  public string Uuid { get; set; } = string.Empty;
 
   [Parameter(Mandatory=true, ValueFromPipeline=true)]
   public Vm VM { get; set; }

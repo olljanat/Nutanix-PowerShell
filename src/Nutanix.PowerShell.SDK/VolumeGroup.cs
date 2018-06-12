@@ -4,12 +4,12 @@ using System;
 namespace Nutanix {
 
 public class VolumeGroup {
-  public string Name { get; set; } = "";
-  public string Id { get; set; } = "";
+  public string Name { get; set; } = string.Empty;
+  public string Id { get; set; } = string.Empty;
 
   // 'Uid' is VMware's equivalent field for Nutanix's Uuid.
-  public string Uid { get; set; } = "";
-  public string Uuid { get; set; } = "";
+  public string Uid { get; set; } = string.Empty;
+  public string Uuid { get; set; } = string.Empty;
   public dynamic json { get; set; }
 
   // TODO Mtu, NumPorts, ExtensionData, NumPortsAvailable, Key, Nic, VMHostId,
@@ -30,7 +30,7 @@ public class VolumeGroup {
 [CmdletAttribute(VerbsCommon.New, "VolumeGroup")]
 public class NewVolumeGroupCmdlet : Cmdlet {
   [Parameter]
-  public string Name { get; set; } = "";
+  public string Name { get; set; } = string.Empty;
 
   protected override void ProcessRecord() {
     // // TODO: make cluster_reference required if talking to PC. But not needed
@@ -66,7 +66,7 @@ public class NewVolumeGroupCmdlet : Cmdlet {
 [CmdletAttribute(VerbsCommon.Get, "VolumeGroup")]
 public class GetVolumeGroupCmdlet : Cmdlet {
   [Parameter]
-  public string Uuid { get; set; } = "";
+  public string Uuid { get; set; } = string.Empty;
 
   protected override void ProcessRecord() {
     if (!String.IsNullOrEmpty(Uuid)) {
@@ -99,7 +99,7 @@ public class GetVolumeGroupCmdlet : Cmdlet {
 [CmdletAttribute(VerbsCommon.Remove, "VolumeGroup")]
 public class DeleteVolumeGroupCmdlet : Cmdlet {
   [Parameter]
-  public string Uuid { get; set; } = "";
+  public string Uuid { get; set; } = string.Empty;
 
   protected override void ProcessRecord() {
     if (!String.IsNullOrEmpty(Uuid)) {
