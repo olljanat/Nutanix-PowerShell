@@ -18,7 +18,6 @@ jobs:
       script:
         - dotnet build
 
-
 matrix:
   fast_finish: true
   allow_failures:
