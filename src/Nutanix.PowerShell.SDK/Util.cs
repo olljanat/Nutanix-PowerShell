@@ -21,9 +21,9 @@ public class Util
   public static string server { get; set; } = string.Empty;
 
   // Holds username and password.
-  // TODO: might need to GC pscreds.Password (SecureString) using Dispose
+  // TODO: might need to GC PSCreds.Password (SecureString) using Dispose
   // method.
-  public static System.Management.Automation.PSCredential pscreds;
+  public static System.Management.Automation.PSCredential PSCreds;
 
   // NOTE: only use this function during development.
   public static void TestOnlyIgnoreCerts()
@@ -39,7 +39,6 @@ public class Util
     string requestMethod,
     string requestBody)
   {
-
     if (string.IsNullOrEmpty(server) || Util.pscreds == null)
     {
       // TODO: throw exception.
@@ -65,7 +64,7 @@ public class Util
     {
       var bytes = Encoding.GetEncoding("UTF-8").GetBytes(requestBody);
       request.ContentLength = bytes.Length;
-      using(var writeStream = request.GetRequestStream())
+      using (var writeStream = request.GetRequestStream())
       {
         writeStream.Write(bytes, 0, bytes.Length);
       }
@@ -73,7 +72,7 @@ public class Util
 
     try
     {
-      using(var response = (HttpWebResponse) request.GetResponse())
+      using (var response = (HttpWebResponse) request.GetResponse())
       {
         if (response.StatusCode != HttpStatusCode.OK &&
           response.StatusCode != HttpStatusCode.Accepted)
@@ -84,11 +83,11 @@ public class Util
         }
 
         // grab the response
-        using(var responseStream = response.GetResponseStream())
+        using (var responseStream = response.GetResponseStream())
         {
           if (responseStream != null)
           {
-            using(var reader = new StreamReader(responseStream))
+            using (var reader = new StreamReader(responseStream))
             {
               return JsonConvert.DeserializeObject(reader.ReadToEnd());
             }
@@ -99,11 +98,11 @@ public class Util
     catch (WebException ex)
     {
       var response = (HttpWebResponse) ex.Response;
-      using(var responseStream = response.GetResponseStream())
+      using (var responseStream = response.GetResponseStream())
       {
         if (responseStream != null)
         {
-          using(var reader = new StreamReader(responseStream))
+          using (var reader = new StreamReader(responseStream))
           {
             var json = JsonConvert.DeserializeObject(reader.ReadToEnd());
             // Print request + response to help user debug.
@@ -115,7 +114,6 @@ public class Util
       }
       throw ex;
     }
-
     return null;
   }
 
@@ -146,6 +144,6 @@ public class Util
   public static T[] FromJson<T>(dynamic json, Func<dynamic, T> creator)
   {
     return ((IEnumerable<T>) Enumerable.Select(json.entities,
-      (Func<dynamic, T>) (entity => creator(entity)))).ToArray();
+      (Func<dynamic, T>entity => creator(entity)))).ToArray();
   }
 }
