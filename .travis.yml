@@ -5,14 +5,13 @@ git:
   depth: 1
 
 stages:
-  - warm up dependencies
   # - sanity testing
   - build
   # - acceptance testing
 
 jobs:
   include:
-    - stage: warm up dependencies
+    - stage: build
       mono: latest
       dotnet: 2.1
       script:
@@ -22,9 +21,7 @@ jobs:
         - curl https://packages.microsoft.com/config/ubuntu/14.04/prod.list | sudo tee /etc/apt/sources.list.d/microsoft.list
         - sudo apt-get update
         - sudo apt-get install -y powershell
-    - stage: build
-      script:
-        - make sdk
+        - mcs -target:library -out:$(BUILD_DIR)/NtnxPoshSDK.dll *.cs
 
 matrix:
   fast_finish: true
