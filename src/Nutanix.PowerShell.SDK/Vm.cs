@@ -1,4 +1,12 @@
-﻿using System;
+﻿// Purpose: VM (Virtual Machines) source for 'Nutanix.PowerShell.SDK'
+// Author: Nutanix
+// Copyright: Nutanix, 2018
+// Owner: PowerShell@nutanix.com
+// Maintainer(s):
+//   Jon Kohler  (Nutanix, JonKohler)
+//   Alex Guo    (Nutanix, mallochine)
+
+using System;
 using System.Management.Automation;
 
 using Newtonsoft.Json;
@@ -91,9 +99,9 @@ namespace Nutanix
       },
       ""spec"": {
         ""resources"": {
-          ""memory_size_mib"": " + MemorySizeMib.ToString() + @",
-          ""num_vcpus_per_socket"": " + NumVcpusPerSocket.ToString() + @",
-          ""num_sockets"": " + NumSockets.ToString() + @",
+          ""memory_size_mib"": " + MemorySizeMib.ToString()+ @",
+          ""num_vcpus_per_socket"": " + NumVcpusPerSocket.ToString()+ @",
+          ""num_sockets"": " + NumSockets.ToString()+ @",
           ""power_state"": """ + PowerState + @""",
           ""disk_list"": [
             {
@@ -163,7 +171,7 @@ namespace Nutanix
             "Ambiguous: found more than 1 image with the same name");
           for (int i = 0; i < images.Length; ++i)
           {
-            Console.WriteLine("Image " + i.ToString() + ": " + images[i].Uuid);
+            Console.WriteLine("Image " + i.ToString()+ ": " + images[i].Uuid);
           }
           return false;
         }
@@ -194,7 +202,7 @@ namespace Nutanix
             "Ambiguous: found more than 1 Subnet with the same name");
           for (int i = 0; i < networks.Length; ++i)
           {
-            Console.WriteLine("Network " + i.ToString() + ": " + networks[i].Uuid);
+            Console.WriteLine("Network " + i.ToString()+ ": " + networks[i].Uuid);
           }
           return false;
         }
@@ -231,7 +239,7 @@ namespace Nutanix
 
     protected override void ProcessRecord()
     {
-      if (string.IsNullOrEmpty(Name) && string.IsNullOrEmpty(Uuid))
+      if (string.IsNullOrEmpty(Name)&& string.IsNullOrEmpty(Uuid))
       {
         // If no params specified, then get all VMs.
         WriteObject(GetAllVms());
@@ -290,7 +298,7 @@ namespace Nutanix
     public static Vm GetVmByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      var json = Util.RestCall("/vms/" + uuid, "GET", string.Empty /* requestBody */);
+      var json = Util.RestCall("/vms/" + uuid, "GET", string.Empty /* requestBody */ );
       return new Vm(json);
     }
   }
@@ -348,7 +356,7 @@ namespace Nutanix
         Uuid = VM.Uuid;
       }
 
-      if (string.IsNullOrEmpty(Name) && string.IsNullOrEmpty(Uuid))
+      if (string.IsNullOrEmpty(Name)&& string.IsNullOrEmpty(Uuid))
       {
         throw new Exception("Need -Name or -Uuid");
         return;

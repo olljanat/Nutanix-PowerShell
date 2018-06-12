@@ -1,3 +1,11 @@
+// Purpose: Subnets (virtual networks / vlans) source for 'Nutanix.PowerShell.SDK'
+// Author: Nutanix
+// Copyright: Nutanix, 2018
+// Owner: PowerShell@nutanix.com
+// Maintainer(s):
+//   Jon Kohler  (Nutanix, JonKohler)
+//   Alex Guo    (Nutanix, mallochine)
+
 using System;
 using System.Management.Automation;
 
@@ -126,7 +134,7 @@ namespace Nutanix
     public void CheckResult(Subnet[] subnets)
     {
       return; // TODO: consider whether throwing duplicate exception is good idea.
-      if (!string.IsNullOrEmpty(Name) && subnets.Length > 1)
+      if (!string.IsNullOrEmpty(Name)&& subnets.Length > 1)
       {
         throw new Exception("Found duplicate subnets");
       }
@@ -135,7 +143,7 @@ namespace Nutanix
     public static Subnet GetSubnetByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      var json = Util.RestCall("/subnets/" + uuid, "GET", string.Empty /* requestBody */);
+      var json = Util.RestCall("/subnets/" + uuid, "GET", string.Empty /* requestBody */ );
       return new Subnet(json);
     }
 
@@ -153,7 +161,7 @@ namespace Nutanix
     {
       return Util.FromJson<Subnet>(
         Util.RestCall("/subnets/list", "POST", reqBody),
-        (Func<dynamic, Subnet>) (j => new Subnet(j)));
+        (Func<dynamic, Subnet>)(j => new Subnet(j)));
     }
   }
 
@@ -179,7 +187,7 @@ namespace Nutanix
     public static void DeleteSubnetByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      Util.RestCall("/subnets/" + uuid, "DELETE", string.Empty /* requestBody */);
+      Util.RestCall("/subnets/" + uuid, "DELETE", string.Empty /* requestBody */ );
     }
   }
 

@@ -1,3 +1,11 @@
+// Purpose: Tasks source for 'Nutanix.PowerShell.SDK'
+// Author: Nutanix
+// Copyright: Nutanix, 2018
+// Owner: PowerShell@nutanix.com
+// Maintainer(s):
+//   Jon Kohler  (Nutanix, JonKohler)
+//   Alex Guo    (Nutanix, mallochine)
+
 using System;
 using System.Management.Automation;
 
@@ -89,7 +97,7 @@ namespace Nutanix
     public static Task GetTaskByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      var json = Util.RestCall("/tasks/" + uuid, "GET", string.Empty /* requestBody */);
+      var json = Util.RestCall("/tasks/" + uuid, "GET", string.Empty /* requestBody */ );
       return new Task(json);
     }
   }

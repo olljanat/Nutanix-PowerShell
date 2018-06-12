@@ -1,3 +1,11 @@
+// Purpose: Utility source for 'Nutanix.PowerShell.SDK'
+// Author: Nutanix
+// Copyright: Nutanix, 2018
+// Owner: PowerShell@nutanix.com
+// Maintainer(s):
+//   Jon Kohler  (Nutanix, JonKohler)
+//   Alex Guo    (Nutanix, mallochine)
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,7 +29,7 @@ public class Util
   public static void TestOnlyIgnoreCerts()
   {
     ServicePointManager.ServerCertificateValidationCallback +=
-      (sender, cert, chain, sslPolicyErrors) =>
+      (sender, cert, chain, sslPolicyErrors)=>
       true;
   }
 
@@ -32,7 +40,7 @@ public class Util
     string requestBody)
   {
 
-    if (string.IsNullOrEmpty(server) || Util.pscreds == null)
+    if (string.IsNullOrEmpty(server)|| Util.pscreds == null)
     {
       // TODO: throw exception.
       return null;
@@ -65,7 +73,7 @@ public class Util
 
     try
     {
-      using(var response = (HttpWebResponse) request.GetResponse())
+      using(var response = (HttpWebResponse)request.GetResponse())
       {
         if (response.StatusCode != HttpStatusCode.OK &&
           response.StatusCode != HttpStatusCode.Accepted)
@@ -90,7 +98,7 @@ public class Util
     }
     catch (WebException ex)
     {
-      var response = (HttpWebResponse) ex.Response;
+      var response = (HttpWebResponse)ex.Response;
       using(var responseStream = response.GetResponseStream())
       {
         if (responseStream != null)
@@ -137,7 +145,7 @@ public class Util
 
   public static T[] FromJson<T>(dynamic json, Func<dynamic, T> creator)
   {
-    return ((IEnumerable<T>) Enumerable.Select(json.entities,
-      (Func<dynamic, T>) (entity => creator(entity)))).ToArray();
+    return ((IEnumerable<T>)Enumerable.Select(json.entities,
+      (Func<dynamic, T>)(entity => creator(entity)))).ToArray();
   }
 }

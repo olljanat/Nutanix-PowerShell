@@ -1,3 +1,11 @@
+// Purpose: Clusters (connection and information) source for 'Nutanix.PowerShell.SDK'
+// Author: Nutanix
+// Copyright: Nutanix, 2018
+// Owner: PowerShell@nutanix.com
+// Maintainer(s):
+//   Jon Kohler  (Nutanix, JonKohler)
+//   Alex Guo    (Nutanix, mallochine)
+
 using System;
 using System.Management.Automation;
 

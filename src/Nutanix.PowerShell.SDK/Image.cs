@@ -1,3 +1,11 @@
+// Purpose: Images (image service) source for 'Nutanix.PowerShell.SDK'
+// Author: Nutanix
+// Copyright: Nutanix, 2018
+// Owner: PowerShell@nutanix.com
+// Maintainer(s):
+//   Jon Kohler  (Nutanix, JonKohler)
+//   Alex Guo    (Nutanix, mallochine)
+
 using System;
 using System.Management.Automation;
 
@@ -127,7 +135,7 @@ namespace Nutanix
     public void CheckResult(Image[] images)
     {
       return; // TODO: consider whether throwing duplicate exception is good idea.
-      if (!string.IsNullOrEmpty(Name) && images.Length > 1)
+      if (!string.IsNullOrEmpty(Name)&& images.Length > 1)
       {
         throw new Exception("Found duplicate images");
       }
@@ -136,7 +144,7 @@ namespace Nutanix
     public static Image GetImageByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      var json = Util.RestCall("/images/" + uuid, "GET", string.Empty /* requestBody */);
+      var json = Util.RestCall("/images/" + uuid, "GET", string.Empty /* requestBody */ );
       return new Image(json);
     }
 
@@ -153,7 +161,7 @@ namespace Nutanix
     public static Image[] GetAllImages(string reqBody)
     {
       return Util.FromJson<Image>(Util.RestCall("/images/list", "POST", reqBody),
-        (Func<dynamic, Image>) (j => new Image(j)));
+        (Func<dynamic, Image>)(j => new Image(j)));
     }
   }
 
@@ -176,7 +184,7 @@ namespace Nutanix
     public static void DeleteImageByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      Util.RestCall("/images/" + uuid, "DELETE", string.Empty /* requestBody */);
+      Util.RestCall("/images/" + uuid, "DELETE", string.Empty /* requestBody */ );
     }
   }
 

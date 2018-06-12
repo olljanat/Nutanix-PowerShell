@@ -1,3 +1,11 @@
+// Purpose: Volume Groups source for 'Nutanix.PowerShell.SDK'
+// Author: Nutanix
+// Copyright: Nutanix, 2018
+// Owner: PowerShell@nutanix.com
+// Maintainer(s):
+//   Jon Kohler  (Nutanix, JonKohler)
+//   Alex Guo    (Nutanix, mallochine)
+
 using System;
 using System.Management.Automation;
 
@@ -87,7 +95,7 @@ namespace Nutanix
     public static VolumeGroup GetVolumeGroupByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      var json = Util.RestCall("/volume_groups/" + uuid, "GET", string.Empty /* requestBody */);
+      var json = Util.RestCall("/volume_groups/" + uuid, "GET", string.Empty /* requestBody */ );
       return new VolumeGroup(json);
     }
 
@@ -126,7 +134,7 @@ namespace Nutanix
     public static void DeleteVolumeGroupByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      Util.RestCall("/volume_groups/" + uuid, "DELETE", string.Empty /* requestBody */);
+      Util.RestCall("/volume_groups/" + uuid, "DELETE", string.Empty /* requestBody */ );
     }
   }
 
