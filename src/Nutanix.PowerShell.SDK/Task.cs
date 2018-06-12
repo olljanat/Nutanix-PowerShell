@@ -16,7 +16,7 @@ namespace Nutanix
     public int DefaultPollTimeoutSecs { get; set; } = 2147483;
     public int DefaultPollIntervalMs = 500;
     public dynamic json { get; set; }
-    public Task (dynamic json)
+    public Task(dynamic json)
     {
       Uuid = json.uuid;
       Status = json.status;
@@ -29,28 +29,28 @@ namespace Nutanix
       this.json = json;
     }
 
-    public Task (string uuid)
+    public Task(string uuid)
     {
       Uuid = uuid;
     }
 
-    public static Task FromUuidInJson (dynamic json)
+    public static Task FromUuidInJson(dynamic json)
     {
-      return new Task (json.status.execution_context.task_uuid.ToString ());
+      return new Task(json.status.execution_context.task_uuid.ToString());
     }
 
-    public Task Wait ()
+    public Task Wait()
     {
-      return Wait (DefaultPollTimeoutSecs);
+      return Wait(DefaultPollTimeoutSecs);
     }
 
-    public Task Wait (int timeoutSecs)
+    public Task Wait(int timeoutSecs)
     {
       DateTime start = DateTime.Now;
       while ((DateTime.Now - start).TotalMilliseconds < timeoutSecs * 1000)
       {
-        System.Threading.Thread.Sleep (DefaultPollIntervalMs);
-        var task = GetTaskCmdlet.GetTaskByUuid (Uuid);
+        System.Threading.Thread.Sleep(DefaultPollIntervalMs);
+        var task = GetTaskCmdlet.GetTaskByUuid(Uuid);
         if (task.Status != "RUNNING")
         {
           return task;
@@ -60,7 +60,7 @@ namespace Nutanix
     }
   }
 
-  [CmdletAttribute (VerbsCommon.Get, "Task")]
+  [CmdletAttribute(VerbsCommon.Get, "Task")]
   public class GetTaskCmdlet : Cmdlet
   {
     [Parameter]
@@ -69,28 +69,28 @@ namespace Nutanix
     [Parameter]
     public Task Task { get; set; }
 
-    protected override void ProcessRecord ()
+    protected override void ProcessRecord()
     {
-      if (!string.IsNullOrEmpty (Uuid))
+      if (!string.IsNullOrEmpty(Uuid))
       {
-        WriteObject (GetTaskByUuid (Uuid));
+        WriteObject(GetTaskByUuid(Uuid));
         return;
       }
 
       if (Task != null)
       {
-        WriteObject (GetTaskByUuid (Task.Uuid));
+        WriteObject(GetTaskByUuid(Task.Uuid));
         return;
       }
 
-      throw new Exception ("Expected either -Uuid or -Task");
+      throw new Exception("Expected either -Uuid or -Task");
     }
 
-    public static Task GetTaskByUuid (string uuid)
+    public static Task GetTaskByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      var json = Util.RestCall ("/tasks/" + uuid, "GET", "" /* requestBody */ );
-      return new Task (json);
+      var json = Util.RestCall("/tasks/" + uuid, "GET", string.Empty /* requestBody */ );
+      return new Task(json);
     }
   }
 

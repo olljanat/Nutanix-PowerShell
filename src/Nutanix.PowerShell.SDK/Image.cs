@@ -18,11 +18,11 @@ namespace Nutanix
     // TODO Mtu, NumPorts, ExtensionData, NumPortsAvailable, Key, Nic, VMHostId,
     // VMHost, VMHostUid, Nic
 
-    public Image (dynamic json)
+    public Image(dynamic json)
     {
       // Special property 'json' stores the original json.
       this.json = json;
-      this.json.Property ("status").Remove ();
+      this.json.Property("status").Remove();
       this.json.api_version = "3.1";
 
       Name = json.spec.name;
@@ -31,7 +31,7 @@ namespace Nutanix
     }
   }
 
-  [CmdletAttribute (VerbsCommon.New, "Image")]
+  [CmdletAttribute(VerbsCommon.New, "Image")]
   public class NewImageCmdlet : Cmdlet
   {
     [Parameter]
@@ -51,7 +51,7 @@ namespace Nutanix
     }
     private bool runAsync;
 
-    protected override void ProcessRecord ()
+    protected override void ProcessRecord()
     {
       var url = "/images";
       var method = "POST";
@@ -71,20 +71,20 @@ namespace Nutanix
       }
     }";
 
-      WriteDebug (Util.RestCallTrace (url, method, str));
-      var task = Task.FromUuidInJson (Util.RestCall (url, method, str));
+      WriteDebug(Util.RestCallTrace(url, method, str));
+      var task = Task.FromUuidInJson(Util.RestCall(url, method, str));
       if (runAsync)
       {
-        WriteObject (task);
+        WriteObject(task);
       }
       else
       {
-        WriteObject (task.Wait ());
+        WriteObject(task.Wait());
       }
     }
   }
 
-  [CmdletAttribute (VerbsCommon.Get, "Image")]
+  [CmdletAttribute(VerbsCommon.Get, "Image")]
   public class GetImageCmdlet : Cmdlet
   {
     [Parameter]
@@ -96,94 +96,94 @@ namespace Nutanix
     [Parameter]
     public int? Max { get; set; }
 
-    protected override void ProcessRecord ()
+    protected override void ProcessRecord()
     {
-      if (!string.IsNullOrEmpty (Uuid))
+      if (!string.IsNullOrEmpty(Uuid))
       {
-        WriteObject (GetImageByUuid (Uuid));
+        WriteObject(GetImageByUuid(Uuid));
         return;
       }
 
-      var images = GetAllImages (BuildRequestBody ());
-      CheckResult (images);
-      WriteObject (images);
+      var images = GetAllImages(BuildRequestBody());
+      CheckResult(images);
+      WriteObject(images);
     }
 
     // Given the parameters, build request body for '/images/list'.
-    public dynamic BuildRequestBody ()
+    public dynamic BuildRequestBody()
     {
-      dynamic json = JsonConvert.DeserializeObject ("{}");
+      dynamic json = JsonConvert.DeserializeObject("{}");
       if (Max != null)
       {
         json.length = Max;
       }
-      if (!string.IsNullOrEmpty (Name))
+      if (!string.IsNullOrEmpty(Name))
       {
         json.filter = "name==" + Name;
       }
       return json;
     }
 
-    public void CheckResult (Image[] images)
+    public void CheckResult(Image[] images)
     {
       return; // TODO: consider whether throwing duplicate exception is good idea.
-      if (!string.IsNullOrEmpty (Name) && images.Length > 1)
+      if (!string.IsNullOrEmpty(Name) && images.Length > 1)
       {
-        throw new Exception ("Found duplicate images");
+        throw new Exception("Found duplicate images");
       }
     }
 
-    public static Image GetImageByUuid (string uuid)
+    public static Image GetImageByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      var json = Util.RestCall ("/images/" + uuid, "GET", "" /* requestBody */ );
-      return new Image (json);
+      var json = Util.RestCall("/images/" + uuid, "GET", string.Empty /* requestBody */ );
+      return new Image(json);
     }
 
-    public static Image[] GetImagesByName (string name)
+    public static Image[] GetImagesByName(string name)
     {
-      return GetAllImages ("{\"filter\": \"name==" + name + "\"}");
+      return GetAllImages("{\"filter\": \"name==" + name + "\"}");
     }
 
-    public static Image[] GetAllImages (dynamic jsonReqBody)
+    public static Image[] GetAllImages(dynamic jsonReqBody)
     {
-      return GetAllImages (jsonReqBody.ToString ());
+      return GetAllImages(jsonReqBody.ToString());
     }
 
-    public static Image[] GetAllImages (string reqBody)
+    public static Image[] GetAllImages(string reqBody)
     {
-      return Util.FromJson<Image> (Util.RestCall ("/images/list", "POST", reqBody),
-        (Func<dynamic, Image>) (j => new Image (j)));
+      return Util.FromJson<Image>(Util.RestCall("/images/list", "POST", reqBody),
+        (Func<dynamic, Image>) (j => new Image(j)));
     }
   }
 
-  [CmdletAttribute (VerbsCommon.Remove, "Image")]
+  [CmdletAttribute(VerbsCommon.Remove, "Image")]
   public class DeleteImageCmdlet : Cmdlet
   {
     [Parameter]
     public string Uuid { get; set; } = string.Empty;
 
-    protected override void ProcessRecord ()
+    protected override void ProcessRecord()
     {
-      if (!string.IsNullOrEmpty (Uuid))
+      if (!string.IsNullOrEmpty(Uuid))
       {
         // TODO: WriteObject Task
-        DeleteImageByUuid (Uuid);
+        DeleteImageByUuid(Uuid);
         return;
       }
     }
 
-    public static void DeleteImageByUuid (string uuid)
+    public static void DeleteImageByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      Util.RestCall ("/images/" + uuid, "DELETE", "" /* requestBody */ );
+      Util.RestCall("/images/" + uuid, "DELETE", string.Empty /* requestBody */ );
     }
   }
 
-  [CmdletAttribute (VerbsCommon.Set, "Image")]
+  [CmdletAttribute(VerbsCommon.Set, "Image")]
   public class SetImageCmdlet : Cmdlet
   {
-    [Parameter (Mandatory = true, ValueFromPipeline = true)]
+    [Parameter(Mandatory = true, ValueFromPipeline = true)]
     public Image Image { get; set; }
 
     [Parameter]
@@ -197,22 +197,22 @@ namespace Nutanix
     }
     private bool runAsync;
 
-    protected override void ProcessRecord ()
+    protected override void ProcessRecord()
     {
       if (Name != null)
       {
         Image.json.spec.name = Name;
       }
       Image.json.api_version = "3.1";
-      var task = Task.FromUuidInJson (
-        Util.RestCall ("/images/" + Image.Uuid, "PUT", Image.json.ToString ()));
+      var task = Task.FromUuidInJson(
+        Util.RestCall("/images/" + Image.Uuid, "PUT", Image.json.ToString()));
       if (runAsync)
       {
-        WriteObject (task);
+        WriteObject(task);
       }
       else
       {
-        WriteObject (task.Wait ());
+        WriteObject(task.Wait());
       }
     }
   }
