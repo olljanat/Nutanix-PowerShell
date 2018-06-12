@@ -161,7 +161,7 @@ namespace Nutanix
     {
       return Util.FromJson<Subnet>(
         Util.RestCall("/subnets/list", "POST", reqBody),
-        (Func<dynamic, Subnet>j => new Subnet(j)));
+        (Func<dynamic, Subnet>)(j => new Subnet(j)));
     }
   }
 

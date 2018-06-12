@@ -87,7 +87,7 @@ namespace Nutanix
         Util.TestOnlyIgnoreCerts();
       }
       Util.server = server;
-      Util.pscreds = new System.Management.Automation.PSCredential(
+      Util.PSCreds = new System.Management.Automation.PSCredential(
         username, password);
     }
   }

@@ -39,7 +39,7 @@ public class Util
     string requestMethod,
     string requestBody)
   {
-    if (string.IsNullOrEmpty(server) || Util.pscreds == null)
+    if (string.IsNullOrEmpty(server) || Util.PSCreds == null)
     {
       // TODO: throw exception.
       return null;
@@ -49,7 +49,7 @@ public class Util
       "https://" + Util.server + ":9440/api/nutanix/v3" + urlPath);
     request.Method = requestMethod;
     request.PreAuthenticate = true;
-    var creds = Util.pscreds.GetNetworkCredential();
+    var creds = Util.PSCreds.GetNetworkCredential();
     string username = creds.UserName;
     string password = creds.Password;
     var encoding = System.Text.Encoding.GetEncoding("UTF-8");
@@ -144,6 +144,6 @@ public class Util
   public static T[] FromJson<T>(dynamic json, Func<dynamic, T> creator)
   {
     return ((IEnumerable<T>) Enumerable.Select(json.entities,
-      (Func<dynamic, T>entity => creator(entity)))).ToArray();
+      (Func<dynamic, T>)(entity => creator(entity)))).ToArray();
   }
 }

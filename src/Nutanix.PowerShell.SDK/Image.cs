@@ -161,7 +161,7 @@ namespace Nutanix
     public static Image[] GetAllImages(string reqBody)
     {
       return Util.FromJson<Image>(Util.RestCall("/images/list", "POST", reqBody),
-        (Func<dynamic, Image>j => new Image(j)));
+        (Func<dynamic, Image>)(j => new Image(j)));
     }
   }
 
