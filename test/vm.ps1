@@ -10,7 +10,7 @@ $Password = ConvertTo-SecureString 'Nutanix.123' -AsPlainText -Force
 #------------------------------------------------------------------------------
 # Test authentication
 #------------------------------------------------------------------------------
-New-NTNX -Server $ClusterIp -UserName admin -Password $Password `
+New-NtnxConnection -Server $ClusterIp -UserName admin -Password $Password `
   -AcceptInvalidSslCerts
 
 #------------------------------------------------------------------------------

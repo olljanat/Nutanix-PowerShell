@@ -9,7 +9,7 @@
 Import-Module -Force ./build/NtnxPoshSDK.dll
 $ClusterIp = '10.7.255.141'
 $Password = ConvertTo-SecureString 'Nutanix.123' -AsPlainText -Force
-New-NTNX -Server $ClusterIp -UserName admin -Password $Password `
+New-NtnxConnection -Server $ClusterIp -UserName admin -Password $Password `
   -AcceptInvalidSslCerts
 
 # Get available clusters.

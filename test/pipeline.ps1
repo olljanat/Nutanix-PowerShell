@@ -7,7 +7,7 @@ Import-Module ./build/NtnxPoshSDK.dll -Force
 $ClusterIp = 'feature-c1'
 $VmName = '4k-rand-io'
 $Password = ConvertTo-SecureString 'Nutanix.123' -AsPlainText -Force
-New-NTNX -Server $ClusterIp -UserName admin -Password $Password `
+New-NtnxConnection -Server $ClusterIp -UserName admin -Password $Password `
   -AcceptInvalidSslCerts
 
 # Test passing VM via parameter.

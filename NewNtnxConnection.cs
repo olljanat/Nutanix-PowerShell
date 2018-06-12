@@ -1,6 +1,6 @@
 using System.Management.Automation;
 
-[CmdletAttribute(VerbsCommon.New, "NTNX")]
+[CmdletAttribute(VerbsCommon.New, "NtnxConnection")]
 public class ConnectNTNX : Cmdlet {
   [Parameter()]
   public string Server { get; set; } = "";
