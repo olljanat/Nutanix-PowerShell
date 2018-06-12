@@ -30,8 +30,11 @@ namespace Nutanix
     public int PercentageComplete { get; set; }
 
     public int DefaultPollTimeoutSecs { get; set; } = 2147483;
-    private int DefaultPollIntervalMs = 500;
+
+    private int defaultPollIntervalMs = 500;
+
     public dynamic json { get; set; }
+
     public Task(dynamic json)
     {
       Uuid = json.uuid;
@@ -65,7 +68,7 @@ namespace Nutanix
       DateTime start = DateTime.Now;
       while ((DateTime.Now - start).TotalMilliseconds < timeoutSecs * 1000)
       {
-        System.Threading.Thread.Sleep(DefaultPollIntervalMs);
+        System.Threading.Thread.Sleep(defaultPollIntervalMs);
         var task = GetTaskCmdlet.GetTaskByUuid(Uuid);
         if (task.Status != "RUNNING")
         {
