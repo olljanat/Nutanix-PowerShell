@@ -146,6 +146,6 @@ public class Util
 
   public static T[] FromJson<T>(dynamic json, Func<dynamic, T> creator)
   {
-    return ((IEnumerable<T>) Enumerable.Select(json.entities, (Func<dynamic, T>)(entity => creator(entity)))).ToArray();
+    return ((IEnumerable<T>)Enumerable.Select(json.entities, (Func<dynamic, T>)(entity => creator(entity)))).ToArray();
   }
 }
