@@ -2,7 +2,7 @@
 
 Microsoft PowerShell module to integrate with Nutanix Enterprise Cloud
 
-NOTE: This PowerShell modu is currently tech preview as of 9 May 2018. See "Current Development Status" below.
+NOTE: This PowerShell module is currently tech preview as of 9 May 2018. See "Current Development Status" below.
 
 #### Project, Build, Quality Status
 
@@ -10,7 +10,7 @@ NOTE: This PowerShell modu is currently tech preview as of 9 May 2018. See "Curr
 
 | Master                                                                                                                                                          | Develop                                                                                                                                                           |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [![Build Status](https://travis-ci.org/nutanix/PowerShell.svg?branch=master)](https://travis-ci.org/nutanix/PowerShell) | (TBD) |
+| [![Build Status](https://travis-ci.com/nutanix/PowerShell.svg?branch=master)](https://travis-ci.com/nutanix/PowerShell) | (TBD) |
 
 
 
@@ -18,17 +18,17 @@ What, Why, and Goals
 --------------------
 Nutanix is committed to making PowerShell a first-class feature. In service of that goal, Nutanix is planning to deprecate the existing PowerShell cmdlets, in favor of this fully open source project.
 
-Nutanix cmdlets are being replaced with a "from the ground up" rewrite, leveraging our latest API's and Microsoft's PowerShell 6.x code train. 
+Nutanix cmdlets are being replaced with a "from the ground up" rewrite, leveraging our latest API's and Microsoft's PowerShell 6.x code train.
 
 This new release will fundamentally enhance our functionality, including:
 * PowerShell 6.0 Support for Windows, Linux, and OSX
 * Module support, for easy integration with editors like Visual Studio Code
 * PowerShell Gallery support, for ease of deployment
-* Simplified, easy to use Cmdlets with traditional virtualization sysadmin semantics 
+* Simplified, easy to use Cmdlets with traditional virtualization sysadmin semantics
 * Verbose Get-Help with detailed examples on each cmdlet
 * Production supported, with additional Open Source community collaboration on GitHub and Slack
-* Nutanix v3 API support - This means Calm, Micro Seg, and all of the other goodies. 
-* Note: legacy API’s will only be leveraged for methods not yet available in v3 API 
+* Nutanix v3 API support - This means Calm, Micro Seg, and all of the other goodies.
+* Note: legacy API’s will only be leveraged for methods not yet available in v3 API
 
 Nutanix is taking an inclusive approach to developing this new feature and welcomes customer feedback. Please see our development project on GitHub, comment on requirements and/or design, and feel free to join us on Slack. Instructions on commenting, contributing, and joining our community Slack channel are all located within our GitHub Readme.
 

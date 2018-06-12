@@ -1,11 +1,27 @@
+---
 language: csharp
 
-install:
-  - nuget install -OutputDirectory deps NETStandard.Library.NETFramework -Version 2.0.0-preview2-25405-01
-  - nuget install -OutputDirectory deps Newtonsoft.Json -Version 10.0.3
-  - nuget install -OutputDirectory deps PowerShellStandard.Library -Version 5.1.0-preview-01
+git:
+  depth: 1
 
-script:
-  - mkdir -p build
-  - mcs target:library out:build/NtnxPoshSDK.dll reference:deps/NETStandard.Library.NETFramework.2.0.0-preview2-25405-01/build/net461/lib/netstandard.dll reference:deps/PowerShellStandard.Library.5.1.0-preview-01/lib/netstandard2.0/System.Management.Automation.dll reference:deps/Newtonsoft.Json.10.0.3/lib/net40/Newtonsoft.Json.dll *.cs
-  - cp NtnxPoshSDK.dll-Help.xml NtnxPoshSDK.dll-Help.xml
+stages:
+  - warm up dependencies
+  # - sanity testing
+  - build
+  # - acceptance testing
+
+jobs:
+  include:
+    - stage: warm up dependencies
+      script:
+        - nuget update -self
+        - make deps
+    - stage: build
+      script:
+        - make sdk
+
+matrix:
+  fast_finish: true
+  allow_failures:
+  - stage: sanity testing
+  - script: make sanity
