@@ -127,19 +127,20 @@ public class NewVmCmdlet : Cmdlet {
     var task = Task.FromUuidInJson(Util.RestCall(url, method, json.ToString()));
     if (runAsync) {
       WriteObject(task);
-    } else {
+    }
+    else {
       WriteObject(task.Wait());
     }
   }
 
   public static bool AddImage(
-    dynamic json, string ImageUuid, string ImageName) {
+    dynamic json, string imageUuid, string imageName) {
 
-    if (!string.IsNullOrEmpty(ImageUuid)) {
-      json.spec.resources.disk_list[0].data_source_reference.uuid = ImageUuid;
-    } else if (!string.IsNullOrEmpty(ImageName)) {
+    if (!string.IsNullOrEmpty(imageUuid)) {
+      json.spec.resources.disk_list[0].data_source_reference.uuid = imageUuid;
+    } else if (!string.IsNullOrEmpty(imageName)) {
       // TODO: grab images by name.
-      var images = GetImageCmdlet.GetImagesByName(ImageName);
+      var images = GetImageCmdlet.GetImagesByName(imageName);
       if (images.Length > 1) {
         Console.WriteLine(
           "Ambiguous: found more than 1 image with the same name");
@@ -147,7 +148,8 @@ public class NewVmCmdlet : Cmdlet {
           Console.WriteLine("Image " + i.ToString() + ": " + images[i].Uuid);
         }
         return false;
-      } else {
+      }
+      else {
         json.spec.resources.disk_list[0].data_source_reference.uuid =
           images[0].Uuid;
       }
@@ -156,13 +158,13 @@ public class NewVmCmdlet : Cmdlet {
   }
 
   public static bool AddNetwork(
-    dynamic json, string NetworkUuid, string NetworkName) {
+    dynamic json, string networkUuid, string networkName) {
 
-    if (!string.IsNullOrEmpty(NetworkUuid)) {
-      json.spec.resources.nic_list[0].subnet_reference.uuid = NetworkUuid;
-    } else if (!string.IsNullOrEmpty(NetworkName)) {
+    if (!string.IsNullOrEmpty(networkUuid)) {
+      json.spec.resources.nic_list[0].subnet_reference.uuid = networkUuid;
+    } else if (!string.IsNullOrEmpty(networkName)) {
       // TODO: grab images by name.
-      var networks = GetSubnetCmdlet.GetSubnetsByName(NetworkName);
+      var networks = GetSubnetCmdlet.GetSubnetsByName(networkName);
       if (networks.Length > 1) {
         Console.WriteLine(
           "Ambiguous: found more than 1 Subnet with the same name");
@@ -170,7 +172,8 @@ public class NewVmCmdlet : Cmdlet {
           Console.WriteLine("Network " + i.ToString() + ": " + networks[i].Uuid);
         }
         return false;
-      } else {
+      }
+      else {
         json.spec.resources.nic_list[0].subnet_reference.uuid =
           networks[0].Uuid;
       }
@@ -276,7 +279,8 @@ public class StartVmCmdlet : Cmdlet {
       Util.RestCall("/vms/" + VM.Uuid, "PUT", VM.json.ToString()));
     if (runAsync) {
       WriteObject(task);
-    } else {
+    }
+    else {
       WriteObject(task.Wait());
     }
   }
@@ -346,8 +350,8 @@ public class SetVmCmdlet : Cmdlet {
   [Parameter]
   public int? MemoryMB { get; set; }
 
-  // TODO: figure out Nutanix's analog for NumCpu. NumVcpusPerSocket is not
-  // correct.
+  // TODO: figure out Nutanix's analog for NumCpu.
+  //       NumVcpusPerSocket is not correct.
 
   protected override void ProcessRecord() {
     // TODO: maybe should not rely on 'json' to generate request?
@@ -367,5 +371,4 @@ public class SetVmCmdlet : Cmdlet {
       Util.RestCall("/vms/" + VM.Uuid, "PUT", VM.json.ToString())));
   }
 }
-
 }

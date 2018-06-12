@@ -69,7 +69,8 @@ public class NewImageCmdlet : Cmdlet {
     var task = Task.FromUuidInJson(Util.RestCall(url, method, str));
     if (runAsync) {
       WriteObject(task);
-    } else {
+    }
+    else {
       WriteObject(task.Wait());
     }
   }
@@ -180,7 +181,8 @@ public class SetImageCmdlet : Cmdlet {
       Util.RestCall("/images/" + Image.Uuid, "PUT", Image.json.ToString()));
     if (runAsync) {
       WriteObject(task);
-    } else {
+    }
+    else {
       WriteObject(task.Wait());
     }
   }
