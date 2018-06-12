@@ -17,16 +17,24 @@ namespace Nutanix
   // https://www.vmware.com/support/developer/PowerCLI/PowerCLI41U1/html/VirtualMachine.html
   public class Vm
   {
-    public static string PowerState_ON = "ON";
-    public static string PowerState_OFF = "OFF";
+    public static string powerStateON = "ON";
+
+    public static string powerStateOFF = "OFF";
 
     public string Name { get; set; }
+
     public string Uuid { get; set; }
+
     public string HardwareClockTimezone { get; set; }
+
     public int? NumSockets { get; set; }
+
     public int? MemoryMB { get; set; }
+
     public int? NumVcpusPerSocket { get; set; }
+
     public dynamic json { get; set; }
+
     public Vm(dynamic json)
     {
       // Special property 'json' stores the original json.
@@ -86,6 +94,7 @@ namespace Nutanix
       get { return runAsync; }
       set { runAsync = value; }
     }
+
     private bool runAsync;
 
     protected override void ProcessRecord()
@@ -129,10 +138,12 @@ namespace Nutanix
       {
         return;
       }
+
       if (!AddNetwork(json, NetworkUuid, NetworkName))
       {
         return;
       }
+
       if (!AddCluster(json, Cluster))
       {
         return;
@@ -173,6 +184,7 @@ namespace Nutanix
             Console.WriteLine("Image " + i.ToString() + ": " + images[i].Uuid);
           }
           return false;
+
         }
         else
         {
@@ -180,6 +192,7 @@ namespace Nutanix
             images[0].Uuid;
         }
       }
+
       return true;
     }
 
@@ -210,6 +223,7 @@ namespace Nutanix
             networks[0].Uuid;
         }
       }
+
       return true;
     }
 
@@ -222,6 +236,7 @@ namespace Nutanix
         json.spec.cluster_reference.uuid = Cluster.Uuid;
         json.spec.cluster_reference.name = Cluster.Name;
       }
+
       return true;
     }
   }
@@ -297,7 +312,7 @@ namespace Nutanix
     public static Vm GetVmByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      var json = Util.RestCall("/vms/" + uuid, "GET", string.Empty /* requestBody */ );
+      var json = Util.RestCall("/vms/" + uuid, "GET", string.Empty /* requestBody */);
       return new Vm(json);
     }
   }
@@ -321,7 +336,7 @@ namespace Nutanix
 
     protected override void ProcessRecord()
     {
-      VM.json.spec.resources.power_state = Vm.PowerState_ON;
+      VM.json.spec.resources.power_state = Vm.powerStateON;
       VM.json.api_version = "3.1"; // TODO: remove api_version field set.
       var task = Task.FromUuidInJson(
         Util.RestCall("/vms/" + VM.Uuid, "PUT", VM.json.ToString()));
