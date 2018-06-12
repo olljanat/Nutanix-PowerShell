@@ -16,10 +16,13 @@ jobs:
       mono: latest
       dotnet: 2.1
       script:
-        - nuget update -self
-        - nuget install -OutputDirectory deps NETStandard.Library.NETFramework
-        - nuget install -OutputDirectory deps Newtonsoft.Json
-        - nuget install -OutputDirectory deps PowerShellStandard.Library
+        - sudo nuget update -self
+        - nuget install Newtonsoft.Json -Version 11.0.2
+        - nuget install PowerShellStandard.Library -Version 5.1.0-preview-03
+        - curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+        - curl https://packages.microsoft.com/config/ubuntu/14.04/prod.list | sudo tee /etc/apt/sources.list.d/microsoft.list
+        - sudo apt-get update
+        - sudo apt-get install -y powershell
     - stage: build
       script:
         - make sdk
@@ -29,8 +32,28 @@ matrix:
   allow_failures:
   - stage: sanity testing
   - script: make sanity
+  include:
+    - os: linux
+      dist: trusty
+      sudo: required
   # include:
   #   - dotnet: 2.1
   #     mono: none
   #     env: DOTNETCORE=1
   #   - mono: latest
+
+# travis-ci will quit using the cache if an enviroment variable changes.
+# CACHE_VERSION is not used for anything other than invalidating the cache.
+# DOTNET_SKIP_FIRST_TIME_EXPERIENCE is to skip the dotnet-cli initialization,
+# which is expensive and unneeded for build agents.
+env:
+  global:
+    - CACHE_VERSION=netcoreapp.2.1-sdk.2.1.300
+    - POWERSHELL_TELEMETRY_OPTOUT=1
+    - DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
+
+cache:
+  timeout: 360
+  directories:
+    - $HOME/.nuget
+    - deps
