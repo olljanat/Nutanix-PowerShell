@@ -33,13 +33,13 @@ namespace Nutanix
 
     public int? NumVcpusPerSocket { get; set; }
 
-    public dynamic json { get; set; }
+    public dynamic Json { get; set; }
 
     public Vm(dynamic json)
     {
       // Special property 'json' stores the original json.
-      this.json = json;
-      this.json.api_version = "3.1";
+      this.Json = json;
+      this.Json.api_version = "3.1";
       SetFromJson(json);
     }
 
@@ -215,6 +215,7 @@ namespace Nutanix
           {
             Console.WriteLine("Network " + i.ToString() + ": " + networks[i].Uuid);
           }
+
           return false;
         }
         else
@@ -227,7 +228,7 @@ namespace Nutanix
       return true;
     }
 
-    public static bool AddCluster(dynamic json, Cluster Cluster)
+    public static bool AddCluster(dynamic json, Cluster cluster)
     {
       if (Cluster != null)
       {
@@ -281,11 +282,13 @@ namespace Nutanix
       {
         return new Vm[0];
       }
+
       Vm[] vms = new Vm[json.entities.Count];
       for (int i = 0; i < json.entities.Count; ++i)
       {
         vms[i] = new Vm(json.entities[i]);
       }
+
       return vms;
     }
 
@@ -332,14 +335,15 @@ namespace Nutanix
       get { return runAsync; }
       set { runAsync = value; }
     }
+
     private bool runAsync;
 
     protected override void ProcessRecord()
     {
-      VM.json.spec.resources.power_state = Vm.powerStateON;
-      VM.json.api_version = "3.1"; // TODO: remove api_version field set.
+      VM.Json.spec.resources.power_state = Vm.powerStateON;
+      VM.Json.api_version = "3.1"; // TODO: remove api_version field set.
       var task = Task.FromUuidInJson(
-        Util.RestCall("/vms/" + VM.Uuid, "PUT", VM.json.ToString()));
+        Util.RestCall("/vms/" + VM.Uuid, "PUT", VM.Json.ToString()));
       if (runAsync)
       {
         WriteObject(task);
@@ -406,6 +410,7 @@ namespace Nutanix
       {
         return Task.FromUuidInJson(Util.RestCall("/vms/" + vm.Uuid, "DELETE", string.Empty));
       }
+
       return null;
     }
   }
@@ -427,28 +432,30 @@ namespace Nutanix
 
     // TODO: figure out Nutanix's analog for NumCpu.
     //       NumVcpusPerSocket is not correct.
-
     protected override void ProcessRecord()
     {
       // TODO: maybe should not rely on 'json' to generate request?
       if (Name != null)
       {
-        VM.json.spec.name = Name;
+        VM.Json.spec.name = Name;
       }
+
       if (Description != null)
       {
-        VM.json.spec.description = Description;
+        VM.Json.spec.description = Description;
       }
+
       if (MemoryMB != null)
       {
-        VM.json.spec.resources.memory_size_mib = MemoryMB;
+        VM.Json.spec.resources.memory_size_mib = MemoryMB;
       }
-      VM.json.api_version = "3.1";
-      VM.json.Property("status").Remove();
+
+      VM.Json.api_version = "3.1";
+      VM.Json.Property("status").Remove();
 
       // TODO: return Task object from the RestCall.
       WriteObject(Task.FromUuidInJson(
-        Util.RestCall("/vms/" + VM.Uuid, "PUT", VM.json.ToString())));
+        Util.RestCall("/vms/" + VM.Uuid, "PUT", VM.Json.ToString())));
     }
   }
 }
