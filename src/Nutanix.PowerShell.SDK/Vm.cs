@@ -183,8 +183,8 @@ namespace Nutanix
           {
             Console.WriteLine("Image " + i.ToString() + ": " + images[i].Uuid);
           }
-          return false;
 
+          return false;
         }
         else
         {
@@ -230,12 +230,12 @@ namespace Nutanix
 
     public static bool AddCluster(dynamic json, Cluster cluster)
     {
-      if (Cluster != null)
+      if (cluster != null)
       {
         json.spec.cluster_reference = new Newtonsoft.Json.Linq.JObject();
         json.spec.cluster_reference.kind = "cluster";
-        json.spec.cluster_reference.uuid = Cluster.Uuid;
-        json.spec.cluster_reference.name = Cluster.Name;
+        json.spec.cluster_reference.uuid = cluster.Uuid;
+        json.spec.cluster_reference.name = cluster.Name;
       }
 
       return true;
