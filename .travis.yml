@@ -1,50 +1,52 @@
----
-language: csharp
+# ---
+# language: csharp
+# solution: solution-name.sln
+# git:
+#   depth: 1
 
-git:
-  depth: 1
+# stages:
+#   # - sanity testing
+#   - build
+#   # - acceptance testing
 
-stages:
-  # - sanity testing
-  - build
-  # - acceptance testing
+# jobs:
+#   include:
+#     - stage: build
+#       mono: latest
+#       dotnet: 2.1
+#       script:
+#         - nuget install Newtonsoft.Json -Version 11.0.2
+#         - curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+#         - curl https://packages.microsoft.com/config/ubuntu/14.04/prod.list | sudo tee /etc/apt/sources.list.d/microsoft.list
+#         - sudo apt-get update
+#         - sudo apt-get install -y powershell
+#         - export BUILD_DIR="${TRAVIS_BUILD_DIR}/vendor:$GOPATH"
+#         - dotnet build
+#         - mcs -target:library -out:NtnxPoshSDK.dll -pkg:dotnet \
+#           -reference:${TRAVIS_BUILD_DIR}/PowerShellStandard.Library.5.1.0-preview-03/lib/netstandard2.0/System.Management.Automation.dll -reference:${TRAVIS_BUILD_DIR}/Newtonsoft.Json.11.0.2/lib/net40/Newtonsoft.Json.dll *.cs
 
-jobs:
-  include:
-    - stage: build
-      mono: latest
-      dotnet: 2.1
-      script:
-        - nuget install Newtonsoft.Json -Version 11.0.2
-        - nuget install PowerShellStandard.Library -Version 5.1.0-preview-03
-        - curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-        - curl https://packages.microsoft.com/config/ubuntu/14.04/prod.list | sudo tee /etc/apt/sources.list.d/microsoft.list
-        - sudo apt-get update
-        - sudo apt-get install -y powershell
-        - mcs -target:library -out:$(BUILD_DIR)/NtnxPoshSDK.dll *.cs
+# matrix:
+#   fast_finish: true
+#   allow_failures:
+#   - stage: sanity testing
+#   - script: make sanity
+#   include:
+#     - os: linux
+#       dist: trusty
+#       sudo: required
 
-matrix:
-  fast_finish: true
-  allow_failures:
-  - stage: sanity testing
-  - script: make sanity
-  include:
-    - os: linux
-      dist: trusty
-      sudo: required
+# # travis-ci will quit using the cache if an enviroment variable changes.
+# # CACHE_VERSION is not used for anything other than invalidating the cache.
+# # DOTNET_SKIP_FIRST_TIME_EXPERIENCE is to skip the dotnet-cli initialization,
+# # which is expensive and unneeded for build agents.
+# env:
+#   global:
+#     - CACHE_VERSION=netcoreapp.2.1-sdk.2.1.300
+#     - POWERSHELL_TELEMETRY_OPTOUT=1
+#     - DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
 
-# travis-ci will quit using the cache if an enviroment variable changes.
-# CACHE_VERSION is not used for anything other than invalidating the cache.
-# DOTNET_SKIP_FIRST_TIME_EXPERIENCE is to skip the dotnet-cli initialization,
-# which is expensive and unneeded for build agents.
-env:
-  global:
-    - CACHE_VERSION=netcoreapp.2.1-sdk.2.1.300
-    - POWERSHELL_TELEMETRY_OPTOUT=1
-    - DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
-
-cache:
-  timeout: 360
-  directories:
-    - $HOME/.nuget
-    - deps
+# cache:
+#   timeout: 360
+#   directories:
+#     - $HOME/.nuget
+#     - deps
