@@ -113,7 +113,7 @@ public class GetImageCmdlet : Cmdlet {
   public void CheckResult(Image[] images) {
     return; // TODO: consider whether throwing duplicate exception is good idea.
     if (!String.IsNullOrEmpty(Name) && images.Length > 1) {
-      throw new NtnxException("Found duplicate images");
+      throw new Exception("Found duplicate images");
     }
   }
 
