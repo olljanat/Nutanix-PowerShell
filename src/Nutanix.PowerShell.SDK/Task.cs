@@ -5,17 +5,57 @@ namespace Nutanix
 {
   public class Task
   {
-    public string Uuid { get; set; } = string.Empty;
-    public string Status { get; set; } = string.Empty;
-    public string StartTime { get; set; } = string.Empty;
-    public string CreationTime { get; set; } = string.Empty;
-    public string CompletionTime { get; set; } = string.Empty;
-    public string ProgressMessage { get; set; } = string.Empty;
-    public string OperationType { get; set; } = string.Empty;
-    public int PercentageComplete { get; set; }
-    public int DefaultPollTimeoutSecs { get; set; } = 2147483;
+    public string Uuid
+    {
+      get;
+      set;
+    } = string.Empty;
+    public string Status
+    {
+      get;
+      set;
+    } = string.Empty;
+    public string StartTime
+    {
+      get;
+      set;
+    } = string.Empty;
+    public string CreationTime
+    {
+      get;
+      set;
+    } = string.Empty;
+    public string CompletionTime
+    {
+      get;
+      set;
+    } = string.Empty;
+    public string ProgressMessage
+    {
+      get;
+      set;
+    } = string.Empty;
+    public string OperationType
+    {
+      get;
+      set;
+    } = string.Empty;
+    public int PercentageComplete
+    {
+      get;
+      set;
+    }
+    public int DefaultPollTimeoutSecs
+    {
+      get;
+      set;
+    } = 2147483;
     public int DefaultPollIntervalMs = 500;
-    public dynamic json { get; set; }
+    public dynamic json
+    {
+      get;
+      set;
+    }
     public Task(dynamic json)
     {
       Uuid = json.uuid;
@@ -64,10 +104,18 @@ namespace Nutanix
   public class GetTaskCmdlet : Cmdlet
   {
     [Parameter]
-    public string Uuid { get; set; } = string.Empty;
+    public string Uuid
+    {
+      get;
+      set;
+    } = string.Empty;
 
     [Parameter]
-    public Task Task { get; set; }
+    public Task Task
+    {
+      get;
+      set;
+    }
 
     protected override void ProcessRecord()
     {
