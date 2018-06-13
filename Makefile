@@ -8,7 +8,7 @@ all: sdk
 .PHONY: sdk
 sdk:
 	mkdir -p $(BUILD_DIR)
-	dotnet build -output $(BUILD_DIR)
+	dotnet build --output $(BUILD_DIR)
 
 .PHONY: image
 image:
