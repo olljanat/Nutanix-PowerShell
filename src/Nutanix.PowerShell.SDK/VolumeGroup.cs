@@ -14,16 +14,18 @@ namespace Nutanix
   public class VolumeGroup
   {
     public string Name { get; set; } = string.Empty;
+
     public string Id { get; set; } = string.Empty;
 
     // 'Uid' is VMware's equivalent field for Nutanix's Uuid.
     public string Uid { get; set; } = string.Empty;
+
     public string Uuid { get; set; } = string.Empty;
+
     public dynamic Json { get; set; }
 
     // TODO Mtu, NumPorts, ExtensionData, NumPortsAvailable, Key, Nic, VMHostId,
     // VMHost, VMHostUid, Nic
-
     public VolumeGroup(dynamic json)
     {
       // Special property 'json' stores the original json.
@@ -106,11 +108,13 @@ namespace Nutanix
       {
         return new VolumeGroup[0];
       }
+
       VolumeGroup[] volume_groups = new VolumeGroup[json.entities.Count];
       for (int i = 0; i < json.entities.Count; ++i)
       {
         volume_groups[i] = new VolumeGroup(json.entities[i]);
       }
+
       return volume_groups;
     }
   }
@@ -137,5 +141,4 @@ namespace Nutanix
       Util.RestCall("/volume_groups/" + uuid, "DELETE", string.Empty /* requestBody */ );
     }
   }
-
 }

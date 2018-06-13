@@ -24,16 +24,16 @@ namespace Nutanix
 
     public string Uuid { get; set; }
 
-    public dynamic json { get; set; }
+    public dynamic Json { get; set; }
 
     // TODO Mtu, NumPorts, ExtensionData, NumPortsAvailable, Key, Nic, VMHostId,
     // VMHost, VMHostUid, Nic
     public Subnet(dynamic json)
     {
       // Special property 'json' stores the original json.
-      this.json = json;
-      this.json.Property("status").Remove();
-      this.json.api_version = "3.1";
+      this.Json = json;
+      this.Json.Property("status").Remove();
+      this.Json.api_version = "3.1";
 
       Name = json.spec.name;
       Id = json.spec.resources.vlan_id;
@@ -191,7 +191,7 @@ namespace Nutanix
     public static void DeleteSubnetByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      Util.RestCall("/subnets/" + uuid, "DELETE", string.Empty /* requestBody */ );
+      Util.RestCall("/subnets/" + uuid, "DELETE", string.Empty /* requestBody */);
     }
   }
 
@@ -211,16 +211,16 @@ namespace Nutanix
     {
       if (Name != null)
       {
-        Subnet.json.spec.name = Name;
+        Subnet.Json.spec.name = Name;
       }
 
       if (VlanId != null)
       {
-        Subnet.json.spec.resources.vlan_id = VlanId;
+        Subnet.Json.spec.resources.vlan_id = VlanId;
       }
 
-      Subnet.json.api_version = "3.1";
-      Util.RestCall("/subnets/" + Subnet.Uuid, "PUT", Subnet.json.ToString());
+      Subnet.Json.api_version = "3.1";
+      Util.RestCall("/subnets/" + Subnet.Uuid, "PUT", Subnet.Json.ToString());
     }
   }
 }

@@ -23,7 +23,7 @@ public class Util
   // Holds username and password.
   // TODO: might need to GC PSCreds.Password (SecureString) using Dispose
   // method.
-  public static System.Management.Automation.PSCredential PSCreds;
+  public static System.Management.Automation.PSCredential PSCreds { get; set; }
 
   // NOTE: only use this function during development.
   public static void TestOnlyIgnoreCerts()
