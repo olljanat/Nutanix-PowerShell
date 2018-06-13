@@ -73,6 +73,7 @@ namespace Nutanix
       get { return acceptInvalidSslCerts; }
       set { acceptInvalidSslCerts = value; }
     }
+
     private bool acceptInvalidSslCerts;
 
     protected override void ProcessRecord()
@@ -91,6 +92,7 @@ namespace Nutanix
       {
         Util.TestOnlyIgnoreCerts();
       }
+
       Util.Server = server;
       Util.PSCreds = new System.Management.Automation.PSCredential(
         username, password);
