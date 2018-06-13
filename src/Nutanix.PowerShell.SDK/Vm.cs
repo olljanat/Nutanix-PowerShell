@@ -175,8 +175,7 @@ namespace Nutanix.PowerShell.SDK
         var images = GetImageCmdlet.GetImagesByName(imageName);
         if (images.Length > 1)
         {
-          Console.WriteLine(
-            "Ambiguous: found more than 1 image with the same name");
+          // Ambiguous: found more than 1 image with the same name
           for (int i = 0; i < images.Length; ++i)
           {
             Console.WriteLine("Image " + i.ToString() + ": " + images[i].Uuid);
@@ -300,16 +299,10 @@ namespace Nutanix.PowerShell.SDK
       {
         throw new NtnxException("VM not found.");
       }
-
-      // TODO: reconsider if we want to throw error on more than 1 VM.
-      // if (json.entities.Count > 1) {
-      //   throw new NtnxException("More than 1 VM found.");
-      // }
       return new Vm(json.entities[0]);
     }
 
     // Get Vm using 'uuid'.
-    // REST: /vms/{uuid}
     public static Vm GetVmByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
@@ -387,7 +380,6 @@ namespace Nutanix.PowerShell.SDK
       if (!string.IsNullOrEmpty(Name))
       {
         WriteObject(DeleteVmByName(Name));
-        return;
       }
     }
 

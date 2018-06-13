@@ -79,7 +79,7 @@ public class Util
         {
           var message = string.Format(
             "Request failed. StatusCode {0}", response.StatusCode);
-          throw new ApplicationException(message);
+          throw new NtnxException(message);
         }
 
         // grab the response
@@ -114,7 +114,7 @@ public class Util
         }
       }
 
-      throw ex;
+      throw;
     }
 
     return null;

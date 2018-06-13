@@ -181,7 +181,6 @@ namespace Nutanix.PowerShell.SDK
       {
         // TODO: WriteObject Task
         DeleteImageByUuid(Uuid);
-        return;
       }
     }
 

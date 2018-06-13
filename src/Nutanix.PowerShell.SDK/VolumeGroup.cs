@@ -131,7 +131,6 @@ namespace Nutanix.PowerShell.SDK
       {
         // TODO: WriteObject Task
         DeleteVolumeGroupByUuid(Uuid);
-        return;
       }
     }
 

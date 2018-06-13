@@ -184,7 +184,6 @@ namespace Nutanix.PowerShell.SDK
       {
         // TODO: WriteObject Task
         DeleteSubnetByUuid(Uuid);
-        return;
       }
     }
 

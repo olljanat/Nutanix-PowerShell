@@ -31,8 +31,6 @@ namespace Nutanix.PowerShell.SDK
 
     public int DefaultPollTimeoutSecs { get; set; } = 2147483;
 
-    private int defaultPollIntervalMs = 500;
-
     public dynamic Json { get; set; }
 
     public Task(dynamic json)
@@ -68,7 +66,7 @@ namespace Nutanix.PowerShell.SDK
       DateTime start = DateTime.Now;
       while ((DateTime.Now - start).TotalMilliseconds < timeoutSecs * 1000)
       {
-        System.Threading.Thread.Sleep(defaultPollIntervalMs);
+        System.Threading.Thread.Sleep(500);
         var task = GetTaskCmdlet.GetTaskByUuid(Uuid);
         if (task.Status != "RUNNING")
         {
