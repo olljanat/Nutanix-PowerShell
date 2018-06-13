@@ -1,4 +1,4 @@
-// Purpose: VM (Virtual Machines) source for 'Nutanix.PowerShell.SDK'
+// Purpose: PLACEHOLDER for xunit csharp unit tests for 'Nutanix.PowerShell.SDK'
 // Author: Nutanix
 // Copyright: Nutanix, 2018
 // Owner: PowerShell@nutanix.com
@@ -9,7 +9,7 @@
 using System;
 using Xunit;
 
-namespace csharp.tests
+namespace Csharp.Tests
 {
   public class UnitTest1
   {
