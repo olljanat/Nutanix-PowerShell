@@ -11,7 +11,7 @@ using System.Management.Automation;
 
 using Newtonsoft.Json;
 
-namespace Nutanix
+namespace Nutanix.PowerShell.SDK
 {
   // VMware's struct definition.
   // https://www.vmware.com/support/developer/PowerCLI/PowerCLI41U1/html/VirtualMachine.html

@@ -11,7 +11,7 @@ using System.Management.Automation;
 
 using Newtonsoft.Json;
 
-namespace Nutanix
+namespace Nutanix.PowerShell.SDK
 {
   public class Subnet
   {

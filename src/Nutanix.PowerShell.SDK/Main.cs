@@ -10,10 +10,11 @@ using System;
 
 namespace Nutanix.PowerShell.SDK
 {
-  public class Program
+  public class Nutanix
   {
     public static void Main(string[] args)
     {
+    // TODO: Logic for main
     }
   }
 }

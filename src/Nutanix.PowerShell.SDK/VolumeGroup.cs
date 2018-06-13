@@ -9,7 +9,7 @@
 using System;
 using System.Management.Automation;
 
-namespace Nutanix
+namespace Nutanix.PowerShell.SDK
 {
   public class VolumeGroup
   {
