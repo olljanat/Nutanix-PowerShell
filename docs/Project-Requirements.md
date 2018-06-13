@@ -1,3 +1,7 @@
+NOTE - this is a raw export of a google doc, and is really badly formatted, and has info scattered all over
+TODO - Clean this up and modularize it properly in markdown, and move action items into issues/projects here.
+
+
 ---
 title: Nutanix PowerShell.next Requirements
 layout: post
@@ -24,7 +28,8 @@ published: true
 
 [[TOC]]
 
-### Why & Goals* * *
+### 
+Why & Goals* * *
 
 
 Nutanix is committed to making PowerShell a first-class feature. In service of that goal, Nutanix is deprecating the existing PowerShell cmdlets included with AOS as of (tentative 5.5.1, 5.1.5). 
