@@ -142,7 +142,7 @@ namespace Nutanix
       return; // TODO: consider whether throwing duplicate exception is good idea.
       if (!string.IsNullOrEmpty(Name) && images.Length > 1)
       {
-        throw new Exception("Found duplicate images");
+        throw new NtnxException("Found duplicate images");
       }
     }
 

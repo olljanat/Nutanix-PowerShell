@@ -141,7 +141,7 @@ namespace Nutanix
       return; // TODO: consider whether throwing duplicate exception is good idea.
       if (!string.IsNullOrEmpty(Name) && subnets.Length > 1)
       {
-        throw new Exception("Found duplicate subnets");
+        throw new NtnxException("Found duplicate subnets");
       }
     }
 

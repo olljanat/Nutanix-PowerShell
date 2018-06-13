@@ -298,12 +298,12 @@ namespace Nutanix
       var json = Util.RestCall("/vms/list", "POST", reqBody);
       if (json.entities.Count == 0)
       {
-        throw new Exception("VM not found.");
+        throw new NtnxException("VM not found.");
       }
 
       // TODO: reconsider if we want to throw error on more than 1 VM.
       // if (json.entities.Count > 1) {
-      //   throw new Exception("More than 1 VM found.");
+      //   throw new NtnxException("More than 1 VM found.");
       // }
       return new Vm(json.entities[0]);
     }
@@ -374,7 +374,7 @@ namespace Nutanix
 
       if (string.IsNullOrEmpty(Name) && string.IsNullOrEmpty(Uuid))
       {
-        throw new Exception("Need -Name or -Uuid");
+        throw new NtnxException("Need -Name or -Uuid");
         return;
       }
 

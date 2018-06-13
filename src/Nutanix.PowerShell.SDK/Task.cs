@@ -103,7 +103,7 @@ namespace Nutanix
         return;
       }
 
-      throw new Exception("Expected either -Uuid or -Task");
+      throw new NtnxException("Expected either -Uuid or -Task");
     }
 
     public static Task GetTaskByUuid(string uuid)
