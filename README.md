@@ -2,11 +2,13 @@
 
 Microsoft PowerShell module to integrate with Nutanix Enterprise Cloud
 
-NOTE: This PowerShell module is currently tech preview as of 9 May 2018. See "Current Development Status" below.
+NOTE: This PowerShell module is currently tech preview as of 13 June 2018. See "Current Development Status" below.
+
+NOTE: This is open source, and we love pull requests! Please see the GitHub issues for help wanted, and feel free to chip in with pull requests!
 
 #### Project, Build, Quality Status
 
-[![Waffle.io - Columns and their card count](https://badge.waffle.io/nutanix/PowerShell.svg?columns=all)](https://waffle.io/nutanix/PowerShell) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/31363a609f9e422097824a083e983357)](https://www.codacy.com/app/JonKohler/PowerShell?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nutanix/PowerShell&amp;utm_campaign=Badge_Grade) [![CodeFactor](https://www.codefactor.io/repository/github/nutanix/powershell/badge)](https://www.codefactor.io/repository/github/nutanix/powershell)
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/nutanix/PowerShell.svg?columns=all)](https://waffle.io/nutanix/PowerShell) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/31363a609f9e422097824a083e983357)](https://www.codacy.com/app/JonKohler/PowerShell?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nutanix/PowerShell&amp;utm_campaign=Badge_Grade) [![CodeFactor](https://www.codefactor.io/repository/github/nutanix/powershell/badge)](https://www.codefactor.io/repository/github/nutanix/powershell) [![codecov](https://codecov.io/gh/nutanix/PowerShell/branch/master/graph/badge.svg)](https://codecov.io/gh/nutanix/PowerShell)
 
 | Master                                                                                                                                                          | Develop                                                                                                                                                           |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -40,6 +42,7 @@ If you're reading this, you're in on the ground floor. Really, the parking garag
 
 In the short term, we'll be adding our full requirements list as we build our our documentation, and start baking in a proper readme, etc.
 
+##### TODO - tune up the install / dev docs based on the new processes
 Quick Install
 -------------
 
