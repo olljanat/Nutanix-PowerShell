@@ -16,16 +16,18 @@ namespace Nutanix
   public class Subnet
   {
     public string Name { get; set; } = string.Empty;
+
     public string Id { get; set; } = string.Empty;
 
     // 'Uid' is VMware's equivalent field for Nutanix's Uuid.
-    public string Uid;
-    public string Uuid;
+    public string Uid { get; set; }
+
+    public string Uuid { get; set; }
+
     public dynamic json { get; set; }
 
     // TODO Mtu, NumPorts, ExtensionData, NumPortsAvailable, Key, Nic, VMHostId,
     // VMHost, VMHostUid, Nic
-
     public Subnet(dynamic json)
     {
       // Special property 'json' stores the original json.
@@ -173,7 +175,6 @@ namespace Nutanix
 
     // TODO: Confirm, WhatIf params.
     // https://www.vmware.com/support/developer/PowerCLI/PowerCLI41U1/html/Remove-VirtualSwitch.html
-
     protected override void ProcessRecord()
     {
       if (!string.IsNullOrEmpty(Uuid))
@@ -216,7 +217,6 @@ namespace Nutanix
       Subnet.json.api_version = "3.1";
       Util.RestCall("/subnets/" + Subnet.Uuid, "PUT", Subnet.json.ToString());
     }
-
   }
 
 }

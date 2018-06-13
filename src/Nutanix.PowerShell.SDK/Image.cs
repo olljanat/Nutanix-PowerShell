@@ -20,9 +20,9 @@ namespace Nutanix
     public string Id { get; set; }
 
     // 'Uid' is VMware's equivalent field for Nutanix's Uuid.
-    public string Uid;
+    public string Uid { get; set; }
 
-    public string Uuid;
+    public string Uuid { get; set; }
 
     public dynamic Json { get; set; }
 
