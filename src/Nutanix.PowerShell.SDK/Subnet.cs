@@ -152,9 +152,9 @@ namespace Nutanix
       return GetAllSubnets("{\"filter\": \"name==" + name + "\"}");
     }
 
-    public static Subnet[] GetAllSubnets(dynamic JsonReqBody)
+    public static Subnet[] GetAllSubnets(dynamic jsonReqBody)
     {
-      return GetAllSubnets(JsonReqBody.ToString());
+      return GetAllSubnets(jsonReqBody.ToString());
     }
 
     public static Subnet[] GetAllSubnets(string reqBody)
