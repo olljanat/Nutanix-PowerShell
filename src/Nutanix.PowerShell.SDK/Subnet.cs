@@ -86,6 +86,7 @@ namespace Nutanix
       }
 
       WriteDebug(Util.RestCallTrace(url, method, json.ToString()));
+
       // TODO: should use Task.
       WriteObject(
         Task.FromUuidInJson(Util.RestCall(url, method, json.ToString())));
@@ -126,10 +127,12 @@ namespace Nutanix
       {
         json.length = Max;
       }
+
       if (!string.IsNullOrEmpty(Name))
       {
         json.filter = "name==" + Name;
       }
+
       return json;
     }
 
@@ -145,7 +148,7 @@ namespace Nutanix
     public static Subnet GetSubnetByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      var json = Util.RestCall("/subnets/" + uuid, "GET", string.Empty /* requestBody */ );
+      var json = Util.RestCall("/subnets/" + uuid, "GET", string.Empty /* requestBody */);
       return new Subnet(json);
     }
 
@@ -210,13 +213,14 @@ namespace Nutanix
       {
         Subnet.json.spec.name = Name;
       }
+
       if (VlanId != null)
       {
         Subnet.json.spec.resources.vlan_id = VlanId;
       }
+
       Subnet.json.api_version = "3.1";
       Util.RestCall("/subnets/" + Subnet.Uuid, "PUT", Subnet.json.ToString());
     }
   }
-
 }
