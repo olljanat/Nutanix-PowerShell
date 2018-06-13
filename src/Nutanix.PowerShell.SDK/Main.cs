@@ -12,7 +12,7 @@ namespace Nutanix.PowerShell.SDK
 {
   public class Nutanix
   {
-    public static void Main(string[] args)
+    public static void main(String[] args)
     {
     // TODO: Logic for main
     }
