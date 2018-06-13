@@ -10,9 +10,11 @@ using System;
 
 public class NtnxException : Exception
 {
-  public NtnxException() : base() {
+  public NtnxException() : base()
+  {
   }
 
-  public NtnxException(string message) : base(message) {
+  public NtnxException(string message) : base(message)
+  {
   }
 }
