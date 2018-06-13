@@ -13,8 +13,10 @@ namespace Nutanix
 {
   public class Cluster
   {
-    public string Name;
-    public string Uuid;
+    public string Name { get; set; }
+
+    public string Uuid { get; set; }
+
     public Cluster(dynamic json)
     {
       Uuid = json.metadata.uuid;
@@ -39,11 +41,13 @@ namespace Nutanix
       {
         return new Cluster[0];
       }
+
       Cluster[] clusters = new Cluster[json.entities.Count];
       for (int i = 0; i < json.entities.Count; ++i)
       {
         clusters[i] = new Cluster(json.entities[i]);
       }
+
       return clusters;
     }
   }
@@ -78,10 +82,11 @@ namespace Nutanix
 
     // Save authentication info.
     public static void Connect(
-      string server, string username, System.Security.SecureString password,
+      string server,
+      string username,
+      System.Security.SecureString password,
       bool acceptinvalidsslcerts)
     {
-
       if (acceptinvalidsslcerts)
       {
         Util.TestOnlyIgnoreCerts();
