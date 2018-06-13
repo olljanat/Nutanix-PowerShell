@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C681CF14-EF3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nutanix.PowerShell.SDK", "src\Nutanix.PowerShell.SDK\Nutanix.PowerShell.SDK.csproj", "{A0D2B5AE-B823-4420-8DB8-B509DC260E9B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{2C1681AE-0634-4E8E-9880-2E9E630B9B71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csharp.tests", "test\csharp\csharp.tests.csproj", "{68B9D3C9-EC17-431F-BC52-F5D639BE1BD3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,8 +36,21 @@ Global
 		{A0D2B5AE-B823-4420-8DB8-B509DC260E9B}.Release|x64.Build.0 = Release|Any CPU
 		{A0D2B5AE-B823-4420-8DB8-B509DC260E9B}.Release|x86.ActiveCfg = Release|Any CPU
 		{A0D2B5AE-B823-4420-8DB8-B509DC260E9B}.Release|x86.Build.0 = Release|Any CPU
+		{68B9D3C9-EC17-431F-BC52-F5D639BE1BD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68B9D3C9-EC17-431F-BC52-F5D639BE1BD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68B9D3C9-EC17-431F-BC52-F5D639BE1BD3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{68B9D3C9-EC17-431F-BC52-F5D639BE1BD3}.Debug|x64.Build.0 = Debug|Any CPU
+		{68B9D3C9-EC17-431F-BC52-F5D639BE1BD3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{68B9D3C9-EC17-431F-BC52-F5D639BE1BD3}.Debug|x86.Build.0 = Debug|Any CPU
+		{68B9D3C9-EC17-431F-BC52-F5D639BE1BD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68B9D3C9-EC17-431F-BC52-F5D639BE1BD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68B9D3C9-EC17-431F-BC52-F5D639BE1BD3}.Release|x64.ActiveCfg = Release|Any CPU
+		{68B9D3C9-EC17-431F-BC52-F5D639BE1BD3}.Release|x64.Build.0 = Release|Any CPU
+		{68B9D3C9-EC17-431F-BC52-F5D639BE1BD3}.Release|x86.ActiveCfg = Release|Any CPU
+		{68B9D3C9-EC17-431F-BC52-F5D639BE1BD3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A0D2B5AE-B823-4420-8DB8-B509DC260E9B} = {C681CF14-EF3E-449C-86E5-328080590915}
+		{68B9D3C9-EC17-431F-BC52-F5D639BE1BD3} = {2C1681AE-0634-4E8E-9880-2E9E630B9B71}
 	EndGlobalSection
 EndGlobal
