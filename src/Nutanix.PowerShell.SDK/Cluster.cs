@@ -39,7 +39,7 @@ namespace Nutanix.PowerShell.SDK
       var json = Util.RestCall("/clusters/list", "POST", "{}");
       if (json.entities.Count == 0)
       {
-        return new Cluster[0];
+        return Array.Empty<Cluster>();
       }
 
       Cluster[] clusters = new Cluster[json.entities.Count];
