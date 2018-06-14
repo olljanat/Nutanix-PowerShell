@@ -1,6 +1,13 @@
 ---
 language: csharp
 solution: PowerShell.sln
+mono: none
+dotnet:
+  - 2.0.x
+  - 2.1.x
+  - master
+  - tip
+  - latest
 
 git:
   depth: 1
@@ -13,8 +20,7 @@ stages:
 jobs:
   include:
     - stage: build
-      mono: none
-      dotnet: 2.1
+      dotnet: 2.1.x
       script:
         - dotnet build
 

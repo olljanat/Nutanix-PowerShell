@@ -2,17 +2,9 @@ NOTE - this is a raw export of a google doc, and is really badly formatted, and 
 TODO - Clean this up and modularize it properly in markdown, and move action items into issues/projects here.
 
 
----
-title: Nutanix PowerShell.next Requirements
-layout: post
-author: jonatha.kohler
-permalink: /nutanix-powershell.next-requirements/
-source-id: 1Sk9ypyB3Z1jq665nUEj0bXwgkPeNyObRW5fuUHrEj8o
-published: true
----
 **_PowerShell.Next (PoSh 2.0) Project_**
 
-**Owner:** Jon Kohler (jon@nutanix.com) 
+**Owner:** Jon Kohler (jon@nutanix.com)
 
 **Dev Lead: **Alex Guo
 
@@ -20,41 +12,10 @@ published: true
 
 **GitHub**:[ https://github.com/nutanix/PowerShell](https://github.com/nutanix/PowerShell)
 
-**JIRA**: [https://jira.nutanix.com/browse/FEAT-6441](https://jira.nutanix.com/browse/FEAT-6441) 
+**JIRA**: [https://jira.nutanix.com/browse/FEAT-6441](https://jira.nutanix.com/browse/FEAT-6441)
 
 **DL**: [PowerShell@nutanix.com](mailto:PowerShell@nutanix.com)
 
-**Slack**: #_powershell_ext @ nutanix.slack.com
-
-[[TOC]]
-
-### 
-Why & Goals* * *
-
-
-Nutanix is committed to making PowerShell a first-class feature. In service of that goal, Nutanix is deprecating the existing PowerShell cmdlets included with AOS as of (tentative 5.5.1, 5.1.5). 
-
-Nutanix cmdlets are being replaced with a "from the ground up" rewrite, leveraging our latest API's and Microsoft's PowerShell 6.x code train. 
-
-This new release will fundamentally enhance our functionality, including:
-
-* PowerShell 6.0 Support for Windows, Linux, and OSX
-
-* Module support, for easy integration with editors like Visual Studio Code
-
-* PowerShell Gallery support, for ease of deployment
-
-* Simplified, easy to use Cmdlets with traditional virtualization sysadmin semantics 
-
-* Verbose Get-Help with detailed examples on each cmdlet
-
-* Production supported, with additional Open Source community collaboration on GitHub and Slack
-
-* Nutanix v3 API support - This means Calm, Micro Seg, and all of the other goodies. 
-
-    * Note: legacy API's will only be leveraged for methods not yet available in v3 API 
-
-Nutanix is taking an inclusive approach to developing this new feature and welcomes customer feedback. Please see our development project on GitHub, comment on requirements and/or design, and feel free to join us on Slack. Instructions on commenting, contributing, and joining our community Slack channel are all located within our GitHub Readme.
 
 ### Prerequisites
 
@@ -81,18 +42,18 @@ Nutanix is taking an inclusive approach to developing this new feature and welco
 
 * **Enhancements to existing cmdlets**
 
-### Requirements and Comments 
+### Requirements and Comments
 
 * * *
 
 
-**_PowerShell.Next @ Nutanix_**: [https://jira.nutanix.com/browse/FEAT-6441](https://jira.nutanix.com/browse/FEAT-6441) 
+**_PowerShell.Next @ Nutanix_**: [https://jira.nutanix.com/browse/FEAT-6441](https://jira.nutanix.com/browse/FEAT-6441)
 
-Requirements here also include the 'intent' of the requirement from a user’s perspective in *italics*. 
+Requirements here also include the 'intent' of the requirement from a user’s perspective in *italics*.
 
- 
 
-1. Open source day 1 
+
+1. Open source day 1
 
     1. GitHub (private for now):[ https://github.com/nutanix/PowerShell](https://github.com/nutanix/PowerShell)
 
@@ -106,9 +67,9 @@ Requirements here also include the 'intent' of the requirement from a user’s p
 
     4. We should follow suit. Leveraging the power of the community could be huge here, and really help us step up our game against the competition.
 
-2. We need to do this in PowerShell 6.0, which is written in .net core. 
+2. We need to do this in PowerShell 6.0, which is written in .net core.
 
-    5. This will get us cross platform from day 1 
+    5. This will get us cross platform from day 1
 
     6. GitHub Site is here - [https://github.com/PowerShell/PowerShell](https://github.com/PowerShell/PowerShell)
 
@@ -118,7 +79,7 @@ Requirements here also include the 'intent' of the requirement from a user’s p
 
     8. From Darren Woolard about existing cmdlets: I've installed the Nutanix cmdlets into my Win7 VM. All work and I can run commands. If I try an use an editor (to assist with debug, syntax highlighting, etc…) the cmdlets don’t appear to be registered. I’ve tried Powershell ISE (native) and a 3rd party tool called Powershell Plus (by Idera). I can see other 3rd party cmdlets shown in the editors but not ours.
 
-4. PowerShell gallery installable 
+4. PowerShell gallery installable
 
     9. This would be similar to how others (like VMW) have done things, so that someone could do Install-Module -Name Nutanix.CLI
 
@@ -192,7 +153,7 @@ Requirements here also include the 'intent' of the requirement from a user’s p
 
     34. Just a few points on functions vs cmdlets if you haven't seen it already: [http://www.leeholmes.com/blog/2007/07/24/cmdlets-vs-functions/](http://www.leeholmes.com/blog/2007/07/24/cmdlets-vs-functions/)
 
-15. Cmdlets are ***extremely* **easy to use. 
+15. Cmdlets are ***extremely* **easy to use.
 
     35. For example, I should be able to make a VM with two cmdlets, with a "connect" statement, then a “new-vm” statement, that's it.
 
@@ -238,7 +199,7 @@ Requirements here also include the 'intent' of the requirement from a user’s p
 
 21. Follow well accepted build and push standards
 
-    50. [http://ramblingcookiemonster.github.io/Building-A-PowerShell-Module/](http://ramblingcookiemonster.github.io/Building-A-PowerShell-Module/) 
+    50. [http://ramblingcookiemonster.github.io/Building-A-PowerShell-Module/](http://ramblingcookiemonster.github.io/Building-A-PowerShell-Module/)
 
 22. Need coverage for everything that has an API endpoint, within reason
 
@@ -248,7 +209,7 @@ Requirements here also include the 'intent' of the requirement from a user’s p
 
     53. That means both VM/entity CRUD as well as "cluster" level CRUD for administrative options
 
-        4. Cmdlet mapping doc: [https://docs.google.com/spreadsheets/d/1LUnXF7CApiaqjKMSYinDPWr2ycEaA9WOu83WJ4vwCfo/edit#gid=0](https://docs.google.com/spreadsheets/d/1LUnXF7CApiaqjKMSYinDPWr2ycEaA9WOu83WJ4vwCfo/edit#gid=0) 
+        4. Cmdlet mapping doc: [https://docs.google.com/spreadsheets/d/1LUnXF7CApiaqjKMSYinDPWr2ycEaA9WOu83WJ4vwCfo/edit#gid=0](https://docs.google.com/spreadsheets/d/1LUnXF7CApiaqjKMSYinDPWr2ycEaA9WOu83WJ4vwCfo/edit#gid=0)
 
         5. Should include typical things like DNS, NTP, SNMP, SMTP
 
@@ -262,9 +223,9 @@ Requirements here also include the 'intent' of the requirement from a user’s p
 
             2. NOTE: This may require API tweaks if our GUI is doing something sneaky
 
-    54. We should also be able to get statistics, for users who want to "poll" their clusters for reporting purposes. 
+    54. We should also be able to get statistics, for users who want to "poll" their clusters for reporting purposes.
 
-        9. Northern Trust already does something similar, but in reality, they'd want a more similar type of reporting like the vCheck report for VMW: [http://www.virtu-al.net/vcheck-pluginsheaders/vcheck/](http://www.virtu-al.net/vcheck-pluginsheaders/vcheck/) 
+        9. Northern Trust already does something similar, but in reality, they'd want a more similar type of reporting like the vCheck report for VMW: [http://www.virtu-al.net/vcheck-pluginsheaders/vcheck/](http://www.virtu-al.net/vcheck-pluginsheaders/vcheck/)
 
         10. Our PoSh needs to be able to enable this type of workflow
 
@@ -324,9 +285,9 @@ Requirements here also include the 'intent' of the requirement from a user’s p
 
     67. This might require changes to the rest API
 
-27. Need to think through how authentication will work 
+27. Need to think through how authentication will work
 
-    68. From a customer case: 
+    68. From a customer case:
 
         22. "When connecting to PRISM (4.1.4) using PowerShell, we always have to specify the username and password. Even though we have AD Integration setup, we still need to specify the username and password. it would be nice if we could just SSO when connecting to Prism (like with VMware/PowerCLI, ...)"
 
@@ -384,13 +345,13 @@ Requirements here also include the 'intent' of the requirement from a user’s p
 
         37. Likely should not be based on git commit log, as that will generate too much noise
 
-        38. [http://keepachangelog.com/en/1.0.0/](http://keepachangelog.com/en/1.0.0/) 
+        38. [http://keepachangelog.com/en/1.0.0/](http://keepachangelog.com/en/1.0.0/)
 
-    78. Contributing guidelines: 
+    78. Contributing guidelines:
 
         39. Need to get from Victor
 
-    79. License: 
+    79. License:
 
         40. MIT per victor
 
@@ -402,9 +363,9 @@ Requirements here also include the 'intent' of the requirement from a user’s p
 
         43. Likely need to look at portal.nutanix.com/GitHub integration
 
-    81. Samples (see separate section) 
+    81. Samples (see separate section)
 
-    82. TOI (see separate section 
+    82. TOI (see separate section
 
 31. TOI - Transfer of Information
 
@@ -412,9 +373,9 @@ Requirements here also include the 'intent' of the requirement from a user’s p
 
     84. My initial thought would be a similar TOI format to what we do internally, but instead, pre-record it and put it on YouTube, and just send out the link for people to watch OR do a "live session" like we do today, but instead record it and put it up on YouTube
 
-32. Samples 
+32. Samples
 
-    85. Along the lines of the TOI, each TOI/module should be accompanied by functional samples. 
+    85. Along the lines of the TOI, each TOI/module should be accompanied by functional samples.
 
     86. We should have a samples directory right within the repo, that can be actively maintained by the community.
 
@@ -434,13 +395,13 @@ Requirements here also include the 'intent' of the requirement from a user’s p
 
     90. Public facing JIRA project with GitHub integration?
 
-    91. Outward bound alias: [PowerShell@nutanix.com](mailto:PowerShell@nutanix.com) 
+    91. Outward bound alias: [PowerShell@nutanix.com](mailto:PowerShell@nutanix.com)
 
-    92. Public slack channel: 
+    92. Public slack channel:
 
 34. Readme
 
-    93. [https://www.makeareadme.com/](https://www.makeareadme.com/) 
+    93. [https://www.makeareadme.com/](https://www.makeareadme.com/)
 
     94. Name and description
 
@@ -556,7 +517,7 @@ Requirements here also include the 'intent' of the requirement from a user’s p
 
 35. Zalando's README Template
 
-    110. [https://github.com/zalando/zalando-howto-open-source/blob/master/READMEtemplate.md](https://github.com/zalando/zalando-howto-open-source/blob/master/READMEtemplate.md) 
+    110. [https://github.com/zalando/zalando-howto-open-source/blob/master/READMEtemplate.md](https://github.com/zalando/zalando-howto-open-source/blob/master/READMEtemplate.md)
 
     111. Clear documentation is critical to the success of your project. This checklist is meant to help you cover all your bases. Not every section/subsection will be relevant to your project; pick and choose what is. Inspired by READMEs of very successful projects like etcd.
 
@@ -652,7 +613,7 @@ JJ @ BBY
 
 Comments to integrate from IVAN
 
-Dear Nutanix Team, I've looked through the document and find it to be a very good start. I have a few comments and hope that you'll find them useful. I'll send them as separate messages as otherwise they look more like a blog post 
+Dear Nutanix Team, I've looked through the document and find it to be a very good start. I have a few comments and hope that you'll find them useful. I'll send them as separate messages as otherwise they look more like a blog post
 
 In Section 7 you may want to also consider the future structure of the module, i.e.:
 
@@ -672,7 +633,7 @@ As for Cmdlet name collisions (Section 13), generally there are two ways to avoi
 
     • Pick common/familiar cmdlet names, and have users either rely on module-qualified names (https://www.sapien.com/blog/2015/10/23/using-module-qualified-cmdlet-names/) when there's a need to use several modules with identical cmdlet names or  use -Prefix parameter of the Import-Module cmdlet to avoid collisions.
 
-There doesn't seem to be any best practice established on this, as there are many good examples for both approaches: 
+There doesn't seem to be any best practice established on this, as there are many good examples for both approaches:
 
     With Prefix: Cisco PowerTool Module, MS System Center, Azure
 
@@ -680,24 +641,24 @@ There doesn't seem to be any best practice established on this, as there are man
 
 I personally like cmdlet names with prefix, since they require less typing and worrying less about collisions. Another argument for prefixing nouns is that when googling for New-NTNXVM you're more likely going to get Nutanix related results, as opposed to when searching for New-VM cmdlet.
 
-### Post Sale Considerations & Serviceability over Feature/Product Life 
+### Post Sale Considerations & Serviceability over Feature/Product Life
 
 * * *
 
 
 NEED TO UPDATE FROM CAMS TEMPLATE
 
-These should be considered standard P0 items for any new feature, how the feature integrates with the rest of the Nutanix ecosystem - where applicable. 
+These should be considered standard P0 items for any new feature, how the feature integrates with the rest of the Nutanix ecosystem - where applicable.
 
 * **_Guardrails:_**
 
-    * If a target cluster is less than AOS 5.0 then alert that the cluster cannot be used with LCM on PC 
+    * If a target cluster is less than AOS 5.0 then alert that the cluster cannot be used with LCM on PC
 
-    * If a target cluster has an old LCM Framework (eg. LCM v1.0), do we need to ensure they are running the latest prior to any LCM on PC functions? 
+    * If a target cluster has an old LCM Framework (eg. LCM v1.0), do we need to ensure they are running the latest prior to any LCM on PC functions?
 
 * **_Logs_***: (what should be collected)*
 
-    * LCM on PC should have unique logs separate from LCM on PE logs to differentiate between the two frameworks 
+    * LCM on PC should have unique logs separate from LCM on PE logs to differentiate between the two frameworks
 
 * **_PulseHD:_**
 
@@ -705,41 +666,41 @@ These should be considered standard P0 items for any new feature, how the featur
 
 * **_Panacea_**
 
-    * LCM logs needs to be in a format that Panacea can consume 
+    * LCM logs needs to be in a format that Panacea can consume
 
 * **_Upgrading and/or LCM integration:  _**
 
-    * LCM in PC framework also needs the ability to upgrade itself 
+    * LCM in PC framework also needs the ability to upgrade itself
 
-    * Ensure that any future upgrades of LCM on PC keeps the current scheduling and other settings as per the user's wishes 
+    * Ensure that any future upgrades of LCM on PC keeps the current scheduling and other settings as per the user's wishes
 
 * **_Foundation: _**
 
-    * LCM in PC to support upgrading CVM Foundation on PE 
+    * LCM in PC to support upgrading CVM Foundation on PE
 
 * **_NCC: _**
 
-    * LCM team to write NCC checks for LCM in PC (what health aspects of LCM need to be monitored according to LCM Engg) 
+    * LCM team to write NCC checks for LCM in PC (what health aspects of LCM need to be monitored according to LCM Engg)
 
 * **_Serviceability:_*** *
 
-    * LCM in PC must be self-updatable 
+    * LCM in PC must be self-updatable
 
-    * Procedure for repairing/replacing corrupted or deleted LCM on PC files (re-install force option?) for SREs etc 
+    * Procedure for repairing/replacing corrupted or deleted LCM on PC files (re-install force option?) for SREs etc
 
 * **_Alerts:_*** *
 
-    * LCM on PC is operational or not 
+    * LCM on PC is operational or not
 
     * LCM on PC unable to reach a PE cluster (eg state change) after a usable set time
 
-    * Monitor Prism Central storage usage, eg alert when 75% full etc if PC hosts repo files 
+    * Monitor Prism Central storage usage, eg alert when 75% full etc if PC hosts repo files
 
 * **_QA Tests to be added : _**
 
 * **_Failure Mode Effects and Analysis (FMEA)_**
 
-    * If LCM in PC fails, what are the effects on conducting upgrades on PE ?  (Are the requirements that LCM in PC must be restored functional prior to PE upgrades?) 
+    * If LCM in PC fails, what are the effects on conducting upgrades on PE ?  (Are the requirements that LCM in PC must be restored functional prior to PE upgrades?)
 
 * **_Field Enablement / TOI training : _**
 
