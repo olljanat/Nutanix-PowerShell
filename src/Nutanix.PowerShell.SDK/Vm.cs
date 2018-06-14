@@ -206,8 +206,6 @@ namespace Nutanix.PowerShell.SDK
         var networks = GetSubnetCmdlet.GetSubnetsByName(networkName);
         if (networks.Length > 1)
         {
-          Console.WriteLine(
-            "Ambiguous: found more than 1 Subnet with the same name");
           for (int i = 0; i < networks.Length; ++i)
           {
             Console.WriteLine("Network " + i.ToString() + ": " + networks[i].Uuid);
@@ -266,7 +264,6 @@ namespace Nutanix.PowerShell.SDK
       if (!string.IsNullOrEmpty(Name))
       {
         WriteObject(GetVmByName(Name));
-        return;
       }
     }
 
@@ -385,7 +382,6 @@ namespace Nutanix.PowerShell.SDK
     }
 
     // Delete Vm using 'uuid'.
-    // REST path is /vms/{uuid}
     public static Task DeleteVmByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
@@ -393,7 +389,6 @@ namespace Nutanix.PowerShell.SDK
     }
 
     // If no params specified, then get VM with 'name'.
-    // REST: /vms/list
     public static Task DeleteVmByName(string name)
     {
       var vm = GetVmCmdlet.GetVmByName(name);
