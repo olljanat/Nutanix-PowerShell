@@ -106,7 +106,7 @@ namespace Nutanix.PowerShell.SDK
       var json = Util.RestCall("/volume_groups/list", "POST", "{}");
       if (json.entities.Count == 0)
       {
-        return Array.Empty<VolumeGroup>() ;
+        return Array.Empty<VolumeGroup>();
       }
 
       VolumeGroup[] volume_groups = new VolumeGroup[json.entities.Count];
