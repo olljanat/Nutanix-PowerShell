@@ -106,10 +106,10 @@ namespace Nutanix.PowerShell.SDK
       },
       ""spec"": {
         ""resources"": {
-          ""memory_size_mib"": " + MemorySizeMib.ToString() + @",
-          ""num_vcpus_per_socket"": " + NumVcpusPerSocket.ToString() + @",
-          ""num_sockets"": " + NumSockets.ToString() + @",
-          ""power_state"": """ + PowerState + @""",
+          ""memory_size_mib"": " + this.MemorySizeMib.ToString() + @",
+          ""num_vcpus_per_socket"": " + this.NumVcpusPerSocket.ToString() + @",
+          ""num_sockets"": " + this.NumSockets.ToString() + @",
+          ""power_state"": """ + this.PowerState + @""",
           ""disk_list"": [
             {
               ""data_source_reference"": {
@@ -132,7 +132,7 @@ namespace Nutanix.PowerShell.SDK
       }
     }";
       dynamic json = JsonConvert.DeserializeObject(str);
-      if (!AddImage(json, ImageUuid, ImageName))
+      if (!AddImage(json, this.ImageUuid, this.ImageName))
       {
         return;
       }

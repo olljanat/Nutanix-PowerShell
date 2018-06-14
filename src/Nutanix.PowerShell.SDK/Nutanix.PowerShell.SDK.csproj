@@ -5,8 +5,8 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <Description>Nutanix PowerShell SDK</Description>
     <PackageId>Nutanix.PowerShell.SDK</PackageId>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <DocumentationFile>bin\REPLACEME-TODO.XML</DocumentationFile>
+    <!-- <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DocumentationFile>bin\REPLACEME-TODO.XML</DocumentationFile> -->
   </PropertyGroup>
 
   <ItemGroup>
