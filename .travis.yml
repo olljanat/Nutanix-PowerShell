@@ -14,7 +14,7 @@ stages:
 jobs:
   include:
     - stage: build
-      dotnet: Current
+      dotnet: "2.1.300"
       script:
         - dotnet build
 
