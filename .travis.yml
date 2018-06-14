@@ -17,12 +17,12 @@ stages:
   - build
   # - acceptance testing
 
-jobs:
-  include:
-    - stage: build
-      dotnet: 2.1.x
-      script:
-        - dotnet build
+# jobs:
+#   include:
+#     - stage: build
+#       dotnet: 2.1.x
+#       script:
+#         - dotnet build
 
 matrix:
   fast_finish: true
