@@ -299,6 +299,7 @@ namespace Nutanix.PowerShell.SDK
       {
         throw new NtnxException("VM not found.");
       }
+
       return new Vm(json.entities[0]);
     }
 
