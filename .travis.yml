@@ -2,12 +2,6 @@
 language: csharp
 solution: PowerShell.sln
 mono: none
-dotnet:
-  - 2.0.x
-  - 2.1.x
-  - master
-  - tip
-  - latest
 
 git:
   depth: 1
@@ -17,12 +11,12 @@ stages:
   - build
   # - acceptance testing
 
-# jobs:
-#   include:
-#     - stage: build
-#       dotnet: 2.1.x
-#       script:
-#         - dotnet build
+jobs:
+  include:
+    - stage: build
+      dotnet: "2.1.300"
+      script:
+        - dotnet build
 
 matrix:
   fast_finish: true
