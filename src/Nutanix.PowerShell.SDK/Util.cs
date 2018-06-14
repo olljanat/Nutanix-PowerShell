@@ -18,6 +18,10 @@ using Newtonsoft.Json;
 
 public class Util
 {
+  protected Util()
+  {
+  }
+
   public static string Server { get; set; } = string.Empty;
 
   // Holds username and password.
@@ -107,8 +111,7 @@ public class Util
             var json = JsonConvert.DeserializeObject(reader.ReadToEnd());
 
             // Print request + response to help user debug.
-            Console.WriteLine(requestMethod + " " + urlPath + ":\n" +
-              requestBody);
+            Console.WriteLine(requestMethod + " " + urlPath + ":\n" + requestBody);
             Console.WriteLine(json.ToString());
           }
         }
