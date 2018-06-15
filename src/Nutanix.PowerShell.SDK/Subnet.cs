@@ -62,7 +62,7 @@ namespace Nutanix.PowerShell.SDK
       var url = "/subnets";
       var method = "POST";
       var str = @"{
-      ""api_version"": ""3.0"",
+      ""api_version"": ""3.1"",
       ""metadata"": {
         ""kind"": ""subnet"",
         ""name"": """ + Name + @"""

@@ -50,7 +50,7 @@ namespace Nutanix.PowerShell.SDK
       // // TODO: make cluster_reference required if talking to PC. But not needed
       // // if talking to PE.
       // Util.RestCall("/volume_groups", "POST", @"{
-      //   ""api_version"": ""3.0"",
+      //   ""api_version"": ""3.1"",
       //   ""metadata"": {
       //     ""kind"": ""volume_group""
       //   },

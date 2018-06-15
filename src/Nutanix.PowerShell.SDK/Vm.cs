@@ -100,7 +100,7 @@ namespace Nutanix.PowerShell.SDK
       var url = "/vms";
       var method = "POST";
       var str = @"{
-      ""api_version"": ""3.0"",
+      ""api_version"": ""3.1"",
       ""metadata"": {
         ""kind"": ""vm""
       },
