@@ -358,15 +358,14 @@ namespace Nutanix.PowerShell.SDK
 
     protected override void ProcessRecord()
     {
-      if (VM != null)
+      if (this.VM != null)
       {
-        Uuid = VM.Uuid;
+        this.Uuid = this.VM.Uuid;
       }
 
-      if (string.IsNullOrEmpty(Name) && string.IsNullOrEmpty(Uuid))
+      if (string.IsNullOrEmpty(this.Name) && string.IsNullOrEmpty(this.Uuid))
       {
         throw new NtnxException("Need -Name or -Uuid");
-        return;
       }
 
       if (!string.IsNullOrEmpty(Uuid))

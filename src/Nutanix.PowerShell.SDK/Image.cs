@@ -67,7 +67,7 @@ namespace Nutanix.PowerShell.SDK
       var url = "/images";
       var method = "POST";
       var str = @"{
-      ""api_version"": ""1"",
+      ""api_version"": ""3.1"",
       ""metadata"": {
         ""kind"": ""image"",
         ""name"": """ + Name + @"""
