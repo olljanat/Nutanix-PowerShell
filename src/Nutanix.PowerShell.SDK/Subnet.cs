@@ -87,11 +87,11 @@ namespace Nutanix.PowerShell.SDK
         json.spec.cluster_reference.name = Cluster.Name;
       }
 
-      WriteDebug(Util.RestCallTrace(url, method, json.ToString()));
+      WriteDebug(NtnxUtil.RestCallTrace(url, method, json.ToString()));
 
       // TODO: should use Task.
       WriteObject(
-        Task.FromUuidInJson(Util.RestCall(url, method, json.ToString())));
+        Task.FromUuidInJson(NtnxUtil.RestCall(url, method, json.ToString())));
     }
   }
 
@@ -149,7 +149,7 @@ namespace Nutanix.PowerShell.SDK
     public static Subnet GetSubnetByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      var json = Util.RestCall("/subnets/" + uuid, "GET", string.Empty /* requestBody */);
+      var json = NtnxUtil.RestCall("/subnets/" + uuid, "GET", string.Empty /* requestBody */);
       return new Subnet(json);
     }
 
@@ -165,8 +165,8 @@ namespace Nutanix.PowerShell.SDK
 
     public static Subnet[] GetAllSubnets(string reqBody)
     {
-      return Util.FromJson<Subnet>(
-        Util.RestCall("/subnets/list", "POST", reqBody),
+      return NtnxUtil.FromJson<Subnet>(
+        NtnxUtil.RestCall("/subnets/list", "POST", reqBody),
         (Func<dynamic, Subnet>)(j => new Subnet(j)));
     }
   }
@@ -191,7 +191,7 @@ namespace Nutanix.PowerShell.SDK
     public static void DeleteSubnetByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      Util.RestCall("/subnets/" + uuid, "DELETE", string.Empty /* requestBody */);
+      NtnxUtil.RestCall("/subnets/" + uuid, "DELETE", string.Empty /* requestBody */);
     }
   }
 
@@ -220,7 +220,7 @@ namespace Nutanix.PowerShell.SDK
       }
 
       Subnet.Json.api_version = "3.1";
-      Util.RestCall("/subnets/" + Subnet.Uuid, "PUT", Subnet.Json.ToString());
+      NtnxUtil.RestCall("/subnets/" + Subnet.Uuid, "PUT", Subnet.Json.ToString());
     }
   }
 }

@@ -38,7 +38,7 @@ namespace Nutanix.PowerShell.SDK
     // REST: /clusters/list
     public static Cluster[] GetAllClusters()
     {
-      var json = Util.RestCall("/clusters/list", "POST", "{}");
+      var json = NtnxUtil.RestCall("/clusters/list", "POST", "{}");
       if (json.entities.Count == 0)
       {
         return Array.Empty<Cluster>();
@@ -92,11 +92,11 @@ namespace Nutanix.PowerShell.SDK
     {
       if (acceptinvalidsslcerts)
       {
-        Util.TestOnlyIgnoreCerts();
+        NtnxUtil.TestOnlyIgnoreCerts();
       }
 
-      Util.Server = server;
-      Util.PSCreds = new System.Management.Automation.PSCredential(
+      NtnxUtil.Server = server;
+      NtnxUtil.PSCreds = new System.Management.Automation.PSCredential(
         username, password);
     }
   }

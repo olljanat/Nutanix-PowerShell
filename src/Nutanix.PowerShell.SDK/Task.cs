@@ -109,7 +109,7 @@ namespace Nutanix.PowerShell.SDK
     public static Task GetTaskByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      var json = Util.RestCall("/tasks/" + uuid, "GET", string.Empty /* requestBody */);
+      var json = NtnxUtil.RestCall("/tasks/" + uuid, "GET", string.Empty /* requestBody */);
       return new Task(json);
     }
   }

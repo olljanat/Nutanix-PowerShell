@@ -17,9 +17,9 @@ using System.Text;
 
 using Newtonsoft.Json;
 
-public class Util
+public class NtnxUtil
 {
-  protected Util()
+  protected NtnxUtil()
   {
   }
 
@@ -44,17 +44,17 @@ public class Util
     string requestMethod,
     string requestBody)
   {
-    if (string.IsNullOrEmpty(Server) || Util.PSCreds == null)
+    if (string.IsNullOrEmpty(Server) || NtnxUtil.PSCreds == null)
     {
       // TODO: throw exception.
       return null;
     }
 
     var request = WebRequest.Create(
-      "https://" + Util.Server + ":9440/api/nutanix/v3" + urlPath);
+      "https://" + NtnxUtil.Server + ":9440/api/nutanix/v3" + urlPath);
     request.Method = requestMethod;
     request.PreAuthenticate = true;
-    var creds = Util.PSCreds.GetNetworkCredential();
+    var creds = NtnxUtil.PSCreds.GetNetworkCredential();
     string username = creds.UserName;
     string password = creds.Password;
     var encoding = System.Text.Encoding.GetEncoding("UTF-8");

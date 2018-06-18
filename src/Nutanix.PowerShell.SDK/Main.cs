@@ -12,7 +12,7 @@ using System;
 
 namespace Nutanix.PowerShell.SDK
 {
-  public static class Nutanix
+  public static class NutanixPowerShellSDK
   {
     public static void Main(string[] args)
     {

@@ -6,8 +6,9 @@
     <!-- <TreatWarningsAsErrors>True</TreatWarningsAsErrors> -->
     <Description>Nutanix PowerShell SDK</Description>
     <PackageId>Nutanix.PowerShell.SDK</PackageId>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <DocumentationFile>bin\REPLACEME-TODO.XML</DocumentationFile>
+    <NoWarn>S1135</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,7 +20,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />                                   <!-- from https://www.nuget.org/packages/Newtonsoft.Json/ -->
     <PackageReference Include="Roslynator.Analyzers" Version="1.9.0" />                               <!-- from https://www.nuget.org/packages/Roslynator.Analyzers/ -->
     <PackageReference Include="SonarAnalyzer.CSharp" Version="7.2.0.5463" />                          <!-- from https://www.nuget.org/packages/SonarAnalyzer.CSharp/ -->
-    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta008" />                         <!-- from https://www.nuget.org/packages/stylecop.analyzers/ -->
+    <!-- <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta008" />                          from https://www.nuget.org/packages/stylecop.analyzers/ -->
     <PackageReference Include="System.Management.Automation" Version="6.1.0-preview.3" />             <!-- from https://powershell.myget.org/feed/powershell-core/package/nuget/System.Management.Automation -->
   </ItemGroup>
 

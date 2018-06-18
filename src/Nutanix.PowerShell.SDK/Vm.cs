@@ -149,11 +149,11 @@ namespace Nutanix.PowerShell.SDK
         return;
       }
 
-      WriteDebug(Util.RestCallTrace(url, method, json.ToString()));
+      WriteDebug(NtnxUtil.RestCallTrace(url, method, json.ToString()));
 
       // TODO: make cluster_reference required if talking to PC. But not needed
       // if talking to PE.
-      var task = Task.FromUuidInJson(Util.RestCall(url, method, json.ToString()));
+      var task = Task.FromUuidInJson(NtnxUtil.RestCall(url, method, json.ToString()));
       if (runAsync)
       {
         WriteObject(task);
@@ -273,7 +273,7 @@ namespace Nutanix.PowerShell.SDK
     // REST: /vms/list
     public static Vm[] GetAllVms()
     {
-      var json = Util.RestCall("/vms/list", "POST", "{}");
+      var json = NtnxUtil.RestCall("/vms/list", "POST", "{}");
       if (json.entities.Count == 0)
       {
         return new Vm[0];
@@ -293,7 +293,7 @@ namespace Nutanix.PowerShell.SDK
     public static Vm GetVmByName(string name)
     {
       var reqBody = "{\"filter\": \"vm_name==" + name + "\"}";
-      var json = Util.RestCall("/vms/list", "POST", reqBody);
+      var json = NtnxUtil.RestCall("/vms/list", "POST", reqBody);
       if (json.entities.Count == 0)
       {
         throw new NtnxException("VM not found.");
@@ -306,7 +306,7 @@ namespace Nutanix.PowerShell.SDK
     public static Vm GetVmByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      var json = Util.RestCall("/vms/" + uuid, "GET", string.Empty /* requestBody */);
+      var json = NtnxUtil.RestCall("/vms/" + uuid, "GET", string.Empty /* requestBody */);
       return new Vm(json);
     }
   }
@@ -334,7 +334,7 @@ namespace Nutanix.PowerShell.SDK
       VM.Json.spec.resources.power_state = "ON";
       VM.Json.api_version = "3.1"; // TODO: remove api_version field set.
       var task = Task.FromUuidInJson(
-        Util.RestCall("/vms/" + VM.Uuid, "PUT", VM.Json.ToString()));
+        NtnxUtil.RestCall("/vms/" + VM.Uuid, "PUT", VM.Json.ToString()));
       if (runAsync)
       {
         WriteObject(task);
@@ -386,7 +386,7 @@ namespace Nutanix.PowerShell.SDK
     public static Task DeleteVmByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      return Task.FromUuidInJson(Util.RestCall("/vms/" + uuid, "DELETE", string.Empty));
+      return Task.FromUuidInJson(NtnxUtil.RestCall("/vms/" + uuid, "DELETE", string.Empty));
     }
 
     // If no params specified, then get VM with 'name'.
@@ -395,7 +395,7 @@ namespace Nutanix.PowerShell.SDK
       var vm = GetVmCmdlet.GetVmByName(name);
       if (vm != null)
       {
-        return Task.FromUuidInJson(Util.RestCall("/vms/" + vm.Uuid, "DELETE", string.Empty));
+        return Task.FromUuidInJson(NtnxUtil.RestCall("/vms/" + vm.Uuid, "DELETE", string.Empty));
       }
 
       return null;
@@ -442,7 +442,7 @@ namespace Nutanix.PowerShell.SDK
 
       // TODO: return Task object from the RestCall.
       WriteObject(Task.FromUuidInJson(
-        Util.RestCall("/vms/" + VM.Uuid, "PUT", VM.Json.ToString())));
+        NtnxUtil.RestCall("/vms/" + VM.Uuid, "PUT", VM.Json.ToString())));
     }
   }
 }

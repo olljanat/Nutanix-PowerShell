@@ -48,33 +48,32 @@ namespace Nutanix.PowerShell.SDK
 
     protected override void ProcessRecord()
     {
-      // // TODO: make cluster_reference required if talking to PC. But not needed
-      // // if talking to PE.
-      // Util.RestCall("/volume_groups", "POST", @"{
-      //   ""api_version"": ""3.1"",
-      //   ""metadata"": {
-      //     ""kind"": ""volume_group""
-      //   },
-      //   ""spec"": {
-      //     ""resources"": {
-      //       ""memory_size_mib"": " + MemorySizeMib.ToString() + @",
-      //       ""num_vcpus_per_socket"": " + NumVcpusPerSocket.ToString() + @",
-      //       ""num_sockets"": " + NumSockets.ToString() + @",
-      //       ""power_state"": """ + PowerState + @""",
-      //       ""disk_list"": [
-      //         {
-      //           ""index"": ""0"",
-      //           ""data_source_reference"": {
-      //             ""kind"": ""image"",
-      //             ""uuid"": """ + ImageUuid + @"""
-      //           },
-      //           ""disk_size_mib"": """ +  + @"""
-      //         }
-      //       ]
-      //     },
-      //     ""name"": """ + Name + @"""
-      //   }
-      // }");
+      // // TODO: make cluster_reference required if talking to PC. But not needed if talking to PE.
+      NtnxUtil.RestCall("/volume_groups", "POST", @"{
+        ""api_version"": ""3.1"",
+        ""metadata"": {
+          ""kind"": ""volume_group""
+        },
+        ""spec"": {
+          ""resources"": {
+            ""memory_size_mib"": " + MemorySizeMib.ToString() + @",
+            ""num_vcpus_per_socket"": " + NumVcpusPerSocket.ToString() + @",
+            ""num_sockets"": " + NumSockets.ToString() + @",
+            ""power_state"": """ + PowerState + @""",
+            ""disk_list"": [
+              {
+                ""index"": ""0"",
+                ""data_source_reference"": {
+                  ""kind"": ""image"",
+                  ""uuid"": """ + ImageUuid + @"""
+                },
+                ""disk_size_mib"": """ +  + @"""
+              }
+            ]
+          },
+          ""name"": """ + Name + @"""
+        }
+      }");
     }
   }
 
@@ -98,13 +97,13 @@ namespace Nutanix.PowerShell.SDK
     public static VolumeGroup GetVolumeGroupByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      var json = Util.RestCall("/volume_groups/" + uuid, "GET", string.Empty /* requestBody */);
+      var json = NtnxUtil.RestCall("/volume_groups/" + uuid, "GET", string.Empty /* requestBody */);
       return new VolumeGroup(json);
     }
 
     public static VolumeGroup[] GetAllVolumeGroups()
     {
-      var json = Util.RestCall("/volume_groups/list", "POST", "{}");
+      var json = NtnxUtil.RestCall("/volume_groups/list", "POST", "{}");
       if (json.entities.Count == 0)
       {
         return Array.Empty<VolumeGroup>();
@@ -138,7 +137,7 @@ namespace Nutanix.PowerShell.SDK
     public static void DeleteVolumeGroupByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      Util.RestCall("/volume_groups/" + uuid, "DELETE", string.Empty /* requestBody */);
+      NtnxUtil.RestCall("/volume_groups/" + uuid, "DELETE", string.Empty /* requestBody */);
     }
   }
 }
