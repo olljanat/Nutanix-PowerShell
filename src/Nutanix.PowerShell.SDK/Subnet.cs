@@ -48,13 +48,13 @@ namespace Nutanix.PowerShell.SDK
   public class NewSubnetCmdlet : Cmdlet
   {
     [Parameter]
-    public string Name { get; set; } = string.Empty;
+    public string Name { get; set; }
 
     [Parameter]
-    public string VlanId { get; set; } = string.Empty;
+    public string VlanId { get; set; }
 
     [Parameter]
-    public string Description { get; set; } = string.Empty;
+    public string Description { get; set; }
 
     [Parameter]
     public Cluster Cluster { get; set; }
@@ -100,17 +100,17 @@ namespace Nutanix.PowerShell.SDK
   {
     // TODO: Name parameter to specify the names of subnets to retrieve.
     [Parameter]
-    public string Uuid { get; set; } = string.Empty;
+    public string Uuid { get; set; }
 
     [Parameter]
-    public string Name { get; set; } = string.Empty;
+    public string Name { get; set; }
 
     [Parameter]
     public int? Max { get; set; }
 
     protected override void ProcessRecord()
     {
-      if (!string.IsNullOrEmpty(Uuid))
+      if (NtnxUtil.PassThroughNonNull(Uuid))
       {
         WriteObject(GetSubnetByUuid(Uuid));
         return;
@@ -130,7 +130,7 @@ namespace Nutanix.PowerShell.SDK
         json.length = Max;
       }
 
-      if (!string.IsNullOrEmpty(Name))
+      if (NtnxUtil.PassThroughNonNull(Name))
       {
         json.filter = "name==" + Name;
       }
@@ -140,7 +140,7 @@ namespace Nutanix.PowerShell.SDK
 
     public void CheckResult(Subnet[] subnets)
     {
-      if (!string.IsNullOrEmpty(Name) && subnets.Length > 1)
+      if (NtnxUtil.PassThroughNonNull(Name) && subnets.Length > 1)
       {
         throw new NtnxException("Found duplicate subnets");
       }
@@ -175,13 +175,13 @@ namespace Nutanix.PowerShell.SDK
   public class DeleteSubnetCmdlet : Cmdlet
   {
     [Parameter]
-    public string Uuid { get; set; } = string.Empty;
+    public string Uuid { get; set; }
 
     // TODO: Confirm, WhatIf params.
     // https://www.vmware.com/support/developer/PowerCLI/PowerCLI41U1/html/Remove-VirtualSwitch.html
     protected override void ProcessRecord()
     {
-      if (!string.IsNullOrEmpty(Uuid))
+      if (NtnxUtil.PassThroughNonNull(Uuid))
       {
         // TODO: WriteObject Task
         DeleteSubnetByUuid(Uuid);

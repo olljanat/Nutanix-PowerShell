@@ -58,10 +58,10 @@ namespace Nutanix.PowerShell.SDK
   public class ConnectClusterCmdlet : Cmdlet
   {
     [Parameter]
-    public string Server { get; set; } = string.Empty;
+    public string Server { get; set; }
 
     [Parameter]
-    public string UserName { get; set; } = string.Empty;
+    public string UserName { get; set; }
 
     // TODO: note that 'Password' should be the result of
     // 'ConvertTo-SecureString'

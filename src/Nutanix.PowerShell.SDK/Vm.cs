@@ -60,7 +60,7 @@ namespace Nutanix.PowerShell.SDK
   public class NewVmCmdlet : Cmdlet
   {
     [Parameter]
-    public string Name { get; set; } = string.Empty;
+    public string Name { get; set; }
 
     [Parameter]
     public int MemorySizeMib { get; set; } = 1024; // 1 GiB
@@ -75,16 +75,16 @@ namespace Nutanix.PowerShell.SDK
     public string PowerState { get; set; } = "OFF";
 
     [Parameter]
-    public string ImageUuid { get; set; } = string.Empty;
+    public string ImageUuid { get; set; }
 
     [Parameter]
-    public string NetworkUuid { get; set; } = string.Empty;
+    public string NetworkUuid { get; set; }
 
     [Parameter]
-    public string NetworkName { get; set; } = string.Empty;
+    public string NetworkName { get; set; }
 
     [Parameter]
-    public string ImageName { get; set; } = string.Empty;
+    public string ImageName { get; set; }
 
     [Parameter]
     public Cluster Cluster { get; set; }
@@ -168,11 +168,11 @@ namespace Nutanix.PowerShell.SDK
     public static bool AddImage(
       dynamic json, string imageUuid, string imageName)
     {
-      if (!string.IsNullOrEmpty(imageUuid))
+      if (NtnxUtil.PassThroughNonNull(imageUuid))
       {
         json.spec.resources.disk_list[0].data_source_reference.uuid = imageUuid;
       }
-      else if (!string.IsNullOrEmpty(imageName))
+      else if (NtnxUtil.PassThroughNonNull(imageName))
       {
         // TODO: grab images by name.
         var images = GetImageCmdlet.GetImagesByName(imageName);
@@ -199,11 +199,11 @@ namespace Nutanix.PowerShell.SDK
     public static bool AddNetwork(
       dynamic json, string networkUuid, string networkName)
     {
-      if (!string.IsNullOrEmpty(networkUuid))
+      if (NtnxUtil.PassThroughNonNull(networkUuid))
       {
         json.spec.resources.nic_list[0].subnet_reference.uuid = networkUuid;
       }
-      else if (!string.IsNullOrEmpty(networkName))
+      else if (NtnxUtil.PassThroughNonNull(networkName))
       {
         // TODO: grab images by name.
         var networks = GetSubnetCmdlet.GetSubnetsByName(networkName);
@@ -244,10 +244,10 @@ namespace Nutanix.PowerShell.SDK
   public class GetVmCmdlet : Cmdlet
   {
     [Parameter]
-    public string Name { get; set; } = string.Empty;
+    public string Name { get; set; }
 
     [Parameter]
-    public string Uuid { get; set; } = string.Empty;
+    public string Uuid { get; set; }
 
     protected override void ProcessRecord()
     {
@@ -258,13 +258,13 @@ namespace Nutanix.PowerShell.SDK
         return;
       }
 
-      if (!string.IsNullOrEmpty(Uuid))
+      if (NtnxUtil.PassThroughNonNull(Uuid))
       {
         WriteObject(GetVmByUuid(Uuid));
         return;
       }
 
-      if (!string.IsNullOrEmpty(Name))
+      if (NtnxUtil.PassThroughNonNull(Name))
       {
         WriteObject(GetVmByName(Name));
       }
@@ -314,7 +314,7 @@ namespace Nutanix.PowerShell.SDK
   public class StartVmCmdlet : Cmdlet
   {
     [Parameter]
-    public string Uuid { get; set; } = string.Empty;
+    public string Uuid { get; set; }
 
     [Parameter]
     public Vm VM { get; set; }
@@ -349,10 +349,10 @@ namespace Nutanix.PowerShell.SDK
   public class RemoveVmCmdlet : Cmdlet
   {
     [Parameter]
-    public string Name { get; set; } = string.Empty;
+    public string Name { get; set; }
 
     [Parameter]
-    public string Uuid { get; set; } = string.Empty;
+    public string Uuid { get; set; }
 
     [Parameter(Mandatory = true, ValueFromPipeline = true)]
     public Vm VM { get; set; }
@@ -370,13 +370,13 @@ namespace Nutanix.PowerShell.SDK
         throw new NtnxException(message);
       }
 
-      if (!string.IsNullOrEmpty(Uuid))
+      if (NtnxUtil.PassThroughNonNull(Uuid))
       {
         WriteObject(DeleteVmByUuid(Uuid));
         return;
       }
 
-      if (!string.IsNullOrEmpty(Name))
+      if (NtnxUtil.PassThroughNonNull(Name))
       {
         WriteObject(DeleteVmByName(Name));
       }

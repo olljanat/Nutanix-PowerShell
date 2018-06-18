@@ -47,13 +47,13 @@ namespace Nutanix.PowerShell.SDK
   public class NewImageCmdlet : Cmdlet
   {
     [Parameter]
-    public string Name { get; set; } = string.Empty;
+    public string Name { get; set; }
 
     [Parameter]
-    public string URL { get; set; } = string.Empty;
+    public Uri URL { get; set; }
 
     [Parameter]
-    public string Description { get; set; } = string.Empty;
+    public string Description { get; set; }
 
     [Parameter]
     public SwitchParameter RunAsync
@@ -101,17 +101,18 @@ namespace Nutanix.PowerShell.SDK
   public class GetImageCmdlet : Cmdlet
   {
     [Parameter]
-    public string Uuid { get; set; } = string.Empty;
+    public string Uuid { get; set; }
 
     [Parameter]
-    public string Name { get; set; } = string.Empty;
+    public string Name { get; set; }
 
     [Parameter]
     public int? Max { get; set; }
 
     protected override void ProcessRecord()
     {
-      if (!string.IsNullOrEmpty(Uuid))
+
+      if (NtnxUtil.PassThroughNonNull(Uuid))
       {
         WriteObject(GetImageByUuid(Uuid));
         return;
@@ -131,7 +132,7 @@ namespace Nutanix.PowerShell.SDK
         json.length = Max;
       }
 
-      if (!string.IsNullOrEmpty(Name))
+      if (NtnxUtil.PassThroughNonNull(Name))
       {
         json.filter = "name==" + Name;
       }
@@ -141,7 +142,7 @@ namespace Nutanix.PowerShell.SDK
 
     public void CheckResult(Image[] images)
     {
-      if (!string.IsNullOrEmpty(Name) && images.Length > 1)
+      if (NtnxUtil.PassThroughNonNull(Name) && images.Length > 1)
       {
         throw new NtnxException("Found duplicate images");
       }
@@ -174,11 +175,11 @@ namespace Nutanix.PowerShell.SDK
   public class DeleteImageCmdlet : Cmdlet
   {
     [Parameter]
-    public string Uuid { get; set; } = string.Empty;
+    public string Uuid { get; set; }
 
     protected override void ProcessRecord()
     {
-      if (!string.IsNullOrEmpty(Uuid))
+      if (NtnxUtil.PassThroughNonNull(Uuid))
       {
         // TODO: WriteObject Task
         DeleteImageByUuid(Uuid);

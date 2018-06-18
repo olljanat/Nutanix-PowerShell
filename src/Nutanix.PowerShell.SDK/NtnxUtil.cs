@@ -22,7 +22,7 @@ namespace Nutanix.PowerShell.SDK
 {
   public static class NtnxUtil
   {
-    public static string Server { get; set; } = string.Empty;
+    public static string Server { get; set; }
 
     // Holds username and password.
     // TODO: might need to GC PSCreds.Password (SecureString) using Dispose
@@ -65,7 +65,7 @@ namespace Nutanix.PowerShell.SDK
       request.Headers.Add("Accept", "application/json");
       request.Headers.Add("X-Nutanix-Client-Type", "Nutanix.PowerShell.SDK");
 
-      if (!string.IsNullOrEmpty(requestBody))
+      if (NtnxUtil.PassThroughNonNull(requestBody))
       {
         var bytes = Encoding.GetEncoding("UTF-8").GetBytes(requestBody);
         request.ContentLength = bytes.Length;
@@ -143,6 +143,13 @@ namespace Nutanix.PowerShell.SDK
     public static T[] FromJson<T>(dynamic json, Func<dynamic, T> creator)
     {
       return ((IEnumerable<T>)Enumerable.Select(json.entities, (Func<dynamic, T>)(entity => creator(entity)))).ToArray();
+    }
+
+    public static dynamic PassThroughNonNull(string nullcheck)
+    {
+        if (nullcheck == null)
+          throw new NtnxException();
+        return nullcheck;
     }
   }
 }

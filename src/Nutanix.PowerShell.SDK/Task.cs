@@ -84,14 +84,14 @@ namespace Nutanix.PowerShell.SDK
   public class GetTaskCmdlet : Cmdlet
   {
     [Parameter]
-    public string Uuid { get; set; } = string.Empty;
+    public string Uuid { get; set; }
 
     [Parameter]
     public Task Task { get; set; }
 
     protected override void ProcessRecord()
     {
-      if (!string.IsNullOrEmpty(Uuid))
+      if (NtnxUtil.PassThroughNonNull(Uuid))
       {
         WriteObject(GetTaskByUuid(Uuid));
         return;
