@@ -17,9 +17,9 @@ namespace Nutanix.PowerShell.SDK
 {
   public class Subnet
   {
-    public string Name { get; set; } = string.Empty;
+    public string Name { get; set; }
 
-    public string Id { get; set; } = string.Empty;
+    public string Id { get; set; }
 
     // 'Uid' is VMware's equivalent field for Nutanix's Uuid.
     public string Uid { get; set; }

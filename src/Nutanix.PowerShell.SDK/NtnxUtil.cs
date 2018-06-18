@@ -20,11 +20,8 @@ using Newtonsoft.Json;
 
 namespace Nutanix.PowerShell.SDK
 {
-  public class NtnxUtil
+  public static class NtnxUtil
   {
-    protected NtnxUtil()
-    {
-    }
 
     public static string Server { get; set; } = string.Empty;
 
@@ -43,7 +40,7 @@ namespace Nutanix.PowerShell.SDK
 
     // Returns the JSON response a string. Responsibility of caller to parse.
     public static dynamic RestCall(
-      string urlPath,
+      string path,
       string requestMethod,
       string requestBody)
     {
@@ -53,8 +50,9 @@ namespace Nutanix.PowerShell.SDK
         return null;
       }
 
-      var request = WebRequest.Create(
-        "https://" + NtnxUtil.Server + ":9440/api/nutanix/v3/" + urlPath);
+      Uri baseUri = new Uri("https://" + NtnxUtil.Server + ":9440/api/nutanix/v3/");
+      Uri callUri = new Uri(baseUri,path);
+      var request = WebRequest.Create(callUri);
       request.Method = requestMethod;
       request.PreAuthenticate = true;
       var creds = NtnxUtil.PSCreds.GetNetworkCredential();
@@ -85,8 +83,7 @@ namespace Nutanix.PowerShell.SDK
           if (response.StatusCode != HttpStatusCode.OK &&
             response.StatusCode != HttpStatusCode.Accepted)
           {
-            var message = string.Format(
-              "Request failed. StatusCode {0}", response.StatusCode);
+            var message = string.Format(CultureInfo.InvariantCulture, "Request failed. StatusCode {0}", response.StatusCode);
             throw new NtnxException(message);
           }
 
@@ -115,7 +112,7 @@ namespace Nutanix.PowerShell.SDK
               var json = JsonConvert.DeserializeObject(reader.ReadToEnd());
 
               // Print request + response to help user debug.
-              Console.WriteLine(requestMethod + " " + urlPath + ":\n" + requestBody);
+              Console.WriteLine(requestMethod + " " + callUri.AbsoluteUri + ":\n" + requestBody);
               Console.WriteLine(json.ToString());
             }
           }

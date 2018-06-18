@@ -15,19 +15,19 @@ namespace Nutanix.PowerShell.SDK
 {
   public class Task
   {
-    public string Uuid { get; set; } = string.Empty;
+    public string Uuid { get; set; }
 
-    public string Status { get; set; } = string.Empty;
+    public string Status { get; set; }
 
-    public string StartTime { get; set; } = string.Empty;
+    public string StartTime { get; set; }
 
-    public string CreationTime { get; set; } = string.Empty;
+    public string CreationTime { get; set; }
 
-    public string CompletionTime { get; set; } = string.Empty;
+    public string CompletionTime { get; set; }
 
-    public string ProgressMessage { get; set; } = string.Empty;
+    public string ProgressMessage { get; set; }
 
-    public string OperationType { get; set; } = string.Empty;
+    public string OperationType { get; set; }
 
     public int PercentageComplete { get; set; }
 

@@ -271,7 +271,6 @@ namespace Nutanix.PowerShell.SDK
     }
 
     // Grab all VMs.
-    // REST: /vms/list
     public static Vm[] GetAllVms()
     {
       var json = NtnxUtil.RestCall("vms/list", "POST", "{}");
@@ -367,7 +366,8 @@ namespace Nutanix.PowerShell.SDK
 
       if (string.IsNullOrEmpty(this.Name) && string.IsNullOrEmpty(this.Uuid))
       {
-        throw new NtnxException("Need -Name or -Uuid");
+        var message = string.Format(CultureInfo.InvariantCulture, "Need -Name or -Uuid. We were given Name {0} and/or UUID {1}", this.Name, this.Uuid);
+        throw new NtnxException(message);
       }
 
       if (!string.IsNullOrEmpty(Uuid))
