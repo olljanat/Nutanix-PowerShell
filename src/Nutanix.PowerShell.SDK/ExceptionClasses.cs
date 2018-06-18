@@ -1,3 +1,5 @@
+// Copyright 2018 (c) Nutanix. All rights reserved.
+// Licensed under the MIT License. See LICENSE file in the repository root for full license information.
 // Purpose: Exception classes source for 'Nutanix.PowerShell.SDK'
 // Author: Nutanix
 // Copyright: Nutanix, 2018

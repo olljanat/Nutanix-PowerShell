@@ -1,3 +1,5 @@
+// Copyright 2018 (c) Nutanix. All rights reserved.
+// Licensed under the MIT License. See LICENSE file in the repository root for full license information.
 // Purpose: Images (image service) source for 'Nutanix.PowerShell.SDK'
 // Author: Nutanix
 // Copyright: Nutanix, 2018
@@ -139,7 +141,6 @@ namespace Nutanix.PowerShell.SDK
 
     public void CheckResult(Image[] images)
     {
-      return; // TODO: consider whether throwing duplicate exception is good idea.
       if (!string.IsNullOrEmpty(Name) && images.Length > 1)
       {
         throw new NtnxException("Found duplicate images");

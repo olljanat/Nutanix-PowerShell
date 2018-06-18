@@ -3,27 +3,25 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <!-- <TreatWarningsAsErrors>True</TreatWarningsAsErrors> -->
     <Description>Nutanix PowerShell SDK</Description>
     <PackageId>Nutanix.PowerShell.SDK</PackageId>
-    <!-- <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <DocumentationFile>bin\REPLACEME-TODO.XML</DocumentationFile> -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DocumentationFile>bin\REPLACEME-TODO.XML</DocumentationFile>
+    <NoWarn>$(NoWarn),1573,1591,1712,1600</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2-beta1" />
-    <PackageReference Include="Microsoft.CodeQuality.Analyzers" Version="2.6.2-beta1" />
-    <PackageReference Include="Microsoft.CodeQuality.Analyzers.Exp" Version="2.6.2-beta1-63012-01" />
-    <PackageReference Include="Microsoft.DotNet.Analyzers.Compatibility" Version="0.1.2-alpha" />
-    <PackageReference Include="Microsoft.NetCore.Analyzers" Version="2.6.2-beta1" />
-    <PackageReference Include="Microsoft.NetFramework.Analyzers" Version="2.6.2-beta1" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta008" />
-    <PackageReference Include="System" Version="4.1.0311.2" />
-    <PackageReference Include="System.Collections" Version="4.3.0" />
-    <PackageReference Include="System.IO" Version="4.3.0" />
-    <PackageReference Include="System.Linq" Version="4.3.0" />
-    <PackageReference Include="System.Management.Automation" Version="6.1.7601.17515" />
-    <PackageReference Include="Text.Analyzers" Version="2.6.2-beta1" />
+    <AdditionalFiles Include="../../stylecop.json" Link="stylecop.json" />
+    <PackageReference Include="AsyncAnalyzers" Version="1.1.7.0" />                                   <!-- from https://www.nuget.org/packages/AsyncAnalyzers/ -->
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2-beta1" />        <!-- from https://www.nuget.org/packages/Microsoft.CodeAnalysis.FxCopAnalyzers -->
+    <PackageReference Include="Microsoft.CodeQuality.Analyzers.Exp" Version="2.6.2-beta1-63012-01" /> <!-- from https://dotnet.myget.org/feed/roslyn-analyzers/package/nuget/Microsoft.CodeQuality.Analyzers.Exp -->
+    <PackageReference Include="Microsoft.DotNet.Analyzers.Compatibility" Version="0.2.12-alpha" />    <!-- from https://www.nuget.org/packages/Microsoft.DotNet.Analyzers.Compatibility -->
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />                                   <!-- from https://www.nuget.org/packages/Newtonsoft.Json/ -->
+    <PackageReference Include="Roslynator.Analyzers" Version="1.9.0" />                               <!-- from https://www.nuget.org/packages/Roslynator.Analyzers/ -->
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.2.0.5463" />                          <!-- from https://www.nuget.org/packages/SonarAnalyzer.CSharp/ -->
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta008" />                         <!-- from https://www.nuget.org/packages/stylecop.analyzers/ -->
+    <PackageReference Include="System.Management.Automation" Version="6.1.0-preview.3" />             <!-- from https://powershell.myget.org/feed/powershell-core/package/nuget/System.Management.Automation -->
   </ItemGroup>
 
 </Project>
