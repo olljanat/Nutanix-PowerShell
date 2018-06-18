@@ -22,7 +22,6 @@ namespace Nutanix.PowerShell.SDK
 {
   public static class NtnxUtil
   {
-
     public static string Server { get; set; } = string.Empty;
 
     // Holds username and password.
@@ -51,7 +50,7 @@ namespace Nutanix.PowerShell.SDK
       }
 
       Uri baseUri = new Uri("https://" + NtnxUtil.Server + ":9440/api/nutanix/v3/");
-      Uri callUri = new Uri(baseUri,path);
+      Uri callUri = new Uri(baseUri, path);
       var request = WebRequest.Create(callUri);
       request.Method = requestMethod;
       request.PreAuthenticate = true;

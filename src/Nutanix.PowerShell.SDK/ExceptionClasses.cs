@@ -18,6 +18,7 @@ namespace Nutanix.PowerShell.SDK
   {
   [NonSerialized]
     private const string HelpLink = "https://github.com/nutanix/PowerShell/issues";
+
     public NtnxException() : base()
     {
       this.HelpLink = HelpLink;
