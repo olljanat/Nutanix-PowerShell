@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <AdditionalFiles Include="../../stylecop.json" Link="stylecop.json" />
-    <PackageReference Include="AsyncAnalyzers" Version="1.1.7.0" />                                   <!-- from https://www.nuget.org/packages/AsyncAnalyzers/ -->
+    <!--<PackageReference Include="AsyncAnalyzers" Version="1.1.7.0" />                                    from https://www.nuget.org/packages/AsyncAnalyzers/ -->
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2-beta1" />        <!-- from https://www.nuget.org/packages/Microsoft.CodeAnalysis.FxCopAnalyzers -->
     <PackageReference Include="Microsoft.CodeQuality.Analyzers.Exp" Version="2.6.2-beta1-63012-01" /> <!-- from https://dotnet.myget.org/feed/roslyn-analyzers/package/nuget/Microsoft.CodeQuality.Analyzers.Exp -->
     <PackageReference Include="Microsoft.DotNet.Analyzers.Compatibility" Version="0.2.12-alpha" />    <!-- from https://www.nuget.org/packages/Microsoft.DotNet.Analyzers.Compatibility -->

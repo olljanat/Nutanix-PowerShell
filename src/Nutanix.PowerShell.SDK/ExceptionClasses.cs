@@ -9,10 +9,27 @@
 //   Alex Guo    (Nutanix, mallochine)
 
 using System;
+using System.Runtime.Serialization;
 
-public class NtnxException : Exception
+namespace Nutanix.PowerShell.SDK
 {
-  public NtnxException(string message) : base(message)
+  [Serializable]
+  public class NtnxException : Exception
   {
+		public NtnxException()
+		{
+		}
+
+		public NtnxException(string message): base(message)
+		{
+		}
+
+		public NtnxException(string message, Exception innerException): base(message, innerException)
+		{
+		}
+
+		protected NtnxException(SerializationInfo info, StreamingContext context): base(info, context)
+		{
+		}
   }
 }
