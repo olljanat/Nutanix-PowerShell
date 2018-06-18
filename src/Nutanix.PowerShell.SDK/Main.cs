@@ -12,11 +12,11 @@ using System;
 
 namespace Nutanix.PowerShell.SDK
 {
-  public static class NutanixPowerShellSDK
+  public static class NutanixPowerShellSdk
   {
-    public static void Main(string[] args)
+    public static void Main()
     {
-    // TODO: Logic for main
+      // TODO: Logic for main
     }
   }
 }

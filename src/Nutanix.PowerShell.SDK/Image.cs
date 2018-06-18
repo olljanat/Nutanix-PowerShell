@@ -150,7 +150,7 @@ namespace Nutanix.PowerShell.SDK
     public static Image GetImageByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      var json = NtnxUtil.RestCall("/images/" + uuid, "GET", string.Empty /* requestBody */);
+      var json = NtnxUtil.RestCall("images/" + uuid, "GET", string.Empty /* requestBody */);
       return new Image(json);
     }
 
@@ -166,7 +166,7 @@ namespace Nutanix.PowerShell.SDK
 
     public static Image[] GetAllImages(string reqBody)
     {
-      return NtnxUtil.FromJson<Image>(NtnxUtil.RestCall("/images/list", "POST", reqBody), (Func<dynamic, Image>)(j => new Image(j)));
+      return NtnxUtil.FromJson<Image>(NtnxUtil.RestCall("images/list", "POST", reqBody), (Func<dynamic, Image>)(j => new Image(j)));
     }
   }
 
@@ -188,7 +188,7 @@ namespace Nutanix.PowerShell.SDK
     public static void DeleteImageByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
-      NtnxUtil.RestCall("/images/" + uuid, "DELETE", string.Empty /* requestBody */);
+      NtnxUtil.RestCall("images/" + uuid, "DELETE", string.Empty /* requestBody */);
     }
   }
 
@@ -219,7 +219,7 @@ namespace Nutanix.PowerShell.SDK
 
       Image.Json.api_version = "3.1";
       var task = Task.FromUuidInJson(
-        NtnxUtil.RestCall("/images/" + Image.Uuid, "PUT", Image.Json.ToString()));
+        NtnxUtil.RestCall("images/" + Image.Uuid, "PUT", Image.Json.ToString()));
       if (runAsync)
       {
         WriteObject(task);

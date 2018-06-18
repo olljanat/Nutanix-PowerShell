@@ -51,7 +51,7 @@ public class NtnxUtil
     }
 
     var request = WebRequest.Create(
-      "https://" + NtnxUtil.Server + ":9440/api/nutanix/v3" + urlPath);
+      "https://" + NtnxUtil.Server + ":9440/api/nutanix/v3/" + urlPath);
     request.Method = requestMethod;
     request.PreAuthenticate = true;
     var creds = NtnxUtil.PSCreds.GetNetworkCredential();
