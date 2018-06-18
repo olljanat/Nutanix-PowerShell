@@ -16,26 +16,26 @@ namespace Nutanix.PowerShell.SDK
   [Serializable]
   public class NtnxException : Exception
   {
-	[NonSerialized]
-  	const string helpLink = "https://github.com/nutanix/PowerShell/issues";
-		public NtnxException(): base()
-		{
-			this.HelpLink = helpLink;
-		}
+  [NonSerialized]
+    private const string HelpLink = "https://github.com/nutanix/PowerShell/issues";
+    public NtnxException() : base()
+    {
+      this.HelpLink = HelpLink;
+    }
 
-		public NtnxException(string message): base(message)
-		{
-			this.HelpLink = helpLink;
-		}
+    public NtnxException(string message) : base(message)
+    {
+      this.HelpLink = HelpLink;
+    }
 
-		public NtnxException(string message, Exception innerException): base(message, innerException)
-		{
-			this.HelpLink = helpLink;
-		}
+    public NtnxException(string message, Exception innerException) : base(message, innerException)
+    {
+      this.HelpLink = HelpLink;
+    }
 
-		protected NtnxException(SerializationInfo info, StreamingContext context): base(info, context)
-		{
-			this.HelpLink = helpLink;
-		}
+    protected NtnxException(SerializationInfo info, StreamingContext context) : base(info, context)
+    {
+      this.HelpLink = HelpLink;
+    }
   }
 }
