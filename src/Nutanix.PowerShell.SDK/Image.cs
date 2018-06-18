@@ -66,7 +66,7 @@ namespace Nutanix.PowerShell.SDK
 
     protected override void ProcessRecord()
     {
-      var url = "/images";
+      var url = "images";
       var method = "POST";
       var str = @"{
       ""api_version"": ""3.1"",

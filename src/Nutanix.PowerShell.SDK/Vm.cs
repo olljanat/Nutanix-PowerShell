@@ -100,7 +100,7 @@ namespace Nutanix.PowerShell.SDK
 
     protected override void ProcessRecord()
     {
-      var url = "/vms";
+      var url = "vms";
       var method = "POST";
       var str = @"{
       ""api_version"": ""3.1"",
