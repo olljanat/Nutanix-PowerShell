@@ -117,7 +117,6 @@ namespace Nutanix.PowerShell.SDK
       }
 
       var subnets = GetAllSubnets(BuildRequestBody());
-      CheckResult(subnets);
       WriteObject(subnets);
     }
 
@@ -136,14 +135,6 @@ namespace Nutanix.PowerShell.SDK
       }
 
       return json;
-    }
-
-    public void CheckResult(Subnet[] subnets)
-    {
-      if (NtnxUtil.PassThroughNonNull(Name) && subnets.Length > 1)
-      {
-        throw new NtnxException("Found duplicate subnets");
-      }
     }
 
     public static Subnet GetSubnetByUuid(string uuid)

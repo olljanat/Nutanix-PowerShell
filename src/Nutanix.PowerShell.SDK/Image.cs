@@ -9,6 +9,7 @@
 //   Alex Guo    (Nutanix, mallochine)
 
 using System;
+using System.Diagnostics.Contracts;
 using System.Management.Automation;
 
 using Newtonsoft.Json;
@@ -119,7 +120,6 @@ namespace Nutanix.PowerShell.SDK
       }
 
       var images = GetAllImages(BuildRequestBody());
-      CheckResult(images);
       WriteObject(images);
     }
 
@@ -140,15 +140,7 @@ namespace Nutanix.PowerShell.SDK
       return json;
     }
 
-    public void CheckResult(Image[] images)
-    {
-      if (NtnxUtil.PassThroughNonNull(Name) && images.Length > 1)
-      {
-        throw new NtnxException("Found duplicate images");
-      }
-    }
-
-    public static Image GetImageByUuid(string uuid)
+    private static Image GetImageByUuid(string uuid)
     {
       // TODO: validate using UUID regexes that 'uuid' is in correct format.
       var json = NtnxUtil.RestCall("images/" + uuid, "GET", string.Empty /* requestBody */);
