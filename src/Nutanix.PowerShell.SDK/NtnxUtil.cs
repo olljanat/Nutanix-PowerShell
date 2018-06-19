@@ -106,12 +106,12 @@ namespace Nutanix.PowerShell.SDK
         if (e.Status == WebExceptionStatus.ProtocolError)
         {
           var message = string.Format(CultureInfo.InvariantCulture, "Status Code : {0}\nStatus Description : {1}", ((HttpWebResponse)e.Response).StatusCode, ((HttpWebResponse)e.Response).StatusDescription);
-          Console.WriteLine(message);
+          Debug.WriteLine(message);
         }
       }
       catch (Exception e)
       {
-        Console.WriteLine(e.Message);
+        Debug.WriteLine(e.Message);
       }
 
       return null;
