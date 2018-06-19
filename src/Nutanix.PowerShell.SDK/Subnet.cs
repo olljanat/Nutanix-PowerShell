@@ -87,8 +87,6 @@ namespace Nutanix.PowerShell.SDK
         json.spec.cluster_reference.name = Cluster.Name;
       }
 
-      WriteDebug(NtnxUtil.RestCallTrace(url, method, json.ToString()));
-
       // TODO: should use Task.
       WriteObject(
         Task.FromUuidInJson(NtnxUtil.RestCall(url, method, json.ToString())));

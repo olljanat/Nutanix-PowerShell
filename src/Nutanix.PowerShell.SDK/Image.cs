@@ -9,7 +9,6 @@
 //   Alex Guo    (Nutanix, mallochine)
 
 using System;
-using System.Diagnostics.Contracts;
 using System.Management.Automation;
 
 using Newtonsoft.Json;
@@ -85,7 +84,6 @@ namespace Nutanix.PowerShell.SDK
       }
     }";
 
-      WriteDebug(NtnxUtil.RestCallTrace(url, method, str));
       var task = Task.FromUuidInJson(NtnxUtil.RestCall(url, method, str));
       if (runAsync)
       {
@@ -112,7 +110,6 @@ namespace Nutanix.PowerShell.SDK
 
     protected override void ProcessRecord()
     {
-
       if (NtnxUtil.PassThroughNonNull(Uuid))
       {
         WriteObject(GetImageByUuid(Uuid));

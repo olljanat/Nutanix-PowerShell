@@ -150,8 +150,6 @@ namespace Nutanix.PowerShell.SDK
         return;
       }
 
-      WriteDebug(NtnxUtil.RestCallTrace(url, method, json.ToString()));
-
       // TODO: make cluster_reference required if talking to PC. But not needed
       // if talking to PE.
       var task = Task.FromUuidInJson(NtnxUtil.RestCall(url, method, json.ToString()));
@@ -295,7 +293,8 @@ namespace Nutanix.PowerShell.SDK
       var json = NtnxUtil.RestCall("vms/list", "POST", reqBody);
       if (json.entities.Count == 0)
       {
-        throw new NtnxException("VM not found.");
+        var message = string.Format(CultureInfo.InvariantCulture, "VM not found by the name of {0}", name);
+        throw new NtnxException(message);
       }
 
       return new Vm(json.entities[0]);

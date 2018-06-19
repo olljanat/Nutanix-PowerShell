@@ -10,6 +10,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -87,11 +89,11 @@ namespace Nutanix.PowerShell.SDK
           }
 
           // grab the response
-          using (var responseStream = response.GetResponseStream())
+          using (Stream responseStream = response.GetResponseStream())
           {
             if (responseStream != null)
             {
-              using (var reader = new StreamReader(responseStream))
+              using (StreamReader reader = new StreamReader(responseStream))
               {
                 return JsonConvert.DeserializeObject(reader.ReadToEnd());
               }
@@ -99,45 +101,18 @@ namespace Nutanix.PowerShell.SDK
           }
         }
       }
-      catch (WebException ex)
+      catch (WebException e)
       {
-        var response = (HttpWebResponse)ex.Response;
-        using (var responseStream = response.GetResponseStream())
-        {
-          if (responseStream != null)
-          {
-            using (var reader = new StreamReader(responseStream))
-            {
-              var json = JsonConvert.DeserializeObject(reader.ReadToEnd());
-
-              // Print request + response to help user debug.
-              Console.WriteLine(requestMethod + " " + callUri.AbsoluteUri + ":\n" + requestBody);
-              Console.WriteLine(json.ToString());
-            }
-          }
+        if(e.Status == WebExceptionStatus.ProtocolError) {
+            var message = string.Format(CultureInfo.InvariantCulture, "Status Code : {0}\nStatus Description : {1}", ((HttpWebResponse)e.Response).StatusCode, ((HttpWebResponse)e.Response).StatusDescription);
+            Console.WriteLine(message);
         }
-
-        throw;
       }
-
+      catch(Exception e)
+      {
+        Console.WriteLine(e.Message);
+      }
       return null;
-    }
-
-    public static void PrintTrace(
-      string urlPath,
-      string requestMethod,
-      string requestBody)
-    {
-      Console.WriteLine(requestMethod + " " + urlPath);
-      Console.WriteLine(requestBody);
-    }
-
-    public static string RestCallTrace(
-      string urlPath,
-      string requestMethod,
-      string requestBody)
-    {
-      return requestMethod + " " + urlPath + "\n" + requestBody;
     }
 
     public static T[] FromJson<T>(dynamic json, Func<dynamic, T> creator)
@@ -147,9 +122,11 @@ namespace Nutanix.PowerShell.SDK
 
     public static dynamic PassThroughNonNull(string nullcheck)
     {
-        if (nullcheck == null)
-          throw new NtnxException();
-        return nullcheck;
+      if (nullcheck == null)
+      {
+        throw new NtnxException();
+      }
+      return nullcheck;
     }
   }
 }

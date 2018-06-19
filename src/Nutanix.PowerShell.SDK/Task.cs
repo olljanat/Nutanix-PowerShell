@@ -9,6 +9,7 @@
 //   Alex Guo    (Nutanix, mallochine)
 
 using System;
+using System.Globalization;
 using System.Management.Automation;
 
 namespace Nutanix.PowerShell.SDK
@@ -102,8 +103,8 @@ namespace Nutanix.PowerShell.SDK
         WriteObject(GetTaskByUuid(Task.Uuid));
         return;
       }
-
-      throw new NtnxException("Expected either -Uuid or -Task");
+      var message = string.Format(CultureInfo.InvariantCulture, "Expected either -Uuid or -Task. We were given Uuid {0} and/or Task {1}", Uuid, Task);
+      throw new NtnxException(message);
     }
 
     public static Task GetTaskByUuid(string uuid)
