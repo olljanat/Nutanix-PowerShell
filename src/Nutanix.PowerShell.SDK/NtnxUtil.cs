@@ -103,15 +103,17 @@ namespace Nutanix.PowerShell.SDK
       }
       catch (WebException e)
       {
-        if(e.Status == WebExceptionStatus.ProtocolError) {
-            var message = string.Format(CultureInfo.InvariantCulture, "Status Code : {0}\nStatus Description : {1}", ((HttpWebResponse)e.Response).StatusCode, ((HttpWebResponse)e.Response).StatusDescription);
-            Console.WriteLine(message);
+        if (e.Status == WebExceptionStatus.ProtocolError)
+        {
+          var message = string.Format(CultureInfo.InvariantCulture, "Status Code : {0}\nStatus Description : {1}", ((HttpWebResponse)e.Response).StatusCode, ((HttpWebResponse)e.Response).StatusDescription);
+          Console.WriteLine(message);
         }
       }
-      catch(Exception e)
+      catch (Exception e)
       {
         Console.WriteLine(e.Message);
       }
+
       return null;
     }
 
@@ -126,6 +128,7 @@ namespace Nutanix.PowerShell.SDK
       {
         throw new NtnxException();
       }
+
       return nullcheck;
     }
   }
