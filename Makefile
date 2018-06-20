@@ -1,14 +1,12 @@
 
 TOP ?= $(CURDIR)
-BUILD_DIR ?= $(CURDIR)/build
 
 .PHONY: all
-all: sdk
+all: clean sdk
 
 .PHONY: sdk
 sdk:
-	mkdir -p $(BUILD_DIR)
-	dotnet build --output $(BUILD_DIR)
+	dotnet build
 
 .PHONY: manifest
 manifest:
@@ -20,9 +18,5 @@ image:
 
 .PHONY: clean
 clean:
-	rm -rf $(BUILD_DIR)
-
-.PHONY: realclean
-realclean:
-	rm -rf $(BUILD_DIR)
-	rm -rf $(DEPS_DIR)
+	rm -rf ./src/Nutanix.PowerShell.SDK/bin/
+	rm -rf ./src/Nutanix.PowerShell.SDK/obj/
