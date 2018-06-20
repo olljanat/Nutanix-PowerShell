@@ -10,6 +10,7 @@
 
 using System;
 using System.Management.Automation;
+using System.Net.Http;
 
 namespace Nutanix.PowerShell.SDK
 {
@@ -90,14 +91,33 @@ namespace Nutanix.PowerShell.SDK
       System.Security.SecureString password,
       bool acceptinvalidsslcerts)
     {
+      HttpClientHandler handler = null;
+
+      // Create handle to ignore invalid SSL certificates.
       if (acceptinvalidsslcerts)
       {
-        NtnxUtil.TestOnlyIgnoreCerts();
+        handler = new HttpClientHandler();
+        handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+        handler.ServerCertificateCustomValidationCallback =
+          (httpRequestMessage, cert, cetChain, policyErrors) =>
+          {
+            return true;
+          };
       }
 
       NtnxUtil.Server = server;
       NtnxUtil.PSCreds = new System.Management.Automation.PSCredential(
         username, password);
+
+      // Create HttpClient.
+      var client = new HttpClient(handler);
+      string authHeader = NtnxUtil.GetAuthHeader();
+      client.BaseAddress = new Uri("https://" + server + ":9440");
+      client.DefaultRequestHeaders.Add("Authorization", "Basic " + authHeader);
+      client.DefaultRequestHeaders.Add("Accept", "application/json");
+      client.DefaultRequestHeaders.Add(
+        "X-Nutanix-Client-Type", "Nutanix.PowerShell.SDK");
+      NtnxUtil.Client = client;
     }
   }
 }

@@ -16,7 +16,10 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
+using System.Management.Automation;
 
 using Newtonsoft.Json;
 
@@ -26,18 +29,12 @@ namespace Nutanix.PowerShell.SDK
   {
     public static string Server { get; set; }
 
+    public static HttpClient Client { get; set; }
+
     // Holds username and password.
     // TODO: might need to GC PSCreds.Password (SecureString) using Dispose
     // method.
-    public static System.Management.Automation.PSCredential PSCreds { get; set; }
-
-    // NOTE: only use this function during development.
-    public static void TestOnlyIgnoreCerts()
-    {
-      ServicePointManager.ServerCertificateValidationCallback +=
-        (sender, cert, chain, sslPolicyErrors) =>
-        true;
-    }
+    public static PSCredential PSCreds { get; set; }
 
     // Returns the JSON response a string. Responsibility of caller to parse.
     public static dynamic RestCall(
@@ -51,68 +48,27 @@ namespace Nutanix.PowerShell.SDK
         return null;
       }
 
-      Uri baseUri = new Uri("https://" + NtnxUtil.Server + ":9440/api/nutanix/v3/");
-      Uri callUri = new Uri(baseUri, path);
-      var request = WebRequest.Create(callUri);
-      request.Method = requestMethod;
-      request.PreAuthenticate = true;
-      var creds = NtnxUtil.PSCreds.GetNetworkCredential();
-      string username = creds.UserName;
-      string password = creds.Password;
-      var encoding = System.Text.Encoding.GetEncoding("UTF-8");
-      var encodedAuth = encoding.GetBytes(username + ":" + password);
-      string authHeader = System.Convert.ToBase64String(encodedAuth);
-      request.Headers.Add("Authorization", "Basic " + authHeader);
-      request.Headers.Add("Content-Type", "application/json");
-      request.Headers.Add("Accept", "application/json");
-      request.Headers.Add("X-Nutanix-Client-Type", "Nutanix.PowerShell.SDK");
+      String basePath = "/api/nutanix/v3/";
 
-      if (NtnxUtil.PassThroughNonNull(requestBody))
+      HttpResponseMessage result;
+      switch (requestMethod)
       {
-        var bytes = Encoding.GetEncoding("UTF-8").GetBytes(requestBody);
-        request.ContentLength = bytes.Length;
-        using (var writeStream = request.GetRequestStream())
-        {
-          writeStream.Write(bytes, 0, bytes.Length);
-        }
+        case "GET":
+          result = Client.GetAsync(basePath + path).Result;
+          break;
+        case "POST":
+          var content = new StringContent(
+            requestBody, Encoding.UTF8, "application/json");
+          result = Client.PostAsync(basePath + path, content).Result;
+          break;
+        default:
+          throw new NtnxException("Invalid HTTP request method: " +
+              requestMethod);
+          break;
       }
 
-      try
-      {
-        using (var response = (HttpWebResponse)request.GetResponse())
-        {
-          if (response.StatusCode != HttpStatusCode.OK &&
-            response.StatusCode != HttpStatusCode.Accepted)
-          {
-            var message = string.Format(CultureInfo.InvariantCulture, "Request failed. StatusCode {0}", response.StatusCode);
-            throw new NtnxException(message);
-          }
-
-          // grab the response
-          using (Stream responseStream = response.GetResponseStream())
-          {
-            if (responseStream != null)
-            {
-              using (StreamReader reader = new StreamReader(responseStream))
-              {
-                return JsonConvert.DeserializeObject(reader.ReadToEnd());
-              }
-            }
-          }
-        }
-      }
-      catch (WebException e)
-      {
-        if (e.Status == WebExceptionStatus.ProtocolError)
-        {
-          var message = string.Format(CultureInfo.InvariantCulture, "Status Code : {0}\nStatus Description : {1}", ((HttpWebResponse)e.Response).StatusCode, ((HttpWebResponse)e.Response).StatusDescription);
-          Debug.WriteLine(message);
-        }
-      }
-      catch (Exception e)
-      {
-        Debug.WriteLine(e.Message);
-      }
+      string resultContent = result.Content.ReadAsStringAsync().Result;
+      return JsonConvert.DeserializeObject(resultContent);
 
       return null;
     }
@@ -130,6 +86,19 @@ namespace Nutanix.PowerShell.SDK
       }
 
       return true;
+    }
+
+    // Return HTTPS header string that will be the auth header for communicating
+    // with Nutanix cluster.
+    public static string GetAuthHeader()
+    {
+      var creds = NtnxUtil.PSCreds.GetNetworkCredential();
+      string username = creds.UserName;
+      string password = creds.Password;
+      var encoding = System.Text.Encoding.GetEncoding("UTF-8");
+      var encodedAuth = encoding.GetBytes(username + ":" + password);
+      string authHeader = System.Convert.ToBase64String(encodedAuth);
+      return authHeader;
     }
   }
 }
