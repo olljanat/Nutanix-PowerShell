@@ -129,7 +129,7 @@ namespace Nutanix.PowerShell.SDK
         throw new NtnxException();
       }
 
-      return nullcheck;
+      return true;
     }
   }
 }
