@@ -10,6 +10,10 @@ sdk:
 	mkdir -p $(BUILD_DIR)
 	dotnet build --output $(BUILD_DIR)
 
+.PHONY: manifest
+manifest:
+	pwsh make_manifest.ps1
+
 .PHONY: image
 image:
 	sudo docker build -t NtnxSDK .

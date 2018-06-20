@@ -68,3 +68,6 @@ TestsResults*.xml
 
 # Resharper settings
 PowerShell.sln.DotSettings.user
+
+# The auto-generated manifest file.
+NutanixPowershell.psd1
