@@ -30,7 +30,8 @@ matrix:
   - stage: sanity testing
   - script: make sanity
   include:
-    - os: linux
+    - dotnet: "2.1.300"
+      os: linux
       dist: trusty
       sudo: required
     - os: osx
