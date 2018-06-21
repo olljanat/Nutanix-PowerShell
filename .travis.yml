@@ -11,16 +11,18 @@ stages:
   - build
   # - acceptance testing
 
-jobs:
-  include:
-    - stage: build
-      dotnet: "2.1.300"
-      script:
-        - dotnet build
+# jobs:
+#   include:
+#     - stage: build
+#       dotnet: "2.1.300"
+#       script:
+#         - dotnet build
 
 os:
   - linux
   - osx
+
+script: dotnet build
 
 matrix:
   fast_finish: true
