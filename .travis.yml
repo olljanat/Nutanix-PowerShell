@@ -18,6 +18,10 @@ jobs:
       script:
         - dotnet build
 
+os:
+  - linux
+  - osx
+
 matrix:
   fast_finish: true
   allow_failures:
