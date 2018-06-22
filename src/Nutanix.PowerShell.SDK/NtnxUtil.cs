@@ -49,28 +49,25 @@ namespace Nutanix.PowerShell.SDK
       }
 
       String basePath = "/api/nutanix/v3/";
-
       HttpResponseMessage result;
       switch (requestMethod)
       {
         case "GET":
-          result = Client.GetAsync(basePath + path).Result;
+          result = Client.GetAsync(new Uri(basePath + path)).Result;
           break;
         case "POST":
           var content = new StringContent(
             requestBody, Encoding.UTF8, "application/json");
-          result = Client.PostAsync(basePath + path, content).Result;
+          result = Client.PostAsync(new Uri(basePath + path), content).Result;
+          content.Dispose();
           break;
         default:
           throw new NtnxException("Invalid HTTP request method: " +
               requestMethod);
-          break;
       }
 
       string resultContent = result.Content.ReadAsStringAsync().Result;
       return JsonConvert.DeserializeObject(resultContent);
-
-      return null;
     }
 
     public static T[] FromJson<T>(dynamic json, Func<dynamic, T> creator)
