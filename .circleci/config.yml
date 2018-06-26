@@ -9,3 +9,4 @@ dependencies:
 jobs:
   build:
     - echo "hi"
+    - echo "hi 2"
