@@ -12,4 +12,4 @@ jobs:
       enabled: true
     steps:
       - run:
-        command: echo "hi"
+          command: echo "hi"
