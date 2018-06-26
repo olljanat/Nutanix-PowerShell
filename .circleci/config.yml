@@ -8,6 +8,8 @@ dependencies:
 
 jobs:
   build:
+    machine:
+      enabled: true
     steps:
       - echo "hi"
       - echo "hi 2"
