@@ -11,5 +11,5 @@ jobs:
     machine:
       enabled: true
     steps:
-      - echo "hi"
-      - echo "hi 2"
+      - run:
+        command: echo "hi"
