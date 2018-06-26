@@ -6,7 +6,8 @@ dependencies:
     - sudo yum update
     - sudo yum install dotnet-sdk-2.1
 
-test:
-  override:
-    - echo "hi"
-    - echo "hi 2"
+jobs:
+  build:
+    steps:
+      - echo "hi"
+      - echo "hi 2"
