@@ -12,4 +12,6 @@ jobs:
       enabled: true
     steps:
       - run:
-          command: find /home/circleci
+          command: git clone http://github.com/nutanix/Powershell
+      - run:
+          command: find
