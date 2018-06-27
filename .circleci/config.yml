@@ -4,16 +4,16 @@ dependencies:
   override:
     - sudo rpm -Uvh https://packages.microsoft.com/config/rhel/7/packages-microsoft-prod.rpm
     - sudo yum update
-    - sudo yum install dotnet-sdk-2.1
+    - sudo yum -y install dotnet-sdk-2.1
+    - git clone http://github.com/nutanix/Powershell
 
 jobs:
   build:
     machine:
       enabled: true
+    working_directory: ~/project/Powershell
     steps:
-      - run:
-          command: git clone http://github.com/nutanix/Powershell
       - run:
           command: find
       - run:
-          command: which dotnet
+          command: dotnet build
