@@ -22,6 +22,6 @@ Import-Module (Join-Path -Path . -ChildPath Nutanix.PowerShell.SDK.dll)
 #     }
 # }
 
-$FilteredCommands = @()
+# $FilteredCommands = @()
 
 ### TODO add (# SIG # Begin signature block)

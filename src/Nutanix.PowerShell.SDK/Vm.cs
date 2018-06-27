@@ -48,6 +48,7 @@ namespace Nutanix.PowerShell.SDK
     {
       // Fill in field.
       Name = json.spec.name;
+      PowerState = json.spec.resources.power_state;
       NumSockets = json.spec.resources.num_sockets;
       MemoryMB = json.spec.resources.memory_size_mib;
       NumVcpusPerSocket = json.spec.resources.num_vcpus_per_socket;
@@ -249,6 +250,7 @@ namespace Nutanix.PowerShell.SDK
 
     protected override void ProcessRecord()
     {
+            Console.WriteLine("getvm 252");
       if (string.IsNullOrEmpty(Name) && string.IsNullOrEmpty(Uuid))
       {
         // If no params specified, then get all VMs.
@@ -256,13 +258,13 @@ namespace Nutanix.PowerShell.SDK
         return;
       }
 
-      if (NtnxUtil.PassThroughNonNull(Uuid))
+      if (Uuid != null)
       {
         WriteObject(GetVmByUuid(Uuid));
         return;
       }
 
-      if (NtnxUtil.PassThroughNonNull(Name))
+      if (Name != null)
       {
         WriteObject(GetVmByName(Name));
       }
@@ -271,18 +273,23 @@ namespace Nutanix.PowerShell.SDK
     // Grab all VMs.
     public static Vm[] GetAllVms()
     {
+      Console.WriteLine("getvm 274");
       var json = NtnxUtil.RestCall("vms/list", "POST", "{}");
+            Console.WriteLine("getvm 277");
       if (json.entities.Count == 0)
       {
+              Console.WriteLine("getvm 280");
         return Array.Empty<Vm>();
       }
 
       Vm[] vms = new Vm[json.entities.Count];
+            Console.WriteLine("getvm 285");
       for (int i = 0; i < json.entities.Count; ++i)
       {
+              Console.WriteLine("getvm 287");
         vms[i] = new Vm(json.entities[i]);
       }
-
+              Console.WriteLine("going to return vms");
       return vms;
     }
 

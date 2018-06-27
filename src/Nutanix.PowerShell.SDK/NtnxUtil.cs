@@ -42,8 +42,10 @@ namespace Nutanix.PowerShell.SDK
       string requestMethod,
       string requestBody)
     {
+      Console.WriteLine("rest 48");
       if (string.IsNullOrEmpty(Server) || NtnxUtil.PSCreds == null)
       {
+        Console.WriteLine("rest 51");
         // TODO: throw exception.
         return null;
       }
@@ -77,8 +79,10 @@ namespace Nutanix.PowerShell.SDK
 
     public static dynamic PassThroughNonNull(string nullcheck)
     {
+      Console.WriteLine("null 127");
       if (nullcheck == null)
       {
+              Console.WriteLine("null 30");
         throw new NtnxException();
       }
 

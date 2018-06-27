@@ -73,6 +73,12 @@ Install from package
 
 TODO: coming soon, a way to install from powershell gallery.
 
+Install PowerShell 6.1.0-Preview3++: https://github.com/PowerShell/PowerShell/releases
+Launch PowerShell Preview: pwsh-preview
+import-module -Name /Users/jon/git/PowerShell/src/Nutanix.PowerShell.SDK/bin/Debug/netcoreapp2.1/Nutanix.PowerShell.SDK.psm1 -Verbose
+    (this assumes you've compiled and moved the psm1/psd1 to the bin/debug/netcoreapp2.1 folder)
+$pass = ConvertTo-SecureString -string "Nutanix/1234" -force -AsPlainText
+Connect-Cluster -Server 10.5.80.60 -UserName admin -Password $pass -AcceptInvalidSslCerts
 
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fnutanix%2FPowerShell.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fnutanix%2FPowerShell?ref=badge_large)

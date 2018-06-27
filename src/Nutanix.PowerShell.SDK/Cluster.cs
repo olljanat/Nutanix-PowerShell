@@ -32,6 +32,7 @@ namespace Nutanix.PowerShell.SDK
   {
     protected override void ProcessRecord()
     {
+      Console.WriteLine("cluster34");
       WriteObject(GetAllClusters());
     }
 
@@ -39,6 +40,7 @@ namespace Nutanix.PowerShell.SDK
     // REST: /clusters/list
     public static Cluster[] GetAllClusters()
     {
+            Console.WriteLine("cluster42");
       var json = NtnxUtil.RestCall("clusters/list", "POST", "{}");
       if (json.entities.Count == 0)
       {
@@ -58,10 +60,10 @@ namespace Nutanix.PowerShell.SDK
   [CmdletAttribute(VerbsCommunications.Connect, "Cluster")]
   public class ConnectClusterCmdlet : Cmdlet
   {
-    [Parameter]
+    [Parameter(Position = 0, Mandatory = true)]
     public string Server { get; set; }
 
-    [Parameter]
+    [Parameter(Position = 1, Mandatory = true)]
     public string UserName { get; set; }
 
     // TODO: note that 'Password' should be the result of
@@ -81,6 +83,7 @@ namespace Nutanix.PowerShell.SDK
 
     protected override void ProcessRecord()
     {
+            Console.WriteLine("clusterconn 83");
       Connect(Server, UserName, Password, acceptInvalidSslCerts);
     }
 
@@ -89,7 +92,7 @@ namespace Nutanix.PowerShell.SDK
       string server,
       string username,
       System.Security.SecureString password,
-      bool acceptinvalidsslcerts)
+      bool acceptInvalidSslCerts)
     {
       HttpClientHandler handler = null;
 
@@ -105,6 +108,7 @@ namespace Nutanix.PowerShell.SDK
           };
       }
 
+      Console.WriteLine("auth 98");
       NtnxUtil.Server = server;
       NtnxUtil.PSCreds = new System.Management.Automation.PSCredential(
         username, password);
