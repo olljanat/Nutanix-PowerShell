@@ -48,17 +48,17 @@ namespace Nutanix.PowerShell.SDK
         return null;
       }
 
-      String basePath = "/api/nutanix/v3/";
       HttpResponseMessage result;
+      var uri = new Uri("https://" + Server + ":9440/api/nutanix/v3/" + path);
       switch (requestMethod)
       {
         case "GET":
-          result = Client.GetAsync(new Uri(basePath + path)).Result;
+          result = Client.GetAsync(uri).Result;
           break;
         case "POST":
           var content = new StringContent(
             requestBody, Encoding.UTF8, "application/json");
-          result = Client.PostAsync(new Uri(basePath + path), content).Result;
+          result = Client.PostAsync(uri, content).Result;
           content.Dispose();
           break;
         default:

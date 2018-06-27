@@ -13,7 +13,7 @@ NOTE: This is open source, and we love pull requests! Please see the GitHub issu
 
 | Master                                                                                                                                                          | Develop                                                                                                                                                           |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [![Build Status](https://travis-ci.com/nutanix/PowerShell.svg?branch=master)](https://travis-ci.com/nutanix/PowerShell) [![CircleCI](https://circleci.com/gh/nutanix/PowerShell.svg?style=svg)](https://circleci.com/gh/nutanix/PowerShell) | (TBD) |
+| [![CircleCI](https://circleci.com/gh/nutanix/PowerShell.svg?style=svg)](https://circleci.com/gh/nutanix/PowerShell) | (TBD) |
 
 
 
