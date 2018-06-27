@@ -12,6 +12,4 @@ jobs:
       enabled: true
     steps:
       - run:
-          command: ls
           command: pwd
-          command: find
