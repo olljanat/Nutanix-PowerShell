@@ -1,8 +1,5 @@
 version: 0.1
 
-      # - run:
-      #     command: sudo yum -y install dotnet-sdk-2.1
-
 jobs:
   build:
     machine:
