@@ -12,4 +12,4 @@ jobs:
       enabled: true
     steps:
       - run:
-          command: pwd
+          command: find /home/circleci
