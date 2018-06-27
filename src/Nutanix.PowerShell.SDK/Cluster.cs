@@ -92,7 +92,7 @@ namespace Nutanix.PowerShell.SDK
       string server,
       string username,
       System.Security.SecureString password,
-      bool acceptInvalidSslCerts)
+      bool acceptinvalidsslcerts)
     {
       HttpClientHandler handler = null;
 
