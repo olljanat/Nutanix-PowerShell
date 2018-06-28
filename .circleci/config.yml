@@ -19,4 +19,6 @@ jobs:
       - run:
           command: sudo apt-get install dotnet-sdk-2.1
       - run:
-          command: cd Powershell && dotnet build
+          command: cd Powershell && make
+      - run:
+          command: cd Powershell && make image
