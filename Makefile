@@ -14,7 +14,7 @@ manifest:
 
 .PHONY: image
 image:
-	sudo docker build -t NtnxSDK .
+	sudo docker build .
 
 .PHONY: clean
 clean:
