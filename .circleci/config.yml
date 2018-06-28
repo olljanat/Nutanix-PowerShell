@@ -21,4 +21,4 @@ jobs:
       - run:
           command: cd Powershell && make
       - run:
-          command: cd Powershell && make image
+          command: make image
