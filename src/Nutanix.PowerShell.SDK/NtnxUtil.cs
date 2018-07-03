@@ -10,16 +10,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Management.Automation;
+using System.Text;
 
 using Newtonsoft.Json;
 
@@ -42,12 +36,9 @@ namespace Nutanix.PowerShell.SDK
       string requestMethod,
       string requestBody)
     {
-      Console.WriteLine("rest 48");
       if (string.IsNullOrEmpty(Server) || NtnxUtil.PSCreds == null)
       {
-        Console.WriteLine("rest 51");
-        // TODO: throw exception.
-        return null;
+        throw new NtnxException($"Either passed null server ({Server}) or credentials ({NtnxUtil.PSCreds})");
       }
 
       HttpResponseMessage result;
@@ -68,8 +59,15 @@ namespace Nutanix.PowerShell.SDK
               requestMethod);
       }
 
-      string resultContent = result.Content.ReadAsStringAsync().Result;
-      return JsonConvert.DeserializeObject(resultContent);
+      if (result.IsSuccessStatusCode)
+      {
+        string resultContent = result.Content.ReadAsStringAsync().Result;
+        return JsonConvert.DeserializeObject(resultContent);
+      }
+      else
+      {
+        throw new NtnxException($"REST API request failed with {result.StatusCode}");
+      }
     }
 
     public static T[] FromJson<T>(dynamic json, Func<dynamic, T> creator)
@@ -79,11 +77,9 @@ namespace Nutanix.PowerShell.SDK
 
     public static dynamic PassThroughNonNull(string nullcheck)
     {
-      Console.WriteLine("null 127");
-      if (nullcheck == null)
+      if (string.IsNullOrEmpty(nullcheck))
       {
-              Console.WriteLine("null 30");
-        throw new NtnxException();
+        return false;
       }
 
       return true;

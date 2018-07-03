@@ -32,7 +32,6 @@ namespace Nutanix.PowerShell.SDK
   {
     protected override void ProcessRecord()
     {
-      Console.WriteLine("cluster34");
       WriteObject(GetAllClusters());
     }
 
@@ -40,7 +39,6 @@ namespace Nutanix.PowerShell.SDK
     // REST: /clusters/list
     public static Cluster[] GetAllClusters()
     {
-            Console.WriteLine("cluster42");
       var json = NtnxUtil.RestCall("clusters/list", "POST", "{}");
       if (json.entities.Count == 0)
       {
@@ -60,6 +58,8 @@ namespace Nutanix.PowerShell.SDK
   [CmdletAttribute(VerbsCommunications.Connect, "Cluster")]
   public class ConnectClusterCmdlet : Cmdlet
   {
+    private bool acceptInvalidSslCerts;
+
     [Parameter(Position = 0, Mandatory = true)]
     public string Server { get; set; }
 
@@ -75,16 +75,8 @@ namespace Nutanix.PowerShell.SDK
     [Parameter]
     public SwitchParameter AcceptInvalidSslCerts
     {
-      get { return acceptInvalidSslCerts; }
-      set { acceptInvalidSslCerts = value; }
-    }
-
-    private bool acceptInvalidSslCerts;
-
-    protected override void ProcessRecord()
-    {
-            Console.WriteLine("clusterconn 83");
-      Connect(Server, UserName, Password, acceptInvalidSslCerts);
+      get { return this.acceptInvalidSslCerts; }
+      set { this.acceptInvalidSslCerts = value; }
     }
 
     // Save authentication info.
@@ -108,7 +100,6 @@ namespace Nutanix.PowerShell.SDK
           };
       }
 
-      Console.WriteLine("auth 98");
       NtnxUtil.Server = server;
       NtnxUtil.PSCreds = new System.Management.Automation.PSCredential(
         username, password);
@@ -122,6 +113,11 @@ namespace Nutanix.PowerShell.SDK
       client.DefaultRequestHeaders.Add(
         "X-Nutanix-Client-Type", "Nutanix.PowerShell.SDK");
       NtnxUtil.Client = client;
+    }
+
+    protected override void ProcessRecord()
+    {
+      Connect(Server, UserName, Password, acceptInvalidSslCerts);
     }
   }
 }

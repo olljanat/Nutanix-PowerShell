@@ -9,9 +9,10 @@
 //   Alex Guo    (Nutanix, mallochine)
 
 using System;
+using System.Collections.Concurrent;
 using System.Globalization;
 using System.Management.Automation;
-
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace Nutanix.PowerShell.SDK
@@ -41,25 +42,27 @@ namespace Nutanix.PowerShell.SDK
       // Special property 'json' stores the original json.
       this.Json = json;
       this.Json.api_version = "3.1";
-      SetFromJson(json);
+      this.SetFromJson(json);
     }
 
     public void SetFromJson(dynamic json)
     {
       // Fill in field.
-      Name = json.spec.name;
-      PowerState = json.spec.resources.power_state;
-      NumSockets = json.spec.resources.num_sockets;
-      MemoryMB = json.spec.resources.memory_size_mib;
-      NumVcpusPerSocket = json.spec.resources.num_vcpus_per_socket;
-      HardwareClockTimezone = json.spec.resources.hardware_clock_timezone;
-      Uuid = json.metadata.uuid;
+      this.Name = json.spec.name;
+      this.NumSockets = json.spec.resources.num_sockets;
+      this.MemoryMB = json.spec.resources.memory_size_mib;
+      this.NumVcpusPerSocket = json.spec.resources.num_vcpus_per_socket;
+      this.HardwareClockTimezone = json.spec.resources.hardware_clock_timezone;
+      this.PowerState = json.spec.resources.power_state;
+      this.Uuid = json.metadata.uuid;
     }
   }
 
   [CmdletAttribute(VerbsCommon.New, "Vm")]
   public class NewVmCmdlet : Cmdlet
   {
+    private bool runAsync;
+
     [Parameter]
     public string Name { get; set; }
 
@@ -93,11 +96,9 @@ namespace Nutanix.PowerShell.SDK
     [Parameter]
     public SwitchParameter RunAsync
     {
-      get { return runAsync; }
-      set { runAsync = value; }
+      get { return this.runAsync; }
+      set { this.runAsync = value; }
     }
-
-    private bool runAsync;
 
     protected override void ProcessRecord()
     {
@@ -250,7 +251,6 @@ namespace Nutanix.PowerShell.SDK
 
     protected override void ProcessRecord()
     {
-            Console.WriteLine("getvm 252");
       if (string.IsNullOrEmpty(Name) && string.IsNullOrEmpty(Uuid))
       {
         // If no params specified, then get all VMs.
@@ -258,13 +258,13 @@ namespace Nutanix.PowerShell.SDK
         return;
       }
 
-      if (Uuid != null)
+      if (NtnxUtil.PassThroughNonNull(Uuid))
       {
         WriteObject(GetVmByUuid(Uuid));
         return;
       }
 
-      if (Name != null)
+      if (NtnxUtil.PassThroughNonNull(Name))
       {
         WriteObject(GetVmByName(Name));
       }
@@ -273,23 +273,52 @@ namespace Nutanix.PowerShell.SDK
     // Grab all VMs.
     public static Vm[] GetAllVms()
     {
-      Console.WriteLine("getvm 274");
-      var json = NtnxUtil.RestCall("vms/list", "POST", "{}");
-            Console.WriteLine("getvm 277");
-      if (json.entities.Count == 0)
+      int pageSize = 20;
+      int total_count = 0;
+
+      string request = @"{
+            ""kind"": ""vm"",
+            ""offset"": 0,
+            ""length"": 1
+      }";
+
+      var json = NtnxUtil.RestCall("vms/list", "POST", request);
+
+      if (json == null || json.entities == null || json.metadata == null)
       {
-              Console.WriteLine("getvm 280");
+        throw new NtnxException("REST API call likely failed or server response does not contain needed information");
+      }
+
+      total_count = json.metadata.total_matches;
+
+      if (total_count == 0)
+      {
         return Array.Empty<Vm>();
       }
 
-      Vm[] vms = new Vm[json.entities.Count];
-            Console.WriteLine("getvm 285");
-      for (int i = 0; i < json.entities.Count; ++i)
-      {
-              Console.WriteLine("getvm 287");
-        vms[i] = new Vm(json.entities[i]);
-      }
-              Console.WriteLine("going to return vms");
+      Vm[] vms = new Vm[total_count];
+      Parallel.ForEach(
+        Partitioner.Create(0, total_count, pageSize),
+        new ParallelOptions { MaxDegreeOfParallelism = 4 },
+        range =>
+        {
+          request = @"{
+              ""kind"": ""vm"",
+              ""offset"": " + range.Item1.ToString() + @",
+              ""length"": 20
+            }";
+
+          var jsonParallel = NtnxUtil.RestCall("vms/list", "POST", request);
+
+          for (int i = 0; i < jsonParallel.entities.Count; i++)
+          {
+            lock (vms)
+            {
+              vms[range.Item1 + i] = new Vm(jsonParallel.entities[i]);
+            }
+          }
+        });
+
       return vms;
     }
 
