@@ -60,10 +60,10 @@ namespace Nutanix.PowerShell.SDK
   {
     private bool acceptInvalidSslCerts;
 
-    [Parameter]
+    [Parameter(Position = 0, Mandatory = true)]
     public string Server { get; set; }
 
-    [Parameter]
+    [Parameter(Position = 1, Mandatory = true)]
     public string UserName { get; set; }
 
     // TODO: note that 'Password' should be the result of
