@@ -1,0 +1,554 @@
+{
+    "paths": {
+        "/gcp/v1/accounts/{account_uuid}/zone/{zone_name}/instances/{uuid}": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    },
+                    "404": {
+                        "description": "Internal Error",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "uuid",
+                        "format": "UUID",
+                        "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                        "required": true,
+                        "type": "string",
+                        "description": "uuid of gcp instance"
+                    },
+                    {
+                        "in": "path",
+                        "name": "account_uuid",
+                        "format": "UUID",
+                        "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+                        "required": true,
+                        "type": "string",
+                        "description": "uuid of account"
+                    },
+                    {
+                        "description": "zone name for gcp account",
+                        "required": true,
+                        "type": "string",
+                        "name": "zone_name",
+                        "in": "path"
+                    }
+                ],
+                "tags": [
+                    "gcp/instances"
+                ],
+                "x-doc-hide": true,
+                "summary": "Get gcp vm",
+                "x-ntnx-operations": [
+                    "view"
+                ],
+                "x-ntnx-kind": "gcp_instance",
+                "description": "Given a UUID, returns a gcp vm"
+            }
+        },
+        "/gcp/v1/disk_types/list": {
+            "post": {
+                "description": "List all disk types present in a zone. Supported filters are:\n- account_uuid\n- zone\n",
+                "parameters": [
+                    {
+                        "description": "Request body",
+                        "required": true,
+                        "in": "body",
+                        "name": "get_entities_request",
+                        "schema": {
+                            "$ref": "#/definitions/gcp_list_metadata"
+                        }
+                    }
+                ],
+                "tags": [
+                    "gcp/disk_types"
+                ],
+                "x-doc-hide": true,
+                "summary": "Get Google cloud disk types",
+                "x-ntnx-operations": [
+                    "view"
+                ],
+                "x-ntnx-kind": "gcp_disk_type",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    },
+                    "default": {
+                        "description": "GCP resources response body",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    },
+                    "404": {
+                        "description": "Entity not found",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/gcp/v1/firewalls/list": {
+            "post": {
+                "description": "List all firewalls available for a project. Supported filters are:\n- account_uuid\n",
+                "parameters": [
+                    {
+                        "description": "Request body",
+                        "required": true,
+                        "in": "body",
+                        "name": "get_entities_request",
+                        "schema": {
+                            "$ref": "#/definitions/gcp_list_metadata"
+                        }
+                    }
+                ],
+                "tags": [
+                    "gcp/firewalls"
+                ],
+                "x-doc-hide": true,
+                "summary": "Get Google cloud firewalls",
+                "x-ntnx-operations": [
+                    "view"
+                ],
+                "x-ntnx-kind": "gcp_firewall",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    },
+                    "default": {
+                        "description": "GCP resources response body",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    },
+                    "404": {
+                        "description": "Entity not found",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/gcp/v1/images/list": {
+            "post": {
+                "description": "List all images available for a GCP account. Supported filters are:\n- account_uuid\n",
+                "parameters": [
+                    {
+                        "description": "Request body",
+                        "required": true,
+                        "in": "body",
+                        "name": "get_entities_request",
+                        "schema": {
+                            "$ref": "#/definitions/gcp_list_metadata"
+                        }
+                    }
+                ],
+                "tags": [
+                    "gcp/images"
+                ],
+                "x-doc-hide": true,
+                "summary": "Get Google cloud images",
+                "x-ntnx-operations": [
+                    "view"
+                ],
+                "x-ntnx-kind": "gcp_image",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    },
+                    "default": {
+                        "description": "GCP resources response body",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    },
+                    "404": {
+                        "description": "Entity not found",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/gcp/v1/instances/list": {
+            "post": {
+                "description": "List all VM's present in a zone. Supported filters are:\n- account_uuid\n- zone\n",
+                "parameters": [
+                    {
+                        "description": "Request body",
+                        "required": true,
+                        "in": "body",
+                        "name": "get_entities_request",
+                        "schema": {
+                            "$ref": "#/definitions/gcp_list_metadata"
+                        }
+                    }
+                ],
+                "tags": [
+                    "gcp/instances"
+                ],
+                "x-doc-hide": true,
+                "summary": "Get Google cloud vm instances",
+                "x-ntnx-operations": [
+                    "view"
+                ],
+                "x-ntnx-kind": "gcp_instance",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    },
+                    "default": {
+                        "description": "GCP resources response body",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    },
+                    "404": {
+                        "description": "Entity not found",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/gcp/v1/machine_types/list": {
+            "post": {
+                "description": "List all machine types present in a zone. Supported filters are:\n- account_uuid\n- zone\n",
+                "parameters": [
+                    {
+                        "description": "Request body",
+                        "required": true,
+                        "in": "body",
+                        "name": "get_entities_request",
+                        "schema": {
+                            "$ref": "#/definitions/gcp_list_metadata"
+                        }
+                    }
+                ],
+                "tags": [
+                    "gcp/machine_types"
+                ],
+                "x-doc-hide": true,
+                "summary": "Get Google cloud machine types",
+                "x-ntnx-operations": [
+                    "view"
+                ],
+                "x-ntnx-kind": "gcp_machine_type",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    },
+                    "default": {
+                        "description": "GCP resources response body",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    },
+                    "404": {
+                        "description": "Entity not found",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/gcp/v1/networks/list": {
+            "post": {
+                "description": "List all network interfaces present in a zone. Supported filters are:\n- account_uuid\n- zone\n",
+                "parameters": [
+                    {
+                        "description": "Request body",
+                        "required": true,
+                        "in": "body",
+                        "name": "get_entities_request",
+                        "schema": {
+                            "$ref": "#/definitions/gcp_list_metadata"
+                        }
+                    }
+                ],
+                "tags": [
+                    "gcp/networks"
+                ],
+                "x-doc-hide": true,
+                "summary": "Get Google cloud networks",
+                "x-ntnx-operations": [
+                    "view"
+                ],
+                "x-ntnx-kind": "gcp_network",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    },
+                    "default": {
+                        "description": "GCP resources response body",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    },
+                    "404": {
+                        "description": "Entity not found",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/gcp/v1/persistent_disks/list": {
+            "post": {
+                "description": "List all persistent disks present in a zone. Supported filters are:\n- account_uuid\n- zone\n",
+                "parameters": [
+                    {
+                        "description": "Request body",
+                        "required": true,
+                        "in": "body",
+                        "name": "get_entities_request",
+                        "schema": {
+                            "$ref": "#/definitions/gcp_list_metadata"
+                        }
+                    }
+                ],
+                "tags": [
+                    "gcp/persistent_disks"
+                ],
+                "x-doc-hide": true,
+                "summary": "Get Google cloud persistent disks",
+                "x-ntnx-operations": [
+                    "view"
+                ],
+                "x-ntnx-kind": "gcp_persistent_disk",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    },
+                    "default": {
+                        "description": "GCP resources response body",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    },
+                    "404": {
+                        "description": "Entity not found",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/gcp/v1/regions/list": {
+            "post": {
+                "description": "List all regions present available for a GCP account. Supported filters are:\n- account_uuid\n",
+                "parameters": [
+                    {
+                        "description": "Request body",
+                        "required": true,
+                        "in": "body",
+                        "name": "get_entities_request",
+                        "schema": {
+                            "$ref": "#/definitions/gcp_list_metadata"
+                        }
+                    }
+                ],
+                "tags": [
+                    "gcp/regions"
+                ],
+                "x-doc-hide": true,
+                "summary": "Get Google cloud regions",
+                "x-ntnx-operations": [
+                    "view"
+                ],
+                "x-ntnx-kind": "gcp_region",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    },
+                    "default": {
+                        "description": "GCP resources response body",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    },
+                    "404": {
+                        "description": "Entity not found",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/gcp/v1/snapshots/list": {
+            "post": {
+                "description": "List all snapshots available for a GCP account. Supported filters are:\n- account_uuid\n- zone\n",
+                "parameters": [
+                    {
+                        "description": "Request body",
+                        "required": true,
+                        "in": "body",
+                        "name": "get_entities_request",
+                        "schema": {
+                            "$ref": "#/definitions/gcp_list_metadata"
+                        }
+                    }
+                ],
+                "tags": [
+                    "gcp/snapshots"
+                ],
+                "x-doc-hide": true,
+                "summary": "Get Google cloud snapshots",
+                "x-ntnx-operations": [
+                    "view"
+                ],
+                "x-ntnx-kind": "gcp_snapshot",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    },
+                    "default": {
+                        "description": "GCP resources response body",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    },
+                    "404": {
+                        "description": "Entity not found",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/gcp/v1/subnetworks/list": {
+            "post": {
+                "description": "List all subnetworks available for a GCP account. Supported filters are:\n- account_uuid\n- zone\n",
+                "parameters": [
+                    {
+                        "description": "Request body",
+                        "required": true,
+                        "in": "body",
+                        "name": "get_entities_request",
+                        "schema": {
+                            "$ref": "#/definitions/gcp_list_metadata"
+                        }
+                    }
+                ],
+                "tags": [
+                    "gcp/subnetworks"
+                ],
+                "x-doc-hide": true,
+                "summary": "Get Google cloud subnetworks",
+                "x-ntnx-operations": [
+                    "view"
+                ],
+                "x-ntnx-kind": "gcp_subnetwork",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    },
+                    "default": {
+                        "description": "GCP resources response body",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    },
+                    "404": {
+                        "description": "Entity not found",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/gcp/v1/zones/list": {
+            "post": {
+                "description": "List all zones available for a GCP account. Supported filters are:\n- account_uuid\n",
+                "parameters": [
+                    {
+                        "description": "Request body",
+                        "required": true,
+                        "in": "body",
+                        "name": "get_entities_request",
+                        "schema": {
+                            "$ref": "#/definitions/gcp_list_metadata"
+                        }
+                    }
+                ],
+                "tags": [
+                    "gcp/zones"
+                ],
+                "x-doc-hide": true,
+                "summary": "Get Google cloud zones",
+                "x-ntnx-operations": [
+                    "view"
+                ],
+                "x-ntnx-kind": "gcp_zone",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    },
+                    "default": {
+                        "description": "GCP resources response body",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    },
+                    "404": {
+                        "description": "Entity not found",
+                        "schema": {
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
