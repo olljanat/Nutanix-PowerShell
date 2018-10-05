@@ -1060,6 +1060,306 @@
                 "description": "This operation submits a request to delete a cloud credentials."
             }
         },
+        "/images": {
+            "post": {
+                "responses": {
+                    "default": {
+                        "description": "Internal Error",
+                        "schema": {
+                            "$ref": "#/definitions/image_status"
+                        }
+                    },
+                    "202": {
+                        "description": "Request Accepted",
+                        "schema": {
+                            "$ref": "#/definitions/image_intent_response"
+                        }
+                    }
+                },
+                "description": "Images are raw ISO, QCOW2, or VMDK files that are uploaded by a user can be attached to a VM. An ISO image is attached as a virtual CD-ROM drive, and QCOW2 and VMDK files are attached as SCSI disks. An image has to be explicitly added to the self-service catalog before users can create VMs from it.\n",
+                "parameters": [
+                    {
+                        "required": true,
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/image_intent_input"
+                        }
+                    }
+                ],
+                "tags": [
+                    "images"
+                ],
+                "x-ntnx-operations": [
+                    "create"
+                ],
+                "x-ntnx-kind": "image",
+                "summary": "Create a IMAGE"
+            }
+        },
+        "/images/list": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/image_list_intent_response"
+                        }
+                    },
+                    "default": {
+                        "description": "Internal Error",
+                        "schema": {
+                            "$ref": "#/definitions/image_status"
+                        }
+                    }
+                },
+                "description": "This operation gets a list of IMAGEs, allowing for sorting and pagination. Note: Entities that have not been created successfully are not listed.\n",
+                "parameters": [
+                    {
+                        "required": true,
+                        "in": "body",
+                        "name": "get_entities_request",
+                        "schema": {
+                            "$ref": "#/definitions/image_list_metadata"
+                        }
+                    }
+                ],
+                "tags": [
+                    "images"
+                ],
+                "x-ntnx-operations": [
+                    "view"
+                ],
+                "x-ntnx-kind": "image",
+                "summary": "Get a list of IMAGEs"
+            }
+        },
+        "/images/migrate": {
+            "post": {
+                "responses": {
+                    "default": {
+                        "description": "Internal Error",
+                        "schema": {
+                            "$ref": "#/definitions/procedural_error_response"
+                        }
+                    },
+                    "202": {
+                        "description": "Request Accepted",
+                        "schema": {
+                            "$ref": "#/definitions/procedural_response"
+                        }
+                    }
+                },
+                "description": "Submits a request to create a task handling image migration operation, returns a task reference. This moves ownership of images from the PE cluster to PC. Image uuids can be obtained by querying the PE instance to list images on the PE. In the case where image uuid list is provided as empty, all images on the cluster that are not currently migrated to PC will be migrated to PC.\n",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/image_migrate_input"
+                        }
+                    }
+                ],
+                "tags": [
+                    "images"
+                ],
+                "x-ntnx-operations": [
+                    "migrate"
+                ],
+                "x-ntnx-kind": "image",
+                "summary": "Migrate images from PE cluster to PC"
+            }
+        },
+        "/images/{uuid}": {
+            "put": {
+                "responses": {
+                    "default": {
+                        "description": "Internal Error",
+                        "schema": {
+                            "$ref": "#/definitions/image_status"
+                        }
+                    },
+                    "202": {
+                        "description": "Request Accepted",
+                        "schema": {
+                            "$ref": "#/definitions/image_intent_response"
+                        }
+                    }
+                },
+                "description": "This operation submits a request to update a IMAGE based on the input parameters.\n",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/uuid"
+                    },
+                    {
+                        "required": true,
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/image_intent_input"
+                        }
+                    }
+                ],
+                "tags": [
+                    "images"
+                ],
+                "x-ntnx-operations": [
+                    "update"
+                ],
+                "x-ntnx-kind": "image",
+                "summary": "Update a IMAGE"
+            },
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/image_intent_response"
+                        }
+                    },
+                    "default": {
+                        "description": "Internal Error",
+                        "schema": {
+                            "$ref": "#/definitions/image_status"
+                        }
+                    }
+                },
+                "description": "This operation gets a IMAGE.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/uuid"
+                    }
+                ],
+                "tags": [
+                    "images"
+                ],
+                "x-ntnx-operations": [
+                    "view"
+                ],
+                "x-ntnx-kind": "image",
+                "summary": "Get a IMAGE"
+            },
+            "delete": {
+                "responses": {
+                    "default": {
+                        "description": "Internal Error",
+                        "schema": {
+                            "$ref": "#/definitions/image_status"
+                        }
+                    },
+                    "202": {
+                        "description": "Request Accepted",
+                        "schema": {
+                            "$ref": "#/definitions/image_intent_response"
+                        }
+                    }
+                },
+                "description": "This operation submits a request to delete a IMAGE.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/uuid"
+                    }
+                ],
+                "tags": [
+                    "images"
+                ],
+                "x-ntnx-operations": [
+                    "delete"
+                ],
+                "x-ntnx-kind": "image",
+                "summary": "Delete a IMAGE"
+            }
+        },
+        "/images/{uuid}/file": {
+            "put": {
+                "description": "Upload the binary bits of an image based on the UUID specified. Note that the image must be created first before an upload can be done. Also, once the image has been uploaded the image cannot be changed.\n",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/uuid"
+                    },
+                    {
+                        "required": true,
+                        "in": "body",
+                        "name": "image",
+                        "schema": {
+                            "format": "binary"
+                        }
+                    },
+                    {
+                        "description": "Checksum type (e.g SHA_1, SHA_256).",
+                        "enum": [
+                            "SHA_1",
+                            "SHA_256"
+                        ],
+                        "type": "string",
+                        "name": "X-Nutanix-Checksum-Type",
+                        "in": "header"
+                    },
+                    {
+                        "description": "Checksum bytes.",
+                        "type": "string",
+                        "name": "X-Nutanix-Checksum-Bytes",
+                        "in": "header"
+                    }
+                ],
+                "tags": [
+                    "images"
+                ],
+                "summary": "Upload Image Contents",
+                "x-ntnx-operations": [
+                    "update"
+                ],
+                "x-ntnx-kind": "image",
+                "consumes": [
+                    "application/octet-stream"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "description": "Internal Error",
+                        "schema": {
+                            "$ref": "#/definitions/image_status"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "description": "Downloads the image based on the UUID specified.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/uuid"
+                    }
+                ],
+                "tags": [
+                    "images"
+                ],
+                "produces": [
+                    "application/octet-stream"
+                ],
+                "summary": "Get Image Contents",
+                "x-ntnx-operations": [
+                    "view"
+                ],
+                "x-ntnx-kind": "image",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "string",
+                            "format": "binary"
+                        }
+                    },
+                    "default": {
+                        "description": "Internal Error",
+                        "schema": {
+                            "$ref": "#/definitions/image_status"
+                        }
+                    }
+                }
+            }
+        },
         "/subnets": {
             "post": {
                 "responses": {
