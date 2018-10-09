@@ -1,0 +1,1117 @@
+{
+  "info": {
+      "version": "3.1.0", 
+      "description": "Move programming from the user to the machine.", 
+      "title": "Nutanix Intentful API"
+  }, 
+  "paths" :  {
+      "/images": {
+        "post": {
+            "responses": {
+                "default": {
+                    "description": "Internal Error", 
+                    "schema": {
+                        "$ref": "#/definitions/image_status"
+                    }
+                }, 
+                "202": {
+                    "description": "Request Accepted", 
+                    "schema": {
+                        "$ref": "#/definitions/image_intent_response"
+                    }
+                }
+            }, 
+            "description": "Images are raw ISO, QCOW2, or VMDK files that are uploaded by a user can be attached to a VM. An ISO image is attached as a virtual CD-ROM drive, and QCOW2 and VMDK files are attached as SCSI disks. An image has to be explicitly added to the self-service catalog before users can create VMs from it.\n", 
+            "parameters": [
+                {
+                    "required": true, 
+                    "in": "body", 
+                    "name": "body", 
+                    "schema": {
+                        "$ref": "#/definitions/image_intent_input"
+                    }
+                }
+            ], 
+            "tags": [
+                "images"
+            ], 
+            "x-ntnx-operations": [
+                "create"
+            ], 
+            "x-ntnx-kind": "image", 
+            "summary": "Create a IMAGE"
+        }
+    }, 
+    "/images/list": {
+        "post": {
+            "responses": {
+                "200": {
+                    "description": "Success", 
+                    "schema": {
+                        "$ref": "#/definitions/image_list_intent_response"
+                    }
+                }, 
+                "default": {
+                    "description": "Internal Error", 
+                    "schema": {
+                        "$ref": "#/definitions/image_status"
+                    }
+                }
+            }, 
+            "description": "This operation gets a list of IMAGEs, allowing for sorting and pagination. Note: Entities that have not been created successfully are not listed.\n", 
+            "parameters": [
+                {
+                    "required": true, 
+                    "in": "body", 
+                    "name": "get_entities_request", 
+                    "schema": {
+                        "$ref": "#/definitions/image_list_metadata"
+                    }
+                }
+            ], 
+            "tags": [
+                "images"
+            ], 
+            "x-ntnx-operations": [
+                "view"
+            ], 
+            "x-ntnx-kind": "image", 
+            "summary": "Get a list of IMAGEs"
+        }
+    }, 
+    "/images/migrate": {
+        "post": {
+            "responses": {
+                "default": {
+                    "description": "Internal Error", 
+                    "schema": {
+                        "$ref": "#/definitions/procedural_error_response"
+                    }
+                }, 
+                "202": {
+                    "description": "Request Accepted", 
+                    "schema": {
+                        "$ref": "#/definitions/procedural_response"
+                    }
+                }
+            }, 
+            "description": "Submits a request to create a task handling image migration operation, returns a task reference. This moves ownership of images from the PE cluster to PC. Image uuids can be obtained by querying the PE instance to list images on the PE. In the case where image uuid list is provided as empty, all images on the cluster that are not currently migrated to PC will be migrated to PC.\n", 
+            "parameters": [
+                {
+                    "in": "body", 
+                    "name": "body", 
+                    "schema": {
+                        "$ref": "#/definitions/image_migrate_input"
+                    }
+                }
+            ], 
+            "tags": [
+                "images"
+            ], 
+            "x-ntnx-operations": [
+                "migrate"
+            ], 
+            "x-ntnx-kind": "image", 
+            "summary": "Migrate images from PE cluster to PC"
+        }
+    }, 
+    "/images/{uuid}": {
+        "put": {
+            "responses": {
+                "default": {
+                    "description": "Internal Error", 
+                    "schema": {
+                        "$ref": "#/definitions/image_status"
+                    }
+                }, 
+                "202": {
+                    "description": "Request Accepted", 
+                    "schema": {
+                        "$ref": "#/definitions/image_intent_response"
+                    }
+                }
+            }, 
+            "description": "This operation submits a request to update a IMAGE based on the input parameters.\n", 
+            "parameters": [
+                {
+                    "$ref": "#/parameters/uuid"
+                }, 
+                {
+                    "required": true, 
+                    "in": "body", 
+                    "name": "body", 
+                    "schema": {
+                        "$ref": "#/definitions/image_intent_input"
+                    }
+                }
+            ], 
+            "tags": [
+                "images"
+            ], 
+            "x-ntnx-operations": [
+                "update"
+            ], 
+            "x-ntnx-kind": "image", 
+            "summary": "Update a IMAGE"
+        }, 
+        "get": {
+            "responses": {
+                "200": {
+                    "description": "Success", 
+                    "schema": {
+                        "$ref": "#/definitions/image_intent_response"
+                    }
+                }, 
+                "default": {
+                    "description": "Internal Error", 
+                    "schema": {
+                        "$ref": "#/definitions/image_status"
+                    }
+                }
+            }, 
+            "description": "This operation gets a IMAGE.", 
+            "parameters": [
+                {
+                    "$ref": "#/parameters/uuid"
+                }
+            ], 
+            "tags": [
+                "images"
+            ], 
+            "x-ntnx-operations": [
+                "view"
+            ], 
+            "x-ntnx-kind": "image", 
+            "summary": "Get a IMAGE"
+        }, 
+        "delete": {
+            "responses": {
+                "default": {
+                    "description": "Internal Error", 
+                    "schema": {
+                        "$ref": "#/definitions/image_status"
+                    }
+                }, 
+                "202": {
+                    "description": "Request Accepted", 
+                    "schema": {
+                        "$ref": "#/definitions/image_intent_response"
+                    }
+                }
+            }, 
+            "description": "This operation submits a request to delete a IMAGE.", 
+            "parameters": [
+                {
+                    "$ref": "#/parameters/uuid"
+                }
+            ], 
+            "tags": [
+                "images"
+            ], 
+            "x-ntnx-operations": [
+                "delete"
+            ], 
+            "x-ntnx-kind": "image", 
+            "summary": "Delete a IMAGE"
+        }
+    }, 
+    "/images/{uuid}/file": {
+        "put": {
+            "description": "Upload the binary bits of an image based on the UUID specified. Note that the image must be created first before an upload can be done. Also, once the image has been uploaded the image cannot be changed.\n", 
+            "parameters": [
+                {
+                    "$ref": "#/parameters/uuid"
+                }, 
+                {
+                    "required": true, 
+                    "in": "body", 
+                    "name": "image", 
+                    "schema": {
+                        "format": "binary"
+                    }
+                }, 
+                {
+                    "description": "Checksum type (e.g SHA_1, SHA_256).", 
+                    "enum": [
+                        "SHA_1", 
+                        "SHA_256"
+                    ], 
+                    "type": "string", 
+                    "name": "X-Nutanix-Checksum-Type", 
+                    "in": "header"
+                }, 
+                {
+                    "description": "Checksum bytes.", 
+                    "type": "string", 
+                    "name": "X-Nutanix-Checksum-Bytes", 
+                    "in": "header"
+                }
+            ], 
+            "tags": [
+                "images"
+            ], 
+            "summary": "Upload Image Contents", 
+            "x-ntnx-operations": [
+                "update"
+            ], 
+            "x-ntnx-kind": "image", 
+            "consumes": [
+                "application/octet-stream"
+            ], 
+            "responses": {
+                "200": {
+                    "description": "Success"
+                }, 
+                "default": {
+                    "description": "Internal Error", 
+                    "schema": {
+                        "$ref": "#/definitions/image_status"
+                    }
+                }
+            }
+        }, 
+        "get": {
+            "description": "Downloads the image based on the UUID specified.", 
+            "parameters": [
+                {
+                    "$ref": "#/parameters/uuid"
+                }
+            ], 
+            "tags": [
+                "images"
+            ], 
+            "produces": [
+                "application/octet-stream"
+            ], 
+            "summary": "Get Image Contents", 
+            "x-ntnx-operations": [
+                "view"
+            ], 
+            "x-ntnx-kind": "image", 
+            "responses": {
+                "200": {
+                    "description": "Success", 
+                    "schema": {
+                        "type": "string", 
+                        "format": "binary"
+                    }
+                }, 
+                "default": {
+                    "description": "Internal Error", 
+                    "schema": {
+                        "$ref": "#/definitions/image_status"
+                    }
+                }
+            }
+        }
+    }
+  }, 
+  "schemes": [
+      "http"
+  ], 
+  "parameters": {
+      "uuid": {
+          "in": "path", 
+          "description": "The UUID of the entity.", 
+          "format": "UUID", 
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$", 
+          "required": true, 
+          "type": "string", 
+          "name": "uuid"
+      }
+  }, 
+  "produces": [
+      "application/json"
+  ], 
+  "basePath": "/api/nutanix/v3", 
+  "securityDefinitions": {
+      "basicAuth": {
+          "type": "basic"
+      }
+  }, 
+  "definitions": {
+    "image_intent_response": {
+      "title": "image Intent Response",
+      "required": [
+        "api_version",
+        "metadata"
+      ],
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/image_def_status"
+        },
+        "spec": {
+          "$ref": "#/definitions/image"
+        },
+        "api_version": {
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/image_metadata"
+        }
+      },
+      "description": "Response object for intentful operations on a image"
+    },
+    "image_status": {
+      "title": "Response Kind",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "default": "image",
+          "readOnly": false,
+          "type": "string",
+          "description": "The kind name",
+          "x-ntnx-enum": [
+            "image"
+          ]
+        },
+        "code": {
+          "readOnly": false,
+          "type": "integer",
+          "description": "The HTTP error code."
+        },
+        "message_list": {
+          "items": {
+            "$ref": "#/definitions/message_resource"
+          },
+          "readOnly": false,
+          "type": "array"
+        },
+        "state": {
+          "readOnly": false,
+          "type": "string"
+        },
+        "api_version": {
+          "readOnly": false,
+          "type": "string"
+        }
+      },
+      "description": "The status of a REST API call. Only used when there is a failure to\nreport.\n"
+    },
+    "image_intent_input": {
+      "title": "image Intent Entity",
+      "required": [
+        "metadata",
+        "spec"
+      ],
+      "type": "object",
+      "properties": {
+        "spec": {
+          "$ref": "#/definitions/image"
+        },
+        "api_version": {
+          "default": "3.1.0",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/image_metadata"
+        }
+      },
+      "description": "An intentful representation of a image"
+    },
+    "image_list_intent_response": {
+      "title": "Entity Intent List Response",
+      "required": [
+        "api_version",
+        "metadata"
+      ],
+      "type": "object",
+      "properties": {
+        "entities": {
+          "items": {
+            "$ref": "#/definitions/image_intent_resource"
+          },
+          "type": "array"
+        },
+        "api_version": {
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/image_list_metadata_output"
+        }
+      },
+      "description": "Response object for intentful operation of images"
+    },
+    "image_list_metadata": {
+      "title": "Metadata for image list",
+      "type": "object",
+      "properties": {
+        "filter": {
+          "type": "string",
+          "description": "The filter in FIQL syntax used for the results."
+        },
+        "kind": {
+          "default": "image",
+          "x-ntnx-enum": [
+            "image"
+          ],
+          "type": "string",
+          "description": "The kind name"
+        },
+        "sort_order": {
+          "$ref": "#/definitions/sort_order"
+        },
+        "offset": {
+          "minimum": 0,
+          "type": "integer",
+          "description": "Offset from the start of the entity list",
+          "format": "int32"
+        },
+        "length": {
+          "minimum": 1,
+          "type": "integer",
+          "description": "The number of records to retrieve relative to the offset",
+          "format": "int32"
+        },
+        "sort_attribute": {
+          "type": "string",
+          "description": "The attribute to perform sort on"
+        }
+      },
+      "description": "All api calls that return a list will have this metadata block as input\n"
+    },
+    "procedural_response": {
+      "title": "Procedural API response",
+      "required": [
+        "task_uuid"
+      ],
+      "type": "object",
+      "properties": {
+        "task_uuid": {
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "type": "string",
+          "format": "UUID"
+        }
+      },
+      "description": "Response for invoking a procedural call. Contains a task UUID.\n"
+    },
+    "procedural_error_response": {
+      "title": "Procedural API error response",
+      "type": "object",
+      "properties": {
+        "message_list": {
+          "items": {
+            "$ref": "#/definitions/message_resource"
+          },
+          "readOnly": false,
+          "type": "array"
+        }
+      },
+      "description": "Response for invoking a procedural call.\n"
+    },
+    "image_migrate_input": {
+      "title": "Input for image migration",
+      "required": [
+        "cluster_reference"
+      ],
+      "type": "object",
+      "properties": {
+        "image_reference_list": {
+          "items": {
+            "$ref": "#/definitions/image_reference"
+          },
+          "type": "array",
+          "description": "Reference to the images from PE cluster to be migrated\n"
+        },
+        "cluster_reference": {
+          "description": "Reference to the PE cluster that currently owns images to be migrated.\n",
+          "$ref": "#/definitions/cluster_reference"
+        }
+      },
+      "description": "Specify the cluster and image(s) from the cluster to migrate to PC\n"
+    },
+    "image_def_status": {
+      "title": "image Intent Status with placement specified",
+      "required": [
+        "name",
+        "resources"
+      ],
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "The state of the image."
+        },
+        "name": {
+          "type": "string",
+          "description": "image Name."
+        },
+        "availability_zone_reference": {
+          "$ref": "#/definitions/availability_zone_reference"
+        },
+        "message_list": {
+          "items": {
+            "$ref": "#/definitions/message_resource"
+          },
+          "type": "array",
+          "description": "Any error messages for the image, if in an error state."
+        },
+        "cluster_reference": {
+          "$ref": "#/definitions/cluster_reference"
+        },
+        "resources": {
+          "$ref": "#/definitions/image_resources_def_status"
+        },
+        "description": {
+          "type": "string",
+          "description": "A description for image."
+        }
+      },
+      "description": "An intentful representation of a image status"
+    },
+    "image": {
+      "title": "image Intent Spec with placement specified",
+      "required": [
+        "name",
+        "resources"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "image Name.",
+          "maxLength": 64
+        },
+        "resources": {
+          "$ref": "#/definitions/image_resources"
+        },
+        "description": {
+          "type": "string",
+          "description": "A description for image.",
+          "maxLength": 1000
+        }
+      },
+      "description": "An intentful representation of a image spec"
+    },
+    "image_metadata": {
+      "title": "image metadata",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "last_update_time": {
+          "readOnly": false,
+          "type": "string",
+          "description": "UTC date and time in RFC-3339 format when image was last updated\n",
+          "format": "date-time"
+        },
+        "kind": {
+          "default": "image",
+          "readOnly": false,
+          "type": "string",
+          "description": "The kind name",
+          "x-ntnx-enum": [
+            "image"
+          ]
+        },
+        "uuid": {
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "type": "string",
+          "description": "image uuid",
+          "format": "UUID"
+        },
+        "project_reference": {
+          "description": "The project the image is in.",
+          "$ref": "#/definitions/project_reference"
+        },
+        "spec_version": {
+          "type": "integer",
+          "description": "Version number of the latest spec."
+        },
+        "creation_time": {
+          "readOnly": false,
+          "type": "string",
+          "description": "UTC date and time in RFC-3339 format when image was created\n",
+          "format": "date-time"
+        },
+        "spec_hash": {
+          "type": "string",
+          "description": "Hash of the spec. This will be returned from server.\n"
+        },
+        "owner_reference": {
+          "$ref": "#/definitions/user_reference"
+        },
+        "categories": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object",
+          "description": "Categories for the image"
+        },
+        "name": {
+          "readOnly": false,
+          "type": "string",
+          "description": "image name",
+          "maxLength": 64
+        }
+      },
+      "description": "The image kind metadata"
+    },
+    "message_resource": {
+      "title": "Message.",
+      "required": [
+        "message",
+        "reason"
+      ],
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "If state is ERROR, a message describing the error."
+        },
+        "reason": {
+          "x-ntnx-enum": [
+            "ACCESS_DENIED",
+            "ACCESS_FORBIDDEN",
+            "ACTION_NOT_SUPPORTED",
+            "AUTHENTICATION_REQUIRED",
+            "BEARER_TOKEN_EXPIRED",
+            "BEARER_TOKEN_BAD_SIGNATURE",
+            "CANNOT_MODIFY_PRE_CONFIGURED_REPORT",
+            "CATEGORY_NAME_VALUE_MISMATCH",
+            "CONFIGURATION_INCOMPLETE",
+            "CONCURRENT_REQUESTS_NOT_ALLOWED",
+            "DEFAULT_PROJECT_UNAVAILABLE",
+            "DESERIALIZATION_FAILED",
+            "DIRECTORY_SERVICE_CONNECTION_FAILED",
+            "ENTITY_ALREADY_EXISTS",
+            "ENTITY_DELETION_FAILED",
+            "ENTITY_IS_READONLY",
+            "ENTITY_NAME_UUID_MISMATCH",
+            "ENTITY_NOT_CONFIGURED",
+            "ENTITY_NOT_FOUND",
+            "ENTITY_SAVE_ERROR",
+            "ENTITY_UPDATE_FAILED",
+            "IDEMPOTENCE_UUID_CREATION_FAILED",
+            "IDP_NOT_REACHABLE",
+            "INTERNAL_ERROR",
+            "INVALID_ARGUMENT",
+            "INVALID_AZ_NAME",
+            "INVALID_CONTENT_TYPE",
+            "INVALID_DATA_FORMAT",
+            "INVALID_PORTAL_CONFIGURATION",
+            "INVALID_REQUEST",
+            "INVALID_UUID",
+            "INVALID_OWNER_REFERENCE",
+            "INTERNAL_AZ_PROXY_SETUP_ERROR",
+            "INTERNAL_ERROR_REMOTE_REQUEST",
+            "INTERNAL_ROLE_ACCESS_DENIED",
+            "INCORRECT_EVENTS_FILTER",
+            "MISSING_ATTRIBUTE",
+            "MISSING_CURRENT_USER_METADATA",
+            "NAME_NOT_IN_DOMAIN",
+            "NO_RESPONSE_RECEIVED_FROM_PORTAL",
+            "PE_NOT_PAIRED_WITH_PC",
+            "PC_NOT_PAIRED_WITH_XI_PORTAL",
+            "REFERENCE_ERROR",
+            "RESERVED_ROLE_ACCESS_DENIED",
+            "REQUEST_NOT_SUPPORTED",
+            "REMOTE_CLUSTER_IP_FETCH_FAILED",
+            "REMOTE_CLUSTER_NOT_CONNECTED",
+            "REMOTE_CONNECTION_EXISTS",
+            "REMOTE_CONNECTION_NOT_FOUND",
+            "REPORT_CONFIG_NOT_FOUND",
+            "REPORTING_RESOURCE_NOT_FOUND",
+            "REPORTING_INTERNAL_ERROR",
+            "SERVICE_UNAVAILABLE",
+            "SEARCH_RESULT_PROCESSING_ERROR",
+            "TOO_MANY_REQUESTS",
+            "UNCONFIGURED_API_KEY",
+            "UNCONFIGURED_PORTAL_CONNECTION",
+            "UNSPECIFIED_EVENTS_FILTER",
+            "UNSUPPORTED_AZ_PROXY_API",
+            "UNSUPPORTED_MEDIA_TYPE_ERROR",
+            "UNSUPPORTED_API_VERSION",
+            "UPLOAD_TO_S3_FAILED",
+            "VALIDATION_ERROR",
+            "INVALID_SSL_CERTIFICATE",
+            "ERROR_ATTACHING_FILE_TO_CASE",
+            "SPEC_UPDATE_ERROR",
+            "SPEC_INCOMPATIBLE_ERROR"
+          ],
+          "type": "string",
+          "description": "If state is ERROR, a machine-readable snake-cased string."
+        },
+        "details": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": false,
+          "type": "object",
+          "description": "Custom key-value details relevant to the status."
+        }
+      },
+      "description": "message."
+    },
+    "image_intent_resource": {
+      "title": "image Intent Response",
+      "required": [
+        "metadata"
+      ],
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/image_def_status"
+        },
+        "spec": {
+          "$ref": "#/definitions/image"
+        },
+        "api_version": {
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/image_metadata"
+        }
+      },
+      "description": "Response object for intentful operations on a image"
+    },
+    "image_list_metadata_output": {
+      "title": "Metadata for image list output",
+      "type": "object",
+      "properties": {
+        "filter": {
+          "type": "string",
+          "description": "The filter used for the results"
+        },
+        "kind": {
+          "default": "image",
+          "x-ntnx-enum": [
+            "image"
+          ],
+          "type": "string",
+          "description": "The kind name"
+        },
+        "sort_order": {
+          "$ref": "#/definitions/sort_order"
+        },
+        "offset": {
+          "type": "integer",
+          "description": "Offset from the start of the entity list"
+        },
+        "total_matches": {
+          "type": "integer",
+          "description": "Total matches found"
+        },
+        "length": {
+          "type": "integer",
+          "description": "The number of records retrieved relative to the offset"
+        },
+        "sort_attribute": {
+          "type": "string",
+          "description": "The attribute to perform sort on"
+        }
+      },
+      "description": "All api calls that return a list will have this metadata block\n"
+    },
+    "sort_order": {
+      "x-ntnx-enum": [
+        "ASCENDING",
+        "DESCENDING"
+      ],
+      "type": "string",
+      "description": "The sort order in which results are returned",
+      "title": "Sort order"
+    },
+    "image_reference": {
+      "title": "Reference to a image",
+      "required": [
+        "kind",
+        "uuid"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "default": "image",
+          "readOnly": false,
+          "type": "string",
+          "description": "The kind name",
+          "x-ntnx-enum": [
+            "image"
+          ]
+        },
+        "name": {
+          "readOnly": false,
+          "type": "string"
+        },
+        "uuid": {
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "type": "string",
+          "format": "UUID"
+        }
+      },
+      "description": "The reference to a image"
+    },
+    "cluster_reference": {
+      "title": "Reference to a cluster",
+      "required": [
+        "kind",
+        "uuid"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "default": "cluster",
+          "readOnly": false,
+          "type": "string",
+          "description": "The kind name",
+          "x-ntnx-enum": [
+            "cluster"
+          ]
+        },
+        "name": {
+          "readOnly": false,
+          "type": "string"
+        },
+        "uuid": {
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "type": "string",
+          "format": "UUID"
+        }
+      },
+      "description": "The reference to a cluster"
+    },
+    "availability_zone_reference": {
+      "title": "Reference to a availability_zone",
+      "required": [
+        "kind",
+        "uuid"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "default": "availability_zone",
+          "readOnly": false,
+          "type": "string",
+          "description": "The kind name",
+          "x-ntnx-enum": [
+            "availability_zone"
+          ]
+        },
+        "name": {
+          "readOnly": false,
+          "type": "string"
+        },
+        "uuid": {
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "type": "string",
+          "format": "UUID"
+        }
+      },
+      "description": "The reference to a availability_zone"
+    },
+    "image_resources_def_status": {
+      "title": "Image status resources",
+      "type": "object",
+      "properties": {
+        "retrieval_uri_list": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "List of URIs where the raw image data can be accessed.\n"
+        },
+        "version": {
+          "description": "The image version",
+          "$ref": "#/definitions/image_version_status"
+        },
+        "architecture": {
+          "$ref": "#/definitions/image_architecture"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "description": "The size of the image in bytes.",
+          "format": "long"
+        },
+        "image_type": {
+          "$ref": "#/definitions/image_type"
+        },
+        "checksum": {
+          "description": "Checksum of the image. The checksum is used for image validation if the image has a source specified. For images that do not have their source specified the checksum is generated by the image service.\n",
+          "$ref": "#/definitions/checksum"
+        },
+        "source_uri": {
+          "type": "string",
+          "description": "The source URI points at the location of a the source image which is used to create/update image.\n"
+        }
+      },
+      "description": "Describes the image status resources object."
+    },
+    "image_resources": {
+      "title": "Image spec resources",
+      "type": "object",
+      "properties": {
+        "image_type": {
+          "$ref": "#/definitions/image_type"
+        },
+        "checksum": {
+          "description": "Checksum of the image. The checksum is used for image validation if the image has a source specified. For images that do not have their source specified the checksum is generated by the image service.\n",
+          "$ref": "#/definitions/checksum"
+        },
+        "source_uri": {
+          "type": "string",
+          "description": "The source URI points at the location of a the source image which is used to create/update image.\n"
+        },
+        "version": {
+          "description": "The image version",
+          "$ref": "#/definitions/image_version_resources"
+        },
+        "architecture": {
+          "description": "Indicates the CPU architecture that the image is compatible with. If this is not specified for an image this will default to the CPU architecture type of the cluster.\n",
+          "$ref": "#/definitions/image_architecture"
+        }
+      },
+      "description": "Describes the image spec resources object."
+    },
+    "project_reference": {
+      "title": "Reference to a project",
+      "required": [
+        "kind",
+        "uuid"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "default": "project",
+          "readOnly": false,
+          "type": "string",
+          "description": "The kind name",
+          "x-ntnx-enum": [
+            "project"
+          ]
+        },
+        "name": {
+          "readOnly": false,
+          "type": "string"
+        },
+        "uuid": {
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "type": "string",
+          "format": "UUID"
+        }
+      },
+      "description": "The reference to a project"
+    },
+    "user_reference": {
+      "title": "Reference to a user",
+      "required": [
+        "kind",
+        "uuid"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "default": "user",
+          "readOnly": false,
+          "type": "string",
+          "description": "The kind name",
+          "x-ntnx-enum": [
+            "user"
+          ]
+        },
+        "name": {
+          "readOnly": false,
+          "type": "string"
+        },
+        "uuid": {
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "type": "string",
+          "format": "UUID"
+        }
+      },
+      "description": "The reference to a user"
+    },
+    "image_version_status": {
+      "title": "Image version",
+      "required": [
+        "product_name",
+        "product_version"
+      ],
+      "type": "object",
+      "properties": {
+        "product_version": {
+          "type": "string",
+          "description": "Version string for the disk image."
+        },
+        "product_name": {
+          "type": "string",
+          "description": "Name of the producer/distribution of the image. For example windows or red hat.\n"
+        }
+      },
+      "description": "The image version, which is composed of a product name and product version.\n"
+    },
+    "image_architecture": {
+      "x-ntnx-enum": [
+        "X86_64",
+        "PPC64",
+        "PPC64LE"
+      ],
+      "type": "string",
+      "description": "The supported CPU architecture for a disk image.",
+      "title": "Image architecture"
+    },
+    "image_type": {
+      "x-ntnx-enum": [
+        "DISK_IMAGE",
+        "ISO_IMAGE"
+      ],
+      "type": "string",
+      "description": "The type of image.",
+      "title": "Image type"
+    },
+    "checksum": {
+      "title": "Image checksum",
+      "required": [
+        "checksum_algorithm",
+        "checksum_value"
+      ],
+      "properties": {
+        "checksum_algorithm": {
+          "$ref": "#/definitions/checksum_algorithm"
+        },
+        "checksum_value": {
+          "type": "string",
+          "format": "bytes"
+        }
+      },
+      "description": "Image checksum"
+    },
+    "image_version_resources": {
+      "title": "Image version",
+      "required": [
+        "product_name",
+        "product_version"
+      ],
+      "type": "object",
+      "properties": {
+        "product_version": {
+          "type": "string",
+          "description": "Version string for the disk image.",
+          "maxLength": 64
+        },
+        "product_name": {
+          "type": "string",
+          "description": "Name of the producer/distribution of the image. For example windows or red hat.\n",
+          "maxLength": 64
+        }
+      },
+      "description": "The image version, which is composed of a product name and product version.\n"
+    },
+    "checksum_algorithm": {
+      "x-ntnx-enum": [
+        "SHA_256",
+        "SHA_1"
+      ],
+      "type": "string",
+      "description": "The type of checksum calculated for the image",
+      "title": "Checksum algorithm"
+    }
+  }, 
+  "security": [
+      {
+          "basicAuth": []
+      }
+  ], 
+  "swagger": "2.0"
+}
