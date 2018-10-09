@@ -1,0 +1,3119 @@
+---
+schemas:
+  address: &ref_1
+    type: object
+    description: Host address.
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    properties:
+      fqdn:
+        schema: &ref_18
+          type: string
+          description: Fully qualified domain name.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .address.fqdn
+              description: ''
+        description: Fully qualified domain name.
+        serializedName: fqdn
+        extensions: {}
+        details:
+          default:
+            name: fqdn
+            description: Fully qualified domain name.
+            required: false
+      ip:
+        schema: &ref_19
+          type: string
+          description: IPV4 address.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          pattern: >-
+            ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .address.ip
+              description: ''
+        description: IPV4 address.
+        serializedName: ip
+        extensions: {}
+        details:
+          default:
+            name: ip
+            description: IPV4 address.
+            required: false
+      ipv6:
+        schema: &ref_20
+          type: string
+          description: IPV6 address.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          pattern: >-
+            (([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .address.ipv6
+              description: ''
+        description: IPV6 address.
+        serializedName: ipv6
+        extensions: {}
+        details:
+          default:
+            name: ipv6
+            description: IPV6 address.
+            required: false
+      port:
+        schema: &ref_21
+          type: integer
+          format: int32
+          description: Port Number
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .address.port
+              description: ''
+        description: Port Number
+        serializedName: port
+        extensions: {}
+        details:
+          default:
+            name: port
+            description: Port Number
+            required: false
+    readOnly: false
+    required: []
+    title: Host address.
+    writeOnly: false
+    extensions:
+      x-ntnx-one-of:
+        - required:
+            - ip
+        - required:
+            - ipv6
+        - required:
+            - fqdn
+    details:
+      default:
+        name: address
+        description: Host address.
+  availability_zone_reference: &ref_3
+    type: object
+    description: The reference to a availability_zone
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    properties:
+      name:
+        schema: &ref_23
+          type: string
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .availability_zone_reference.name
+              description: ''
+        description: ''
+        serializedName: name
+        extensions: {}
+        details:
+          default:
+            name: name
+            description: ''
+            required: false
+      kind:
+        schema: &ref_22
+          type: string
+          description: The kind name
+          allOf: []
+          anyOf: []
+          default: availability_zone
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions:
+            x-ntnx-enum:
+              - availability_zone
+          details:
+            default:
+              name: .availability_zone_reference.kind
+              description: ''
+        description: The kind name
+        serializedName: kind
+        extensions: {}
+        details:
+          default:
+            name: kind
+            description: The kind name
+            required: true
+      uuid:
+        schema: &ref_24
+          type: string
+          format: UUID
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          pattern: >-
+            ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .availability_zone_reference.uuid
+              description: ''
+        description: ''
+        serializedName: uuid
+        extensions: {}
+        details:
+          default:
+            name: uuid
+            description: ''
+            required: true
+    readOnly: false
+    required:
+      - kind
+      - uuid
+    title: Reference to a availability_zone
+    writeOnly: false
+    extensions: {}
+    details:
+      default:
+        name: availability_zone_reference
+        description: The reference to a availability_zone
+  cluster_reference: &ref_4
+    type: object
+    description: The reference to a cluster
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    properties:
+      name:
+        schema: &ref_26
+          type: string
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .cluster_reference.name
+              description: ''
+        description: ''
+        serializedName: name
+        extensions: {}
+        details:
+          default:
+            name: name
+            description: ''
+            required: false
+      kind:
+        schema: &ref_25
+          type: string
+          description: The kind name
+          allOf: []
+          anyOf: []
+          default: cluster
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions:
+            x-ntnx-enum:
+              - cluster
+          details:
+            default:
+              name: .cluster_reference.kind
+              description: ''
+        description: The kind name
+        serializedName: kind
+        extensions: {}
+        details:
+          default:
+            name: kind
+            description: The kind name
+            required: true
+      uuid:
+        schema: &ref_27
+          type: string
+          format: UUID
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          pattern: >-
+            ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .cluster_reference.uuid
+              description: ''
+        description: ''
+        serializedName: uuid
+        extensions: {}
+        details:
+          default:
+            name: uuid
+            description: ''
+            required: true
+    readOnly: false
+    required:
+      - kind
+      - uuid
+    title: Reference to a cluster
+    writeOnly: false
+    extensions: {}
+    details:
+      default:
+        name: cluster_reference
+        description: The reference to a cluster
+  dhcp_options: &ref_0
+    type: object
+    description: Spec for defining DHCP options.
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    properties:
+      boot_file_name:
+        schema: &ref_28
+          type: string
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .dhcp_options.boot_file_name
+              description: ''
+        description: ''
+        serializedName: boot_file_name
+        extensions: {}
+        details:
+          default:
+            name: boot_file_name
+            description: ''
+            required: false
+      domain_name:
+        schema: &ref_29
+          type: string
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .dhcp_options.domain_name
+              description: ''
+        description: ''
+        serializedName: domain_name
+        extensions: {}
+        details:
+          default:
+            name: domain_name
+            description: ''
+            required: false
+      domain_name_server_list:
+        schema: &ref_30
+          type: array
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          items: &ref_31
+            type: string
+            allOf: []
+            anyOf: []
+            deprecated: false
+            enum: []
+            nullable: false
+            oneOf: []
+            pattern: >-
+              ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+            properties: {}
+            readOnly: false
+            required: []
+            writeOnly: false
+            extensions: {}
+            details:
+              default:
+                name: .dhcp_options.domain_name_server_list.itemType
+                description: ''
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .dhcp_options.domain_name_server_list
+              description: ''
+        description: ''
+        serializedName: domain_name_server_list
+        extensions: {}
+        details:
+          default:
+            name: domain_name_server_list
+            description: ''
+            required: false
+      domain_search_list:
+        schema: &ref_32
+          type: array
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          items: &ref_33
+            type: string
+            allOf: []
+            anyOf: []
+            deprecated: false
+            enum: []
+            nullable: false
+            oneOf: []
+            properties: {}
+            readOnly: false
+            required: []
+            writeOnly: false
+            extensions: {}
+            details:
+              default:
+                name: .dhcp_options.domain_search_list.itemType
+                description: ''
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .dhcp_options.domain_search_list
+              description: ''
+        description: ''
+        serializedName: domain_search_list
+        extensions: {}
+        details:
+          default:
+            name: domain_search_list
+            description: ''
+            required: false
+      tftp_server_name:
+        schema: &ref_34
+          type: string
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .dhcp_options.tftp_server_name
+              description: ''
+        description: ''
+        serializedName: tftp_server_name
+        extensions: {}
+        details:
+          default:
+            name: tftp_server_name
+            description: ''
+            required: false
+    readOnly: false
+    required: []
+    title: DHCP options
+    writeOnly: false
+    extensions: {}
+    details:
+      default:
+        name: dhcp_options
+        description: Spec for defining DHCP options.
+  ip_config: &ref_5
+    type: object
+    description: IP config.
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    properties:
+      default_gateway_ip:
+        schema: &ref_35
+          type: string
+          description: Default gateway IP address.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          pattern: >-
+            ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .ip_config.default_gateway_ip
+              description: ''
+        description: Default gateway IP address.
+        serializedName: default_gateway_ip
+        extensions: {}
+        details:
+          default:
+            name: default_gateway_ip
+            description: Default gateway IP address.
+            required: false
+      dhcp_options:
+        schema: *ref_0
+        description: Spec for defining DHCP options.
+        serializedName: dhcp_options
+        extensions: {}
+        details:
+          default:
+            name: dhcp_options
+            description: Spec for defining DHCP options.
+            required: false
+      dhcp_server_address:
+        schema: *ref_1
+        description: Host address.
+        serializedName: dhcp_server_address
+        extensions: {}
+        details:
+          default:
+            name: dhcp_server_address
+            description: Host address.
+            required: false
+      pool_list:
+        schema: &ref_36
+          type: array
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          items: &ref_2
+            type: object
+            description: IP pool.
+            allOf: []
+            anyOf: []
+            deprecated: false
+            enum: []
+            nullable: false
+            oneOf: []
+            properties:
+              range:
+                schema: &ref_39
+                  type: string
+                  description: |
+                    Range of IPs (example: 10.0.0.9 10.0.0.19).
+                  allOf: []
+                  anyOf: []
+                  deprecated: false
+                  enum: []
+                  nullable: false
+                  oneOf: []
+                  pattern: >-
+                    ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[
+                    ](?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+                  properties: {}
+                  readOnly: false
+                  required: []
+                  writeOnly: false
+                  extensions: {}
+                  details:
+                    default:
+                      name: .ip_pool.range
+                      description: ''
+                description: |
+                  Range of IPs (example: 10.0.0.9 10.0.0.19).
+                serializedName: range
+                extensions: {}
+                details:
+                  default:
+                    name: range
+                    description: |
+                      Range of IPs (example: 10.0.0.9 10.0.0.19).
+                    required: false
+            readOnly: false
+            required: []
+            title: IP pool
+            writeOnly: false
+            extensions: {}
+            details:
+              default:
+                name: ip_pool
+                description: IP pool.
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .ip_config.pool_list
+              description: ''
+        description: ''
+        serializedName: pool_list
+        extensions: {}
+        details:
+          default:
+            name: pool_list
+            description: ''
+            required: false
+      prefix_length:
+        schema: &ref_37
+          type: integer
+          format: int32
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .ip_config.prefix_length
+              description: ''
+        description: ''
+        serializedName: prefix_length
+        extensions: {}
+        details:
+          default:
+            name: prefix_length
+            description: ''
+            required: false
+      subnet_ip:
+        schema: &ref_38
+          type: string
+          description: Subnet IP address.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          pattern: >-
+            ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .ip_config.subnet_ip
+              description: ''
+        description: Subnet IP address.
+        serializedName: subnet_ip
+        extensions: {}
+        details:
+          default:
+            name: subnet_ip
+            description: Subnet IP address.
+            required: false
+    readOnly: false
+    required: []
+    title: IP config
+    writeOnly: false
+    extensions: {}
+    details:
+      default:
+        name: ip_config
+        description: IP config.
+  ip_pool: *ref_2
+  message_resource: &ref_7
+    type: object
+    description: message.
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    properties:
+      message:
+        schema: &ref_42
+          type: string
+          description: 'If state is ERROR, a message describing the error.'
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .message_resource.message
+              description: ''
+        description: 'If state is ERROR, a message describing the error.'
+        serializedName: message
+        extensions: {}
+        details:
+          default:
+            name: message
+            description: 'If state is ERROR, a message describing the error.'
+            required: true
+      reason:
+        schema: &ref_43
+          type: string
+          description: 'If state is ERROR, a machine-readable snake-cased string.'
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions:
+            x-ntnx-enum:
+              - ACCESS_DENIED
+              - ACCESS_FORBIDDEN
+              - ACTION_NOT_SUPPORTED
+              - AUTHENTICATION_REQUIRED
+              - BEARER_TOKEN_EXPIRED
+              - BEARER_TOKEN_BAD_SIGNATURE
+              - CANNOT_MODIFY_PRE_CONFIGURED_REPORT
+              - CATEGORY_NAME_VALUE_MISMATCH
+              - CONFIGURATION_INCOMPLETE
+              - CONCURRENT_REQUESTS_NOT_ALLOWED
+              - DEFAULT_PROJECT_UNAVAILABLE
+              - DESERIALIZATION_FAILED
+              - DIRECTORY_SERVICE_CONNECTION_FAILED
+              - ENTITY_ALREADY_EXISTS
+              - ENTITY_DELETION_FAILED
+              - ENTITY_IS_READONLY
+              - ENTITY_NAME_UUID_MISMATCH
+              - ENTITY_NOT_CONFIGURED
+              - ENTITY_NOT_FOUND
+              - ENTITY_SAVE_ERROR
+              - ENTITY_UPDATE_FAILED
+              - IDEMPOTENCE_UUID_CREATION_FAILED
+              - IDP_NOT_REACHABLE
+              - INTERNAL_ERROR
+              - INVALID_ARGUMENT
+              - INVALID_AZ_NAME
+              - INVALID_CONTENT_TYPE
+              - INVALID_DATA_FORMAT
+              - INVALID_PORTAL_CONFIGURATION
+              - INVALID_REQUEST
+              - INVALID_UUID
+              - INVALID_OWNER_REFERENCE
+              - INTERNAL_AZ_PROXY_SETUP_ERROR
+              - INTERNAL_ERROR_REMOTE_REQUEST
+              - INTERNAL_ROLE_ACCESS_DENIED
+              - INCORRECT_EVENTS_FILTER
+              - MISSING_ATTRIBUTE
+              - MISSING_CURRENT_USER_METADATA
+              - NAME_NOT_IN_DOMAIN
+              - NO_RESPONSE_RECEIVED_FROM_PORTAL
+              - PE_NOT_PAIRED_WITH_PC
+              - PC_NOT_PAIRED_WITH_XI_PORTAL
+              - REFERENCE_ERROR
+              - RESERVED_ROLE_ACCESS_DENIED
+              - REQUEST_NOT_SUPPORTED
+              - REMOTE_CLUSTER_IP_FETCH_FAILED
+              - REMOTE_CLUSTER_NOT_CONNECTED
+              - REMOTE_CONNECTION_EXISTS
+              - REMOTE_CONNECTION_NOT_FOUND
+              - REPORT_CONFIG_NOT_FOUND
+              - REPORTING_RESOURCE_NOT_FOUND
+              - REPORTING_INTERNAL_ERROR
+              - SERVICE_UNAVAILABLE
+              - SEARCH_RESULT_PROCESSING_ERROR
+              - TOO_MANY_REQUESTS
+              - UNCONFIGURED_API_KEY
+              - UNCONFIGURED_PORTAL_CONNECTION
+              - UNSPECIFIED_EVENTS_FILTER
+              - UNSUPPORTED_AZ_PROXY_API
+              - UNSUPPORTED_MEDIA_TYPE_ERROR
+              - UNSUPPORTED_API_VERSION
+              - UPLOAD_TO_S3_FAILED
+              - VALIDATION_ERROR
+              - INVALID_SSL_CERTIFICATE
+              - ERROR_ATTACHING_FILE_TO_CASE
+              - SPEC_UPDATE_ERROR
+              - SPEC_INCOMPATIBLE_ERROR
+          details:
+            default:
+              name: .message_resource.reason
+              description: ''
+        description: 'If state is ERROR, a machine-readable snake-cased string.'
+        serializedName: reason
+        extensions: {}
+        details:
+          default:
+            name: reason
+            description: 'If state is ERROR, a machine-readable snake-cased string.'
+            required: true
+      details:
+        schema: &ref_40
+          type: object
+          description: Custom key-value details relevant to the status.
+          additionalProperties: &ref_41
+            type: string
+            allOf: []
+            anyOf: []
+            deprecated: false
+            enum: []
+            nullable: false
+            oneOf: []
+            properties: {}
+            readOnly: false
+            required: []
+            writeOnly: false
+            extensions: {}
+            details:
+              default:
+                name: .message_resource.details.additionalItemType
+                description: ''
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .message_resource.details
+              description: Custom key-value details relevant to the status.
+        description: Custom key-value details relevant to the status.
+        serializedName: details
+        extensions: {}
+        details:
+          default:
+            name: details
+            description: Custom key-value details relevant to the status.
+            required: false
+    readOnly: false
+    required:
+      - message
+      - reason
+    title: Message.
+    writeOnly: false
+    extensions: {}
+    details:
+      default:
+        name: message_resource
+        description: message.
+  network_function_chain_reference: &ref_6
+    type: object
+    description: The reference to a network_function_chain
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    properties:
+      name:
+        schema: &ref_45
+          type: string
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .network_function_chain_reference.name
+              description: ''
+        description: ''
+        serializedName: name
+        extensions: {}
+        details:
+          default:
+            name: name
+            description: ''
+            required: false
+      kind:
+        schema: &ref_44
+          type: string
+          description: The kind name
+          allOf: []
+          anyOf: []
+          default: network_function_chain
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions:
+            x-ntnx-enum:
+              - network_function_chain
+          details:
+            default:
+              name: .network_function_chain_reference.kind
+              description: ''
+        description: The kind name
+        serializedName: kind
+        extensions: {}
+        details:
+          default:
+            name: kind
+            description: The kind name
+            required: true
+      uuid:
+        schema: &ref_46
+          type: string
+          format: UUID
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          pattern: >-
+            ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .network_function_chain_reference.uuid
+              description: ''
+        description: ''
+        serializedName: uuid
+        extensions: {}
+        details:
+          default:
+            name: uuid
+            description: ''
+            required: true
+    readOnly: false
+    required:
+      - kind
+      - uuid
+    title: Reference to a network_function_chain
+    writeOnly: false
+    extensions: {}
+    details:
+      default:
+        name: network_function_chain_reference
+        description: The reference to a network_function_chain
+  project_reference: &ref_8
+    type: object
+    description: The reference to a project
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    properties:
+      name:
+        schema: &ref_48
+          type: string
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .project_reference.name
+              description: ''
+        description: ''
+        serializedName: name
+        extensions: {}
+        details:
+          default:
+            name: name
+            description: ''
+            required: false
+      kind:
+        schema: &ref_47
+          type: string
+          description: The kind name
+          allOf: []
+          anyOf: []
+          default: project
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions:
+            x-ntnx-enum:
+              - project
+          details:
+            default:
+              name: .project_reference.kind
+              description: ''
+        description: The kind name
+        serializedName: kind
+        extensions: {}
+        details:
+          default:
+            name: kind
+            description: The kind name
+            required: true
+      uuid:
+        schema: &ref_49
+          type: string
+          format: UUID
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          pattern: >-
+            ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .project_reference.uuid
+              description: ''
+        description: ''
+        serializedName: uuid
+        extensions: {}
+        details:
+          default:
+            name: uuid
+            description: ''
+            required: true
+    readOnly: false
+    required:
+      - kind
+      - uuid
+    title: Reference to a project
+    writeOnly: false
+    extensions: {}
+    details:
+      default:
+        name: project_reference
+        description: The reference to a project
+  sort_order: &ref_13
+    type: string
+    description: The sort order in which results are returned
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    properties: {}
+    readOnly: false
+    required: []
+    title: Sort order
+    writeOnly: false
+    extensions:
+      x-ntnx-enum:
+        - ASCENDING
+        - DESCENDING
+    details:
+      default:
+        name: sort_order
+        description: ''
+  subnet: &ref_9
+    type: object
+    description: An intentful representation of a subnet spec
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    properties:
+      name:
+        schema: &ref_51
+          type: string
+          description: subnet Name.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          maxLength: 64
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .subnet.name
+              description: ''
+        description: subnet Name.
+        serializedName: name
+        extensions: {}
+        details:
+          default:
+            name: name
+            description: subnet Name.
+            required: true
+      description:
+        schema: &ref_50
+          type: string
+          description: A description for subnet.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          maxLength: 1000
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .subnet.description
+              description: ''
+        description: A description for subnet.
+        serializedName: description
+        extensions: {}
+        details:
+          default:
+            name: description
+            description: A description for subnet.
+            required: false
+      availability_zone_reference:
+        schema: *ref_3
+        description: The reference to a availability_zone
+        serializedName: availability_zone_reference
+        extensions: {}
+        details:
+          default:
+            name: availability_zone_reference
+            description: The reference to a availability_zone
+            required: false
+      cluster_reference:
+        schema: *ref_4
+        description: The reference to a cluster
+        serializedName: cluster_reference
+        extensions: {}
+        details:
+          default:
+            name: cluster_reference
+            description: The reference to a cluster
+            required: false
+      resources:
+        schema: &ref_15
+          type: object
+          description: Subnet creation/modification spec.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties:
+            ip_config:
+              schema: *ref_5
+              description: IP config.
+              serializedName: ip_config
+              extensions: {}
+              details:
+                default:
+                  name: ip_config
+                  description: IP config.
+                  required: false
+            network_function_chain_reference:
+              schema: *ref_6
+              description: The reference to a network_function_chain
+              serializedName: network_function_chain_reference
+              extensions: {}
+              details:
+                default:
+                  name: network_function_chain_reference
+                  description: The reference to a network_function_chain
+                  required: false
+            subnet_type:
+              schema: &ref_81
+                type: string
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions:
+                  x-ntnx-enum:
+                    - VLAN
+                details:
+                  default:
+                    name: .subnet_resources.subnet_type
+                    description: ''
+              description: ''
+              serializedName: subnet_type
+              extensions: {}
+              details:
+                default:
+                  name: subnet_type
+                  description: ''
+                  required: true
+            vlan_id:
+              schema: &ref_82
+                type: integer
+                format: int32
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions: {}
+                details:
+                  default:
+                    name: .subnet_resources.vlan_id
+                    description: ''
+              description: ''
+              serializedName: vlan_id
+              extensions: {}
+              details:
+                default:
+                  name: vlan_id
+                  description: ''
+                  required: false
+            vswitch_name:
+              schema: &ref_83
+                type: string
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                maxLength: 64
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions: {}
+                details:
+                  default:
+                    name: .subnet_resources.vswitch_name
+                    description: ''
+              description: ''
+              serializedName: vswitch_name
+              extensions: {}
+              details:
+                default:
+                  name: vswitch_name
+                  description: ''
+                  required: false
+          readOnly: false
+          required:
+            - subnet_type
+          title: Subnet creation/modification spec
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: subnet_resources
+              description: Subnet creation/modification spec.
+        description: Subnet creation/modification spec.
+        serializedName: resources
+        extensions: {}
+        details:
+          default:
+            name: resources
+            description: Subnet creation/modification spec.
+            required: true
+    readOnly: false
+    required:
+      - name
+      - resources
+    title: subnet Intent Spec with placement specified
+    writeOnly: false
+    extensions: {}
+    details:
+      default:
+        name: subnet
+        description: An intentful representation of a subnet spec
+  subnet_def_status: &ref_11
+    type: object
+    description: An intentful representation of a subnet status
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    properties:
+      name:
+        schema: &ref_54
+          type: string
+          description: subnet Name.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .subnet_def_status.name
+              description: ''
+        description: subnet Name.
+        serializedName: name
+        extensions: {}
+        details:
+          default:
+            name: name
+            description: subnet Name.
+            required: true
+      description:
+        schema: &ref_52
+          type: string
+          description: A description for subnet.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .subnet_def_status.description
+              description: ''
+        description: A description for subnet.
+        serializedName: description
+        extensions: {}
+        details:
+          default:
+            name: description
+            description: A description for subnet.
+            required: false
+      availability_zone_reference:
+        schema: *ref_3
+        description: The reference to a availability_zone
+        serializedName: availability_zone_reference
+        extensions: {}
+        details:
+          default:
+            name: availability_zone_reference
+            description: The reference to a availability_zone
+            required: false
+      cluster_reference:
+        schema: *ref_4
+        description: The reference to a cluster
+        serializedName: cluster_reference
+        extensions: {}
+        details:
+          default:
+            name: cluster_reference
+            description: The reference to a cluster
+            required: false
+      message_list:
+        schema: &ref_53
+          type: array
+          description: 'Any error messages for the subnet, if in an error state.'
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          items: *ref_7
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .subnet_def_status.message_list
+              description: ''
+        description: 'Any error messages for the subnet, if in an error state.'
+        serializedName: message_list
+        extensions: {}
+        details:
+          default:
+            name: message_list
+            description: 'Any error messages for the subnet, if in an error state.'
+            required: false
+      resources:
+        schema: &ref_16
+          type: object
+          description: Subnet creation/modification status.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties:
+            ip_config:
+              schema: *ref_5
+              description: IP config.
+              serializedName: ip_config
+              extensions: {}
+              details:
+                default:
+                  name: ip_config
+                  description: IP config.
+                  required: false
+            network_function_chain_reference:
+              schema: *ref_6
+              description: The reference to a network_function_chain
+              serializedName: network_function_chain_reference
+              extensions: {}
+              details:
+                default:
+                  name: network_function_chain_reference
+                  description: The reference to a network_function_chain
+                  required: false
+            subnet_type:
+              schema: &ref_84
+                type: string
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions:
+                  x-ntnx-enum:
+                    - VLAN
+                details:
+                  default:
+                    name: .subnet_resources_def_status.subnet_type
+                    description: ''
+              description: ''
+              serializedName: subnet_type
+              extensions: {}
+              details:
+                default:
+                  name: subnet_type
+                  description: ''
+                  required: false
+            vlan_id:
+              schema: &ref_85
+                type: integer
+                format: int32
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                minimum: 0
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions: {}
+                details:
+                  default:
+                    name: .subnet_resources_def_status.vlan_id
+                    description: ''
+              description: ''
+              serializedName: vlan_id
+              extensions: {}
+              details:
+                default:
+                  name: vlan_id
+                  description: ''
+                  required: false
+            vswitch_name:
+              schema: &ref_86
+                type: string
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions: {}
+                details:
+                  default:
+                    name: .subnet_resources_def_status.vswitch_name
+                    description: ''
+              description: ''
+              serializedName: vswitch_name
+              extensions: {}
+              details:
+                default:
+                  name: vswitch_name
+                  description: ''
+                  required: false
+          readOnly: false
+          required: []
+          title: Subnet creation/modification status
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: subnet_resources_def_status
+              description: Subnet creation/modification status.
+        description: Subnet creation/modification status.
+        serializedName: resources
+        extensions: {}
+        details:
+          default:
+            name: resources
+            description: Subnet creation/modification status.
+            required: true
+      state:
+        schema: &ref_55
+          type: string
+          description: The state of the subnet.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .subnet_def_status.state
+              description: ''
+        description: The state of the subnet.
+        serializedName: state
+        extensions: {}
+        details:
+          default:
+            name: state
+            description: The state of the subnet.
+            required: false
+    readOnly: false
+    required:
+      - name
+      - resources
+    title: subnet Intent Status with placement specified
+    writeOnly: false
+    extensions: {}
+    details:
+      default:
+        name: subnet_def_status
+        description: An intentful representation of a subnet status
+  subnet_intent_input: &ref_96
+    type: object
+    description: An intentful representation of a subnet
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    properties:
+      api_version:
+        schema: &ref_56
+          type: string
+          allOf: []
+          anyOf: []
+          default: 3.1.0
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .subnet_intent_input.api_version
+              description: ''
+        description: ''
+        serializedName: api_version
+        extensions: {}
+        details:
+          default:
+            name: api_version
+            description: ''
+            required: false
+      metadata:
+        schema: &ref_10
+          type: object
+          description: The subnet kind metadata
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties:
+            name:
+              schema: &ref_77
+                type: string
+                description: subnet name
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                maxLength: 64
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions: {}
+                details:
+                  default:
+                    name: .subnet_metadata.name
+                    description: ''
+              description: subnet name
+              serializedName: name
+              extensions: {}
+              details:
+                default:
+                  name: name
+                  description: subnet name
+                  required: false
+            categories:
+              schema: &ref_72
+                type: object
+                description: Categories for the subnet
+                additionalProperties: &ref_73
+                  type: string
+                  allOf: []
+                  anyOf: []
+                  deprecated: false
+                  enum: []
+                  nullable: false
+                  oneOf: []
+                  properties: {}
+                  readOnly: false
+                  required: []
+                  writeOnly: false
+                  extensions: {}
+                  details:
+                    default:
+                      name: .subnet_metadata.categories.additionalItemType
+                      description: ''
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions: {}
+                details:
+                  default:
+                    name: .subnet_metadata.categories
+                    description: Categories for the subnet
+              description: Categories for the subnet
+              serializedName: categories
+              extensions: {}
+              details:
+                default:
+                  name: categories
+                  description: Categories for the subnet
+                  required: false
+            creation_time:
+              schema: &ref_74
+                type: string
+                format: date-time
+                description: |
+                  UTC date and time in RFC-3339 format when subnet was created
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions: {}
+                details:
+                  default:
+                    name: .subnet_metadata.creation_time
+                    description: ''
+              description: |
+                UTC date and time in RFC-3339 format when subnet was created
+              serializedName: creation_time
+              extensions: {}
+              details:
+                default:
+                  name: creation_time
+                  description: |
+                    UTC date and time in RFC-3339 format when subnet was created
+                  required: false
+            kind:
+              schema: &ref_75
+                type: string
+                description: The kind name
+                allOf: []
+                anyOf: []
+                default: subnet
+                deprecated: false
+                enum: []
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions:
+                  x-ntnx-enum:
+                    - subnet
+                details:
+                  default:
+                    name: .subnet_metadata.kind
+                    description: ''
+              description: The kind name
+              serializedName: kind
+              extensions: {}
+              details:
+                default:
+                  name: kind
+                  description: The kind name
+                  required: true
+            last_update_time:
+              schema: &ref_76
+                type: string
+                format: date-time
+                description: >
+                  UTC date and time in RFC-3339 format when subnet was last
+                  updated
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions: {}
+                details:
+                  default:
+                    name: .subnet_metadata.last_update_time
+                    description: ''
+              description: >
+                UTC date and time in RFC-3339 format when subnet was last
+                updated
+              serializedName: last_update_time
+              extensions: {}
+              details:
+                default:
+                  name: last_update_time
+                  description: >
+                    UTC date and time in RFC-3339 format when subnet was last
+                    updated
+                  required: false
+            owner_reference:
+              schema: &ref_17
+                type: object
+                description: The reference to a user
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                nullable: false
+                oneOf: []
+                properties:
+                  name:
+                    schema: &ref_93
+                      type: string
+                      allOf: []
+                      anyOf: []
+                      deprecated: false
+                      enum: []
+                      nullable: false
+                      oneOf: []
+                      properties: {}
+                      readOnly: false
+                      required: []
+                      writeOnly: false
+                      extensions: {}
+                      details:
+                        default:
+                          name: .user_reference.name
+                          description: ''
+                    description: ''
+                    serializedName: name
+                    extensions: {}
+                    details:
+                      default:
+                        name: name
+                        description: ''
+                        required: false
+                  kind:
+                    schema: &ref_92
+                      type: string
+                      description: The kind name
+                      allOf: []
+                      anyOf: []
+                      default: user
+                      deprecated: false
+                      enum: []
+                      nullable: false
+                      oneOf: []
+                      properties: {}
+                      readOnly: false
+                      required: []
+                      writeOnly: false
+                      extensions:
+                        x-ntnx-enum:
+                          - user
+                      details:
+                        default:
+                          name: .user_reference.kind
+                          description: ''
+                    description: The kind name
+                    serializedName: kind
+                    extensions: {}
+                    details:
+                      default:
+                        name: kind
+                        description: The kind name
+                        required: true
+                  uuid:
+                    schema: &ref_94
+                      type: string
+                      format: UUID
+                      allOf: []
+                      anyOf: []
+                      deprecated: false
+                      enum: []
+                      nullable: false
+                      oneOf: []
+                      pattern: >-
+                        ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+                      properties: {}
+                      readOnly: false
+                      required: []
+                      writeOnly: false
+                      extensions: {}
+                      details:
+                        default:
+                          name: .user_reference.uuid
+                          description: ''
+                    description: ''
+                    serializedName: uuid
+                    extensions: {}
+                    details:
+                      default:
+                        name: uuid
+                        description: ''
+                        required: true
+                readOnly: false
+                required:
+                  - kind
+                  - uuid
+                title: Reference to a user
+                writeOnly: false
+                extensions: {}
+                details:
+                  default:
+                    name: user_reference
+                    description: The reference to a user
+              description: The reference to a user
+              serializedName: owner_reference
+              extensions: {}
+              details:
+                default:
+                  name: owner_reference
+                  description: The reference to a user
+                  required: false
+            project_reference:
+              schema: *ref_8
+              description: The project the subnet is in.
+              serializedName: project_reference
+              extensions: {}
+              details:
+                default:
+                  name: project_reference
+                  description: The project the subnet is in.
+                  required: false
+            spec_hash:
+              schema: &ref_78
+                type: string
+                description: |
+                  Hash of the spec. This will be returned from server.
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions: {}
+                details:
+                  default:
+                    name: .subnet_metadata.spec_hash
+                    description: ''
+              description: |
+                Hash of the spec. This will be returned from server.
+              serializedName: spec_hash
+              extensions: {}
+              details:
+                default:
+                  name: spec_hash
+                  description: |
+                    Hash of the spec. This will be returned from server.
+                  required: false
+            spec_version:
+              schema: &ref_79
+                type: integer
+                description: Version number of the latest spec.
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions: {}
+                details:
+                  default:
+                    name: .subnet_metadata.spec_version
+                    description: ''
+              description: Version number of the latest spec.
+              serializedName: spec_version
+              extensions: {}
+              details:
+                default:
+                  name: spec_version
+                  description: Version number of the latest spec.
+                  required: false
+            uuid:
+              schema: &ref_80
+                type: string
+                format: UUID
+                description: subnet uuid
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                nullable: false
+                oneOf: []
+                pattern: >-
+                  ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions: {}
+                details:
+                  default:
+                    name: .subnet_metadata.uuid
+                    description: ''
+              description: subnet uuid
+              serializedName: uuid
+              extensions: {}
+              details:
+                default:
+                  name: uuid
+                  description: subnet uuid
+                  required: false
+          readOnly: false
+          required:
+            - kind
+          title: subnet metadata
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: subnet_metadata
+              description: The subnet kind metadata
+        description: The subnet kind metadata
+        serializedName: metadata
+        extensions: {}
+        details:
+          default:
+            name: metadata
+            description: The subnet kind metadata
+            required: true
+      spec:
+        schema: *ref_9
+        description: An intentful representation of a subnet spec
+        serializedName: spec
+        extensions: {}
+        details:
+          default:
+            name: spec
+            description: An intentful representation of a subnet spec
+            required: true
+    readOnly: false
+    required:
+      - metadata
+      - spec
+    title: subnet Intent Entity
+    writeOnly: false
+    extensions: {}
+    details:
+      default:
+        name: subnet_intent_input
+        description: An intentful representation of a subnet
+  subnet_intent_resource: &ref_12
+    type: object
+    description: Response object for intentful operations on a subnet
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    properties:
+      api_version:
+        schema: &ref_57
+          type: string
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .subnet_intent_resource.api_version
+              description: ''
+        description: ''
+        serializedName: api_version
+        extensions: {}
+        details:
+          default:
+            name: api_version
+            description: ''
+            required: false
+      metadata:
+        schema: *ref_10
+        description: The subnet kind metadata
+        serializedName: metadata
+        extensions: {}
+        details:
+          default:
+            name: metadata
+            description: The subnet kind metadata
+            required: true
+      spec:
+        schema: *ref_9
+        description: An intentful representation of a subnet spec
+        serializedName: spec
+        extensions: {}
+        details:
+          default:
+            name: spec
+            description: An intentful representation of a subnet spec
+            required: false
+      status:
+        schema: *ref_11
+        description: An intentful representation of a subnet status
+        serializedName: status
+        extensions: {}
+        details:
+          default:
+            name: status
+            description: An intentful representation of a subnet status
+            required: false
+    readOnly: false
+    required:
+      - metadata
+    title: subnet Intent Response
+    writeOnly: false
+    extensions: {}
+    details:
+      default:
+        name: subnet_intent_resource
+        description: Response object for intentful operations on a subnet
+  subnet_intent_response: &ref_98
+    type: object
+    description: Response object for intentful operations on a subnet
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    properties:
+      api_version:
+        schema: &ref_58
+          type: string
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .subnet_intent_response.api_version
+              description: ''
+        description: ''
+        serializedName: api_version
+        extensions: {}
+        details:
+          default:
+            name: api_version
+            description: ''
+            required: true
+      metadata:
+        schema: *ref_10
+        description: The subnet kind metadata
+        serializedName: metadata
+        extensions: {}
+        details:
+          default:
+            name: metadata
+            description: The subnet kind metadata
+            required: true
+      spec:
+        schema: *ref_9
+        description: An intentful representation of a subnet spec
+        serializedName: spec
+        extensions: {}
+        details:
+          default:
+            name: spec
+            description: An intentful representation of a subnet spec
+            required: false
+      status:
+        schema: *ref_11
+        description: An intentful representation of a subnet status
+        serializedName: status
+        extensions: {}
+        details:
+          default:
+            name: status
+            description: An intentful representation of a subnet status
+            required: false
+    readOnly: false
+    required:
+      - api_version
+      - metadata
+    title: subnet Intent Response
+    writeOnly: false
+    extensions: {}
+    details:
+      default:
+        name: subnet_intent_response
+        description: Response object for intentful operations on a subnet
+  subnet_list_intent_response:
+    type: object
+    description: Response object for intentful operation of subnets
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    properties:
+      api_version:
+        schema: &ref_59
+          type: string
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .subnet_list_intent_response.api_version
+              description: ''
+        description: ''
+        serializedName: api_version
+        extensions: {}
+        details:
+          default:
+            name: api_version
+            description: ''
+            required: true
+      entities:
+        schema: &ref_60
+          type: array
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          items: *ref_12
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .subnet_list_intent_response.entities
+              description: ''
+        description: ''
+        serializedName: entities
+        extensions: {}
+        details:
+          default:
+            name: entities
+            description: ''
+            required: false
+      metadata:
+        schema: &ref_14
+          type: object
+          description: |
+            All api calls that return a list will have this metadata block
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties:
+            filter:
+              schema: &ref_66
+                type: string
+                description: The filter used for the results
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions: {}
+                details:
+                  default:
+                    name: .subnet_list_metadata_output.filter
+                    description: ''
+              description: The filter used for the results
+              serializedName: filter
+              extensions: {}
+              details:
+                default:
+                  name: filter
+                  description: The filter used for the results
+                  required: false
+            kind:
+              schema: &ref_67
+                type: string
+                description: The kind name
+                allOf: []
+                anyOf: []
+                default: subnet
+                deprecated: false
+                enum: []
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions:
+                  x-ntnx-enum:
+                    - subnet
+                details:
+                  default:
+                    name: .subnet_list_metadata_output.kind
+                    description: ''
+              description: The kind name
+              serializedName: kind
+              extensions: {}
+              details:
+                default:
+                  name: kind
+                  description: The kind name
+                  required: false
+            length:
+              schema: &ref_68
+                type: integer
+                description: The number of records retrieved relative to the offset
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions: {}
+                details:
+                  default:
+                    name: .subnet_list_metadata_output.length
+                    description: ''
+              description: The number of records retrieved relative to the offset
+              serializedName: length
+              extensions: {}
+              details:
+                default:
+                  name: length
+                  description: The number of records retrieved relative to the offset
+                  required: false
+            offset:
+              schema: &ref_69
+                type: integer
+                description: Offset from the start of the entity list
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions: {}
+                details:
+                  default:
+                    name: .subnet_list_metadata_output.offset
+                    description: ''
+              description: Offset from the start of the entity list
+              serializedName: offset
+              extensions: {}
+              details:
+                default:
+                  name: offset
+                  description: Offset from the start of the entity list
+                  required: false
+            sort_attribute:
+              schema: &ref_70
+                type: string
+                description: The attribute to perform sort on
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions: {}
+                details:
+                  default:
+                    name: .subnet_list_metadata_output.sort_attribute
+                    description: ''
+              description: The attribute to perform sort on
+              serializedName: sort_attribute
+              extensions: {}
+              details:
+                default:
+                  name: sort_attribute
+                  description: The attribute to perform sort on
+                  required: false
+            sort_order:
+              schema: *ref_13
+              description: The sort order in which results are returned
+              serializedName: sort_order
+              extensions: {}
+              details:
+                default:
+                  name: sort_order
+                  description: The sort order in which results are returned
+                  required: false
+            total_matches:
+              schema: &ref_71
+                type: integer
+                description: Total matches found
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions: {}
+                details:
+                  default:
+                    name: .subnet_list_metadata_output.total_matches
+                    description: ''
+              description: Total matches found
+              serializedName: total_matches
+              extensions: {}
+              details:
+                default:
+                  name: total_matches
+                  description: Total matches found
+                  required: false
+          readOnly: false
+          required: []
+          title: Metadata for subnet list output
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: subnet_list_metadata_output
+              description: |
+                All api calls that return a list will have this metadata block
+        description: |
+          All api calls that return a list will have this metadata block
+        serializedName: metadata
+        extensions: {}
+        details:
+          default:
+            name: metadata
+            description: |
+              All api calls that return a list will have this metadata block
+            required: true
+    readOnly: false
+    required:
+      - api_version
+      - metadata
+    title: Entity Intent List Response
+    writeOnly: false
+    extensions: {}
+    details:
+      default:
+        name: subnet_list_intent_response
+        description: Response object for intentful operation of subnets
+  subnet_list_metadata:
+    type: object
+    description: |
+      All api calls that return a list will have this metadata block as input
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    properties:
+      filter:
+        schema: &ref_61
+          type: string
+          description: The filter in FIQL syntax used for the results.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .subnet_list_metadata.filter
+              description: ''
+        description: The filter in FIQL syntax used for the results.
+        serializedName: filter
+        extensions: {}
+        details:
+          default:
+            name: filter
+            description: The filter in FIQL syntax used for the results.
+            required: false
+      kind:
+        schema: &ref_62
+          type: string
+          description: The kind name
+          allOf: []
+          anyOf: []
+          default: subnet
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions:
+            x-ntnx-enum:
+              - subnet
+          details:
+            default:
+              name: .subnet_list_metadata.kind
+              description: ''
+        description: The kind name
+        serializedName: kind
+        extensions: {}
+        details:
+          default:
+            name: kind
+            description: The kind name
+            required: false
+      length:
+        schema: &ref_63
+          type: integer
+          format: int32
+          description: The number of records to retrieve relative to the offset
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          minimum: 1
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .subnet_list_metadata.length
+              description: ''
+        description: The number of records to retrieve relative to the offset
+        serializedName: length
+        extensions: {}
+        details:
+          default:
+            name: length
+            description: The number of records to retrieve relative to the offset
+            required: false
+      offset:
+        schema: &ref_64
+          type: integer
+          format: int32
+          description: Offset from the start of the entity list
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          minimum: 0
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .subnet_list_metadata.offset
+              description: ''
+        description: Offset from the start of the entity list
+        serializedName: offset
+        extensions: {}
+        details:
+          default:
+            name: offset
+            description: Offset from the start of the entity list
+            required: false
+      sort_attribute:
+        schema: &ref_65
+          type: string
+          description: The attribute to perform sort on
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .subnet_list_metadata.sort_attribute
+              description: ''
+        description: The attribute to perform sort on
+        serializedName: sort_attribute
+        extensions: {}
+        details:
+          default:
+            name: sort_attribute
+            description: The attribute to perform sort on
+            required: false
+      sort_order:
+        schema: *ref_13
+        description: The sort order in which results are returned
+        serializedName: sort_order
+        extensions: {}
+        details:
+          default:
+            name: sort_order
+            description: The sort order in which results are returned
+            required: false
+    readOnly: false
+    required: []
+    title: Metadata for subnet list
+    writeOnly: false
+    extensions: {}
+    details:
+      default:
+        name: subnet_list_metadata
+        description: >
+          All api calls that return a list will have this metadata block as
+          input
+  subnet_list_metadata_output: *ref_14
+  subnet_metadata: *ref_10
+  subnet_resources: *ref_15
+  subnet_resources_def_status: *ref_16
+  subnet_status: &ref_99
+    type: object
+    description: |
+      The status of a REST API call. Only used when there is a failure to
+      report.
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    properties:
+      api_version:
+        schema: &ref_87
+          type: string
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .subnet_status.api_version
+              description: ''
+        description: ''
+        serializedName: api_version
+        extensions: {}
+        details:
+          default:
+            name: api_version
+            description: ''
+            required: false
+      code:
+        schema: &ref_88
+          type: integer
+          description: The HTTP error code.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .subnet_status.code
+              description: ''
+        description: The HTTP error code.
+        serializedName: code
+        extensions: {}
+        details:
+          default:
+            name: code
+            description: The HTTP error code.
+            required: false
+      kind:
+        schema: &ref_89
+          type: string
+          description: The kind name
+          allOf: []
+          anyOf: []
+          default: subnet
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions:
+            x-ntnx-enum:
+              - subnet
+          details:
+            default:
+              name: .subnet_status.kind
+              description: ''
+        description: The kind name
+        serializedName: kind
+        extensions: {}
+        details:
+          default:
+            name: kind
+            description: The kind name
+            required: false
+      message_list:
+        schema: &ref_90
+          type: array
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          items: *ref_7
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .subnet_status.message_list
+              description: ''
+        description: ''
+        serializedName: message_list
+        extensions: {}
+        details:
+          default:
+            name: message_list
+            description: ''
+            required: false
+      state:
+        schema: &ref_91
+          type: string
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .subnet_status.state
+              description: ''
+        description: ''
+        serializedName: state
+        extensions: {}
+        details:
+          default:
+            name: state
+            description: ''
+            required: false
+    readOnly: false
+    required: []
+    title: Response Kind
+    writeOnly: false
+    extensions: {}
+    details:
+      default:
+        name: subnet_status
+        description: |
+          The status of a REST API call. Only used when there is a failure to
+          report.
+  user_reference: *ref_17
+  .Parameter.uuid: &ref_95
+    type: string
+    format: UUID
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    pattern: >-
+      ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+    properties: {}
+    readOnly: false
+    required: []
+    writeOnly: false
+    extensions: {}
+    details:
+      default:
+        name: .Parameter.uuid
+        description: ''
+  .address.fqdn: *ref_18
+  .address.ip: *ref_19
+  .address.ipv6: *ref_20
+  .address.port: *ref_21
+  .availability_zone_reference.kind: *ref_22
+  .availability_zone_reference.name: *ref_23
+  .availability_zone_reference.uuid: *ref_24
+  .cluster_reference.kind: *ref_25
+  .cluster_reference.name: *ref_26
+  .cluster_reference.uuid: *ref_27
+  .dhcp_options.boot_file_name: *ref_28
+  .dhcp_options.domain_name: *ref_29
+  .dhcp_options.domain_name_server_list: *ref_30
+  .dhcp_options.domain_name_server_list.itemType: *ref_31
+  .dhcp_options.domain_search_list: *ref_32
+  .dhcp_options.domain_search_list.itemType: *ref_33
+  .dhcp_options.tftp_server_name: *ref_34
+  .ip_config.default_gateway_ip: *ref_35
+  .ip_config.pool_list: *ref_36
+  .ip_config.prefix_length: *ref_37
+  .ip_config.subnet_ip: *ref_38
+  .ip_pool.range: *ref_39
+  .message_resource.details: *ref_40
+  .message_resource.details.additionalItemType: *ref_41
+  .message_resource.message: *ref_42
+  .message_resource.reason: *ref_43
+  .network_function_chain_reference.kind: *ref_44
+  .network_function_chain_reference.name: *ref_45
+  .network_function_chain_reference.uuid: *ref_46
+  .project_reference.kind: *ref_47
+  .project_reference.name: *ref_48
+  .project_reference.uuid: *ref_49
+  .subnet.description: *ref_50
+  .subnet.name: *ref_51
+  .subnet_def_status.description: *ref_52
+  .subnet_def_status.message_list: *ref_53
+  .subnet_def_status.name: *ref_54
+  .subnet_def_status.state: *ref_55
+  .subnet_intent_input.api_version: *ref_56
+  .subnet_intent_resource.api_version: *ref_57
+  .subnet_intent_response.api_version: *ref_58
+  .subnet_list_intent_response.api_version: *ref_59
+  .subnet_list_intent_response.entities: *ref_60
+  .subnet_list_metadata.filter: *ref_61
+  .subnet_list_metadata.kind: *ref_62
+  .subnet_list_metadata.length: *ref_63
+  .subnet_list_metadata.offset: *ref_64
+  .subnet_list_metadata.sort_attribute: *ref_65
+  .subnet_list_metadata_output.filter: *ref_66
+  .subnet_list_metadata_output.kind: *ref_67
+  .subnet_list_metadata_output.length: *ref_68
+  .subnet_list_metadata_output.offset: *ref_69
+  .subnet_list_metadata_output.sort_attribute: *ref_70
+  .subnet_list_metadata_output.total_matches: *ref_71
+  .subnet_metadata.categories: *ref_72
+  .subnet_metadata.categories.additionalItemType: *ref_73
+  .subnet_metadata.creation_time: *ref_74
+  .subnet_metadata.kind: *ref_75
+  .subnet_metadata.last_update_time: *ref_76
+  .subnet_metadata.name: *ref_77
+  .subnet_metadata.spec_hash: *ref_78
+  .subnet_metadata.spec_version: *ref_79
+  .subnet_metadata.uuid: *ref_80
+  .subnet_resources.subnet_type: *ref_81
+  .subnet_resources.vlan_id: *ref_82
+  .subnet_resources.vswitch_name: *ref_83
+  .subnet_resources_def_status.subnet_type: *ref_84
+  .subnet_resources_def_status.vlan_id: *ref_85
+  .subnet_resources_def_status.vswitch_name: *ref_86
+  .subnet_status.api_version: *ref_87
+  .subnet_status.code: *ref_88
+  .subnet_status.kind: *ref_89
+  .subnet_status.message_list: *ref_90
+  .subnet_status.state: *ref_91
+  .user_reference.kind: *ref_92
+  .user_reference.name: *ref_93
+  .user_reference.uuid: *ref_94
+info:
+  title: Nutanix Intentful API
+  version: 3.1.0
+  extensions: {}
+security:
+  - basicAuth: []
+servers:
+  - url: 'https://35.196.200.179:9440/api/nutanix/v3'
+    extensions: {}
+tags: []
+http:
+  examples: {}
+  headers: {}
+  links: {}
+  parameters:
+    uuid:
+      name: uuid
+      schema: *ref_95
+      description: The UUID of the entity.
+      allowEmptyValue: false
+      allowReserved: false
+      deprecated: false
+      explode: false
+      in: path
+      required: true
+      style: simple
+      extensions: {}
+      details:
+        default:
+          name: uuid
+          description: The UUID of the entity.
+          location: Client
+  requestBodies:
+    subnet_intent_input: &ref_97
+      schema: *ref_96
+      description: ''
+      contentType: application/json
+      required: true
+      extensions:
+        x-ms-requestBody-name: body
+  responses: {}
+  securitySchemes: {}
+  callbacks: {}
+  operations:
+    subnets:
+      operationId: subnets
+      path: /subnets
+      method: post
+      description: >
+        This operation submits a request to create a subnet based on the input
+        parameters.
+
+        A subnet is a block of IP addresses.
+      deprecated: false
+      parameters: []
+      pathExtensions: {}
+      requestBody: *ref_97
+      responses_new:
+        '202':
+          - schema: *ref_98
+            description: Request Accepted
+            headers: {}
+            mimeTypes:
+              - application/json
+            responseCode: '202'
+            extensions: {}
+            details:
+              default:
+                name: 202 application/json
+                description: MISSING DESCRIPTION 09
+                isErrorResponse: false
+        default:
+          - schema: *ref_99
+            description: Internal Error
+            headers: {}
+            mimeTypes:
+              - application/json
+            responseCode: default
+            extensions: {}
+            details:
+              default:
+                name: default application/json
+                description: MISSING DESCRIPTION 09
+                isErrorResponse: true
+      servers:
+        - url: 'https://35.196.200.179:9440/api/nutanix/v3'
+          extensions: {}
+      summary: Create a subnet
+      tags:
+        - subnets
+      extensions:
+        x-ms-requestBody-index: 0
+        x-ntnx-kind: subnet
+        x-ntnx-operations:
+          - create
+      details:
+        default:
+          name: subnets
+          description: >
+            This operation submits a request to create a subnet based on the
+            input parameters.
+
+            A subnet is a block of IP addresses.
+          headerparameters: []
+  extensions: {}
+commands:
+  parameters: {}
+  operations: {}
+  extensions: {}
+extensions: {}
+details:
+  default:
+    name: Nutanix Intentful API
+    description: ''
