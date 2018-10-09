@@ -1,0 +1,2200 @@
+---
+schemas:
+  category_filter: &ref_2
+    type: object
+    description: A category filter.
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    properties:
+      type:
+        schema: &ref_12
+          type: string
+          description: The type of the filter being used.
+          allOf: []
+          anyOf: []
+          default: CATEGORIES_MATCH_ANY
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions:
+            x-ntnx-enum:
+              - CATEGORIES_MATCH_ALL
+              - CATEGORIES_MATCH_ANY
+          details:
+            default:
+              name: .category_filter.type
+              description: ''
+        description: The type of the filter being used.
+        serializedName: type
+        extensions: {}
+        details:
+          default:
+            name: type
+            description: The type of the filter being used.
+            required: false
+      kind_list:
+        schema: &ref_8
+          type: array
+          description: List of kinds associated with this filter.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          items: &ref_9
+            type: string
+            allOf: []
+            anyOf: []
+            deprecated: false
+            enum: []
+            nullable: false
+            oneOf: []
+            properties: {}
+            readOnly: false
+            required: []
+            writeOnly: false
+            extensions: {}
+            details:
+              default:
+                name: .category_filter.kind_list.itemType
+                description: ''
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .category_filter.kind_list
+              description: ''
+        description: List of kinds associated with this filter.
+        serializedName: kind_list
+        extensions: {}
+        details:
+          default:
+            name: kind_list
+            description: List of kinds associated with this filter.
+            required: false
+      params:
+        schema: &ref_10
+          type: object
+          description: A list of category key and list of values.
+          additionalProperties: &ref_11
+            type: string
+            allOf: []
+            anyOf: []
+            deprecated: false
+            enum: []
+            nullable: false
+            oneOf: []
+            properties: {}
+            readOnly: false
+            required: []
+            writeOnly: false
+            extensions: {}
+            details:
+              default:
+                name: .category_filter.params.additionalItemType
+                description: ''
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .category_filter.params
+              description: A list of category key and list of values.
+        description: A list of category key and list of values.
+        serializedName: params
+        extensions: {}
+        details:
+          default:
+            name: params
+            description: A list of category key and list of values.
+            required: true
+    readOnly: false
+    required:
+      - params
+    title: A category filter
+    writeOnly: false
+    extensions: {}
+    details:
+      default:
+        name: category_filter
+        description: A category filter.
+  category_key:
+    type: object
+    description: Category key definition.
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    properties:
+      name:
+        schema: &ref_15
+          type: string
+          description: Name of the category.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          maxLength: 64
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .category_key.name
+              description: ''
+        description: Name of the category.
+        serializedName: name
+        extensions: {}
+        details:
+          default:
+            name: name
+            description: Name of the category.
+            required: true
+      description:
+        schema: &ref_14
+          type: string
+          description: Description of the category.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          maxLength: 1000
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .category_key.description
+              description: ''
+        description: Description of the category.
+        serializedName: description
+        extensions: {}
+        details:
+          default:
+            name: description
+            description: Description of the category.
+            required: false
+      api_version:
+        schema: &ref_13
+          type: string
+          description: API version.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .category_key.api_version
+              description: ''
+        description: API version.
+        serializedName: api_version
+        extensions: {}
+        details:
+          default:
+            name: api_version
+            description: API version.
+            required: false
+    readOnly: false
+    required:
+      - name
+    title: Category Key definition.
+    writeOnly: false
+    extensions: {}
+    details:
+      default:
+        name: category_key
+        description: Category key definition.
+  category_key_list_response: &ref_68
+    type: object
+    description: Category key list response.
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    properties:
+      api_version:
+        schema: &ref_16
+          type: string
+          description: Api Version.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .category_key_list_response.api_version
+              description: ''
+        description: Api Version.
+        serializedName: api_version
+        extensions: {}
+        details:
+          default:
+            name: api_version
+            description: Api Version.
+            required: false
+      entities:
+        schema: &ref_17
+          type: array
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          items: &ref_0
+            type: object
+            description: Category Key Definition.
+            allOf: []
+            anyOf: []
+            deprecated: false
+            enum: []
+            nullable: false
+            oneOf: []
+            properties:
+              name:
+                schema: &ref_20
+                  type: string
+                  description: Name of the category.
+                  allOf: []
+                  anyOf: []
+                  deprecated: false
+                  enum: []
+                  maxLength: 64
+                  nullable: false
+                  oneOf: []
+                  properties: {}
+                  readOnly: false
+                  required: []
+                  writeOnly: false
+                  extensions: {}
+                  details:
+                    default:
+                      name: .category_key_status.name
+                      description: ''
+                description: Name of the category.
+                serializedName: name
+                extensions: {}
+                details:
+                  default:
+                    name: name
+                    description: Name of the category.
+                    required: true
+              description:
+                schema: &ref_19
+                  type: string
+                  description: Description of the category.
+                  allOf: []
+                  anyOf: []
+                  deprecated: false
+                  enum: []
+                  maxLength: 1000
+                  nullable: false
+                  oneOf: []
+                  properties: {}
+                  readOnly: false
+                  required: []
+                  writeOnly: false
+                  extensions: {}
+                  details:
+                    default:
+                      name: .category_key_status.description
+                      description: ''
+                description: Description of the category.
+                serializedName: description
+                extensions: {}
+                details:
+                  default:
+                    name: description
+                    description: Description of the category.
+                    required: false
+              api_version:
+                schema: &ref_18
+                  type: string
+                  description: API version.
+                  allOf: []
+                  anyOf: []
+                  deprecated: false
+                  enum: []
+                  nullable: false
+                  oneOf: []
+                  properties: {}
+                  readOnly: false
+                  required: []
+                  writeOnly: false
+                  extensions: {}
+                  details:
+                    default:
+                      name: .category_key_status.api_version
+                      description: ''
+                description: API version.
+                serializedName: api_version
+                extensions: {}
+                details:
+                  default:
+                    name: api_version
+                    description: API version.
+                    required: false
+              system_defined:
+                schema: &ref_21
+                  type: boolean
+                  description: Specifying whether its a system defined category.
+                  allOf: []
+                  anyOf: []
+                  deprecated: false
+                  enum: []
+                  nullable: false
+                  oneOf: []
+                  properties: {}
+                  readOnly: false
+                  required: []
+                  writeOnly: false
+                  extensions: {}
+                  details:
+                    default:
+                      name: .category_key_status.system_defined
+                      description: ''
+                description: Specifying whether its a system defined category.
+                serializedName: system_defined
+                extensions: {}
+                details:
+                  default:
+                    name: system_defined
+                    description: Specifying whether its a system defined category.
+                    required: false
+            readOnly: false
+            required:
+              - name
+            title: Category Key Definition.
+            writeOnly: false
+            extensions: {}
+            details:
+              default:
+                name: category_key_status
+                description: Category Key Definition.
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .category_key_list_response.entities
+              description: ''
+        description: ''
+        serializedName: entities
+        extensions: {}
+        details:
+          default:
+            name: entities
+            description: ''
+            required: false
+      metadata:
+        schema: &ref_1
+          type: object
+          description: >
+            All api calls that return a list will have this metadata block as
+            input
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties:
+            filter:
+              schema: &ref_22
+                type: string
+                description: The filter in FIQL syntax used for the results.
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions: {}
+                details:
+                  default:
+                    name: .category_list_metadata.filter
+                    description: ''
+              description: The filter in FIQL syntax used for the results.
+              serializedName: filter
+              extensions: {}
+              details:
+                default:
+                  name: filter
+                  description: The filter in FIQL syntax used for the results.
+                  required: false
+            kind:
+              schema: &ref_23
+                type: string
+                description: The kind name
+                allOf: []
+                anyOf: []
+                default: category
+                deprecated: false
+                enum: []
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions:
+                  x-ntnx-enum:
+                    - category
+                details:
+                  default:
+                    name: .category_list_metadata.kind
+                    description: ''
+              description: The kind name
+              serializedName: kind
+              extensions: {}
+              details:
+                default:
+                  name: kind
+                  description: The kind name
+                  required: false
+            length:
+              schema: &ref_24
+                type: integer
+                format: int32
+                description: The number of records to retrieve relative to the offset
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                minimum: 1
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions: {}
+                details:
+                  default:
+                    name: .category_list_metadata.length
+                    description: ''
+              description: The number of records to retrieve relative to the offset
+              serializedName: length
+              extensions: {}
+              details:
+                default:
+                  name: length
+                  description: The number of records to retrieve relative to the offset
+                  required: false
+            offset:
+              schema: &ref_25
+                type: integer
+                format: int32
+                description: Offset from the start of the entity list
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                minimum: 0
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions: {}
+                details:
+                  default:
+                    name: .category_list_metadata.offset
+                    description: ''
+              description: Offset from the start of the entity list
+              serializedName: offset
+              extensions: {}
+              details:
+                default:
+                  name: offset
+                  description: Offset from the start of the entity list
+                  required: false
+            sort_attribute:
+              schema: &ref_26
+                type: string
+                description: The attribute to perform sort on
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions: {}
+                details:
+                  default:
+                    name: .category_list_metadata.sort_attribute
+                    description: ''
+              description: The attribute to perform sort on
+              serializedName: sort_attribute
+              extensions: {}
+              details:
+                default:
+                  name: sort_attribute
+                  description: The attribute to perform sort on
+                  required: false
+            sort_order:
+              schema: &ref_7
+                type: string
+                description: The sort order in which results are returned
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                title: Sort order
+                writeOnly: false
+                extensions:
+                  x-ntnx-enum:
+                    - ASCENDING
+                    - DESCENDING
+                details:
+                  default:
+                    name: sort_order
+                    description: ''
+              description: The sort order in which results are returned
+              serializedName: sort_order
+              extensions: {}
+              details:
+                default:
+                  name: sort_order
+                  description: The sort order in which results are returned
+                  required: false
+          readOnly: false
+          required: []
+          title: Metadata for category list
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: category_list_metadata
+              description: >
+                All api calls that return a list will have this metadata block
+                as input
+        description: >
+          All api calls that return a list will have this metadata block as
+          input
+        serializedName: metadata
+        extensions: {}
+        details:
+          default:
+            name: metadata
+            description: >
+              All api calls that return a list will have this metadata block as
+              input
+            required: false
+    readOnly: false
+    required: []
+    title: Category key list response.
+    writeOnly: false
+    extensions: {}
+    details:
+      default:
+        name: category_key_list_response
+        description: Category key list response.
+  category_key_status: *ref_0
+  category_list_metadata: *ref_1
+  category_query_input:
+    type: object
+    description: Categories query input object.
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    properties:
+      api_version:
+        schema: &ref_27
+          type: string
+          description: API version.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .category_query_input.api_version
+              description: ''
+        description: API version.
+        serializedName: api_version
+        extensions: {}
+        details:
+          default:
+            name: api_version
+            description: API version.
+            required: false
+      category_filter:
+        schema: *ref_2
+        description: A category filter.
+        serializedName: category_filter
+        extensions: {}
+        details:
+          default:
+            name: category_filter
+            description: A category filter.
+            required: false
+      group_member_count:
+        schema: &ref_28
+          type: integer
+          format: int64
+          description: The maximum number of members to return per group.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .category_query_input.group_member_count
+              description: ''
+        description: The maximum number of members to return per group.
+        serializedName: group_member_count
+        extensions: {}
+        details:
+          default:
+            name: group_member_count
+            description: The maximum number of members to return per group.
+            required: false
+      group_member_offset:
+        schema: &ref_29
+          type: integer
+          format: int64
+          description: The offset into the total member set to return per group.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .category_query_input.group_member_offset
+              description: ''
+        description: The offset into the total member set to return per group.
+        serializedName: group_member_offset
+        extensions: {}
+        details:
+          default:
+            name: group_member_offset
+            description: The offset into the total member set to return per group.
+            required: false
+      usage_type:
+        schema: &ref_3
+          type: string
+          description: |
+            USED_IN - to get policies in which specified categories are used.
+            APPLIED_TO - to get entities attached to specified categories.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          title: Query Usage Type
+          writeOnly: false
+          extensions:
+            x-ntnx-enum:
+              - USED_IN
+              - APPLIED_TO
+          details:
+            default:
+              name: category_query_usage_type
+              description: ''
+        description: |
+          USED_IN - to get policies in which specified categories are used.
+          APPLIED_TO - to get entities attached to specified categories.
+        serializedName: usage_type
+        extensions: {}
+        details:
+          default:
+            name: usage_type
+            description: |
+              USED_IN - to get policies in which specified categories are used.
+              APPLIED_TO - to get entities attached to specified categories.
+            required: false
+    readOnly: false
+    required: []
+    title: Category Query Input
+    writeOnly: false
+    extensions: {}
+    details:
+      default:
+        name: category_query_input
+        description: Categories query input object.
+  category_query_response:
+    type: object
+    description: Categories query response object.
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    properties:
+      api_version:
+        schema: &ref_30
+          type: string
+          description: API version.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .category_query_response.api_version
+              description: ''
+        description: API version.
+        serializedName: api_version
+        extensions: {}
+        details:
+          default:
+            name: api_version
+            description: API version.
+            required: false
+      metadata:
+        schema: &ref_31
+          type: object
+          description: Response metadata.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties:
+            group_member_count:
+              schema: &ref_32
+                type: integer
+                format: int64
+                description: The maximum number of records to return per group.
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions: {}
+                details:
+                  default:
+                    name: .category_query_response.metadata.group_member_count
+                    description: ''
+              description: The maximum number of records to return per group.
+              serializedName: group_member_count
+              extensions: {}
+              details:
+                default:
+                  name: group_member_count
+                  description: The maximum number of records to return per group.
+                  required: false
+            group_member_offset:
+              schema: &ref_33
+                type: integer
+                format: int64
+                description: |
+                  The offset into the total records set to return per group.
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions: {}
+                details:
+                  default:
+                    name: .category_query_response.metadata.group_member_offset
+                    description: ''
+              description: |
+                The offset into the total records set to return per group.
+              serializedName: group_member_offset
+              extensions: {}
+              details:
+                default:
+                  name: group_member_offset
+                  description: |
+                    The offset into the total records set to return per group.
+                  required: false
+            total_matches:
+              schema: &ref_34
+                type: integer
+                format: int64
+                description: Total number of matched results.
+                allOf: []
+                anyOf: []
+                deprecated: false
+                enum: []
+                nullable: false
+                oneOf: []
+                properties: {}
+                readOnly: false
+                required: []
+                writeOnly: false
+                extensions: {}
+                details:
+                  default:
+                    name: .category_query_response.metadata.total_matches
+                    description: ''
+              description: Total number of matched results.
+              serializedName: total_matches
+              extensions: {}
+              details:
+                default:
+                  name: total_matches
+                  description: Total number of matched results.
+                  required: false
+            usage_type:
+              schema: *ref_3
+              description: >
+                USED_IN - to get policies in which specified categories are
+                used.
+
+                APPLIED_TO - to get entities attached to specified categories.
+              serializedName: usage_type
+              extensions: {}
+              details:
+                default:
+                  name: usage_type
+                  description: >
+                    USED_IN - to get policies in which specified categories are
+                    used.
+
+                    APPLIED_TO - to get entities attached to specified
+                    categories.
+                  required: false
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .category_query_response.metadata
+              description: Response metadata.
+        description: Response metadata.
+        serializedName: metadata
+        extensions: {}
+        details:
+          default:
+            name: metadata
+            description: Response metadata.
+            required: false
+      results:
+        schema: &ref_35
+          type: array
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          items: &ref_36
+            type: object
+            allOf: []
+            anyOf: []
+            deprecated: false
+            enum: []
+            nullable: false
+            oneOf: []
+            properties:
+              entity_any_reference_list:
+                schema: &ref_37
+                  type: array
+                  description: List of entity references.
+                  allOf: []
+                  anyOf: []
+                  deprecated: false
+                  enum: []
+                  items: &ref_5
+                    type: object
+                    description: Reference to an entity.
+                    allOf: []
+                    anyOf: []
+                    deprecated: false
+                    enum: []
+                    nullable: false
+                    oneOf: []
+                    properties:
+                      name:
+                        schema: &ref_59
+                          type: string
+                          description: Name of the entity.
+                          allOf: []
+                          anyOf: []
+                          deprecated: false
+                          enum: []
+                          maxLength: 64
+                          nullable: false
+                          oneOf: []
+                          properties: {}
+                          readOnly: false
+                          required: []
+                          writeOnly: false
+                          extensions: {}
+                          details:
+                            default:
+                              name: .entity_reference.name
+                              description: ''
+                        description: Name of the entity.
+                        serializedName: name
+                        extensions: {}
+                        details:
+                          default:
+                            name: name
+                            description: Name of the entity.
+                            required: false
+                      type:
+                        schema: &ref_60
+                          type: string
+                          description: The type of filter being used.
+                          allOf: []
+                          anyOf: []
+                          deprecated: false
+                          enum: []
+                          nullable: false
+                          oneOf: []
+                          properties: {}
+                          readOnly: false
+                          required: []
+                          writeOnly: false
+                          extensions:
+                            x-ntnx-enum:
+                              - CATEGORIES_MATCH_ALL
+                              - CATEGORIES_MATCH_ANY
+                          details:
+                            default:
+                              name: .entity_reference.type
+                              description: ''
+                        description: The type of filter being used.
+                        serializedName: type
+                        extensions: {}
+                        details:
+                          default:
+                            name: type
+                            description: The type of filter being used.
+                            required: false
+                      categories:
+                        schema: &ref_56
+                          type: object
+                          description: Categories for the entity.
+                          additionalProperties: &ref_57
+                            type: string
+                            allOf: []
+                            anyOf: []
+                            deprecated: false
+                            enum: []
+                            nullable: false
+                            oneOf: []
+                            properties: {}
+                            readOnly: false
+                            required: []
+                            writeOnly: false
+                            extensions: {}
+                            details:
+                              default:
+                                name: >-
+                                  .entity_reference.categories.additionalItemType
+                                description: ''
+                          allOf: []
+                          anyOf: []
+                          deprecated: false
+                          enum: []
+                          nullable: false
+                          oneOf: []
+                          properties: {}
+                          readOnly: false
+                          required: []
+                          writeOnly: false
+                          extensions: {}
+                          details:
+                            default:
+                              name: .entity_reference.categories
+                              description: Categories for the entity.
+                        description: Categories for the entity.
+                        serializedName: categories
+                        extensions: {}
+                        details:
+                          default:
+                            name: categories
+                            description: Categories for the entity.
+                            required: false
+                      kind:
+                        schema: &ref_58
+                          type: string
+                          description: Kind of the reference.
+                          allOf: []
+                          anyOf: []
+                          deprecated: false
+                          enum: []
+                          nullable: false
+                          oneOf: []
+                          properties: {}
+                          readOnly: false
+                          required: []
+                          writeOnly: false
+                          extensions: {}
+                          details:
+                            default:
+                              name: .entity_reference.kind
+                              description: ''
+                        description: Kind of the reference.
+                        serializedName: kind
+                        extensions: {}
+                        details:
+                          default:
+                            name: kind
+                            description: Kind of the reference.
+                            required: false
+                      uuid:
+                        schema: &ref_61
+                          type: string
+                          format: UUID
+                          description: UUID of the entity.
+                          allOf: []
+                          anyOf: []
+                          deprecated: false
+                          enum: []
+                          nullable: false
+                          oneOf: []
+                          pattern: >-
+                            ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+                          properties: {}
+                          readOnly: false
+                          required: []
+                          writeOnly: false
+                          extensions: {}
+                          details:
+                            default:
+                              name: .entity_reference.uuid
+                              description: ''
+                        description: UUID of the entity.
+                        serializedName: uuid
+                        extensions: {}
+                        details:
+                          default:
+                            name: uuid
+                            description: UUID of the entity.
+                            required: false
+                    readOnly: false
+                    required: []
+                    title: Entity Reference.
+                    writeOnly: false
+                    extensions: {}
+                    details:
+                      default:
+                        name: entity_reference
+                        description: Reference to an entity.
+                  nullable: false
+                  oneOf: []
+                  properties: {}
+                  readOnly: false
+                  required: []
+                  writeOnly: false
+                  extensions: {}
+                  details:
+                    default:
+                      name: >-
+                        .category_query_response.results.itemType.entity_any_reference_list
+                      description: ''
+                description: List of entity references.
+                serializedName: entity_any_reference_list
+                extensions: {}
+                details:
+                  default:
+                    name: entity_any_reference_list
+                    description: List of entity references.
+                    required: false
+              filtered_entity_count:
+                schema: &ref_38
+                  type: integer
+                  format: int64
+                  description: Total number of filtered results.
+                  allOf: []
+                  anyOf: []
+                  deprecated: false
+                  enum: []
+                  nullable: false
+                  oneOf: []
+                  properties: {}
+                  readOnly: false
+                  required: []
+                  writeOnly: false
+                  extensions: {}
+                  details:
+                    default:
+                      name: >-
+                        .category_query_response.results.itemType.filtered_entity_count
+                      description: ''
+                description: Total number of filtered results.
+                serializedName: filtered_entity_count
+                extensions: {}
+                details:
+                  default:
+                    name: filtered_entity_count
+                    description: Total number of filtered results.
+                    required: false
+              kind:
+                schema: &ref_39
+                  type: string
+                  description: The entity kind.
+                  allOf: []
+                  anyOf: []
+                  deprecated: false
+                  enum: []
+                  nullable: false
+                  oneOf: []
+                  properties: {}
+                  readOnly: false
+                  required: []
+                  writeOnly: false
+                  extensions: {}
+                  details:
+                    default:
+                      name: .category_query_response.results.itemType.kind
+                      description: ''
+                description: The entity kind.
+                serializedName: kind
+                extensions: {}
+                details:
+                  default:
+                    name: kind
+                    description: The entity kind.
+                    required: false
+              total_entity_count:
+                schema: &ref_40
+                  type: integer
+                  format: int64
+                  description: Total number of the matched results.
+                  allOf: []
+                  anyOf: []
+                  deprecated: false
+                  enum: []
+                  nullable: false
+                  oneOf: []
+                  properties: {}
+                  readOnly: false
+                  required: []
+                  writeOnly: false
+                  extensions: {}
+                  details:
+                    default:
+                      name: >-
+                        .category_query_response.results.itemType.total_entity_count
+                      description: ''
+                description: Total number of the matched results.
+                serializedName: total_entity_count
+                extensions: {}
+                details:
+                  default:
+                    name: total_entity_count
+                    description: Total number of the matched results.
+                    required: false
+            readOnly: false
+            required: []
+            writeOnly: false
+            extensions: {}
+            details:
+              default:
+                name: .category_query_response.results.itemType
+                description: ''
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .category_query_response.results
+              description: ''
+        description: ''
+        serializedName: results
+        extensions: {}
+        details:
+          default:
+            name: results
+            description: ''
+            required: false
+    readOnly: false
+    required: []
+    title: Category Query Response
+    writeOnly: false
+    extensions: {}
+    details:
+      default:
+        name: category_query_response
+        description: Categories query response object.
+  category_query_usage_type: *ref_3
+  category_status: &ref_69
+    type: object
+    description: |
+      The status of a REST API call. Only used when there is a failure to
+      report.
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    properties:
+      api_version:
+        schema: &ref_41
+          type: string
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .category_status.api_version
+              description: ''
+        description: ''
+        serializedName: api_version
+        extensions: {}
+        details:
+          default:
+            name: api_version
+            description: ''
+            required: false
+      code:
+        schema: &ref_42
+          type: integer
+          description: The HTTP error code.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .category_status.code
+              description: ''
+        description: The HTTP error code.
+        serializedName: code
+        extensions: {}
+        details:
+          default:
+            name: code
+            description: The HTTP error code.
+            required: false
+      kind:
+        schema: &ref_43
+          type: string
+          description: The kind name
+          allOf: []
+          anyOf: []
+          default: category
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions:
+            x-ntnx-enum:
+              - category
+          details:
+            default:
+              name: .category_status.kind
+              description: ''
+        description: The kind name
+        serializedName: kind
+        extensions: {}
+        details:
+          default:
+            name: kind
+            description: The kind name
+            required: false
+      message_list:
+        schema: &ref_44
+          type: array
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          items: &ref_6
+            type: object
+            description: message.
+            allOf: []
+            anyOf: []
+            deprecated: false
+            enum: []
+            nullable: false
+            oneOf: []
+            properties:
+              message:
+                schema: &ref_64
+                  type: string
+                  description: 'If state is ERROR, a message describing the error.'
+                  allOf: []
+                  anyOf: []
+                  deprecated: false
+                  enum: []
+                  nullable: false
+                  oneOf: []
+                  properties: {}
+                  readOnly: false
+                  required: []
+                  writeOnly: false
+                  extensions: {}
+                  details:
+                    default:
+                      name: .message_resource.message
+                      description: ''
+                description: 'If state is ERROR, a message describing the error.'
+                serializedName: message
+                extensions: {}
+                details:
+                  default:
+                    name: message
+                    description: 'If state is ERROR, a message describing the error.'
+                    required: true
+              reason:
+                schema: &ref_65
+                  type: string
+                  description: 'If state is ERROR, a machine-readable snake-cased string.'
+                  allOf: []
+                  anyOf: []
+                  deprecated: false
+                  enum: []
+                  nullable: false
+                  oneOf: []
+                  properties: {}
+                  readOnly: false
+                  required: []
+                  writeOnly: false
+                  extensions:
+                    x-ntnx-enum:
+                      - ACCESS_DENIED
+                      - ACCESS_FORBIDDEN
+                      - ACTION_NOT_SUPPORTED
+                      - AUTHENTICATION_REQUIRED
+                      - BEARER_TOKEN_EXPIRED
+                      - BEARER_TOKEN_BAD_SIGNATURE
+                      - CANNOT_MODIFY_PRE_CONFIGURED_REPORT
+                      - CATEGORY_NAME_VALUE_MISMATCH
+                      - CONFIGURATION_INCOMPLETE
+                      - CONCURRENT_REQUESTS_NOT_ALLOWED
+                      - DEFAULT_PROJECT_UNAVAILABLE
+                      - DESERIALIZATION_FAILED
+                      - DIRECTORY_SERVICE_CONNECTION_FAILED
+                      - ENTITY_ALREADY_EXISTS
+                      - ENTITY_DELETION_FAILED
+                      - ENTITY_IS_READONLY
+                      - ENTITY_NAME_UUID_MISMATCH
+                      - ENTITY_NOT_CONFIGURED
+                      - ENTITY_NOT_FOUND
+                      - ENTITY_SAVE_ERROR
+                      - ENTITY_UPDATE_FAILED
+                      - IDEMPOTENCE_UUID_CREATION_FAILED
+                      - IDP_NOT_REACHABLE
+                      - INTERNAL_ERROR
+                      - INVALID_ARGUMENT
+                      - INVALID_AZ_NAME
+                      - INVALID_CONTENT_TYPE
+                      - INVALID_DATA_FORMAT
+                      - INVALID_PORTAL_CONFIGURATION
+                      - INVALID_REQUEST
+                      - INVALID_UUID
+                      - INVALID_OWNER_REFERENCE
+                      - INTERNAL_AZ_PROXY_SETUP_ERROR
+                      - INTERNAL_ERROR_REMOTE_REQUEST
+                      - INTERNAL_ROLE_ACCESS_DENIED
+                      - INCORRECT_EVENTS_FILTER
+                      - MISSING_ATTRIBUTE
+                      - MISSING_CURRENT_USER_METADATA
+                      - NAME_NOT_IN_DOMAIN
+                      - NO_RESPONSE_RECEIVED_FROM_PORTAL
+                      - PE_NOT_PAIRED_WITH_PC
+                      - PC_NOT_PAIRED_WITH_XI_PORTAL
+                      - REFERENCE_ERROR
+                      - RESERVED_ROLE_ACCESS_DENIED
+                      - REQUEST_NOT_SUPPORTED
+                      - REMOTE_CLUSTER_IP_FETCH_FAILED
+                      - REMOTE_CLUSTER_NOT_CONNECTED
+                      - REMOTE_CONNECTION_EXISTS
+                      - REMOTE_CONNECTION_NOT_FOUND
+                      - REPORT_CONFIG_NOT_FOUND
+                      - REPORTING_RESOURCE_NOT_FOUND
+                      - REPORTING_INTERNAL_ERROR
+                      - SERVICE_UNAVAILABLE
+                      - SEARCH_RESULT_PROCESSING_ERROR
+                      - TOO_MANY_REQUESTS
+                      - UNCONFIGURED_API_KEY
+                      - UNCONFIGURED_PORTAL_CONNECTION
+                      - UNSPECIFIED_EVENTS_FILTER
+                      - UNSUPPORTED_AZ_PROXY_API
+                      - UNSUPPORTED_MEDIA_TYPE_ERROR
+                      - UNSUPPORTED_API_VERSION
+                      - UPLOAD_TO_S3_FAILED
+                      - VALIDATION_ERROR
+                      - INVALID_SSL_CERTIFICATE
+                      - ERROR_ATTACHING_FILE_TO_CASE
+                      - SPEC_UPDATE_ERROR
+                      - SPEC_INCOMPATIBLE_ERROR
+                  details:
+                    default:
+                      name: .message_resource.reason
+                      description: ''
+                description: 'If state is ERROR, a machine-readable snake-cased string.'
+                serializedName: reason
+                extensions: {}
+                details:
+                  default:
+                    name: reason
+                    description: 'If state is ERROR, a machine-readable snake-cased string.'
+                    required: true
+              details:
+                schema: &ref_62
+                  type: object
+                  description: Custom key-value details relevant to the status.
+                  additionalProperties: &ref_63
+                    type: string
+                    allOf: []
+                    anyOf: []
+                    deprecated: false
+                    enum: []
+                    nullable: false
+                    oneOf: []
+                    properties: {}
+                    readOnly: false
+                    required: []
+                    writeOnly: false
+                    extensions: {}
+                    details:
+                      default:
+                        name: .message_resource.details.additionalItemType
+                        description: ''
+                  allOf: []
+                  anyOf: []
+                  deprecated: false
+                  enum: []
+                  nullable: false
+                  oneOf: []
+                  properties: {}
+                  readOnly: false
+                  required: []
+                  writeOnly: false
+                  extensions: {}
+                  details:
+                    default:
+                      name: .message_resource.details
+                      description: Custom key-value details relevant to the status.
+                description: Custom key-value details relevant to the status.
+                serializedName: details
+                extensions: {}
+                details:
+                  default:
+                    name: details
+                    description: Custom key-value details relevant to the status.
+                    required: false
+            readOnly: false
+            required:
+              - message
+              - reason
+            title: Message.
+            writeOnly: false
+            extensions: {}
+            details:
+              default:
+                name: message_resource
+                description: message.
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .category_status.message_list
+              description: ''
+        description: ''
+        serializedName: message_list
+        extensions: {}
+        details:
+          default:
+            name: message_list
+            description: ''
+            required: false
+      state:
+        schema: &ref_45
+          type: string
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .category_status.state
+              description: ''
+        description: ''
+        serializedName: state
+        extensions: {}
+        details:
+          default:
+            name: state
+            description: ''
+            required: false
+    readOnly: false
+    required: []
+    title: Response Kind
+    writeOnly: false
+    extensions: {}
+    details:
+      default:
+        name: category_status
+        description: |
+          The status of a REST API call. Only used when there is a failure to
+          report.
+  category_value:
+    type: object
+    description: Category value definition.
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    properties:
+      description:
+        schema: &ref_47
+          type: string
+          description: Description of the category value.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          maxLength: 1000
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .category_value.description
+              description: ''
+        description: Description of the category value.
+        serializedName: description
+        extensions: {}
+        details:
+          default:
+            name: description
+            description: Description of the category value.
+            required: false
+      api_version:
+        schema: &ref_46
+          type: string
+          description: API version.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .category_value.api_version
+              description: ''
+        description: API version.
+        serializedName: api_version
+        extensions: {}
+        details:
+          default:
+            name: api_version
+            description: API version.
+            required: false
+      value:
+        schema: &ref_48
+          type: string
+          description: Value for the category.
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          maxLength: 64
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .category_value.value
+              description: ''
+        description: Value for the category.
+        serializedName: value
+        extensions: {}
+        details:
+          default:
+            name: value
+            description: Value for the category.
+            required: false
+    readOnly: false
+    required: []
+    title: Category Value definition.
+    writeOnly: false
+    extensions: {}
+    details:
+      default:
+        name: category_value
+        description: Category value definition.
+  category_value_list_response:
+    type: object
+    description: Category Value list response.
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    properties:
+      api_version:
+        schema: &ref_49
+          type: string
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .category_value_list_response.api_version
+              description: ''
+        description: ''
+        serializedName: api_version
+        extensions: {}
+        details:
+          default:
+            name: api_version
+            description: ''
+            required: false
+      entities:
+        schema: &ref_50
+          type: array
+          allOf: []
+          anyOf: []
+          deprecated: false
+          enum: []
+          items: &ref_4
+            type: object
+            description: Category value definition.
+            allOf: []
+            anyOf: []
+            deprecated: false
+            enum: []
+            nullable: false
+            oneOf: []
+            properties:
+              name:
+                schema: &ref_53
+                  type: string
+                  description: The name of the category.
+                  allOf: []
+                  anyOf: []
+                  deprecated: false
+                  enum: []
+                  maxLength: 64
+                  nullable: false
+                  oneOf: []
+                  properties: {}
+                  readOnly: false
+                  required: []
+                  writeOnly: false
+                  extensions: {}
+                  details:
+                    default:
+                      name: .category_value_status.name
+                      description: ''
+                description: The name of the category.
+                serializedName: name
+                extensions: {}
+                details:
+                  default:
+                    name: name
+                    description: The name of the category.
+                    required: false
+              description:
+                schema: &ref_52
+                  type: string
+                  description: Description of the category value.
+                  allOf: []
+                  anyOf: []
+                  deprecated: false
+                  enum: []
+                  maxLength: 1000
+                  nullable: false
+                  oneOf: []
+                  properties: {}
+                  readOnly: false
+                  required: []
+                  writeOnly: false
+                  extensions: {}
+                  details:
+                    default:
+                      name: .category_value_status.description
+                      description: ''
+                description: Description of the category value.
+                serializedName: description
+                extensions: {}
+                details:
+                  default:
+                    name: description
+                    description: Description of the category value.
+                    required: false
+              api_version:
+                schema: &ref_51
+                  type: string
+                  description: API version.
+                  allOf: []
+                  anyOf: []
+                  deprecated: false
+                  enum: []
+                  nullable: false
+                  oneOf: []
+                  properties: {}
+                  readOnly: false
+                  required: []
+                  writeOnly: false
+                  extensions: {}
+                  details:
+                    default:
+                      name: .category_value_status.api_version
+                      description: ''
+                description: API version.
+                serializedName: api_version
+                extensions: {}
+                details:
+                  default:
+                    name: api_version
+                    description: API version.
+                    required: false
+              system_defined:
+                schema: &ref_54
+                  type: boolean
+                  description: Specifying whether its a system defined category.
+                  allOf: []
+                  anyOf: []
+                  deprecated: false
+                  enum: []
+                  nullable: false
+                  oneOf: []
+                  properties: {}
+                  readOnly: false
+                  required: []
+                  writeOnly: false
+                  extensions: {}
+                  details:
+                    default:
+                      name: .category_value_status.system_defined
+                      description: ''
+                description: Specifying whether its a system defined category.
+                serializedName: system_defined
+                extensions: {}
+                details:
+                  default:
+                    name: system_defined
+                    description: Specifying whether its a system defined category.
+                    required: false
+              value:
+                schema: &ref_55
+                  type: string
+                  description: The value of the category.
+                  allOf: []
+                  anyOf: []
+                  deprecated: false
+                  enum: []
+                  maxLength: 64
+                  nullable: false
+                  oneOf: []
+                  properties: {}
+                  readOnly: false
+                  required: []
+                  writeOnly: false
+                  extensions: {}
+                  details:
+                    default:
+                      name: .category_value_status.value
+                      description: ''
+                description: The value of the category.
+                serializedName: value
+                extensions: {}
+                details:
+                  default:
+                    name: value
+                    description: The value of the category.
+                    required: false
+            readOnly: false
+            required: []
+            title: Category Value Definition.
+            writeOnly: false
+            extensions: {}
+            details:
+              default:
+                name: category_value_status
+                description: Category value definition.
+          nullable: false
+          oneOf: []
+          properties: {}
+          readOnly: false
+          required: []
+          writeOnly: false
+          extensions: {}
+          details:
+            default:
+              name: .category_value_list_response.entities
+              description: ''
+        description: ''
+        serializedName: entities
+        extensions: {}
+        details:
+          default:
+            name: entities
+            description: ''
+            required: false
+      metadata:
+        schema: *ref_1
+        description: >
+          All api calls that return a list will have this metadata block as
+          input
+        serializedName: metadata
+        extensions: {}
+        details:
+          default:
+            name: metadata
+            description: >
+              All api calls that return a list will have this metadata block as
+              input
+            required: false
+    readOnly: false
+    required: []
+    title: Category value list response.
+    writeOnly: false
+    extensions: {}
+    details:
+      default:
+        name: category_value_list_response
+        description: Category Value list response.
+  category_value_status: *ref_4
+  entity_reference: *ref_5
+  message_resource: *ref_6
+  sort_order: *ref_7
+  .Parameter.uuid: &ref_66
+    type: string
+    format: UUID
+    allOf: []
+    anyOf: []
+    deprecated: false
+    enum: []
+    nullable: false
+    oneOf: []
+    pattern: >-
+      ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+    properties: {}
+    readOnly: false
+    required: []
+    writeOnly: false
+    extensions: {}
+    details:
+      default:
+        name: .Parameter.uuid
+        description: ''
+  .category_filter.kind_list: *ref_8
+  .category_filter.kind_list.itemType: *ref_9
+  .category_filter.params: *ref_10
+  .category_filter.params.additionalItemType: *ref_11
+  .category_filter.type: *ref_12
+  .category_key.api_version: *ref_13
+  .category_key.description: *ref_14
+  .category_key.name: *ref_15
+  .category_key_list_response.api_version: *ref_16
+  .category_key_list_response.entities: *ref_17
+  .category_key_status.api_version: *ref_18
+  .category_key_status.description: *ref_19
+  .category_key_status.name: *ref_20
+  .category_key_status.system_defined: *ref_21
+  .category_list_metadata.filter: *ref_22
+  .category_list_metadata.kind: *ref_23
+  .category_list_metadata.length: *ref_24
+  .category_list_metadata.offset: *ref_25
+  .category_list_metadata.sort_attribute: *ref_26
+  .category_query_input.api_version: *ref_27
+  .category_query_input.group_member_count: *ref_28
+  .category_query_input.group_member_offset: *ref_29
+  .category_query_response.api_version: *ref_30
+  .category_query_response.metadata: *ref_31
+  .category_query_response.metadata.group_member_count: *ref_32
+  .category_query_response.metadata.group_member_offset: *ref_33
+  .category_query_response.metadata.total_matches: *ref_34
+  .category_query_response.results: *ref_35
+  .category_query_response.results.itemType: *ref_36
+  .category_query_response.results.itemType.entity_any_reference_list: *ref_37
+  .category_query_response.results.itemType.filtered_entity_count: *ref_38
+  .category_query_response.results.itemType.kind: *ref_39
+  .category_query_response.results.itemType.total_entity_count: *ref_40
+  .category_status.api_version: *ref_41
+  .category_status.code: *ref_42
+  .category_status.kind: *ref_43
+  .category_status.message_list: *ref_44
+  .category_status.state: *ref_45
+  .category_value.api_version: *ref_46
+  .category_value.description: *ref_47
+  .category_value.value: *ref_48
+  .category_value_list_response.api_version: *ref_49
+  .category_value_list_response.entities: *ref_50
+  .category_value_status.api_version: *ref_51
+  .category_value_status.description: *ref_52
+  .category_value_status.name: *ref_53
+  .category_value_status.system_defined: *ref_54
+  .category_value_status.value: *ref_55
+  .entity_reference.categories: *ref_56
+  .entity_reference.categories.additionalItemType: *ref_57
+  .entity_reference.kind: *ref_58
+  .entity_reference.name: *ref_59
+  .entity_reference.type: *ref_60
+  .entity_reference.uuid: *ref_61
+  .message_resource.details: *ref_62
+  .message_resource.details.additionalItemType: *ref_63
+  .message_resource.message: *ref_64
+  .message_resource.reason: *ref_65
+info:
+  title: Nutanix Intentful API
+  version: 3.1.0
+  extensions: {}
+security:
+  - basicAuth: []
+servers:
+  - url: 'http://35.196.200.179:9440/api/nutanix/v3'
+    extensions: {}
+tags: []
+http:
+  examples: {}
+  headers: {}
+  links: {}
+  parameters:
+    uuid:
+      name: uuid
+      schema: *ref_66
+      description: The UUID of the entity.
+      allowEmptyValue: false
+      allowReserved: false
+      deprecated: false
+      explode: false
+      in: path
+      required: true
+      style: simple
+      extensions: {}
+      details:
+        default:
+          name: uuid
+          description: The UUID of the entity.
+          location: Client
+  requestBodies:
+    category_list_metadata: &ref_67
+      schema: *ref_1
+      description: ''
+      contentType: application/json
+      required: false
+      extensions:
+        x-ms-requestBody-name: get_entities_request
+  responses: {}
+  securitySchemes: {}
+  callbacks: {}
+  operations:
+    category:
+      operationId: category
+      path: /categories/list
+      method: post
+      description: |
+        List the category keys.
+      deprecated: false
+      parameters: []
+      pathExtensions: {}
+      requestBody: *ref_67
+      responses_new:
+        '200':
+          - schema: *ref_68
+            description: Success
+            headers: {}
+            mimeTypes:
+              - application/json
+            responseCode: '200'
+            extensions: {}
+            details:
+              default:
+                name: 200 application/json
+                description: MISSING DESCRIPTION 09
+                isErrorResponse: false
+        default:
+          - schema: *ref_69
+            description: Internal Error
+            headers: {}
+            mimeTypes:
+              - application/json
+            responseCode: default
+            extensions: {}
+            details:
+              default:
+                name: default application/json
+                description: MISSING DESCRIPTION 09
+                isErrorResponse: true
+      servers:
+        - url: 'http://35.196.200.179:9440/api/nutanix/v3'
+          extensions: {}
+      summary: List the category keys.
+      tags:
+        - category
+      extensions:
+        x-ms-requestBody-index: 0
+        x-ntnx-kind: category
+        x-ntnx-operations:
+          - view_name
+      details:
+        default:
+          name: category
+          description: |
+            List the category keys.
+          headerparameters: []
+  extensions: {}
+commands:
+  parameters: {}
+  operations: {}
+  extensions: {}
+extensions: {}
+details:
+  default:
+    name: Nutanix Intentful API
+    description: ''
