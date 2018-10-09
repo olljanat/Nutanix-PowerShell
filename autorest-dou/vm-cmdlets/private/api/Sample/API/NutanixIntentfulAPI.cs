@@ -256,6 +256,7 @@ namespace Sample.API
                 System.Net.Http.HttpResponseMessage _response = null;
                 try
                 {
+                    IgnoreBadCertificates();
                     await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeCall, request); if( eventListener.Token.IsCancellationRequested ) { return; }
                     _response = await sender.SendAsync(request, eventListener);
                     await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
@@ -303,4 +304,26 @@ namespace Sample.API
             }
         }
     }
+
+    /// <summary>
+    /// Together with the AcceptAllCertifications method right
+    /// below this causes to bypass errors caused by SLL-Errors.
+    /// </summary>
+    public static void IgnoreBadCertificates() => System.Net.ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(AcceptAllCertifications);
+
+    /// <summary>
+    /// In Short: the Method solves the Problem of broken Certificates.
+    /// Sometime when requesting Data and the sending Webserverconnection
+    /// is based on a SSL Connection, an Error is caused by Servers whoes
+    /// Certificate(s) have Errors. Like when the Cert is out of date
+    /// and much more... So at this point when calling the method,
+    /// this behaviour is prevented
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="certification"></param>
+    /// <param name="chain"></param>
+    /// <param name="sslPolicyErrors"></param>
+    /// <returns>true</returns>
+    private static bool AcceptAllCertifications(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certification, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors) => true;
+
 }
