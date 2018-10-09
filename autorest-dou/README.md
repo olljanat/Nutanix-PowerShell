@@ -23,7 +23,7 @@ These are the global settings for the ServerManagement API.
 
 ``` yaml
 use: "@microsoft.azure/autorest.incubator@preview"
-input-file: swagger.json
+input-file: primary-services.json
 namespace: Nutanix.Powershell
 
 powershell:
