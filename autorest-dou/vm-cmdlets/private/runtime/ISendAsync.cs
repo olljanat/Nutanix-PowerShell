@@ -49,9 +49,14 @@ namespace Microsoft.Rest.ClientRuntime
         {
         }
         public HttpClientFactory(HttpClient client) => this.client = client;
+
+
         public ISendAsync Create() => this;
 
-        public Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, IEventListener callback) => client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, callback.Token);
+        public Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, IEventListener callback)  {
+            
+            return client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, callback.Token);
+        }
     }
 
     public interface ISendAsyncFactory

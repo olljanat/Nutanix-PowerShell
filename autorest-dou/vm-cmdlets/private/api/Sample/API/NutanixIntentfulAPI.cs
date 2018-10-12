@@ -6,7 +6,32 @@ namespace Sample.API
     /// </summary>
     public class NutanixIntentfulAPI
     {
+        /// <summary>
+        /// Together with the AcceptAllCertifications method right
+        /// below this causes to bypass errors caused by SLL-Errors.
+        /// </summary>
+        public static void IgnoreBadCertificates() {
+            System.Net.ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(AcceptAllCertifications);
+            System.Net.ServicePointManager.CheckCertificateRevocationList = false;
+        }
 
+        /// <summary>
+        /// In Short: the Method solves the Problem of broken Certificates.
+        /// Sometime when requesting Data and the sending Webserverconnection
+        /// is based on a SSL Connection, an Error is caused by Servers whoes
+        /// Certificate(s) have Errors. Like when the Cert is out of date
+        /// and much more... So at this point when calling the method,
+        /// this behaviour is prevented
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="certification"></param>
+        /// <param name="chain"></param>
+        /// <param name="sslPolicyErrors"></param>
+        /// <returns>true</returns>
+        private static bool AcceptAllCertifications(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certification, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors){
+         return true;   
+        }
+        
         /// <summary>
         /// This operation gets a list of Access Control Policies, allowing for sorting and pagination. Note: Entities that have not
         /// been created successfully are not listed.
@@ -41,6 +66,7 @@ namespace Sample.API
                 // set body content
                 request.Content = new System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+               
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
                 // make the call
                 await this.ListOperation_Call(request,onOK,onDefault,eventListener,sender);
@@ -214,14 +240,16 @@ namespace Sample.API
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async System.Threading.Tasks.Task Vms(Sample.API.Models.IVmListMetadata body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Sample.API.Models.IVmListIntentResponse>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Sample.API.Models.IVmStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender)
+        public async System.Threading.Tasks.Task Vms(Sample.API.Models.IVmListMetadata body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Sample.API.Models.IVmListIntentResponse>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Sample.API.Models.IVmStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, string username, string password)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
             {
+                IgnoreBadCertificates();
+                System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
                 // construct URL
                 var _url = new System.Uri((
-                        "http://35.196.200.179:9440/api/nutanix/v3//vms/list"
+                        "https://35.196.200.179:9440/api/nutanix/v3//vms/list"
                         ).TrimEnd('?','&'));
 
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
@@ -234,6 +262,8 @@ namespace Sample.API
                 // set body content
                 request.Content = new System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                var byteArray = System.Text.Encoding.ASCII.GetBytes($"{username}:{password}");
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", System.Convert.ToBase64String(byteArray));
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
                 // make the call
                 await this.Vms_Call(request,onOK,onDefault,eventListener,sender);
@@ -256,7 +286,6 @@ namespace Sample.API
                 System.Net.Http.HttpResponseMessage _response = null;
                 try
                 {
-                    IgnoreBadCertificates();
                     await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeCall, request); if( eventListener.Token.IsCancellationRequested ) { return; }
                     _response = await sender.SendAsync(request, eventListener);
                     await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
@@ -304,26 +333,4 @@ namespace Sample.API
             }
         }
     }
-
-    /// <summary>
-    /// Together with the AcceptAllCertifications method right
-    /// below this causes to bypass errors caused by SLL-Errors.
-    /// </summary>
-    public static void IgnoreBadCertificates() => System.Net.ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(AcceptAllCertifications);
-
-    /// <summary>
-    /// In Short: the Method solves the Problem of broken Certificates.
-    /// Sometime when requesting Data and the sending Webserverconnection
-    /// is based on a SSL Connection, an Error is caused by Servers whoes
-    /// Certificate(s) have Errors. Like when the Cert is out of date
-    /// and much more... So at this point when calling the method,
-    /// this behaviour is prevented
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="certification"></param>
-    /// <param name="chain"></param>
-    /// <param name="sslPolicyErrors"></param>
-    /// <returns>true</returns>
-    private static bool AcceptAllCertifications(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certification, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors) => true;
-
 }

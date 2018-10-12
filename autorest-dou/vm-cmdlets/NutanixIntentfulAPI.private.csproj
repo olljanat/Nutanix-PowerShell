@@ -3,7 +3,7 @@
   <PropertyGroup>
     <LangVersion>7.1</LangVersion>
     <OutputType>Library</OutputType>
-     <TargetFramework>netstandard2.0</TargetFramework>
+     <TargetFramework>netcoreapp2.1</TargetFramework>
     <nowarn>1998</nowarn> <!-- some methods are marked async that don't have an await in them.-->
   </PropertyGroup>
 

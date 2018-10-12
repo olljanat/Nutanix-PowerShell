@@ -10,10 +10,23 @@ namespace Sample.API
     {
         /// <summary>FIXME: Field _handler is MISSING DESCRIPTION</summary>
         public System.Net.Http.HttpClientHandler _handler = new System.Net.Http.HttpClientHandler();
+
+        public System.Net.Http.HttpClientHandler _handlerSkipSSL = new System.Net.Http.HttpClientHandler();
+
+        public System.Net.Http.HttpClientHandler _handlerDefaultSkipSSL = new System.Net.Http.HttpClientHandler();
+
+       
         /// <summary>the ISendAsync pipeline instance</summary>
          private Microsoft.Rest.ClientRuntime.HttpPipeline _pipeline;
+
+        /// <summary>the ISendAsync pipeline instance</summary>
+         private Microsoft.Rest.ClientRuntime.HttpPipeline _pipelineWithSkipSSL;
+
         /// <summary>the ISendAsync pipeline instance (when proxy is enabled)</summary>
          private Microsoft.Rest.ClientRuntime.HttpPipeline _pipelineWithProxy;
+
+        /// <summary>the ISendAsync pipeline instance (when proxy is enabled)</summary>
+         private Microsoft.Rest.ClientRuntime.HttpPipeline _pipelineWithProxyWithSkipSSL;
         /// <summary>FIXME: Field _webProxy is MISSING DESCRIPTION</summary>
         public System.Net.WebProxy _webProxy = new System.Net.WebProxy();
         /// <summary>The instance of the Client API</summary>
@@ -45,6 +58,18 @@ namespace Sample.API
             AfterCreatePipeline(boundParameters, ref pipeline);
             return pipeline;
         }
+
+        /// <summary>Creates an instance of the HttpPipeline for each call.</summary>
+        /// <param name="boundParameters">The bound parameters from the cmdlet call.</param>
+        /// <returns>An instance of Microsoft.Rest.ClientRuntime.HttpPipeline for the remote call.</returns>
+        public Microsoft.Rest.ClientRuntime.HttpPipeline CreatePipelineWithProxy(System.Collections.Generic.Dictionary<string,object> boundParameters)
+        {    
+            Microsoft.Rest.ClientRuntime.HttpPipeline pipeline = null;
+            BeforeCreatePipeline(boundParameters, ref pipeline);
+            pipeline = (pipeline ?? (_handlerSkipSSL.UseProxy ? _pipelineWithProxyWithSkipSSL : _pipelineWithSkipSSL)).Clone();
+            AfterCreatePipeline(boundParameters, ref pipeline);
+            return pipeline;
+        }
         /// <summary>Initialization steps performed after the module is loaded.</summary>
 
         public void Init()
@@ -58,8 +83,22 @@ namespace Sample.API
             /// constructor
             ClientAPI = new Sample.API.NutanixIntentfulAPI();
             _handler.Proxy = _webProxy;
+
+            // SkipSSL handlers
+            _handlerDefaultSkipSSL.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; };
+            _handlerSkipSSL.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; };
+            _handlerSkipSSL.Proxy = _webProxy;
+
+            // var httpClientHandler = new System.Net.Http.HttpClientHandler();
+            // httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; };
+
             _pipeline = new Microsoft.Rest.ClientRuntime.HttpPipeline(new Microsoft.Rest.ClientRuntime.HttpClientFactory(new System.Net.Http.HttpClient()));
             _pipelineWithProxy = new Microsoft.Rest.ClientRuntime.HttpPipeline(new Microsoft.Rest.ClientRuntime.HttpClientFactory(new System.Net.Http.HttpClient(_handler)));
+
+            // skip ssl pipelines
+            _pipelineWithSkipSSL = new Microsoft.Rest.ClientRuntime.HttpPipeline(new Microsoft.Rest.ClientRuntime.HttpClientFactory(new System.Net.Http.HttpClient(_handlerDefaultSkipSSL)));
+            _pipelineWithProxyWithSkipSSL = new Microsoft.Rest.ClientRuntime.HttpPipeline(new Microsoft.Rest.ClientRuntime.HttpClientFactory(new System.Net.Http.HttpClient(_handlerSkipSSL)));
+
         }
         /// <summary>FIXME: Method SetProxyConfiguration is MISSING DESCRIPTION</summary>
         /// <param name="proxy">FIXME: Parameter proxy is MISSING DESCRIPTION</param>
@@ -73,6 +112,7 @@ namespace Sample.API
             _webProxy.Credentials = proxyCredential ?.GetNetworkCredential();
             _webProxy.UseDefaultCredentials = proxyUseDefaultCredentials;
             _handler.UseProxy = proxy != null;
+            _handlerSkipSSL.UseProxy = proxy != null;
         }
     }
 }

@@ -62,6 +62,18 @@ namespace Sample.API.Cmdlets
                 GetEntitiesRequest.Length = value;
             }
         }
+
+        /// <summary>The username for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The username for authentication")]
+        public string username {get; set;}
+
+        /// <summary>The password for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The password for authentication")]
+        public string password {get; set;}
+
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Skip the ssl validation")]
+        public System.Management.Automation.SwitchParameter SkipSSL {get; set;}
+
         /// <summary>
         /// <see cref="IEventListener" /> cancellation delegate. Stops the cmdlet when called.
         /// </summary>
@@ -234,14 +246,14 @@ namespace Sample.API.Cmdlets
                 // unroll the inner exceptions to get the root cause
                 foreach( var innerException in aggregateException.Flatten().InnerExceptions )
                 {
-                    ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletException, $"{innerException.GetType().Name} - {innerException.Message} : {innerException.StackTrace}").Wait(); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
+                    ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletException, $"{innerException.GetType().Name} - {innerException.ToString()} -  {innerException.Message} : {innerException.StackTrace}").Wait(); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                     // Write exception out to error channel.
                     WriteError( new System.Management.Automation.ErrorRecord(innerException,string.Empty, System.Management.Automation.ErrorCategory.NotSpecified, null) );
                 }
             }
             catch(System.Exception exception)
             {
-                ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletException, $"{exception.GetType().Name} - {exception.Message} : {exception.StackTrace}").Wait(); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
+                ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletException, $"{exception.GetType().Name} - {exception.InnerException.Message} - {exception.Message} : {exception.StackTrace}").Wait(); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 // Write exception out to error channel.
                 WriteError( new System.Management.Automation.ErrorRecord(exception,string.Empty, System.Management.Automation.ErrorCategory.NotSpecified, null) );
             }
@@ -254,13 +266,19 @@ namespace Sample.API.Cmdlets
         {
             using( NoSynchronizationContext )
             {
+  
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletGetPipeline); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                Pipeline = Sample.API.Module.Instance.CreatePipeline(this.MyInvocation.BoundParameters);
+                // Pipeline = Sample.API.Module.Instance.CreatePipeline(this.MyInvocation.BoundParameters);
+                if (SkipSSL.ToBool()) {
+                    Pipeline = Sample.API.Module.Instance.CreatePipelineWithProxy(this.MyInvocation.BoundParameters);
+                } else {
+                    Pipeline = Sample.API.Module.Instance.CreatePipeline(this.MyInvocation.BoundParameters);
+                }
                 Pipeline.Prepend(HttpPipelinePrepend);
                 Pipeline.Append(HttpPipelineAppend);
                 // get the client instance
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                await this.Client.Vms(GetEntitiesRequest, onOK, onDefault, this, Pipeline);
+                await this.Client.Vms(GetEntitiesRequest, onOK, onDefault, this, Pipeline, this.username, this.password);
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }
         }
