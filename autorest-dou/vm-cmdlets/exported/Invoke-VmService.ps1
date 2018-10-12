@@ -49,6 +49,12 @@ param(
     [switch]
     ${SkipSSL},
 
+    [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='Skip the ssl validation')]
+    [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='Skip the ssl validation')]
+    [ValidateNotNull()]
+    [pscredential]
+    ${Credential},
+
     [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The filter in FIQL syntax used for the results.')]
     [string]
     ${Filter},

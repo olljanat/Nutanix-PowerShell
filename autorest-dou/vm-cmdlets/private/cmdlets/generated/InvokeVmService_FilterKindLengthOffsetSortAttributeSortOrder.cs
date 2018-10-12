@@ -93,6 +93,10 @@ namespace Sample.API.Cmdlets
 
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Skip the ssl validation")]
         public System.Management.Automation.SwitchParameter SkipSSL {get; set;}
+
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Skip the ssl validation")]
+        [System.Management.Automation.ValidateNotNull]
+        public System.Management.Automation.PSCredential Credential {get; set;}
         
         /// <summary>
         /// (overrides the default BeginProcessing method in System.Management.Automation.PSCmdlet)
@@ -246,7 +250,7 @@ namespace Sample.API.Cmdlets
                 Pipeline.Append(HttpPipelineAppend);
                 // get the client instance
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                await this.Client.Vms(GetEntitiesRequest, onOK, onDefault, this, Pipeline, this.username.ToString(), this.password);
+                await this.Client.Vms(GetEntitiesRequest, onOK, onDefault, this, Pipeline, Credential.UserName, Credential.Password);
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }
         }

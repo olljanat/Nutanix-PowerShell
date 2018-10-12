@@ -240,7 +240,7 @@ namespace Sample.API
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async System.Threading.Tasks.Task Vms(Sample.API.Models.IVmListMetadata body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Sample.API.Models.IVmListIntentResponse>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Sample.API.Models.IVmStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, string username, string password)
+        public async System.Threading.Tasks.Task Vms(Sample.API.Models.IVmListMetadata body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Sample.API.Models.IVmListIntentResponse>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Sample.API.Models.IVmStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, string username, System.Security.SecureString password)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -262,7 +262,7 @@ namespace Sample.API
                 // set body content
                 request.Content = new System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                var byteArray = System.Text.Encoding.ASCII.GetBytes($"{username}:{password}");
+                var byteArray = System.Text.Encoding.ASCII.GetBytes($"{username}:{CreateString(password)}");
                 request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", System.Convert.ToBase64String(byteArray));
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
                 // make the call
@@ -332,5 +332,28 @@ namespace Sample.API
                 await eventListener.AssertObjectIsValid(nameof(body), body);
             }
         }
+
+        private static string CreateString(System.Security.SecureString secureString)
+        {
+            System.IntPtr intPtr = System.IntPtr.Zero;
+            if (secureString == null || secureString.Length == 0)
+            {
+                return string.Empty;
+            }
+            string result;
+            try
+            {
+                intPtr = System.Runtime.InteropServices.Marshal.SecureStringToBSTR(secureString);
+                result = System.Runtime.InteropServices.Marshal.PtrToStringBSTR(intPtr);
+            }
+            finally
+            {       
+                if (intPtr != System.IntPtr.Zero)
+                {
+                    System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(intPtr);
+                }
+            }      
+            return result;
+}
     }
 }
