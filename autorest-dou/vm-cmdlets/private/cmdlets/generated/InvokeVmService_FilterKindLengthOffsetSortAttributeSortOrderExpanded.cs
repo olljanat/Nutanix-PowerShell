@@ -45,7 +45,6 @@ namespace Sample.API.Cmdlets
         [System.Management.Automation.ValidateNotNull]
         public Microsoft.Rest.ClientRuntime.SendAsyncStep[] HttpPipelinePrepend {get;set;}
         /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "The kind name")]
         public string Kind
         {
             set
@@ -77,6 +76,19 @@ namespace Sample.API.Cmdlets
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Skip the ssl validation")]
         [System.Management.Automation.ValidateNotNull]
         public System.Management.Automation.PSCredential Credential {get; set;}
+
+        /// <summary>The username for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The username for authentication")]
+        public string Server {get; set;}
+
+          /// <summary>The username for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The username for authentication")]
+        public string Port {get; set;}
+
+        /// <summary>The username for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The username for authentication")]
+        public string Protocol {get; set;}
+        
 
 
 
@@ -282,9 +294,42 @@ namespace Sample.API.Cmdlets
                 }
                 Pipeline.Prepend(HttpPipelinePrepend);
                 Pipeline.Append(HttpPipelineAppend);
+
+
+                // if the values are nil, we assume flag came empty and we either set from env
+                // or we set a default
+                if (Port == null){
+                    Port = System.Environment.GetEnvironmentVariable("NutanixPort") ?? "9440";
+                }
+
+                if (Protocol == null) {
+                    Protocol = System.Environment.GetEnvironmentVariable("NutanixProtocol") ?? "https";
+                }
+
+                if (Server == null) {
+                    System.Console.WriteLine("Nutanix server " + System.Environment.GetEnvironmentVariable("NutanixServer"));
+                    Server = System.Environment.GetEnvironmentVariable("NutanixServer") ?? "localhost";
+                }
+
+                if (username == null) {
+                    username = System.Environment.GetEnvironmentVariable("NutanixUsername") ?? "";
+                }
+
+                if (password == null) {
+                    password = System.Environment.GetEnvironmentVariable("NutanixPassword") ?? "";
+                }
+
+                // set the default values
+                Kind = "vm";
+                //build url 
+                var url = $"{Protocol}://{Server}:{Port}";
+
+
+
+
                 // get the client instance
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                await this.Client.Vms(GetEntitiesRequest, onOK, onDefault, this, Pipeline, Credential.UserName, Credential.Password);
+                await this.Client.Vms(GetEntitiesRequest, onOK, onDefault, this, Pipeline, username, password, Credential, url);
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }
         }

@@ -55,13 +55,24 @@ param(
     [pscredential]
     ${Credential},
 
+    [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The username for authentication')]
+    [string]
+    ${Server},
+
+    [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The username for authentication')]
+    [string]
+    ${Port},
+
+    [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The username for authentication')]
+    [string]
+    ${Protocol},
+
     [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The filter in FIQL syntax used for the results.')]
     [string]
     ${Filter},
-
-    [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The kind name')]
-    [string]
-    ${Kind},
 
     [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The number of records to retrieve relative to the offset')]
     [int]
@@ -83,24 +94,6 @@ begin
 {
   switch ($PsCmdlet.ParameterSetName) { 
 
-  'FilterKindLengthOffsetSortAttributeSortOrderExpanded' {
-
-    try {
-        $outBuffer = $null
-        if ($PSBoundParameters.TryGetValue('OutBuffer', [ref]$outBuffer))
-        {
-            $PSBoundParameters['OutBuffer'] = 1
-        }
-        $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('NutanixIntentfulAPI.private\Invoke-VmService_FilterKindLengthOffsetSortAttributeSortOrderExpanded', [System.Management.Automation.CommandTypes]::Cmdlet)
-        $scriptCmd = {& $wrappedCmd @PSBoundParameters }
-        $steppablePipeline = $scriptCmd.GetSteppablePipeline($myInvocation.CommandOrigin)
-        $steppablePipeline.Begin($PSCmdlet)
-    } catch {
-        throw
-    }
-
-}
-
   'FilterKindLengthOffsetSortAttributeSortOrder' {
 
     try {
@@ -110,6 +103,24 @@ begin
             $PSBoundParameters['OutBuffer'] = 1
         }
         $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('NutanixIntentfulAPI.private\Invoke-VmService_FilterKindLengthOffsetSortAttributeSortOrder', [System.Management.Automation.CommandTypes]::Cmdlet)
+        $scriptCmd = {& $wrappedCmd @PSBoundParameters }
+        $steppablePipeline = $scriptCmd.GetSteppablePipeline($myInvocation.CommandOrigin)
+        $steppablePipeline.Begin($PSCmdlet)
+    } catch {
+        throw
+    }
+
+}
+
+  'FilterKindLengthOffsetSortAttributeSortOrderExpanded' {
+
+    try {
+        $outBuffer = $null
+        if ($PSBoundParameters.TryGetValue('OutBuffer', [ref]$outBuffer))
+        {
+            $PSBoundParameters['OutBuffer'] = 1
+        }
+        $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('NutanixIntentfulAPI.private\Invoke-VmService_FilterKindLengthOffsetSortAttributeSortOrderExpanded', [System.Management.Automation.CommandTypes]::Cmdlet)
         $scriptCmd = {& $wrappedCmd @PSBoundParameters }
         $steppablePipeline = $scriptCmd.GetSteppablePipeline($myInvocation.CommandOrigin)
         $steppablePipeline.Begin($PSCmdlet)
