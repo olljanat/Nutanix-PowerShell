@@ -1,0 +1,8 @@
+
+
+ApiVersion : 3.1
+Entities   : {Sample.API.Models.VmIntentResource, Sample.API.Models.VmIntentResource, Sample.API.Models.VmIntentResource, Sample.API.Models.VmIntentResource...}
+Metadata   : Sample.API.Models.VmListMetadataOutput
+
+
+
