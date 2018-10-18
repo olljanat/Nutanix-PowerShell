@@ -9,7 +9,7 @@ namespace Sample.API.ModelCmdlets
         /// <summary>Backing field for <see cref="Vm" /></summary>
         private Sample.API.Models.IVm _vm = new Sample.API.Models.Vm();
         /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The kind name")]
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "The kind name")]
         public string AvailabilityZoneReferenceKind
         {
             set
@@ -29,7 +29,7 @@ namespace Sample.API.ModelCmdlets
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING")]
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string AvailabilityZoneReferenceUuid
         {
             set
@@ -39,13 +39,12 @@ namespace Sample.API.ModelCmdlets
             }
         }
         /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The kind name")]
         public string ClusterReferenceKind
         {
             set
             {
                 _vm.ClusterReference = _vm.ClusterReference ?? new Sample.API.Models.ClusterReference();
-                _vm.ClusterReference.Kind = value;
+                _vm.ClusterReference.Kind = "cluster";
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>

@@ -11,7 +11,7 @@ namespace Sample.API.ModelCmdlets
         /// <summary>Backing field for <see cref="VmResources" /></summary>
         private Sample.API.Models.IVmResources _vmResources = new Sample.API.Models.VmResources();
         /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING")]
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string DiskAddressAdapterType
         {
             set
@@ -23,7 +23,7 @@ namespace Sample.API.ModelCmdlets
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING")]
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public int DiskAddressDeviceIndex
         {
             set
@@ -167,7 +167,7 @@ namespace Sample.API.ModelCmdlets
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING")]
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string ReferenceKind
         {
             set
@@ -187,7 +187,7 @@ namespace Sample.API.ModelCmdlets
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING")]
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string ReferenceUuid
         {
             set

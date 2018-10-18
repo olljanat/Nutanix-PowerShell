@@ -49,6 +49,27 @@ param(
     [switch]
     ${SkipSSL},
 
+    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='Skip the ssl validation')]
+    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='Skip the ssl validation')]
+    [ValidateNotNull()]
+    [pscredential]
+    ${Credential},
+
+    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The username for authentication')]
+    [string]
+    ${Server},
+
+    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The username for authentication')]
+    [string]
+    ${Port},
+
+    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The username for authentication')]
+    [string]
+    ${Protocol},
+
     [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The filter in FIQL syntax used for the results.')]
     [string]
     ${Filter},

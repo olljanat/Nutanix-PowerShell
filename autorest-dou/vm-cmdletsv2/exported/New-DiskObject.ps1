@@ -1,37 +1,37 @@
-function New-VmObject {
+function New-DiskObject {
 [CmdletBinding()]
 param(
-    [Parameter(ParameterSetName='default', HelpMessage='The kind name')]
+    [Parameter(ParameterSetName='default', HelpMessage='HELP MESSAGE MISSING')]
     [string]
-    ${AvailabilityZoneReferenceKind},
+    ${DataSourceReferenceKind},
 
     [Parameter(ParameterSetName='default', HelpMessage='HELP MESSAGE MISSING')]
     [string]
-    ${AvailabilityZoneReferenceName},
+    ${DataSourceReferenceName},
 
     [Parameter(ParameterSetName='default', HelpMessage='HELP MESSAGE MISSING')]
     [string]
-    ${AvailabilityZoneReferenceUuid},
+    ${DataSourceReferenceUuid},
 
     [Parameter(ParameterSetName='default', HelpMessage='HELP MESSAGE MISSING')]
     [string]
-    ${ClusterReferenceName},
+    ${DeviceType},
 
-    [Parameter(ParameterSetName='default', Mandatory=$true, HelpMessage='HELP MESSAGE MISSING')]
+    [Parameter(ParameterSetName='default', HelpMessage='HELP MESSAGE MISSING')]
     [string]
-    ${ClusterReferenceUuid},
+    ${AdapterType},
 
-    [Parameter(ParameterSetName='default', HelpMessage='A description for vm.')]
-    [string]
-    ${Description},
+    [Parameter(ParameterSetName='default', HelpMessage='HELP MESSAGE MISSING')]
+    [int]
+    ${DeviceIndex},
 
-    [Parameter(ParameterSetName='default', Mandatory=$true, HelpMessage='vm Name.')]
-    [string]
-    ${Name},
+    [Parameter(ParameterSetName='default', HelpMessage='HELP MESSAGE MISSING')]
+    [long]
+    ${DiskSizeBytes},
 
-    [Parameter(ParameterSetName='default', Mandatory=$true, HelpMessage='VM Resources Definition.')]
-    [Sample.API.Models.IVmResources]
-    ${Resources})
+    [Parameter(ParameterSetName='default', HelpMessage='HELP MESSAGE MISSING')]
+    [int]
+    ${DiskSizeMib})
 
 begin
 {
@@ -41,7 +41,7 @@ begin
         {
             $PSBoundParameters['OutBuffer'] = 1
         }
-        $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('NutanixIntentfulAPI.private\New-VmObject', [System.Management.Automation.CommandTypes]::Cmdlet)
+        $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('NutanixIntentfulAPI.private\New-DiskObject', [System.Management.Automation.CommandTypes]::Cmdlet)
         $scriptCmd = {& $wrappedCmd @PSBoundParameters }
         $steppablePipeline = $scriptCmd.GetSteppablePipeline($myInvocation.CommandOrigin)
         $steppablePipeline.Begin($PSCmdlet)
@@ -69,7 +69,7 @@ end
 }
 <#
 
-.ForwardHelpTargetName NutanixIntentfulAPI.private\New-VmObject
+.ForwardHelpTargetName NutanixIntentfulAPI.private\New-DiskObject
 .ForwardHelpCategory Cmdlet
 
 #>

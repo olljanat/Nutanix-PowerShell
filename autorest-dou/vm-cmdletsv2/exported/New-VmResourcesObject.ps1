@@ -1,11 +1,11 @@
 function New-VmResourcesObject {
 [CmdletBinding()]
 param(
-    [Parameter(ParameterSetName='default', Mandatory=$true, HelpMessage='HELP MESSAGE MISSING')]
+    [Parameter(ParameterSetName='default', HelpMessage='HELP MESSAGE MISSING')]
     [string]
     ${DiskAddressAdapterType},
 
-    [Parameter(ParameterSetName='default', Mandatory=$true, HelpMessage='HELP MESSAGE MISSING')]
+    [Parameter(ParameterSetName='default', HelpMessage='HELP MESSAGE MISSING')]
     [int]
     ${DiskAddressDeviceIndex},
 
@@ -61,7 +61,7 @@ param(
     [string]
     ${PowerState},
 
-    [Parameter(ParameterSetName='default', Mandatory=$true, HelpMessage='HELP MESSAGE MISSING')]
+    [Parameter(ParameterSetName='default', HelpMessage='HELP MESSAGE MISSING')]
     [string]
     ${ReferenceKind},
 
@@ -69,7 +69,7 @@ param(
     [string]
     ${ReferenceName},
 
-    [Parameter(ParameterSetName='default', Mandatory=$true, HelpMessage='HELP MESSAGE MISSING')]
+    [Parameter(ParameterSetName='default', HelpMessage='HELP MESSAGE MISSING')]
     [string]
     ${ReferenceUuid},
 

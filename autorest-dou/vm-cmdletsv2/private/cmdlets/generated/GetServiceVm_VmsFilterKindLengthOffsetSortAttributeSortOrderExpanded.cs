@@ -73,6 +73,22 @@ namespace Sample.API.Cmdlets
 
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Skip the ssl validation")]
         public System.Management.Automation.SwitchParameter SkipSSL {get; set;}
+
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Skip the ssl validation")]
+        [System.Management.Automation.ValidateNotNull]
+        public System.Management.Automation.PSCredential Credential {get; set;}
+
+        /// <summary>The username for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The username for authentication")]
+        public string Server {get; set;}
+
+          /// <summary>The username for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The username for authentication")]
+        public string Port {get; set;}
+
+        /// <summary>The username for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The username for authentication")]
+        public string Protocol {get; set;}
         /// <summary>
         /// <see cref="IEventListener" /> cancellation delegate. Stops the cmdlet when called.
         /// </summary>
@@ -273,10 +289,35 @@ namespace Sample.API.Cmdlets
                     Pipeline = Sample.API.Module.Instance.CreatePipeline(this.MyInvocation.BoundParameters);
                 }
                 Pipeline.Prepend(HttpPipelinePrepend);
-                Pipeline.Append(HttpPipelineAppend);
+                Pipeline.Append(HttpPipelineAppend); 
+
+                if (Port == null){
+                    Port = System.Environment.GetEnvironmentVariable("NutanixPort") ?? "9440";
+                }
+
+                if (Protocol == null) {
+                    Protocol = System.Environment.GetEnvironmentVariable("NutanixProtocol") ?? "https";
+                }
+
+                if (Server == null) {
+                    Server = System.Environment.GetEnvironmentVariable("NutanixServer") ?? "localhost";
+                }
+
+                if (username == null) {
+                    username = System.Environment.GetEnvironmentVariable("NutanixUsername") ?? "";
+                }
+
+                if (password == null) {
+                    password = System.Environment.GetEnvironmentVariable("NutanixPassword") ?? "";
+                }
+
+
+                //build url 
+                var url = $"{Protocol}://{Server}:{Port}";
+
                 // get the client instance
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                await this.Client.GetVms(GetEntitiesRequest, onOK, onDefault, this, Pipeline, this.username, this.password);
+                await this.Client.GetVms(GetEntitiesRequest, onOK, onDefault, this, Pipeline, username, password, Credential, url);
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }
         }
