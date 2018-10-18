@@ -11,7 +11,6 @@ namespace Sample.API.ModelCmdlets
         /// <summary>Backing field for <see cref="ProjectReference" /></summary>
         private Sample.API.Models.IProjectReference _projectReference = new Sample.API.Models.ProjectReference();
         /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The kind name")]
         public string Kind
         {
             set
@@ -41,6 +40,7 @@ namespace Sample.API.ModelCmdlets
 
         protected override void ProcessRecord()
         {
+            _projectReference.Kind = "project";
             WriteObject(_projectReference);
         }
     }

@@ -11,7 +11,6 @@ namespace Sample.API.ModelCmdlets
         /// <summary>Backing field for <see cref="VmRecoveryPointIntentInput" /></summary>
         private Sample.API.Models.IVmRecoveryPointIntentInput _vmRecoveryPointIntentInput = new Sample.API.Models.VmRecoveryPointIntentInput();
         /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string ApiVersion
         {
             set
@@ -41,6 +40,7 @@ namespace Sample.API.ModelCmdlets
 
         protected override void ProcessRecord()
         {
+            _vmRecoveryPointIntentInput.ApiVersion = "3.1";
             WriteObject(_vmRecoveryPointIntentInput);
         }
     }

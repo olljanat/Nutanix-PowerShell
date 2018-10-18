@@ -11,7 +11,6 @@ namespace Sample.API.ModelCmdlets
         /// <summary>Backing field for <see cref="ClusterReference" /></summary>
         private Sample.API.Models.IClusterReference _clusterReference = new Sample.API.Models.ClusterReference();
         /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The kind name")]
         public string Kind
         {
             set
@@ -41,6 +40,7 @@ namespace Sample.API.ModelCmdlets
 
         protected override void ProcessRecord()
         {
+            _clusterReference.Kind = "cluster";
             WriteObject(_clusterReference);
         }
     }

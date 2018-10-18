@@ -9,7 +9,6 @@ namespace Sample.API.ModelCmdlets
         /// <summary>Backing field for <see cref="Vm" /></summary>
         private Sample.API.Models.IVm _vm = new Sample.API.Models.Vm();
         /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "The kind name")]
         public string AvailabilityZoneReferenceKind
         {
             set
@@ -26,6 +25,7 @@ namespace Sample.API.ModelCmdlets
             {
                 _vm.AvailabilityZoneReference = _vm.AvailabilityZoneReference ?? new Sample.API.Models.AvailabilityZoneReference();
                 _vm.AvailabilityZoneReference.Name = value;
+                _vm.AvailabilityZoneReference.Kind = "availability_zone";
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
@@ -36,6 +36,7 @@ namespace Sample.API.ModelCmdlets
             {
                 _vm.AvailabilityZoneReference = _vm.AvailabilityZoneReference ?? new Sample.API.Models.AvailabilityZoneReference();
                 _vm.AvailabilityZoneReference.Uuid = value;
+                _vm.AvailabilityZoneReference.Kind = "availability_zone";
             }
         }
         /// <summary>The kind name</summary>

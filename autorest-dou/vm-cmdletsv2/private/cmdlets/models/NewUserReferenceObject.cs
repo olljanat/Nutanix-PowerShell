@@ -11,7 +11,6 @@ namespace Sample.API.ModelCmdlets
         /// <summary>Backing field for <see cref="UserReference" /></summary>
         private Sample.API.Models.IUserReference _userReference = new Sample.API.Models.UserReference();
         /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The kind name")]
         public string Kind
         {
             set
@@ -41,6 +40,7 @@ namespace Sample.API.ModelCmdlets
 
         protected override void ProcessRecord()
         {
+            _userReference.Kind = "user";
             WriteObject(_userReference);
         }
     }
