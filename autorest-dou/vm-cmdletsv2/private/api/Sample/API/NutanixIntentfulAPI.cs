@@ -974,14 +974,14 @@ namespace Sample.API
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async System.Threading.Tasks.Task NewVm(Sample.API.Models.IVmIntentInput body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Sample.API.Models.IVmIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Sample.API.Models.IVmStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender)
+        public async System.Threading.Tasks.Task NewVm(Sample.API.Models.IVmIntentInput body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Sample.API.Models.IVmIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Sample.API.Models.IVmStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, string username, string password, System.Management.Automation.PSCredential credential, string url)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
             {
                 // construct URL
                 var _url = new System.Uri((
-                        "https://35.196.200.179:9440/api/nutanix/v3//vms"
+                        $"{url}/api/nutanix/v3//vms"
                         ).TrimEnd('?','&'));
 
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
@@ -991,6 +991,14 @@ namespace Sample.API
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
 
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                byte[] byteArray;
+                if (credential != null) {
+                    byteArray = System.Text.Encoding.ASCII.GetBytes($"{credential.UserName}:{CreateString(credential.Password)}");
+                } else {
+                    byteArray = System.Text.Encoding.ASCII.GetBytes($"{username}:{password}");
+                }
+
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", System.Convert.ToBase64String(byteArray));
                 // set body content
                 request.Content = new System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
@@ -1020,6 +1028,9 @@ namespace Sample.API
                     _response = await sender.SendAsync(request, eventListener);
                     await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
                     var _contentType = _response.Content.Headers.ContentType?.MediaType;
+
+                    await _response.Content.ReadAsStringAsync().ContinueWith(body => System.Console.WriteLine(body.Result));
+
                     switch ( _response.StatusCode )
                     {
                         case System.Net.HttpStatusCode.Accepted:
@@ -1394,5 +1405,30 @@ namespace Sample.API
                 await eventListener.AssertRegEx(nameof(uuid),uuid,@"^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$");
             }
         }
+
+         private static string CreateString(System.Security.SecureString secureString)
+        {
+            System.IntPtr intPtr = System.IntPtr.Zero;
+            if (secureString == null || secureString.Length == 0)
+            {
+                return string.Empty;
+            }
+            string result;
+            try
+            {
+                intPtr = System.Runtime.InteropServices.Marshal.SecureStringToBSTR(secureString);
+                result = System.Runtime.InteropServices.Marshal.PtrToStringBSTR(intPtr);
+            }
+            finally
+            {       
+                if (intPtr != System.IntPtr.Zero)
+                {
+                    System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(intPtr);
+                }
+            }      
+            return result;
+        }   
+
+
     }
 }

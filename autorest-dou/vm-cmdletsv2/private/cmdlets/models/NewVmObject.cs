@@ -44,7 +44,7 @@ namespace Sample.API.ModelCmdlets
             set
             {
                 _vm.ClusterReference = _vm.ClusterReference ?? new Sample.API.Models.ClusterReference();
-                _vm.ClusterReference.Kind = "cluster";
+                _vm.ClusterReference.Kind = value;
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
@@ -98,6 +98,7 @@ namespace Sample.API.ModelCmdlets
 
         protected override void ProcessRecord()
         {
+            _vm.ClusterReference.Kind = "cluster";
             WriteObject(_vm);
         }
     }

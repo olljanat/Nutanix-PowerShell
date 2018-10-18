@@ -9,10 +9,6 @@ param(
     [datetime]
     ${CreationTime},
 
-    [Parameter(ParameterSetName='default', Mandatory=$true, HelpMessage='The kind name')]
-    [string]
-    ${Kind},
-
     [Parameter(ParameterSetName='default', HelpMessage='UTC date and time in RFC-3339 format when vm was last updated')]
     [datetime]
     ${LastUpdateTime},
@@ -21,15 +17,11 @@ param(
     [string]
     ${Name},
 
-    [Parameter(ParameterSetName='default', Mandatory=$true, HelpMessage='The kind name')]
-    [string]
-    ${ProjectReferenceKind},
-
     [Parameter(ParameterSetName='default', HelpMessage='HELP MESSAGE MISSING')]
     [string]
     ${ProjectReferenceName},
 
-    [Parameter(ParameterSetName='default', Mandatory=$true, HelpMessage='HELP MESSAGE MISSING')]
+    [Parameter(ParameterSetName='default', HelpMessage='HELP MESSAGE MISSING')]
     [string]
     ${ProjectReferenceUuid},
 
@@ -41,15 +33,11 @@ param(
     [int]
     ${SpecVersion},
 
-    [Parameter(ParameterSetName='default', Mandatory=$true, HelpMessage='The kind name')]
-    [string]
-    ${UserReferenceKind},
-
     [Parameter(ParameterSetName='default', HelpMessage='HELP MESSAGE MISSING')]
     [string]
     ${UserReferenceName},
 
-    [Parameter(ParameterSetName='default', Mandatory=$true, HelpMessage='HELP MESSAGE MISSING')]
+    [Parameter(ParameterSetName='default', HelpMessage='HELP MESSAGE MISSING')]
     [string]
     ${UserReferenceUuid},
 

@@ -33,6 +33,42 @@ param(
     [switch]
     ${ProxyUseDefaultCredentials},
 
+    [Parameter(ParameterSetName='VmApiVersionMetadataSpec', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='VmApiVersionMetadataSpecExpanded', HelpMessage='The username for authentication')]
+    [string]
+    ${username},
+
+    [Parameter(ParameterSetName='VmApiVersionMetadataSpec', HelpMessage='The password for authentication')]
+    [Parameter(ParameterSetName='VmApiVersionMetadataSpecExpanded', HelpMessage='The password for authentication')]
+    [string]
+    ${password},
+
+    [Parameter(ParameterSetName='VmApiVersionMetadataSpec', HelpMessage='Skip the ssl validation')]
+    [Parameter(ParameterSetName='VmApiVersionMetadataSpecExpanded', HelpMessage='Skip the ssl validation')]
+    [switch]
+    ${SkipSSL},
+
+    [Parameter(ParameterSetName='VmApiVersionMetadataSpec', HelpMessage='Skip the ssl validation')]
+    [Parameter(ParameterSetName='VmApiVersionMetadataSpecExpanded', HelpMessage='Skip the ssl validation')]
+    [ValidateNotNull()]
+    [pscredential]
+    ${Credential},
+
+    [Parameter(ParameterSetName='VmApiVersionMetadataSpec', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='VmApiVersionMetadataSpecExpanded', HelpMessage='The username for authentication')]
+    [string]
+    ${Server},
+
+    [Parameter(ParameterSetName='VmApiVersionMetadataSpec', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='VmApiVersionMetadataSpecExpanded', HelpMessage='The username for authentication')]
+    [string]
+    ${Port},
+
+    [Parameter(ParameterSetName='VmApiVersionMetadataSpec', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='VmApiVersionMetadataSpecExpanded', HelpMessage='The username for authentication')]
+    [string]
+    ${Protocol},
+
     [Parameter(ParameterSetName='VmApiVersionMetadataSpecExpanded', HelpMessage='HELP MESSAGE MISSING')]
     [string]
     ${ApiVersion},
