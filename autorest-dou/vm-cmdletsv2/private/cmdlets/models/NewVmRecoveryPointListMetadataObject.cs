@@ -20,7 +20,6 @@ namespace Sample.API.ModelCmdlets
             }
         }
         /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "The kind name")]
         public string Kind
         {
             set
@@ -68,6 +67,7 @@ namespace Sample.API.ModelCmdlets
 
         protected override void ProcessRecord()
         {
+            _vmRecoveryPointListMetadata.Kind = "recovery_point";
             WriteObject(_vmRecoveryPointListMetadata);
         }
     }

@@ -27,7 +27,6 @@ namespace Sample.API.ModelCmdlets
             }
         }
         /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The kind name")]
         public string Kind
         {
             set
@@ -54,13 +53,12 @@ namespace Sample.API.ModelCmdlets
             }
         }
         /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The kind name")]
         public string ProjectReferenceKind
         {
             set
             {
                 _vmMetadata.ProjectReference = _vmMetadata.ProjectReference ?? new Sample.API.Models.ProjectReference();
-                _vmMetadata.ProjectReference.Kind = value;
+                _vmMetadata.ProjectReference.Kind = "project";
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
@@ -74,7 +72,7 @@ namespace Sample.API.ModelCmdlets
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING")]
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string ProjectReferenceUuid
         {
             set
@@ -102,13 +100,12 @@ namespace Sample.API.ModelCmdlets
             }
         }
         /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The kind name")]
         public string UserReferenceKind
         {
             set
             {
                 _vmMetadata.OwnerReference = _vmMetadata.OwnerReference ?? new Sample.API.Models.UserReference();
-                _vmMetadata.OwnerReference.Kind = value;
+                _vmMetadata.OwnerReference.Kind = "user";
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
@@ -122,7 +119,7 @@ namespace Sample.API.ModelCmdlets
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING")]
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string UserReferenceUuid
         {
             set
@@ -144,6 +141,7 @@ namespace Sample.API.ModelCmdlets
 
         protected override void ProcessRecord()
         {
+            _vmMetadata.Kind = "vm";
             WriteObject(_vmMetadata);
         }
     }

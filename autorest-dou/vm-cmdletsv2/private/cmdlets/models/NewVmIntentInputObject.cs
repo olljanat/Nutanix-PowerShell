@@ -11,7 +11,6 @@ namespace Sample.API.ModelCmdlets
         /// <summary>Backing field for <see cref="VmIntentInput" /></summary>
         private Sample.API.Models.IVmIntentInput _vmIntentInput = new Sample.API.Models.VmIntentInput();
         /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string ApiVersion
         {
             set
@@ -41,6 +40,7 @@ namespace Sample.API.ModelCmdlets
 
         protected override void ProcessRecord()
         {
+            _vmIntentInput.ApiVersion = "3.1";
             WriteObject(_vmIntentInput);
         }
     }

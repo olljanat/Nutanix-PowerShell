@@ -11,7 +11,6 @@ namespace Sample.API.ModelCmdlets
         /// <summary>Backing field for <see cref="AvailabilityZoneReference" /></summary>
         private Sample.API.Models.IAvailabilityZoneReference _availabilityZoneReference = new Sample.API.Models.AvailabilityZoneReference();
         /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The kind name")]
         public string Kind
         {
             set
@@ -41,6 +40,7 @@ namespace Sample.API.ModelCmdlets
 
         protected override void ProcessRecord()
         {
+            _availabilityZoneReference.Kind = "availability_zone";
             WriteObject(_availabilityZoneReference);
         }
     }
