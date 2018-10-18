@@ -1029,8 +1029,6 @@ namespace Sample.API
                     await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
                     var _contentType = _response.Content.Headers.ContentType?.MediaType;
 
-                    await _response.Content.ReadAsStringAsync().ContinueWith(body => System.Console.WriteLine(body.Result));
-
                     switch ( _response.StatusCode )
                     {
                         case System.Net.HttpStatusCode.Accepted:
