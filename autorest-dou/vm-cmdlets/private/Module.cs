@@ -15,7 +15,6 @@ namespace Sample.API
 
         public System.Net.Http.HttpClientHandler _handlerDefaultSkipSSL = new System.Net.Http.HttpClientHandler();
 
-       
         /// <summary>the ISendAsync pipeline instance</summary>
          private Microsoft.Rest.ClientRuntime.HttpPipeline _pipeline;
 
