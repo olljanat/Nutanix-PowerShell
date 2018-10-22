@@ -36,24 +36,20 @@ param(
     [switch]
     ${SkipSSL},
 
-    [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='Skip the ssl validation')]
-    [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='Skip the ssl validation')]
+    [Parameter(ParameterSetName='VmUuid', HelpMessage='Skip the ssl validation')]
     [ValidateNotNull()]
     [pscredential]
     ${Credential},
 
-    [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='The username for authentication')]
-    [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='VmUuid', HelpMessage='The username for authentication')]
     [string]
     ${Server},
 
-    [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='The username for authentication')]
-    [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='VmUuid', HelpMessage='The username for authentication')]
     [string]
     ${Port},
 
-    [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='The username for authentication')]
-    [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='VmUuid', HelpMessage='The username for authentication')]
     [string]
     ${Protocol},
 
