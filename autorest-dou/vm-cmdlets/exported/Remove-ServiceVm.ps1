@@ -36,6 +36,27 @@ param(
     [switch]
     ${SkipSSL},
 
+    [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='Skip the ssl validation')]
+    [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='Skip the ssl validation')]
+    [ValidateNotNull()]
+    [pscredential]
+    ${Credential},
+
+    [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The username for authentication')]
+    [string]
+    ${Server},
+
+    [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The username for authentication')]
+    [string]
+    ${Port},
+
+    [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='FilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The username for authentication')]
+    [string]
+    ${Protocol},
+
     [Parameter(ParameterSetName='VmUuid', Mandatory=$true, HelpMessage='The UUID of the entity.')]
     [string]
     ${Uuid})
