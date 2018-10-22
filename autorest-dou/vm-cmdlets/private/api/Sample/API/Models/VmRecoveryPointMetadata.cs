@@ -1,13 +1,13 @@
 namespace Sample.API.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
-    /// <summary>The vm kind metadata</summary>
-    public partial class VmMetadata : Sample.API.Models.IVmMetadata, Microsoft.Rest.ClientRuntime.IValidates
+    /// <summary>The vm_recovery_point kind metadata</summary>
+    public partial class VmRecoveryPointMetadata : Sample.API.Models.IVmRecoveryPointMetadata, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for Categories property</summary>
         private System.Collections.Generic.IDictionary<string,string> _categories;
 
-        /// <summary>Categories for the vm</summary>
+        /// <summary>Categories for the vm_recovery_point</summary>
         public System.Collections.Generic.IDictionary<string,string> Categories
         {
             get
@@ -23,7 +23,7 @@ namespace Sample.API.Models
         private System.DateTime? _creationTime;
 
         /// <summary>
-        /// UTC date and time in RFC-3339 format when vm was created
+        /// UTC date and time in RFC-3339 format when vm_recovery_point was created
         /// </summary>
         public System.DateTime? CreationTime
         {
@@ -55,7 +55,7 @@ namespace Sample.API.Models
         private System.DateTime? _lastUpdateTime;
 
         /// <summary>
-        /// UTC date and time in RFC-3339 format when vm was last updated
+        /// UTC date and time in RFC-3339 format when vm_recovery_point was last updated
         /// </summary>
         public System.DateTime? LastUpdateTime
         {
@@ -71,7 +71,7 @@ namespace Sample.API.Models
         /// <summary>Backing field for Name property</summary>
         private string _name;
 
-        /// <summary>vm name</summary>
+        /// <summary>vm_recovery_point name</summary>
         public string Name
         {
             get
@@ -101,7 +101,7 @@ namespace Sample.API.Models
         /// <summary>Backing field for ProjectReference property</summary>
         private Sample.API.Models.IProjectReference _projectReference;
 
-        /// <summary>The project the vm is in.</summary>
+        /// <summary>The project the vm_recovery_point is in.</summary>
         public Sample.API.Models.IProjectReference ProjectReference
         {
             get
@@ -148,7 +148,7 @@ namespace Sample.API.Models
         /// <summary>Backing field for Uuid property</summary>
         private string _uuid;
 
-        /// <summary>vm uuid</summary>
+        /// <summary>vm_recovery_point uuid</summary>
         public string Uuid
         {
             get
@@ -174,13 +174,13 @@ namespace Sample.API.Models
             await eventListener.AssertObjectIsValid(nameof(ProjectReference), ProjectReference);
             await eventListener.AssertRegEx(nameof(Uuid),Uuid,@"^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$");
         }
-        /// <summary>Creates an new <see cref="VmMetadata" /> instance.</summary>
-        public VmMetadata()
+        /// <summary>Creates an new <see cref="VmRecoveryPointMetadata" /> instance.</summary>
+        public VmRecoveryPointMetadata()
         {
         }
     }
-    /// The vm kind metadata
-    public partial interface IVmMetadata : Microsoft.Rest.ClientRuntime.IJsonSerializable {
+    /// The vm_recovery_point kind metadata
+    public partial interface IVmRecoveryPointMetadata : Microsoft.Rest.ClientRuntime.IJsonSerializable {
         System.Collections.Generic.IDictionary<string,string> Categories { get; set; }
         System.DateTime? CreationTime { get; set; }
         string Kind { get; set; }

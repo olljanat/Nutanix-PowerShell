@@ -1,8 +1,8 @@
 namespace Sample.API.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
-    /// <summary>The reference to a user</summary>
-    public partial class UserReference
+    /// <summary>The vm_recovery_point kind metadata</summary>
+    public partial class VmRecoveryPointMetadata
     {
 
         /// <summary>
@@ -38,22 +38,22 @@ namespace Sample.API.Models
         /// instantly.</param>
         partial void BeforeToJson(ref Carbon.Json.JsonObject container, ref bool returnNow);
         /// <summary>
-        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Sample.API.Models.IUserReference.
+        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Sample.API.Models.IVmRecoveryPointMetadata.
         /// </summary>
         /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
-        /// <returns>an instance of Sample.API.Models.IUserReference.</returns>
-        public static Sample.API.Models.IUserReference FromJson(Carbon.Json.JsonNode node)
+        /// <returns>an instance of Sample.API.Models.IVmRecoveryPointMetadata.</returns>
+        public static Sample.API.Models.IVmRecoveryPointMetadata FromJson(Carbon.Json.JsonNode node)
         {
-            return node is Carbon.Json.JsonObject json ? new UserReference(json) : null;
+            return node is Carbon.Json.JsonObject json ? new VmRecoveryPointMetadata(json) : null;
         }
         /// <summary>
-        /// Serializes this instance of <see cref="UserReference" /> into a <see cref="Carbon.Json.JsonNode" />.
+        /// Serializes this instance of <see cref="VmRecoveryPointMetadata" /> into a <see cref="Carbon.Json.JsonNode" />.
         /// </summary>
         /// <param name="container">The <see cref="Carbon.Json.JsonObject"/> container to serialize this object into. If the caller
         /// passes in <c>null</c>, a new instance will be created and returned to the caller.</param>
         /// <param name="serializationMode">Allows the caller to choose the depth of the serialization. See <see cref="Microsoft.Rest.ClientRuntime.SerializationMode"/>.</param>
         /// <returns>
-        /// a serialized instance of <see cref="UserReference" /> as a <see cref="Carbon.Json.JsonNode" />.
+        /// a serialized instance of <see cref="VmRecoveryPointMetadata" /> as a <see cref="Carbon.Json.JsonNode" />.
         /// </returns>
         public Carbon.Json.JsonNode ToJson(Carbon.Json.JsonObject container, Microsoft.Rest.ClientRuntime.SerializationMode serializationMode)
         {
@@ -66,16 +66,23 @@ namespace Sample.API.Models
                 return container;
             }
             AddIf( null != Name ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(Name) : null, "name" ,container.Add );
+            /* serializeToContainerMember (wildcard) doesn't support 'application/json' C:\Users\hugo1\Documents\autorest\autorest.incubator\dist\csharp\schema\wildcard.js*/
+            AddIf( null != CreationTime ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(CreationTime?.ToString(@"yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK",System.Globalization.CultureInfo.InvariantCulture)) : null, "creation_time" ,container.Add );
             AddIf( null != Kind ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(Kind) : null, "kind" ,container.Add );
+            AddIf( null != LastUpdateTime ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(LastUpdateTime?.ToString(@"yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK",System.Globalization.CultureInfo.InvariantCulture)) : null, "last_update_time" ,container.Add );
+            AddIf( null != OwnerReference ? (Carbon.Json.JsonNode) OwnerReference.ToJson(null) : null, "owner_reference" ,container.Add );
+            AddIf( null != ProjectReference ? (Carbon.Json.JsonNode) ProjectReference.ToJson(null) : null, "project_reference" ,container.Add );
+            AddIf( null != SpecHash ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(SpecHash) : null, "spec_hash" ,container.Add );
+            AddIf( null != SpecVersion ? (Carbon.Json.JsonNode)new Carbon.Json.JsonNumber((int)SpecVersion) : null, "spec_version" ,container.Add );
             AddIf( null != Uuid ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(Uuid) : null, "uuid" ,container.Add );
             AfterToJson(ref container);
             return container;
         }
         /// <summary>
-        /// Deserializes a Carbon.Json.JsonObject into a new instance of <see cref="UserReference" />.
+        /// Deserializes a Carbon.Json.JsonObject into a new instance of <see cref="VmRecoveryPointMetadata" />.
         /// </summary>
         /// <param name="json">A Carbon.Json.JsonObject instance to deserialize from.</param>
-        internal UserReference(Carbon.Json.JsonObject json)
+        internal VmRecoveryPointMetadata(Carbon.Json.JsonObject json)
         {
             bool returnNow = false;
             BeforeFromJson(json, ref returnNow);
@@ -84,7 +91,14 @@ namespace Sample.API.Models
                 return;
             }
             _name = If( json?.PropertyT<Carbon.Json.JsonString>("name"), out var __jsonName) ? (string)__jsonName : (string)Name;
+            _categories = null /* deserializeFromContainerMember (wildcard) doesn't support 'application/json' C:\Users\hugo1\Documents\autorest\autorest.incubator\dist\csharp\schema\wildcard.js*/;
+            _creationTime = If( json?.PropertyT<Carbon.Json.JsonString>("creation_time"), out var __jsonCreationTime) ? System.DateTime.TryParse((string)__jsonCreationTime, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.AdjustToUniversal, out var __jsonCreationTimeValue) ? __jsonCreationTimeValue : CreationTime : CreationTime;
             _kind = If( json?.PropertyT<Carbon.Json.JsonString>("kind"), out var __jsonKind) ? (string)__jsonKind : (string)Kind;
+            _lastUpdateTime = If( json?.PropertyT<Carbon.Json.JsonString>("last_update_time"), out var __jsonLastUpdateTime) ? System.DateTime.TryParse((string)__jsonLastUpdateTime, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.AdjustToUniversal, out var __jsonLastUpdateTimeValue) ? __jsonLastUpdateTimeValue : LastUpdateTime : LastUpdateTime;
+            _ownerReference = If( json?.PropertyT<Carbon.Json.JsonObject>("owner_reference"), out var __jsonOwnerReference) ? Sample.API.Models.UserReference.FromJson(__jsonOwnerReference) : OwnerReference;
+            _projectReference = If( json?.PropertyT<Carbon.Json.JsonObject>("project_reference"), out var __jsonProjectReference) ? Sample.API.Models.ProjectReference.FromJson(__jsonProjectReference) : ProjectReference;
+            _specHash = If( json?.PropertyT<Carbon.Json.JsonString>("spec_hash"), out var __jsonSpecHash) ? (string)__jsonSpecHash : (string)SpecHash;
+            _specVersion = If( json?.PropertyT<Carbon.Json.JsonNumber>("spec_version"), out var __jsonSpecVersion) ? (int?)__jsonSpecVersion : SpecVersion;
             _uuid = If( json?.PropertyT<Carbon.Json.JsonString>("uuid"), out var __jsonUuid) ? (string)__jsonUuid : (string)Uuid;
             AfterFromJson(json);
         }

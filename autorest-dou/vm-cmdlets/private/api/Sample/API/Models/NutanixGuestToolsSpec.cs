@@ -5,10 +5,10 @@ namespace Sample.API.Models
     public partial class NutanixGuestToolsSpec : Sample.API.Models.INutanixGuestToolsSpec
     {
         /// <summary>Backing field for EnabledCapabilityList property</summary>
-        private string _enabledCapabilityList;
+        private string[] _enabledCapabilityList;
 
         /// <summary>Application names that are enabled.</summary>
-        public string EnabledCapabilityList
+        public string[] EnabledCapabilityList
         {
             get
             {
@@ -58,7 +58,7 @@ namespace Sample.API.Models
     }
     /// Information regarding Nutanix Guest Tools.
     public partial interface INutanixGuestToolsSpec : Microsoft.Rest.ClientRuntime.IJsonSerializable {
-        string EnabledCapabilityList { get; set; }
+        string[] EnabledCapabilityList { get; set; }
         string IsoMountState { get; set; }
         string State { get; set; }
     }

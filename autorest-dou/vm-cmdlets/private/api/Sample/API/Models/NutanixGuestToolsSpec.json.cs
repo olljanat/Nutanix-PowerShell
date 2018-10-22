@@ -58,7 +58,7 @@ namespace Sample.API.Models
             {
                 return;
             }
-            _enabledCapabilityList = If( json?.PropertyT<Carbon.Json.JsonString>("enabled_capability_list"), out var __jsonEnabledCapabilityList) ? (string)__jsonEnabledCapabilityList : (string)EnabledCapabilityList;
+            _enabledCapabilityList = If( json?.PropertyT<Carbon.Json.JsonArray>("enabled_capability_list"), out var __jsonEnabledCapabilityList) ? If( __jsonEnabledCapabilityList, out var __w) ? new System.Func<string[]>(()=> System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select( __w, (__v)=> __v is Carbon.Json.JsonString __u ? (string)__u : null ) ) )() : null : EnabledCapabilityList;
             _isoMountState = If( json?.PropertyT<Carbon.Json.JsonString>("iso_mount_state"), out var __jsonIsoMountState) ? (string)__jsonIsoMountState : (string)IsoMountState;
             _state = If( json?.PropertyT<Carbon.Json.JsonString>("state"), out var __jsonState) ? (string)__jsonState : (string)State;
             AfterFromJson(json);
@@ -82,7 +82,15 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            AddIf( null != EnabledCapabilityList ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(EnabledCapabilityList) : null, "enabled_capability_list" ,container.Add );
+            if (null != EnabledCapabilityList)
+            {
+                var __x = new Carbon.Json.XNodeArray();
+                foreach( var __y in EnabledCapabilityList )
+                {
+                    AddIf(null != __y ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(__y) : null ,__x.Add);
+                }
+                container.Add("enabled_capability_list",__x);
+            }
             AddIf( null != IsoMountState ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(IsoMountState) : null, "iso_mount_state" ,container.Add );
             AddIf( null != State ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(State) : null, "state" ,container.Add );
             AfterToJson(ref container);

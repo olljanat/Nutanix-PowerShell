@@ -27,7 +27,7 @@ namespace Sample.API.Models
             {
                 return this._name;
             }
-            internal set
+            set
             {
                 this._name = value;
             }
@@ -66,7 +66,7 @@ namespace Sample.API.Models
     /// Reference to a kind
     public partial interface IReference : Microsoft.Rest.ClientRuntime.IJsonSerializable {
         string Kind { get; set; }
-        string Name { get;  }
+        string Name { get; set; }
         string Uuid { get; set; }
     }
 }

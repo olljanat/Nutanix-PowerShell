@@ -66,14 +66,38 @@ namespace Sample.API.Models
                 return container;
             }
             AddIf( null != BootConfig ? (Carbon.Json.JsonNode) BootConfig.ToJson(null) : null, "boot_config" ,container.Add );
-            AddIf( null != DiskList ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(DiskList) : null, "disk_list" ,container.Add );
-            AddIf( null != GpuList ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(GpuList) : null, "gpu_list" ,container.Add );
+            if (null != DiskList)
+            {
+                var __x = new Carbon.Json.XNodeArray();
+                foreach( var __y in DiskList )
+                {
+                    AddIf(__y?.ToJson(null) ,__x.Add);
+                }
+                container.Add("disk_list",__x);
+            }
+            if (null != GpuList)
+            {
+                var __s = new Carbon.Json.XNodeArray();
+                foreach( var __t in GpuList )
+                {
+                    AddIf(__t?.ToJson(null) ,__s.Add);
+                }
+                container.Add("gpu_list",__s);
+            }
             AddIf( null != GuestCustomization ? (Carbon.Json.JsonNode) GuestCustomization.ToJson(null) : null, "guest_customization" ,container.Add );
             AddIf( null != GuestOsId ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(GuestOsId) : null, "guest_os_id" ,container.Add );
             AddIf( null != GuestTools ? (Carbon.Json.JsonNode) GuestTools.ToJson(null) : null, "guest_tools" ,container.Add );
             AddIf( null != HardwareClockTimezone ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(HardwareClockTimezone) : null, "hardware_clock_timezone" ,container.Add );
             AddIf( null != MemorySizeMib ? (Carbon.Json.JsonNode)new Carbon.Json.JsonNumber((int)MemorySizeMib) : null, "memory_size_mib" ,container.Add );
-            AddIf( null != NicList ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(NicList) : null, "nic_list" ,container.Add );
+            if (null != NicList)
+            {
+                var __n = new Carbon.Json.XNodeArray();
+                foreach( var __o in NicList )
+                {
+                    AddIf(__o?.ToJson(null) ,__n.Add);
+                }
+                container.Add("nic_list",__n);
+            }
             AddIf( null != NumSockets ? (Carbon.Json.JsonNode)new Carbon.Json.JsonNumber((int)NumSockets) : null, "num_sockets" ,container.Add );
             AddIf( null != NumVcpusPerSocket ? (Carbon.Json.JsonNode)new Carbon.Json.JsonNumber((int)NumVcpusPerSocket) : null, "num_vcpus_per_socket" ,container.Add );
             AddIf( null != ParentReference ? (Carbon.Json.JsonNode) ParentReference.ToJson(null) : null, "parent_reference" ,container.Add );
@@ -97,14 +121,14 @@ namespace Sample.API.Models
                 return;
             }
             _bootConfig = If( json?.PropertyT<Carbon.Json.JsonObject>("boot_config"), out var __jsonBootConfig) ? Sample.API.Models.VmBootConfig.FromJson(__jsonBootConfig) : BootConfig;
-            _diskList = If( json?.PropertyT<Carbon.Json.JsonString>("disk_list"), out var __jsonDiskList) ? (string)__jsonDiskList : (string)DiskList;
-            _gpuList = If( json?.PropertyT<Carbon.Json.JsonString>("gpu_list"), out var __jsonGpuList) ? (string)__jsonGpuList : (string)GpuList;
+            _diskList = If( json?.PropertyT<Carbon.Json.JsonArray>("disk_list"), out var __jsonDiskList) ? If( __jsonDiskList, out var __w) ? new System.Func<Sample.API.Models.IVmDisk[]>(()=> System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select( __w, (__v)=> Sample.API.Models.VmDisk.FromJson(__v)  ) ) )() : null : DiskList;
+            _gpuList = If( json?.PropertyT<Carbon.Json.JsonArray>("gpu_list"), out var __jsonGpuList) ? If( __jsonGpuList, out var __r) ? new System.Func<Sample.API.Models.IVmGpu[]>(()=> System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select( __r, (__q)=> Sample.API.Models.VmGpu.FromJson(__q)  ) ) )() : null : GpuList;
             _guestCustomization = If( json?.PropertyT<Carbon.Json.JsonObject>("guest_customization"), out var __jsonGuestCustomization) ? Sample.API.Models.GuestCustomization.FromJson(__jsonGuestCustomization) : GuestCustomization;
             _guestOsId = If( json?.PropertyT<Carbon.Json.JsonString>("guest_os_id"), out var __jsonGuestOsId) ? (string)__jsonGuestOsId : (string)GuestOsId;
             _guestTools = If( json?.PropertyT<Carbon.Json.JsonObject>("guest_tools"), out var __jsonGuestTools) ? Sample.API.Models.GuestToolsSpec.FromJson(__jsonGuestTools) : GuestTools;
             _hardwareClockTimezone = If( json?.PropertyT<Carbon.Json.JsonString>("hardware_clock_timezone"), out var __jsonHardwareClockTimezone) ? (string)__jsonHardwareClockTimezone : (string)HardwareClockTimezone;
             _memorySizeMib = If( json?.PropertyT<Carbon.Json.JsonNumber>("memory_size_mib"), out var __jsonMemorySizeMib) ? (int?)__jsonMemorySizeMib : MemorySizeMib;
-            _nicList = If( json?.PropertyT<Carbon.Json.JsonString>("nic_list"), out var __jsonNicList) ? (string)__jsonNicList : (string)NicList;
+            _nicList = If( json?.PropertyT<Carbon.Json.JsonArray>("nic_list"), out var __jsonNicList) ? If( __jsonNicList, out var __m) ? new System.Func<Sample.API.Models.IVmNic[]>(()=> System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select( __m, (__l)=> Sample.API.Models.VmNic.FromJson(__l)  ) ) )() : null : NicList;
             _numSockets = If( json?.PropertyT<Carbon.Json.JsonNumber>("num_sockets"), out var __jsonNumSockets) ? (int?)__jsonNumSockets : NumSockets;
             _numVcpusPerSocket = If( json?.PropertyT<Carbon.Json.JsonNumber>("num_vcpus_per_socket"), out var __jsonNumVcpusPerSocket) ? (int?)__jsonNumVcpusPerSocket : NumVcpusPerSocket;
             _parentReference = If( json?.PropertyT<Carbon.Json.JsonObject>("parent_reference"), out var __jsonParentReference) ? Sample.API.Models.Reference.FromJson(__jsonParentReference) : ParentReference;

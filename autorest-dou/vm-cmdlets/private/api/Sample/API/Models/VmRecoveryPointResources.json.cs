@@ -1,10 +1,8 @@
 namespace Sample.API.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
-    /// <summary>
-    /// Indicates which device a VM should boot from.
-    /// </summary>
-    public partial class VmBootConfig
+    /// <summary>Recovery point resources</summary>
+    public partial class VmRecoveryPointResources
     {
 
         /// <summary>
@@ -40,22 +38,22 @@ namespace Sample.API.Models
         /// instantly.</param>
         partial void BeforeToJson(ref Carbon.Json.JsonObject container, ref bool returnNow);
         /// <summary>
-        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Sample.API.Models.IVmBootConfig.
+        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Sample.API.Models.IVmRecoveryPointResources.
         /// </summary>
         /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
-        /// <returns>an instance of Sample.API.Models.IVmBootConfig.</returns>
-        public static Sample.API.Models.IVmBootConfig FromJson(Carbon.Json.JsonNode node)
+        /// <returns>an instance of Sample.API.Models.IVmRecoveryPointResources.</returns>
+        public static Sample.API.Models.IVmRecoveryPointResources FromJson(Carbon.Json.JsonNode node)
         {
-            return node is Carbon.Json.JsonObject json ? new VmBootConfig(json) : null;
+            return node is Carbon.Json.JsonObject json ? new VmRecoveryPointResources(json) : null;
         }
         /// <summary>
-        /// Serializes this instance of <see cref="VmBootConfig" /> into a <see cref="Carbon.Json.JsonNode" />.
+        /// Serializes this instance of <see cref="VmRecoveryPointResources" /> into a <see cref="Carbon.Json.JsonNode" />.
         /// </summary>
         /// <param name="container">The <see cref="Carbon.Json.JsonObject"/> container to serialize this object into. If the caller
         /// passes in <c>null</c>, a new instance will be created and returned to the caller.</param>
         /// <param name="serializationMode">Allows the caller to choose the depth of the serialization. See <see cref="Microsoft.Rest.ClientRuntime.SerializationMode"/>.</param>
         /// <returns>
-        /// a serialized instance of <see cref="VmBootConfig" /> as a <see cref="Carbon.Json.JsonNode" />.
+        /// a serialized instance of <see cref="VmRecoveryPointResources" /> as a <see cref="Carbon.Json.JsonNode" />.
         /// </returns>
         public Carbon.Json.JsonNode ToJson(Carbon.Json.JsonObject container, Microsoft.Rest.ClientRuntime.SerializationMode serializationMode)
         {
@@ -67,24 +65,18 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            AddIf( null != BootDevice ? (Carbon.Json.JsonNode) BootDevice.ToJson(null) : null, "boot_device" ,container.Add );
-            if (null != BootDeviceOrderList)
-            {
-                var __x = new Carbon.Json.XNodeArray();
-                foreach( var __y in BootDeviceOrderList )
-                {
-                    AddIf(null != __y ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(__y) : null ,__x.Add);
-                }
-                container.Add("boot_device_order_list",__x);
-            }
+            AddIf( null != ParentVmReference ? (Carbon.Json.JsonNode) ParentVmReference.ToJson(null) : null, "parent_vm_reference" ,container.Add );
+            AddIf( null != SourceAvailabilityZoneReference ? (Carbon.Json.JsonNode) SourceAvailabilityZoneReference.ToJson(null) : null, "source_availability_zone_reference" ,container.Add );
+            AddIf( null != SourceClusterReference ? (Carbon.Json.JsonNode) SourceClusterReference.ToJson(null) : null, "source_cluster_reference" ,container.Add );
+            AddIf( null != VmRecoveryPointLocationAgnosticUuid ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(VmRecoveryPointLocationAgnosticUuid) : null, "vm_recovery_point_location_agnostic_uuid" ,container.Add );
             AfterToJson(ref container);
             return container;
         }
         /// <summary>
-        /// Deserializes a Carbon.Json.JsonObject into a new instance of <see cref="VmBootConfig" />.
+        /// Deserializes a Carbon.Json.JsonObject into a new instance of <see cref="VmRecoveryPointResources" />.
         /// </summary>
         /// <param name="json">A Carbon.Json.JsonObject instance to deserialize from.</param>
-        internal VmBootConfig(Carbon.Json.JsonObject json)
+        internal VmRecoveryPointResources(Carbon.Json.JsonObject json)
         {
             bool returnNow = false;
             BeforeFromJson(json, ref returnNow);
@@ -92,8 +84,10 @@ namespace Sample.API.Models
             {
                 return;
             }
-            _bootDevice = If( json?.PropertyT<Carbon.Json.JsonObject>("boot_device"), out var __jsonBootDevice) ? Sample.API.Models.VmBootDevice.FromJson(__jsonBootDevice) : BootDevice;
-            _bootDeviceOrderList = If( json?.PropertyT<Carbon.Json.JsonArray>("boot_device_order_list"), out var __jsonBootDeviceOrderList) ? If( __jsonBootDeviceOrderList, out var __w) ? new System.Func<string[]>(()=> System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select( __w, (__v)=> __v is Carbon.Json.JsonString __u ? (string)__u : null ) ) )() : null : BootDeviceOrderList;
+            _parentVmReference = If( json?.PropertyT<Carbon.Json.JsonObject>("parent_vm_reference"), out var __jsonParentVmReference) ? Sample.API.Models.VmReference.FromJson(__jsonParentVmReference) : ParentVmReference;
+            _sourceAvailabilityZoneReference = If( json?.PropertyT<Carbon.Json.JsonObject>("source_availability_zone_reference"), out var __jsonSourceAvailabilityZoneReference) ? Sample.API.Models.AvailabilityZoneReference.FromJson(__jsonSourceAvailabilityZoneReference) : SourceAvailabilityZoneReference;
+            _sourceClusterReference = If( json?.PropertyT<Carbon.Json.JsonObject>("source_cluster_reference"), out var __jsonSourceClusterReference) ? Sample.API.Models.ClusterReference.FromJson(__jsonSourceClusterReference) : SourceClusterReference;
+            _vmRecoveryPointLocationAgnosticUuid = If( json?.PropertyT<Carbon.Json.JsonString>("vm_recovery_point_location_agnostic_uuid"), out var __jsonVmRecoveryPointLocationAgnosticUuid) ? (string)__jsonVmRecoveryPointLocationAgnosticUuid : (string)VmRecoveryPointLocationAgnosticUuid;
             AfterFromJson(json);
         }
     }

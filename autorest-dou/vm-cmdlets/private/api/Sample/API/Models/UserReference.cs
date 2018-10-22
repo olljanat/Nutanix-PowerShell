@@ -14,7 +14,7 @@ namespace Sample.API.Models
             {
                 return this._kind;
             }
-            internal set
+            set
             {
                 this._kind = value;
             }
@@ -28,7 +28,7 @@ namespace Sample.API.Models
             {
                 return this._name;
             }
-            internal set
+            set
             {
                 this._name = value;
             }
@@ -59,14 +59,15 @@ namespace Sample.API.Models
         /// </returns>
         public async System.Threading.Tasks.Task Validate(Microsoft.Rest.ClientRuntime.IEventListener eventListener)
         {
+            await eventListener.AssertNotNull(nameof(Kind),Kind);
             await eventListener.AssertNotNull(nameof(Uuid),Uuid);
             await eventListener.AssertRegEx(nameof(Uuid),Uuid,@"^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$");
         }
     }
     /// The reference to a user
     public partial interface IUserReference : Microsoft.Rest.ClientRuntime.IJsonSerializable {
-        string Kind { get;  }
-        string Name { get;  }
+        string Kind { get; set; }
+        string Name { get; set; }
         string Uuid { get; set; }
     }
 }

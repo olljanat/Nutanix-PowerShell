@@ -1,8 +1,8 @@
 namespace Sample.API.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
-    /// <summary>The reference to a availability_zone</summary>
-    public partial class AvailabilityZoneReference : Sample.API.Models.IAvailabilityZoneReference, Microsoft.Rest.ClientRuntime.IValidates
+    /// <summary>The reference to a vm</summary>
+    public partial class VmReference : Sample.API.Models.IVmReference, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for Kind property</summary>
         private string _kind;
@@ -47,10 +47,6 @@ namespace Sample.API.Models
                 this._uuid = value;
             }
         }
-        /// <summary>Creates an new <see cref="AvailabilityZoneReference" /> instance.</summary>
-        public AvailabilityZoneReference()
-        {
-        }
         /// <summary>Validates that this object meets the validation criteria.</summary>
         /// <param name="eventListener">an <see cref="Microsoft.Rest.ClientRuntime.IEventListener" /> instance that will receive validation
         /// events.</param>
@@ -63,9 +59,13 @@ namespace Sample.API.Models
             await eventListener.AssertNotNull(nameof(Uuid),Uuid);
             await eventListener.AssertRegEx(nameof(Uuid),Uuid,@"^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$");
         }
+        /// <summary>Creates an new <see cref="VmReference" /> instance.</summary>
+        public VmReference()
+        {
+        }
     }
-    /// The reference to a availability_zone
-    public partial interface IAvailabilityZoneReference : Microsoft.Rest.ClientRuntime.IJsonSerializable {
+    /// The reference to a vm
+    public partial interface IVmReference : Microsoft.Rest.ClientRuntime.IJsonSerializable {
         string Kind { get; set; }
         string Name { get; set; }
         string Uuid { get; set; }

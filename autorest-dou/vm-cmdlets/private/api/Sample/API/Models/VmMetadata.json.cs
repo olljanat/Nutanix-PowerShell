@@ -65,23 +65,11 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            if (serializationMode.HasFlag(Microsoft.Rest.ClientRuntime.SerializationMode.IncludeReadOnly))
-            {
-                AddIf( null != Name ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(Name) : null, "name" ,container.Add );
-            }
+            AddIf( null != Name ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(Name) : null, "name" ,container.Add );
             /* serializeToContainerMember (wildcard) doesn't support 'application/json' C:\Users\hugo1\Documents\autorest\autorest.incubator\dist\csharp\schema\wildcard.js*/
-            if (serializationMode.HasFlag(Microsoft.Rest.ClientRuntime.SerializationMode.IncludeReadOnly))
-            {
-                AddIf( null != CreationTime ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(CreationTime?.ToString(@"yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK",System.Globalization.CultureInfo.InvariantCulture)) : null, "creation_time" ,container.Add );
-            }
-            if (serializationMode.HasFlag(Microsoft.Rest.ClientRuntime.SerializationMode.IncludeReadOnly))
-            {
-                AddIf( null != Kind ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(Kind) : null, "kind" ,container.Add );
-            }
-            if (serializationMode.HasFlag(Microsoft.Rest.ClientRuntime.SerializationMode.IncludeReadOnly))
-            {
-                AddIf( null != LastUpdateTime ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(LastUpdateTime?.ToString(@"yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK",System.Globalization.CultureInfo.InvariantCulture)) : null, "last_update_time" ,container.Add );
-            }
+            AddIf( null != CreationTime ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(CreationTime?.ToString(@"yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK",System.Globalization.CultureInfo.InvariantCulture)) : null, "creation_time" ,container.Add );
+            AddIf( null != Kind ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(Kind) : null, "kind" ,container.Add );
+            AddIf( null != LastUpdateTime ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(LastUpdateTime?.ToString(@"yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK",System.Globalization.CultureInfo.InvariantCulture)) : null, "last_update_time" ,container.Add );
             AddIf( null != OwnerReference ? (Carbon.Json.JsonNode) OwnerReference.ToJson(null) : null, "owner_reference" ,container.Add );
             AddIf( null != ProjectReference ? (Carbon.Json.JsonNode) ProjectReference.ToJson(null) : null, "project_reference" ,container.Add );
             AddIf( null != SpecHash ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(SpecHash) : null, "spec_hash" ,container.Add );

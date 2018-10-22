@@ -20,10 +20,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for DiskList property</summary>
-        private string _diskList;
+        private Sample.API.Models.IVmDisk[] _diskList;
 
         /// <summary>Disks attached to the VM.</summary>
-        public string DiskList
+        public Sample.API.Models.IVmDisk[] DiskList
         {
             get
             {
@@ -35,10 +35,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for GpuList property</summary>
-        private string _gpuList;
+        private Sample.API.Models.IVmGpu[] _gpuList;
 
         /// <summary>GPUs attached to the VM.</summary>
-        public string GpuList
+        public Sample.API.Models.IVmGpu[] GpuList
         {
             get
             {
@@ -136,10 +136,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for NicList property</summary>
-        private string _nicList;
+        private Sample.API.Models.IVmNic[] _nicList;
 
         /// <summary>NICs attached to the VM.</summary>
-        public string NicList
+        public Sample.API.Models.IVmNic[] NicList
         {
             get
             {
@@ -268,11 +268,26 @@ namespace Sample.API.Models
         public async System.Threading.Tasks.Task Validate(Microsoft.Rest.ClientRuntime.IEventListener eventListener)
         {
             await eventListener.AssertObjectIsValid(nameof(BootConfig), BootConfig);
+            if (DiskList != null ) {
+                    for (int __i = 0; __i < DiskList.Length; __i++) {
+                      await eventListener.AssertObjectIsValid($"DiskList[{__i}]", DiskList[__i]);
+                    }
+                  }
+            if (GpuList != null ) {
+                    for (int __i = 0; __i < GpuList.Length; __i++) {
+                      await eventListener.AssertObjectIsValid($"GpuList[{__i}]", GpuList[__i]);
+                    }
+                  }
             await eventListener.AssertObjectIsValid(nameof(GuestCustomization), GuestCustomization);
             await eventListener.AssertMaximumLength(nameof(GuestOsId),GuestOsId,64);
             await eventListener.AssertObjectIsValid(nameof(GuestTools), GuestTools);
             await eventListener.AssertMaximumLength(nameof(HardwareClockTimezone),HardwareClockTimezone,64);
             await eventListener.AssertIsGreaterThanOrEqual(nameof(MemorySizeMib),MemorySizeMib,1);
+            if (NicList != null ) {
+                    for (int __i = 0; __i < NicList.Length; __i++) {
+                      await eventListener.AssertObjectIsValid($"NicList[{__i}]", NicList[__i]);
+                    }
+                  }
             await eventListener.AssertIsGreaterThanOrEqual(nameof(NumSockets),NumSockets,1);
             await eventListener.AssertIsGreaterThanOrEqual(nameof(NumVcpusPerSocket),NumVcpusPerSocket,1);
             await eventListener.AssertObjectIsValid(nameof(ParentReference), ParentReference);
@@ -287,14 +302,14 @@ namespace Sample.API.Models
     /// VM Resources Definition.
     public partial interface IVmResources : Microsoft.Rest.ClientRuntime.IJsonSerializable {
         Sample.API.Models.IVmBootConfig BootConfig { get; set; }
-        string DiskList { get; set; }
-        string GpuList { get; set; }
+        Sample.API.Models.IVmDisk[] DiskList { get; set; }
+        Sample.API.Models.IVmGpu[] GpuList { get; set; }
         Sample.API.Models.IGuestCustomization GuestCustomization { get; set; }
         string GuestOsId { get; set; }
         Sample.API.Models.IGuestToolsSpec GuestTools { get; set; }
         string HardwareClockTimezone { get; set; }
         int? MemorySizeMib { get; set; }
-        string NicList { get; set; }
+        Sample.API.Models.IVmNic[] NicList { get; set; }
         int? NumSockets { get; set; }
         int? NumVcpusPerSocket { get; set; }
         Sample.API.Models.IReference ParentReference { get; set; }

@@ -1,10 +1,8 @@
 namespace Sample.API.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
-    /// <summary>
-    /// Indicates which device a VM should boot from.
-    /// </summary>
-    public partial class VmBootConfig
+    /// <summary>The reference to a vm</summary>
+    public partial class VmReference
     {
 
         /// <summary>
@@ -40,22 +38,22 @@ namespace Sample.API.Models
         /// instantly.</param>
         partial void BeforeToJson(ref Carbon.Json.JsonObject container, ref bool returnNow);
         /// <summary>
-        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Sample.API.Models.IVmBootConfig.
+        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Sample.API.Models.IVmReference.
         /// </summary>
         /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
-        /// <returns>an instance of Sample.API.Models.IVmBootConfig.</returns>
-        public static Sample.API.Models.IVmBootConfig FromJson(Carbon.Json.JsonNode node)
+        /// <returns>an instance of Sample.API.Models.IVmReference.</returns>
+        public static Sample.API.Models.IVmReference FromJson(Carbon.Json.JsonNode node)
         {
-            return node is Carbon.Json.JsonObject json ? new VmBootConfig(json) : null;
+            return node is Carbon.Json.JsonObject json ? new VmReference(json) : null;
         }
         /// <summary>
-        /// Serializes this instance of <see cref="VmBootConfig" /> into a <see cref="Carbon.Json.JsonNode" />.
+        /// Serializes this instance of <see cref="VmReference" /> into a <see cref="Carbon.Json.JsonNode" />.
         /// </summary>
         /// <param name="container">The <see cref="Carbon.Json.JsonObject"/> container to serialize this object into. If the caller
         /// passes in <c>null</c>, a new instance will be created and returned to the caller.</param>
         /// <param name="serializationMode">Allows the caller to choose the depth of the serialization. See <see cref="Microsoft.Rest.ClientRuntime.SerializationMode"/>.</param>
         /// <returns>
-        /// a serialized instance of <see cref="VmBootConfig" /> as a <see cref="Carbon.Json.JsonNode" />.
+        /// a serialized instance of <see cref="VmReference" /> as a <see cref="Carbon.Json.JsonNode" />.
         /// </returns>
         public Carbon.Json.JsonNode ToJson(Carbon.Json.JsonObject container, Microsoft.Rest.ClientRuntime.SerializationMode serializationMode)
         {
@@ -67,24 +65,17 @@ namespace Sample.API.Models
             {
                 return container;
             }
-            AddIf( null != BootDevice ? (Carbon.Json.JsonNode) BootDevice.ToJson(null) : null, "boot_device" ,container.Add );
-            if (null != BootDeviceOrderList)
-            {
-                var __x = new Carbon.Json.XNodeArray();
-                foreach( var __y in BootDeviceOrderList )
-                {
-                    AddIf(null != __y ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(__y) : null ,__x.Add);
-                }
-                container.Add("boot_device_order_list",__x);
-            }
+            AddIf( null != Name ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(Name) : null, "name" ,container.Add );
+            AddIf( null != Kind ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(Kind) : null, "kind" ,container.Add );
+            AddIf( null != Uuid ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(Uuid) : null, "uuid" ,container.Add );
             AfterToJson(ref container);
             return container;
         }
         /// <summary>
-        /// Deserializes a Carbon.Json.JsonObject into a new instance of <see cref="VmBootConfig" />.
+        /// Deserializes a Carbon.Json.JsonObject into a new instance of <see cref="VmReference" />.
         /// </summary>
         /// <param name="json">A Carbon.Json.JsonObject instance to deserialize from.</param>
-        internal VmBootConfig(Carbon.Json.JsonObject json)
+        internal VmReference(Carbon.Json.JsonObject json)
         {
             bool returnNow = false;
             BeforeFromJson(json, ref returnNow);
@@ -92,8 +83,9 @@ namespace Sample.API.Models
             {
                 return;
             }
-            _bootDevice = If( json?.PropertyT<Carbon.Json.JsonObject>("boot_device"), out var __jsonBootDevice) ? Sample.API.Models.VmBootDevice.FromJson(__jsonBootDevice) : BootDevice;
-            _bootDeviceOrderList = If( json?.PropertyT<Carbon.Json.JsonArray>("boot_device_order_list"), out var __jsonBootDeviceOrderList) ? If( __jsonBootDeviceOrderList, out var __w) ? new System.Func<string[]>(()=> System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select( __w, (__v)=> __v is Carbon.Json.JsonString __u ? (string)__u : null ) ) )() : null : BootDeviceOrderList;
+            _name = If( json?.PropertyT<Carbon.Json.JsonString>("name"), out var __jsonName) ? (string)__jsonName : (string)Name;
+            _kind = If( json?.PropertyT<Carbon.Json.JsonString>("kind"), out var __jsonKind) ? (string)__jsonKind : (string)Kind;
+            _uuid = If( json?.PropertyT<Carbon.Json.JsonString>("uuid"), out var __jsonUuid) ? (string)__jsonUuid : (string)Uuid;
             AfterFromJson(json);
         }
     }

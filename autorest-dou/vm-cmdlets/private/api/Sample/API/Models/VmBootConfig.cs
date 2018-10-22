@@ -26,13 +26,13 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for BootDeviceOrderList property</summary>
-        private string _bootDeviceOrderList;
+        private string[] _bootDeviceOrderList;
 
         /// <summary>
         /// Indicates the order of device types in which VM should try to boot from. If boot device order is not provided the system
         /// will decide appropriate boot device order.
         /// </summary>
-        public string BootDeviceOrderList
+        public string[] BootDeviceOrderList
         {
             get
             {
@@ -61,6 +61,6 @@ namespace Sample.API.Models
     /// Indicates which device a VM should boot from.
     public partial interface IVmBootConfig : Microsoft.Rest.ClientRuntime.IJsonSerializable {
         Sample.API.Models.IVmBootDevice BootDevice { get; set; }
-        string BootDeviceOrderList { get; set; }
+        string[] BootDeviceOrderList { get; set; }
     }
 }
