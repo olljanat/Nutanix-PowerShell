@@ -67,7 +67,7 @@ namespace Sample.API.Models
             }
             AddIf( null != ApiVersion ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(ApiVersion) : null, "api_version" ,container.Add );
             AddIf( null != Metadata ? (Carbon.Json.JsonNode) Metadata.ToJson(null) : null, "metadata" ,container.Add );
-            AddIf( null != Spec ? (Carbon.Json.JsonNode) Spec.ToJson(null) : null, "entities" ,container.Add );
+            AddIf( null != Spec ? (Carbon.Json.JsonNode) Spec.ToJson(null) : null, "spec" ,container.Add );
             AfterToJson(ref container);
             return container;
         }

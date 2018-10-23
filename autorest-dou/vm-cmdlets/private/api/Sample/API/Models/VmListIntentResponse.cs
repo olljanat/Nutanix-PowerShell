@@ -19,9 +19,9 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for Entities property</summary>
-        private string _entities;
+        private Sample.API.Models.IVmIntentResource[] _entities;
 
-        public string Entities
+        public Sample.API.Models.IVmIntentResource[] Entities
         {
             get
             {
@@ -58,6 +58,11 @@ namespace Sample.API.Models
         public async System.Threading.Tasks.Task Validate(Microsoft.Rest.ClientRuntime.IEventListener eventListener)
         {
             await eventListener.AssertNotNull(nameof(ApiVersion),ApiVersion);
+            if (Entities != null ) {
+                    for (int __i = 0; __i < Entities.Length; __i++) {
+                      await eventListener.AssertObjectIsValid($"Entities[{__i}]", Entities[__i]);
+                    }
+                  }
             await eventListener.AssertNotNull(nameof(Metadata), Metadata);
             await eventListener.AssertObjectIsValid(nameof(Metadata), Metadata);
         }
@@ -69,7 +74,7 @@ namespace Sample.API.Models
     /// Response object for intentful operation of vms
     public partial interface IVmListIntentResponse : Microsoft.Rest.ClientRuntime.IJsonSerializable {
         string ApiVersion { get; set; }
-        string Entities { get; set; }
+        Sample.API.Models.IVmIntentResource[] Entities { get; set; }
         Sample.API.Models.IVmListMetadataOutput Metadata { get; set; }
     }
 }

@@ -61,6 +61,13 @@ namespace Sample.API.Cmdlets
             {
                 GetEntitiesRequest.Length = value;
             }
+
+            get {
+                if (GetEntitiesRequest.Length.HasValue) {
+                    return GetEntitiesRequest.Length.Value;
+                }
+                return 0;
+            }
         }
 
         /// <summary>The username for authentication</summary>
@@ -102,6 +109,14 @@ namespace Sample.API.Cmdlets
             set
             {
                 GetEntitiesRequest.Offset = value;
+            }
+
+            get 
+            {
+                if (GetEntitiesRequest.Offset.HasValue){
+                    return GetEntitiesRequest.Offset.Value;
+                }
+                return 0;
             }
         }
         /// <summary>
@@ -317,7 +332,13 @@ namespace Sample.API.Cmdlets
 
                 // get the client instance
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                await this.Client.GetVms(GetEntitiesRequest, onOK, onDefault, this, Pipeline, username, password, Credential, url);
+
+                // if neither length nor offset is given, get every instance on the account
+                if (Length == 0 && Offset == 0) {
+                    await this.Client.GetVms_All(GetEntitiesRequest, onOK2, onDefault, this, Pipeline, username, password, Credential, url);
+                } else {
+                    await this.Client.GetVms(GetEntitiesRequest, onOK, onDefault, this, Pipeline, username, password, Credential, url);
+                }
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }
         }
@@ -368,6 +389,17 @@ namespace Sample.API.Cmdlets
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
         /// </returns>
         private async System.Threading.Tasks.Task onOK(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Sample.API.Models.IVmListIntentResponse> response)
+        {
+            using( NoSynchronizationContext )
+            {
+                // onOK - response for 200 / application/json
+                // (await response) // should be Sample.API.Models.IVmListIntentResponse
+                WriteObject(await response);
+            }
+        }
+
+        
+        private async System.Threading.Tasks.Task onOK2(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Sample.API.Models.IVmIntentResource[]> response)
         {
             using( NoSynchronizationContext )
             {

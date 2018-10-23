@@ -217,14 +217,12 @@ namespace Sample.API.Cmdlets
         {
             using( NoSynchronizationContext )
             {
-                System.Console.WriteLine("Cmdlet get pipeline");
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletGetPipeline); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 if (SkipSSL.ToBool()) {
                     Pipeline = Sample.API.Module.Instance.CreatePipelineWithProxy(this.MyInvocation.BoundParameters);
                 } else { 
                     Pipeline = Sample.API.Module.Instance.CreatePipeline(this.MyInvocation.BoundParameters);
                 }
-                System.Console.WriteLine("Cmdlet skip ssl");
                 Pipeline.Prepend(HttpPipelinePrepend);
                 Pipeline.Append(HttpPipelineAppend);
                 // get the client instance
@@ -252,7 +250,6 @@ namespace Sample.API.Cmdlets
                 //build url 
                 var url = $"{Protocol}://{Server}:{Port}";
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                System.Console.WriteLine("Cmdlet get Vm");
                 await this.Client.GetVm(Uuid, onOK, onNotFound, onDefault, this, Pipeline, username, password, Credential, url);
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }

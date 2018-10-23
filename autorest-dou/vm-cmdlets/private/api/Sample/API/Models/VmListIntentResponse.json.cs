@@ -66,7 +66,15 @@ namespace Sample.API.Models
                 return container;
             }
             AddIf( null != ApiVersion ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(ApiVersion) : null, "api_version" ,container.Add );
-            AddIf( null != Entities ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(Entities) : null, "entities" ,container.Add );
+            if (null != Entities)
+            {
+                var __x = new Carbon.Json.XNodeArray();
+                foreach( var __y in Entities )
+                {
+                    AddIf(__y?.ToJson(null) ,__x.Add);
+                }
+                container.Add("entities",__x);
+            }
             AddIf( null != Metadata ? (Carbon.Json.JsonNode) Metadata.ToJson(null) : null, "metadata" ,container.Add );
             AfterToJson(ref container);
             return container;
@@ -84,7 +92,7 @@ namespace Sample.API.Models
                 return;
             }
             _apiVersion = If( json?.PropertyT<Carbon.Json.JsonString>("api_version"), out var __jsonApiVersion) ? (string)__jsonApiVersion : (string)ApiVersion;
-            _entities = If( json?.PropertyT<Carbon.Json.JsonString>("entities"), out var __jsonEntities) ? (string)__jsonEntities : (string)Entities;
+            _entities = If( json?.PropertyT<Carbon.Json.JsonArray>("entities"), out var __jsonEntities) ? If( __jsonEntities, out var __w) ? new System.Func<Sample.API.Models.IVmIntentResource[]>(()=> System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select( __w, (__v)=> Sample.API.Models.VmIntentResource.FromJson(__v)  ) ) )() : null : Entities;
             _metadata = If( json?.PropertyT<Carbon.Json.JsonObject>("metadata"), out var __jsonMetadata) ? Sample.API.Models.VmListMetadataOutput.FromJson(__jsonMetadata) : Metadata;
             AfterFromJson(json);
         }
