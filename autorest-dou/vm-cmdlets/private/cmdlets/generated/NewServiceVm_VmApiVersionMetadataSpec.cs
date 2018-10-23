@@ -55,13 +55,13 @@ namespace Sample.API.Cmdlets
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Use the default credentials for the proxy")]
         public System.Management.Automation.SwitchParameter ProxyUseDefaultCredentials {get;set;}
 
-        /// <summary>The username for authentication</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The username for authentication")]
-        public string username {get; set;}
+        /// <summary>The Username for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Username for authentication")]
+        public string Username {get; set;}
 
-        /// <summary>The password for authentication</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The password for authentication")]
-        public string password {get; set;}
+        /// <summary>The Password for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Password for authentication")]
+        public System.Security.SecureString Password {get; set;}
 
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Skip the ssl validation")]
         public System.Management.Automation.SwitchParameter SkipSSL {get; set;}
@@ -70,16 +70,16 @@ namespace Sample.API.Cmdlets
         [System.Management.Automation.ValidateNotNull]
         public System.Management.Automation.PSCredential Credential {get; set;}
 
-        /// <summary>The username for authentication</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The username for authentication")]
+        /// <summary>The Username for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Username for authentication")]
         public string Server {get; set;}
 
-          /// <summary>The username for authentication</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The username for authentication")]
+          /// <summary>The Username for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Username for authentication")]
         public string Port {get; set;}
 
-        /// <summary>The username for authentication</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The username for authentication")]
+        /// <summary>The Username for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Username for authentication")]
         public string Protocol {get; set;}
 
         /// <summary>
@@ -245,12 +245,21 @@ namespace Sample.API.Cmdlets
                     Server = System.Environment.GetEnvironmentVariable("NutanixServer") ?? "localhost";
                 }
 
-                if (username == null) {
-                    username = System.Environment.GetEnvironmentVariable("NutanixUsername") ?? "";
+                if (Username == null) {
+                    Username = System.Environment.GetEnvironmentVariable("NutanixUsername") ?? "";
                 }
 
-                if (password == null) {
-                    password = System.Environment.GetEnvironmentVariable("NutanixPassword") ?? "";
+                if (Password == null) {
+                    var psw = System.Environment.GetEnvironmentVariable("NutanixPassword") ?? "";
+                    System.Security.SecureString result = new System.Security.SecureString();
+                    foreach (char c in psw)
+                        result.AppendChar(c);
+
+                    Password = result;
+                }
+
+                if (Credential == null) {
+                    Credential = new System.Management.Automation.PSCredential(Username, Password);
                 }
 
 
@@ -259,7 +268,7 @@ namespace Sample.API.Cmdlets
 
                 // get the client instance
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                await this.Client.NewVm(Body, onAccepted, onDefault, this, Pipeline, username, password, Credential, url);
+                await this.Client.NewVm(Body, onAccepted, onDefault, this, Pipeline, Credential, url);
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }
         }
