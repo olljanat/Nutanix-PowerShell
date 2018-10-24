@@ -1,4 +1,4 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>
@@ -44,11 +44,11 @@ namespace Sample.API.Models
         /// instantly.</param>
         partial void BeforeToJson(ref Carbon.Json.JsonObject container, ref bool returnNow);
         /// <summary>
-        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Sample.API.Models.IGuestCustomization.
+        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Nutanix.Powershell.Models.IGuestCustomization.
         /// </summary>
         /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
-        /// <returns>an instance of Sample.API.Models.IGuestCustomization.</returns>
-        public static Sample.API.Models.IGuestCustomization FromJson(Carbon.Json.JsonNode node)
+        /// <returns>an instance of Nutanix.Powershell.Models.IGuestCustomization.</returns>
+        public static Nutanix.Powershell.Models.IGuestCustomization FromJson(Carbon.Json.JsonNode node)
         {
             return node is Carbon.Json.JsonObject json ? new GuestCustomization(json) : null;
         }
@@ -64,9 +64,9 @@ namespace Sample.API.Models
             {
                 return;
             }
-            _cloudInit = If( json?.PropertyT<Carbon.Json.JsonObject>("cloud_init"), out var __jsonCloudInit) ? Sample.API.Models.GuestCustomizationCloudInit.FromJson(__jsonCloudInit) : CloudInit;
+            _cloudInit = If( json?.PropertyT<Carbon.Json.JsonObject>("cloud_init"), out var __jsonCloudInit) ? Nutanix.Powershell.Models.GuestCustomizationCloudInit.FromJson(__jsonCloudInit) : CloudInit;
             _isOverridable = If( json?.PropertyT<Carbon.Json.JsonBoolean>("is_overridable"), out var __jsonIsOverridable) ? (bool?)__jsonIsOverridable : IsOverridable;
-            _sysprep = If( json?.PropertyT<Carbon.Json.JsonObject>("sysprep"), out var __jsonSysprep) ? Sample.API.Models.GuestCustomizationSysprep.FromJson(__jsonSysprep) : Sysprep;
+            _sysprep = If( json?.PropertyT<Carbon.Json.JsonObject>("sysprep"), out var __jsonSysprep) ? Nutanix.Powershell.Models.GuestCustomizationSysprep.FromJson(__jsonSysprep) : Sysprep;
             AfterFromJson(json);
         }
         /// <summary>

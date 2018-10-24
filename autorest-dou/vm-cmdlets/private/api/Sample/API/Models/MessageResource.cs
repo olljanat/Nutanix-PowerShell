@@ -1,8 +1,8 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>message.</summary>
-    public partial class MessageResource : Sample.API.Models.IMessageResource, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class MessageResource : Nutanix.Powershell.Models.IMessageResource, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for Details property</summary>
         private System.Collections.Generic.IDictionary<string,string> _details;

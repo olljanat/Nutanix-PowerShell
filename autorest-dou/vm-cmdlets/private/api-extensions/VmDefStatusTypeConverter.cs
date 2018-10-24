@@ -1,4 +1,4 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
 
     /// <summary>

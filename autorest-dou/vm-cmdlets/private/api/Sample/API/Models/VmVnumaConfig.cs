@@ -1,10 +1,10 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>
     /// Indicates how VM vNUMA should be configured
     /// </summary>
-    public partial class VmVnumaConfig : Sample.API.Models.IVmVnumaConfig
+    public partial class VmVnumaConfig : Nutanix.Powershell.Models.IVmVnumaConfig
     {
         /// <summary>Backing field for NumVnumaNodes property</summary>
         private long? _numVnumaNodes;

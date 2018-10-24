@@ -1,8 +1,8 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>The vm kind metadata</summary>
-    public partial class VmMetadata : Sample.API.Models.IVmMetadata, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class VmMetadata : Nutanix.Powershell.Models.IVmMetadata, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for Categories property</summary>
         private System.Collections.Generic.IDictionary<string,string> _categories;
@@ -84,10 +84,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for OwnerReference property</summary>
-        private Sample.API.Models.IUserReference _ownerReference;
+        private Nutanix.Powershell.Models.IUserReference _ownerReference;
 
         /// <summary>The reference to a user</summary>
-        public Sample.API.Models.IUserReference OwnerReference
+        public Nutanix.Powershell.Models.IUserReference OwnerReference
         {
             get
             {
@@ -99,10 +99,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for ProjectReference property</summary>
-        private Sample.API.Models.IProjectReference _projectReference;
+        private Nutanix.Powershell.Models.IProjectReference _projectReference;
 
         /// <summary>The project the vm is in.</summary>
-        public Sample.API.Models.IProjectReference ProjectReference
+        public Nutanix.Powershell.Models.IProjectReference ProjectReference
         {
             get
             {
@@ -186,8 +186,8 @@ namespace Sample.API.Models
         string Kind { get; set; }
         System.DateTime? LastUpdateTime { get; set; }
         string Name { get; set; }
-        Sample.API.Models.IUserReference OwnerReference { get; set; }
-        Sample.API.Models.IProjectReference ProjectReference { get; set; }
+        Nutanix.Powershell.Models.IUserReference OwnerReference { get; set; }
+        Nutanix.Powershell.Models.IProjectReference ProjectReference { get; set; }
         string SpecHash { get; set; }
         int? SpecVersion { get; set; }
         string Uuid { get; set; }

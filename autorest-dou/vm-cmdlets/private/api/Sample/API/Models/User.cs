@@ -1,14 +1,14 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>User Input Definition.</summary>
-    public partial class User : Sample.API.Models.IUser, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class User : Nutanix.Powershell.Models.IUser, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for Resources property</summary>
-        private Sample.API.Models.IUserInputResource _resources;
+        private Nutanix.Powershell.Models.IUserInputResource _resources;
 
         /// <summary>User Resource Definition.</summary>
-        public Sample.API.Models.IUserInputResource Resources
+        public Nutanix.Powershell.Models.IUserInputResource Resources
         {
             get
             {
@@ -37,6 +37,6 @@ namespace Sample.API.Models
     }
     /// User Input Definition.
     public partial interface IUser : Microsoft.Rest.ClientRuntime.IJsonSerializable {
-        Sample.API.Models.IUserInputResource Resources { get; set; }
+        Nutanix.Powershell.Models.IUserInputResource Resources { get; set; }
     }
 }

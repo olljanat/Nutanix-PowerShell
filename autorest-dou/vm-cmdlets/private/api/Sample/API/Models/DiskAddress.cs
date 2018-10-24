@@ -1,8 +1,8 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Disk Address.</summary>
-    public partial class DiskAddress : Sample.API.Models.IDiskAddress, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class DiskAddress : Nutanix.Powershell.Models.IDiskAddress, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for AdapterType property</summary>
         private string _adapterType;

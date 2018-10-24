@@ -1,4 +1,4 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Response object for intentful operation of vms</summary>
@@ -38,11 +38,11 @@ namespace Sample.API.Models
         /// instantly.</param>
         partial void BeforeToJson(ref Carbon.Json.JsonObject container, ref bool returnNow);
         /// <summary>
-        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Sample.API.Models.IVmListIntentResponse.
+        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Nutanix.Powershell.Models.IVmListIntentResponse.
         /// </summary>
         /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
-        /// <returns>an instance of Sample.API.Models.IVmListIntentResponse.</returns>
-        public static Sample.API.Models.IVmListIntentResponse FromJson(Carbon.Json.JsonNode node)
+        /// <returns>an instance of Nutanix.Powershell.Models.IVmListIntentResponse.</returns>
+        public static Nutanix.Powershell.Models.IVmListIntentResponse FromJson(Carbon.Json.JsonNode node)
         {
             return node is Carbon.Json.JsonObject json ? new VmListIntentResponse(json) : null;
         }
@@ -92,8 +92,8 @@ namespace Sample.API.Models
                 return;
             }
             _apiVersion = If( json?.PropertyT<Carbon.Json.JsonString>("api_version"), out var __jsonApiVersion) ? (string)__jsonApiVersion : (string)ApiVersion;
-            _entities = If( json?.PropertyT<Carbon.Json.JsonArray>("entities"), out var __jsonEntities) ? If( __jsonEntities, out var __w) ? new System.Func<Sample.API.Models.IVmIntentResource[]>(()=> System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select( __w, (__v)=> Sample.API.Models.VmIntentResource.FromJson(__v)  ) ) )() : null : Entities;
-            _metadata = If( json?.PropertyT<Carbon.Json.JsonObject>("metadata"), out var __jsonMetadata) ? Sample.API.Models.VmListMetadataOutput.FromJson(__jsonMetadata) : Metadata;
+            _entities = If( json?.PropertyT<Carbon.Json.JsonArray>("entities"), out var __jsonEntities) ? If( __jsonEntities, out var __w) ? new System.Func<Nutanix.Powershell.Models.IVmIntentResource[]>(()=> System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select( __w, (__v)=> Nutanix.Powershell.Models.VmIntentResource.FromJson(__v)  ) ) )() : null : Entities;
+            _metadata = If( json?.PropertyT<Carbon.Json.JsonObject>("metadata"), out var __jsonMetadata) ? Nutanix.Powershell.Models.VmListMetadataOutput.FromJson(__jsonMetadata) : Metadata;
             AfterFromJson(json);
         }
     }

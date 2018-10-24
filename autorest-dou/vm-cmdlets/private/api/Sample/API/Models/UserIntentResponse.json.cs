@@ -1,4 +1,4 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Response object for intentful operations on a user</summary>
@@ -38,11 +38,11 @@ namespace Sample.API.Models
         /// instantly.</param>
         partial void BeforeToJson(ref Carbon.Json.JsonObject container, ref bool returnNow);
         /// <summary>
-        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Sample.API.Models.IUserIntentResponse.
+        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Nutanix.Powershell.Models.IUserIntentResponse.
         /// </summary>
         /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
-        /// <returns>an instance of Sample.API.Models.IUserIntentResponse.</returns>
-        public static Sample.API.Models.IUserIntentResponse FromJson(Carbon.Json.JsonNode node)
+        /// <returns>an instance of Nutanix.Powershell.Models.IUserIntentResponse.</returns>
+        public static Nutanix.Powershell.Models.IUserIntentResponse FromJson(Carbon.Json.JsonNode node)
         {
             return node is Carbon.Json.JsonObject json ? new UserIntentResponse(json) : null;
         }
@@ -85,9 +85,9 @@ namespace Sample.API.Models
                 return;
             }
             _apiVersion = If( json?.PropertyT<Carbon.Json.JsonString>("api_version"), out var __jsonApiVersion) ? (string)__jsonApiVersion : (string)ApiVersion;
-            _metadata = If( json?.PropertyT<Carbon.Json.JsonObject>("metadata"), out var __jsonMetadata) ? Sample.API.Models.UserMetadata.FromJson(__jsonMetadata) : Metadata;
-            _spec = If( json?.PropertyT<Carbon.Json.JsonObject>("spec"), out var __jsonSpec) ? Sample.API.Models.User.FromJson(__jsonSpec) : Spec;
-            _status = If( json?.PropertyT<Carbon.Json.JsonObject>("status"), out var __jsonStatus) ? Sample.API.Models.UserDefStatus.FromJson(__jsonStatus) : Status;
+            _metadata = If( json?.PropertyT<Carbon.Json.JsonObject>("metadata"), out var __jsonMetadata) ? Nutanix.Powershell.Models.UserMetadata.FromJson(__jsonMetadata) : Metadata;
+            _spec = If( json?.PropertyT<Carbon.Json.JsonObject>("spec"), out var __jsonSpec) ? Nutanix.Powershell.Models.User.FromJson(__jsonSpec) : Spec;
+            _status = If( json?.PropertyT<Carbon.Json.JsonObject>("status"), out var __jsonStatus) ? Nutanix.Powershell.Models.UserDefStatus.FromJson(__jsonStatus) : Status;
             AfterFromJson(json);
         }
     }

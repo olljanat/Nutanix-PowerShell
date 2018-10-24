@@ -2,11 +2,11 @@ function New-VmRecoveryPointIntentInputObject {
 [CmdletBinding()]
 param(
     [Parameter(ParameterSetName='default', Mandatory=$true, HelpMessage='The vm_recovery_point kind metadata')]
-    [Sample.API.Models.IVmRecoveryPointMetadata]
+    [Nutanix.Powershell.Models.IVmRecoveryPointMetadata]
     ${Metadata},
 
     [Parameter(ParameterSetName='default', Mandatory=$true, HelpMessage='The input object that defines a vm recovery point.')]
-    [Sample.API.Models.IVmRecoveryPoint]
+    [Nutanix.Powershell.Models.IVmRecoveryPoint]
     ${Spec})
 
 begin

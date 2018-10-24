@@ -1,14 +1,14 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>User Resource Definition.</summary>
-    public partial class UserInputResource : Sample.API.Models.IUserInputResource, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class UserInputResource : Nutanix.Powershell.Models.IUserInputResource, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for DirectoryServiceUser property</summary>
-        private Sample.API.Models.IDirectoryServiceUser _directoryServiceUser;
+        private Nutanix.Powershell.Models.IDirectoryServiceUser _directoryServiceUser;
 
         /// <summary>A Directory Service user.</summary>
-        public Sample.API.Models.IDirectoryServiceUser DirectoryServiceUser
+        public Nutanix.Powershell.Models.IDirectoryServiceUser DirectoryServiceUser
         {
             get
             {
@@ -36,6 +36,6 @@ namespace Sample.API.Models
     }
     /// User Resource Definition.
     public partial interface IUserInputResource : Microsoft.Rest.ClientRuntime.IJsonSerializable {
-        Sample.API.Models.IDirectoryServiceUser DirectoryServiceUser { get; set; }
+        Nutanix.Powershell.Models.IDirectoryServiceUser DirectoryServiceUser { get; set; }
     }
 }

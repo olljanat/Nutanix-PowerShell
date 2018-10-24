@@ -1,4 +1,4 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Extra configs related to power state transition.</summary>
@@ -38,11 +38,11 @@ namespace Sample.API.Models
         /// instantly.</param>
         partial void BeforeToJson(ref Carbon.Json.JsonObject container, ref bool returnNow);
         /// <summary>
-        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Sample.API.Models.IVmGuestPowerStateTransitionConfig.
+        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Nutanix.Powershell.Models.IVmGuestPowerStateTransitionConfig.
         /// </summary>
         /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
-        /// <returns>an instance of Sample.API.Models.IVmGuestPowerStateTransitionConfig.</returns>
-        public static Sample.API.Models.IVmGuestPowerStateTransitionConfig FromJson(Carbon.Json.JsonNode node)
+        /// <returns>an instance of Nutanix.Powershell.Models.IVmGuestPowerStateTransitionConfig.</returns>
+        public static Nutanix.Powershell.Models.IVmGuestPowerStateTransitionConfig FromJson(Carbon.Json.JsonNode node)
         {
             return node is Carbon.Json.JsonObject json ? new VmGuestPowerStateTransitionConfig(json) : null;
         }

@@ -1,4 +1,4 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Response object for intentful operation of access_control_policys</summary>
@@ -54,11 +54,11 @@ namespace Sample.API.Models
             AfterFromJson(json);
         }
         /// <summary>
-        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Sample.API.Models.IAccessControlPolicyListIntentResponse.
+        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Nutanix.Powershell.Models.IAccessControlPolicyListIntentResponse.
         /// </summary>
         /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
-        /// <returns>an instance of Sample.API.Models.IAccessControlPolicyListIntentResponse.</returns>
-        public static Sample.API.Models.IAccessControlPolicyListIntentResponse FromJson(Carbon.Json.JsonNode node)
+        /// <returns>an instance of Nutanix.Powershell.Models.IAccessControlPolicyListIntentResponse.</returns>
+        public static Nutanix.Powershell.Models.IAccessControlPolicyListIntentResponse FromJson(Carbon.Json.JsonNode node)
         {
             return node is Carbon.Json.JsonObject json ? new AccessControlPolicyListIntentResponse(json) : null;
         }

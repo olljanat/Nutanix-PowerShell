@@ -1,20 +1,20 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>
     /// Indicates which device a VM should boot from.
     /// </summary>
-    public partial class VmBootConfig : Sample.API.Models.IVmBootConfig, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class VmBootConfig : Nutanix.Powershell.Models.IVmBootConfig, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for BootDevice property</summary>
-        private Sample.API.Models.IVmBootDevice _bootDevice;
+        private Nutanix.Powershell.Models.IVmBootDevice _bootDevice;
 
         /// <summary>
         /// Indicates which device a VM should boot from. Boot device takes precdence over boot device order. If both are given then
         /// specified boot device will be primary boot device and remaining devices will be assigned boot order according to boot
         /// device order field.
         /// </summary>
-        public Sample.API.Models.IVmBootDevice BootDevice
+        public Nutanix.Powershell.Models.IVmBootDevice BootDevice
         {
             get
             {
@@ -60,7 +60,7 @@ namespace Sample.API.Models
     }
     /// Indicates which device a VM should boot from.
     public partial interface IVmBootConfig : Microsoft.Rest.ClientRuntime.IJsonSerializable {
-        Sample.API.Models.IVmBootDevice BootDevice { get; set; }
+        Nutanix.Powershell.Models.IVmBootDevice BootDevice { get; set; }
         string[] BootDeviceOrderList { get; set; }
     }
 }

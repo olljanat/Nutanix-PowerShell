@@ -1,4 +1,4 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>VirtualMachine Disk (VM Disk).</summary>
@@ -38,11 +38,11 @@ namespace Sample.API.Models
         /// instantly.</param>
         partial void BeforeToJson(ref Carbon.Json.JsonObject container, ref bool returnNow);
         /// <summary>
-        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Sample.API.Models.IVmDisk.
+        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Nutanix.Powershell.Models.IVmDisk.
         /// </summary>
         /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
-        /// <returns>an instance of Sample.API.Models.IVmDisk.</returns>
-        public static Sample.API.Models.IVmDisk FromJson(Carbon.Json.JsonNode node)
+        /// <returns>an instance of Nutanix.Powershell.Models.IVmDisk.</returns>
+        public static Nutanix.Powershell.Models.IVmDisk FromJson(Carbon.Json.JsonNode node)
         {
             return node is Carbon.Json.JsonObject json ? new VmDisk(json) : null;
         }
@@ -86,12 +86,12 @@ namespace Sample.API.Models
             {
                 return;
             }
-            _dataSourceReference = If( json?.PropertyT<Carbon.Json.JsonObject>("data_source_reference"), out var __jsonDataSourceReference) ? Sample.API.Models.Reference.FromJson(__jsonDataSourceReference) : DataSourceReference;
-            _deviceProperties = If( json?.PropertyT<Carbon.Json.JsonObject>("device_properties"), out var __jsonDeviceProperties) ? Sample.API.Models.VmDiskDeviceProperties.FromJson(__jsonDeviceProperties) : DeviceProperties;
+            _dataSourceReference = If( json?.PropertyT<Carbon.Json.JsonObject>("data_source_reference"), out var __jsonDataSourceReference) ? Nutanix.Powershell.Models.Reference.FromJson(__jsonDataSourceReference) : DataSourceReference;
+            _deviceProperties = If( json?.PropertyT<Carbon.Json.JsonObject>("device_properties"), out var __jsonDeviceProperties) ? Nutanix.Powershell.Models.VmDiskDeviceProperties.FromJson(__jsonDeviceProperties) : DeviceProperties;
             _diskSizeBytes = If( json?.PropertyT<Carbon.Json.JsonNumber>("disk_size_bytes"), out var __jsonDiskSizeBytes) ? (long?)__jsonDiskSizeBytes : DiskSizeBytes;
             _diskSizeMib = If( json?.PropertyT<Carbon.Json.JsonNumber>("disk_size_mib"), out var __jsonDiskSizeMib) ? (int?)__jsonDiskSizeMib : DiskSizeMib;
             _uuid = If( json?.PropertyT<Carbon.Json.JsonString>("uuid"), out var __jsonUuid) ? (string)__jsonUuid : (string)Uuid;
-            _volumeGroupReference = If( json?.PropertyT<Carbon.Json.JsonObject>("volume_group_reference"), out var __jsonVolumeGroupReference) ? Sample.API.Models.Reference.FromJson(__jsonVolumeGroupReference) : VolumeGroupReference;
+            _volumeGroupReference = If( json?.PropertyT<Carbon.Json.JsonObject>("volume_group_reference"), out var __jsonVolumeGroupReference) ? Nutanix.Powershell.Models.Reference.FromJson(__jsonVolumeGroupReference) : VolumeGroupReference;
             AfterFromJson(json);
         }
     }

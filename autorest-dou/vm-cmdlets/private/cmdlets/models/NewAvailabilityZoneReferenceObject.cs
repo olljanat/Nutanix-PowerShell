@@ -1,15 +1,15 @@
-namespace Sample.API.ModelCmdlets
+namespace Nutanix.Powershell.ModelCmdlets
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>
     /// Cmdlet to create an in-memory instance of the <see cref="AvailabilityZoneReference" /> object.
     /// </summary>
     [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.New, @"AvailabilityZoneReferenceObject")]
-    [System.Management.Automation.OutputType(typeof(Sample.API.Models.IAvailabilityZoneReference))]
+    [System.Management.Automation.OutputType(typeof(Nutanix.Powershell.Models.IAvailabilityZoneReference))]
     public class NewAvailabilityZoneReferenceObject : System.Management.Automation.PSCmdlet
     {
         /// <summary>Backing field for <see cref="AvailabilityZoneReference" /></summary>
-        private Sample.API.Models.IAvailabilityZoneReference _availabilityZoneReference = new Sample.API.Models.AvailabilityZoneReference();
+        private Nutanix.Powershell.Models.IAvailabilityZoneReference _availabilityZoneReference = new Nutanix.Powershell.Models.AvailabilityZoneReference();
         /// <summary>The kind name</summary>
         public string Kind
         {

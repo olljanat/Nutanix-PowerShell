@@ -1,14 +1,14 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>VM Resources Definition.</summary>
-    public partial class VmResources : Sample.API.Models.IVmResources, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class VmResources : Nutanix.Powershell.Models.IVmResources, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for BootConfig property</summary>
-        private Sample.API.Models.IVmBootConfig _bootConfig;
+        private Nutanix.Powershell.Models.IVmBootConfig _bootConfig;
 
         /// <summary>Indicates which device the VM should boot from.</summary>
-        public Sample.API.Models.IVmBootConfig BootConfig
+        public Nutanix.Powershell.Models.IVmBootConfig BootConfig
         {
             get
             {
@@ -20,10 +20,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for DiskList property</summary>
-        private Sample.API.Models.IVmDisk[] _diskList;
+        private Nutanix.Powershell.Models.IVmDisk[] _diskList;
 
         /// <summary>Disks attached to the VM.</summary>
-        public Sample.API.Models.IVmDisk[] DiskList
+        public Nutanix.Powershell.Models.IVmDisk[] DiskList
         {
             get
             {
@@ -35,10 +35,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for GpuList property</summary>
-        private Sample.API.Models.IVmGpu[] _gpuList;
+        private Nutanix.Powershell.Models.IVmGpu[] _gpuList;
 
         /// <summary>GPUs attached to the VM.</summary>
-        public Sample.API.Models.IVmGpu[] GpuList
+        public Nutanix.Powershell.Models.IVmGpu[] GpuList
         {
             get
             {
@@ -50,7 +50,7 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for GuestCustomization property</summary>
-        private Sample.API.Models.IGuestCustomization _guestCustomization;
+        private Nutanix.Powershell.Models.IGuestCustomization _guestCustomization;
 
         /// <summary>
         /// VM guests may be customized at boot time using one of several different methods. Currently, cloud-init w/ ConfigDriveV2
@@ -59,7 +59,7 @@ namespace Sample.API.Models
         /// in an error. Additional properties can be specified. For example - in the context of VM template creation if "override_script"
         /// is set to "True" then the deployer can upload their own custom script.
         /// </summary>
-        public Sample.API.Models.IGuestCustomization GuestCustomization
+        public Nutanix.Powershell.Models.IGuestCustomization GuestCustomization
         {
             get
             {
@@ -89,10 +89,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for GuestTools property</summary>
-        private Sample.API.Models.IGuestToolsSpec _guestTools;
+        private Nutanix.Powershell.Models.IGuestToolsSpec _guestTools;
 
         /// <summary>Information regarding guest tools.</summary>
-        public Sample.API.Models.IGuestToolsSpec GuestTools
+        public Nutanix.Powershell.Models.IGuestToolsSpec GuestTools
         {
             get
             {
@@ -136,10 +136,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for NicList property</summary>
-        private Sample.API.Models.IVmNic[] _nicList;
+        private Nutanix.Powershell.Models.IVmNic[] _nicList;
 
         /// <summary>NICs attached to the VM.</summary>
-        public Sample.API.Models.IVmNic[] NicList
+        public Nutanix.Powershell.Models.IVmNic[] NicList
         {
             get
             {
@@ -181,12 +181,12 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for ParentReference property</summary>
-        private Sample.API.Models.IReference _parentReference;
+        private Nutanix.Powershell.Models.IReference _parentReference;
 
         /// <summary>
         /// Reference to an entity that the VM should be cloned from.
         /// </summary>
-        public Sample.API.Models.IReference ParentReference
+        public Nutanix.Powershell.Models.IReference ParentReference
         {
             get
             {
@@ -213,12 +213,12 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for PowerStateMechanism property</summary>
-        private Sample.API.Models.IVmPowerStateMechanism _powerStateMechanism;
+        private Nutanix.Powershell.Models.IVmPowerStateMechanism _powerStateMechanism;
 
         /// <summary>
         /// Indicates the mechanism guiding the VM power state transition. Currently used for the transition to "OFF" state.
         /// </summary>
-        public Sample.API.Models.IVmPowerStateMechanism PowerStateMechanism
+        public Nutanix.Powershell.Models.IVmPowerStateMechanism PowerStateMechanism
         {
             get
             {
@@ -245,10 +245,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for VnumaConfig property</summary>
-        private Sample.API.Models.IVmVnumaConfig _vnumaConfig;
+        private Nutanix.Powershell.Models.IVmVnumaConfig _vnumaConfig;
 
         /// <summary>Information regarding vNUMA configuration.</summary>
-        public Sample.API.Models.IVmVnumaConfig VnumaConfig
+        public Nutanix.Powershell.Models.IVmVnumaConfig VnumaConfig
         {
             get
             {
@@ -301,21 +301,21 @@ namespace Sample.API.Models
     }
     /// VM Resources Definition.
     public partial interface IVmResources : Microsoft.Rest.ClientRuntime.IJsonSerializable {
-        Sample.API.Models.IVmBootConfig BootConfig { get; set; }
-        Sample.API.Models.IVmDisk[] DiskList { get; set; }
-        Sample.API.Models.IVmGpu[] GpuList { get; set; }
-        Sample.API.Models.IGuestCustomization GuestCustomization { get; set; }
+        Nutanix.Powershell.Models.IVmBootConfig BootConfig { get; set; }
+        Nutanix.Powershell.Models.IVmDisk[] DiskList { get; set; }
+        Nutanix.Powershell.Models.IVmGpu[] GpuList { get; set; }
+        Nutanix.Powershell.Models.IGuestCustomization GuestCustomization { get; set; }
         string GuestOsId { get; set; }
-        Sample.API.Models.IGuestToolsSpec GuestTools { get; set; }
+        Nutanix.Powershell.Models.IGuestToolsSpec GuestTools { get; set; }
         string HardwareClockTimezone { get; set; }
         int? MemorySizeMib { get; set; }
-        Sample.API.Models.IVmNic[] NicList { get; set; }
+        Nutanix.Powershell.Models.IVmNic[] NicList { get; set; }
         int? NumSockets { get; set; }
         int? NumVcpusPerSocket { get; set; }
-        Sample.API.Models.IReference ParentReference { get; set; }
+        Nutanix.Powershell.Models.IReference ParentReference { get; set; }
         string PowerState { get; set; }
-        Sample.API.Models.IVmPowerStateMechanism PowerStateMechanism { get; set; }
+        Nutanix.Powershell.Models.IVmPowerStateMechanism PowerStateMechanism { get; set; }
         bool? VgaConsoleEnabled { get; set; }
-        Sample.API.Models.IVmVnumaConfig VnumaConfig { get; set; }
+        Nutanix.Powershell.Models.IVmVnumaConfig VnumaConfig { get; set; }
     }
 }

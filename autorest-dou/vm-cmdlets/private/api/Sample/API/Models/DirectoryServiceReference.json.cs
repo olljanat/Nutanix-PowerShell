@@ -1,4 +1,4 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>The reference to a directory_service</summary>
@@ -55,11 +55,11 @@ namespace Sample.API.Models
             AfterFromJson(json);
         }
         /// <summary>
-        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Sample.API.Models.IDirectoryServiceReference.
+        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Nutanix.Powershell.Models.IDirectoryServiceReference.
         /// </summary>
         /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
-        /// <returns>an instance of Sample.API.Models.IDirectoryServiceReference.</returns>
-        public static Sample.API.Models.IDirectoryServiceReference FromJson(Carbon.Json.JsonNode node)
+        /// <returns>an instance of Nutanix.Powershell.Models.IDirectoryServiceReference.</returns>
+        public static Nutanix.Powershell.Models.IDirectoryServiceReference FromJson(Carbon.Json.JsonNode node)
         {
             return node is Carbon.Json.JsonObject json ? new DirectoryServiceReference(json) : null;
         }

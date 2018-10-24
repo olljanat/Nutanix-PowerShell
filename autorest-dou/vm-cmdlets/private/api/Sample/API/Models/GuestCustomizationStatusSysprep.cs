@@ -1,11 +1,11 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>
     /// If this field is set, the guest will be customized using Sysprep. Either unattend_xml or custom_key_values should be provided.
     /// If custom_key_values are provided then the unattended answer file will be generated using these key-value pairs.
     /// </summary>
-    public partial class GuestCustomizationStatusSysprep : Sample.API.Models.IGuestCustomizationStatusSysprep
+    public partial class GuestCustomizationStatusSysprep : Nutanix.Powershell.Models.IGuestCustomizationStatusSysprep
     {
         /// <summary>Backing field for CustomKeyValues property</summary>
         private System.Collections.Generic.IDictionary<string,string> _customKeyValues;

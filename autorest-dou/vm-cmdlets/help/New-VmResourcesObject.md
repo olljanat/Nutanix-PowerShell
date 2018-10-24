@@ -72,7 +72,7 @@ Accept wildcard characters: False
 Disks attached to the VM.
 
 ```yaml
-Type: Sample.API.Models.IVmDisk[]
+Type: Nutanix.Powershell.Models.IVmDisk[]
 Parameter Sets: (All)
 Aliases:
 
@@ -87,7 +87,7 @@ Accept wildcard characters: False
 GPUs attached to the VM.
 
 ```yaml
-Type: Sample.API.Models.IVmGpu[]
+Type: Nutanix.Powershell.Models.IVmGpu[]
 Parameter Sets: (All)
 Aliases:
 
@@ -108,7 +108,7 @@ Additional properties can be specified.
 For example - in the context of VM template creation if "override_script" is set to "True" then the deployer can upload their own custom script.
 
 ```yaml
-Type: Sample.API.Models.IGuestCustomization
+Type: Nutanix.Powershell.Models.IGuestCustomization
 Parameter Sets: (All)
 Aliases:
 
@@ -169,7 +169,7 @@ Accept wildcard characters: False
 NICs attached to the VM.
 
 ```yaml
-Type: Sample.API.Models.IVmNic[]
+Type: Nutanix.Powershell.Models.IVmNic[]
 Parameter Sets: (All)
 Aliases:
 

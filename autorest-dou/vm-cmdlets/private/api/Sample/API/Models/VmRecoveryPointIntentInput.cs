@@ -1,8 +1,8 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>An intentful representation of a vm_recovery_point</summary>
-    public partial class VmRecoveryPointIntentInput : Sample.API.Models.IVmRecoveryPointIntentInput, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class VmRecoveryPointIntentInput : Nutanix.Powershell.Models.IVmRecoveryPointIntentInput, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for ApiVersion property</summary>
         private string _apiVersion;
@@ -19,10 +19,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for Metadata property</summary>
-        private Sample.API.Models.IVmRecoveryPointMetadata _metadata;
+        private Nutanix.Powershell.Models.IVmRecoveryPointMetadata _metadata;
 
         /// <summary>The vm_recovery_point kind metadata</summary>
-        public Sample.API.Models.IVmRecoveryPointMetadata Metadata
+        public Nutanix.Powershell.Models.IVmRecoveryPointMetadata Metadata
         {
             get
             {
@@ -34,10 +34,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for Spec property</summary>
-        private Sample.API.Models.IVmRecoveryPoint _spec;
+        private Nutanix.Powershell.Models.IVmRecoveryPoint _spec;
 
         /// <summary>The input object that defines a vm recovery point.</summary>
-        public Sample.API.Models.IVmRecoveryPoint Spec
+        public Nutanix.Powershell.Models.IVmRecoveryPoint Spec
         {
             get
             {
@@ -69,7 +69,7 @@ namespace Sample.API.Models
     /// An intentful representation of a vm_recovery_point
     public partial interface IVmRecoveryPointIntentInput : Microsoft.Rest.ClientRuntime.IJsonSerializable {
         string ApiVersion { get; set; }
-        Sample.API.Models.IVmRecoveryPointMetadata Metadata { get; set; }
-        Sample.API.Models.IVmRecoveryPoint Spec { get; set; }
+        Nutanix.Powershell.Models.IVmRecoveryPointMetadata Metadata { get; set; }
+        Nutanix.Powershell.Models.IVmRecoveryPoint Spec { get; set; }
     }
 }

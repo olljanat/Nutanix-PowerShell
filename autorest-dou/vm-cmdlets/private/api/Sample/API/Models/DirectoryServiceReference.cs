@@ -1,8 +1,8 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>The reference to a directory_service</summary>
-    public partial class DirectoryServiceReference : Sample.API.Models.IDirectoryServiceReference, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class DirectoryServiceReference : Nutanix.Powershell.Models.IDirectoryServiceReference, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for Kind property</summary>
         private string _kind;

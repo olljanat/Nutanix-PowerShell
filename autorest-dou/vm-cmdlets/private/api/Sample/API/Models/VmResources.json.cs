@@ -1,4 +1,4 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>VM Resources Definition.</summary>
@@ -38,11 +38,11 @@ namespace Sample.API.Models
         /// instantly.</param>
         partial void BeforeToJson(ref Carbon.Json.JsonObject container, ref bool returnNow);
         /// <summary>
-        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Sample.API.Models.IVmResources.
+        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Nutanix.Powershell.Models.IVmResources.
         /// </summary>
         /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
-        /// <returns>an instance of Sample.API.Models.IVmResources.</returns>
-        public static Sample.API.Models.IVmResources FromJson(Carbon.Json.JsonNode node)
+        /// <returns>an instance of Nutanix.Powershell.Models.IVmResources.</returns>
+        public static Nutanix.Powershell.Models.IVmResources FromJson(Carbon.Json.JsonNode node)
         {
             return node is Carbon.Json.JsonObject json ? new VmResources(json) : null;
         }
@@ -120,22 +120,22 @@ namespace Sample.API.Models
             {
                 return;
             }
-            _bootConfig = If( json?.PropertyT<Carbon.Json.JsonObject>("boot_config"), out var __jsonBootConfig) ? Sample.API.Models.VmBootConfig.FromJson(__jsonBootConfig) : BootConfig;
-            _diskList = If( json?.PropertyT<Carbon.Json.JsonArray>("disk_list"), out var __jsonDiskList) ? If( __jsonDiskList, out var __w) ? new System.Func<Sample.API.Models.IVmDisk[]>(()=> System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select( __w, (__v)=> Sample.API.Models.VmDisk.FromJson(__v)  ) ) )() : null : DiskList;
-            _gpuList = If( json?.PropertyT<Carbon.Json.JsonArray>("gpu_list"), out var __jsonGpuList) ? If( __jsonGpuList, out var __r) ? new System.Func<Sample.API.Models.IVmGpu[]>(()=> System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select( __r, (__q)=> Sample.API.Models.VmGpu.FromJson(__q)  ) ) )() : null : GpuList;
-            _guestCustomization = If( json?.PropertyT<Carbon.Json.JsonObject>("guest_customization"), out var __jsonGuestCustomization) ? Sample.API.Models.GuestCustomization.FromJson(__jsonGuestCustomization) : GuestCustomization;
+            _bootConfig = If( json?.PropertyT<Carbon.Json.JsonObject>("boot_config"), out var __jsonBootConfig) ? Nutanix.Powershell.Models.VmBootConfig.FromJson(__jsonBootConfig) : BootConfig;
+            _diskList = If( json?.PropertyT<Carbon.Json.JsonArray>("disk_list"), out var __jsonDiskList) ? If( __jsonDiskList, out var __w) ? new System.Func<Nutanix.Powershell.Models.IVmDisk[]>(()=> System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select( __w, (__v)=> Nutanix.Powershell.Models.VmDisk.FromJson(__v)  ) ) )() : null : DiskList;
+            _gpuList = If( json?.PropertyT<Carbon.Json.JsonArray>("gpu_list"), out var __jsonGpuList) ? If( __jsonGpuList, out var __r) ? new System.Func<Nutanix.Powershell.Models.IVmGpu[]>(()=> System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select( __r, (__q)=> Nutanix.Powershell.Models.VmGpu.FromJson(__q)  ) ) )() : null : GpuList;
+            _guestCustomization = If( json?.PropertyT<Carbon.Json.JsonObject>("guest_customization"), out var __jsonGuestCustomization) ? Nutanix.Powershell.Models.GuestCustomization.FromJson(__jsonGuestCustomization) : GuestCustomization;
             _guestOsId = If( json?.PropertyT<Carbon.Json.JsonString>("guest_os_id"), out var __jsonGuestOsId) ? (string)__jsonGuestOsId : (string)GuestOsId;
-            _guestTools = If( json?.PropertyT<Carbon.Json.JsonObject>("guest_tools"), out var __jsonGuestTools) ? Sample.API.Models.GuestToolsSpec.FromJson(__jsonGuestTools) : GuestTools;
+            _guestTools = If( json?.PropertyT<Carbon.Json.JsonObject>("guest_tools"), out var __jsonGuestTools) ? Nutanix.Powershell.Models.GuestToolsSpec.FromJson(__jsonGuestTools) : GuestTools;
             _hardwareClockTimezone = If( json?.PropertyT<Carbon.Json.JsonString>("hardware_clock_timezone"), out var __jsonHardwareClockTimezone) ? (string)__jsonHardwareClockTimezone : (string)HardwareClockTimezone;
             _memorySizeMib = If( json?.PropertyT<Carbon.Json.JsonNumber>("memory_size_mib"), out var __jsonMemorySizeMib) ? (int?)__jsonMemorySizeMib : MemorySizeMib;
-            _nicList = If( json?.PropertyT<Carbon.Json.JsonArray>("nic_list"), out var __jsonNicList) ? If( __jsonNicList, out var __m) ? new System.Func<Sample.API.Models.IVmNic[]>(()=> System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select( __m, (__l)=> Sample.API.Models.VmNic.FromJson(__l)  ) ) )() : null : NicList;
+            _nicList = If( json?.PropertyT<Carbon.Json.JsonArray>("nic_list"), out var __jsonNicList) ? If( __jsonNicList, out var __m) ? new System.Func<Nutanix.Powershell.Models.IVmNic[]>(()=> System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select( __m, (__l)=> Nutanix.Powershell.Models.VmNic.FromJson(__l)  ) ) )() : null : NicList;
             _numSockets = If( json?.PropertyT<Carbon.Json.JsonNumber>("num_sockets"), out var __jsonNumSockets) ? (int?)__jsonNumSockets : NumSockets;
             _numVcpusPerSocket = If( json?.PropertyT<Carbon.Json.JsonNumber>("num_vcpus_per_socket"), out var __jsonNumVcpusPerSocket) ? (int?)__jsonNumVcpusPerSocket : NumVcpusPerSocket;
-            _parentReference = If( json?.PropertyT<Carbon.Json.JsonObject>("parent_reference"), out var __jsonParentReference) ? Sample.API.Models.Reference.FromJson(__jsonParentReference) : ParentReference;
+            _parentReference = If( json?.PropertyT<Carbon.Json.JsonObject>("parent_reference"), out var __jsonParentReference) ? Nutanix.Powershell.Models.Reference.FromJson(__jsonParentReference) : ParentReference;
             _powerState = If( json?.PropertyT<Carbon.Json.JsonString>("power_state"), out var __jsonPowerState) ? (string)__jsonPowerState : (string)PowerState;
-            _powerStateMechanism = If( json?.PropertyT<Carbon.Json.JsonObject>("power_state_mechanism"), out var __jsonPowerStateMechanism) ? Sample.API.Models.VmPowerStateMechanism.FromJson(__jsonPowerStateMechanism) : PowerStateMechanism;
+            _powerStateMechanism = If( json?.PropertyT<Carbon.Json.JsonObject>("power_state_mechanism"), out var __jsonPowerStateMechanism) ? Nutanix.Powershell.Models.VmPowerStateMechanism.FromJson(__jsonPowerStateMechanism) : PowerStateMechanism;
             _vgaConsoleEnabled = If( json?.PropertyT<Carbon.Json.JsonBoolean>("vga_console_enabled"), out var __jsonVgaConsoleEnabled) ? (bool?)__jsonVgaConsoleEnabled : VgaConsoleEnabled;
-            _vnumaConfig = If( json?.PropertyT<Carbon.Json.JsonObject>("vnuma_config"), out var __jsonVnumaConfig) ? Sample.API.Models.VmVnumaConfig.FromJson(__jsonVnumaConfig) : VnumaConfig;
+            _vnumaConfig = If( json?.PropertyT<Carbon.Json.JsonObject>("vnuma_config"), out var __jsonVnumaConfig) ? Nutanix.Powershell.Models.VmVnumaConfig.FromJson(__jsonVnumaConfig) : VnumaConfig;
             AfterFromJson(json);
         }
     }

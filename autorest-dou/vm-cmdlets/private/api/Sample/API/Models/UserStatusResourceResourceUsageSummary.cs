@@ -1,13 +1,13 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
-    public partial class UserStatusResourceResourceUsageSummary : Sample.API.Models.IUserStatusResourceResourceUsageSummary, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class UserStatusResourceResourceUsageSummary : Nutanix.Powershell.Models.IUserStatusResourceResourceUsageSummary, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for ResourceDomain property</summary>
-        private Sample.API.Models.IResourceDomainResourcesStatus _resourceDomain;
+        private Nutanix.Powershell.Models.IResourceDomainResourcesStatus _resourceDomain;
 
         /// <summary>The status for a resource domain (limits and values)</summary>
-        public Sample.API.Models.IResourceDomainResourcesStatus ResourceDomain
+        public Nutanix.Powershell.Models.IResourceDomainResourcesStatus ResourceDomain
         {
             get
             {
@@ -34,6 +34,6 @@ namespace Sample.API.Models
         }
     }
     public partial interface IUserStatusResourceResourceUsageSummary : Microsoft.Rest.ClientRuntime.IJsonSerializable {
-        Sample.API.Models.IResourceDomainResourcesStatus ResourceDomain { get; set; }
+        Nutanix.Powershell.Models.IResourceDomainResourcesStatus ResourceDomain { get; set; }
     }
 }

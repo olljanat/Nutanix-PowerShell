@@ -1,10 +1,10 @@
-namespace Sample.API.Cmdlets
+namespace Nutanix.Powershell.Cmdlets
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Implement a variant of the cmdlet Remove-ServiceVm.</summary>
     [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.Remove, @"ServiceVm_VmUuid", SupportsShouldProcess = true)]
-    [System.Management.Automation.OutputType(typeof(Sample.API.Models.IVmIntentResponse))]
-    [System.Management.Automation.OutputType(typeof(Sample.API.Models.IVmStatus))]
+    [System.Management.Automation.OutputType(typeof(Nutanix.Powershell.Models.IVmIntentResponse))]
+    [System.Management.Automation.OutputType(typeof(Nutanix.Powershell.Models.IVmStatus))]
     public class RemoveServiceVm_VmUuid : System.Management.Automation.PSCmdlet, Microsoft.Rest.ClientRuntime.IEventListener
     {
          /// <summary>
@@ -34,7 +34,7 @@ namespace Sample.API.Cmdlets
         /// <summary>The <see cref="System.Threading.CancellationTokenSource" /> for this operation.</summary>
         private System.Threading.CancellationTokenSource _cancellationTokenSource = new System.Threading.CancellationTokenSource();
         /// <summary>The reference to the client API class.</summary>
-        public Sample.API.NutanixIntentfulAPI Client => Sample.API.Module.Instance.ClientAPI;
+        public Nutanix.Powershell.NutanixIntentfulAPI Client => Nutanix.Powershell.Module.Instance.ClientAPI;
         /// <summary>SendAsync Pipeline Steps to be appended to the front of the pipeline</summary>
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "SendAsync Pipeline Steps to be appended to the front of the pipeline")]
         [System.Management.Automation.ValidateNotNull]
@@ -116,7 +116,7 @@ namespace Sample.API.Cmdlets
         }
         /// <summary>Creates a duplicate instance of this cmdlet (via JSON serialization).</summary>
         /// <returns>a duplicate instance of RemoveServiceVm_VmUuid</returns>
-        public Sample.API.Cmdlets.RemoveServiceVm_VmUuid Clone()
+        public Nutanix.Powershell.Cmdlets.RemoveServiceVm_VmUuid Clone()
         {
             var clone = FromJson(this.ToJson(null, Microsoft.Rest.ClientRuntime.SerializationMode.IncludeAll));
             clone.HttpPipelinePrepend = this.HttpPipelinePrepend;
@@ -133,7 +133,7 @@ namespace Sample.API.Cmdlets
         /// </summary>
         /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
         /// <returns>an instance of RemoveServiceVm_VmUuid.</returns>
-        public static Sample.API.Cmdlets.RemoveServiceVm_VmUuid FromJson(Carbon.Json.JsonNode node)
+        public static Nutanix.Powershell.Cmdlets.RemoveServiceVm_VmUuid FromJson(Carbon.Json.JsonNode node)
         {
             return node is Carbon.Json.JsonObject json ? new RemoveServiceVm_VmUuid(json) : null;
         }
@@ -142,7 +142,7 @@ namespace Sample.API.Cmdlets
         /// </summary>
         /// <param name="jsonText">a string containing a JSON serialized instance of this cmdlet.</param>
         /// <returns>returns a new instance of the <see cref="RemoveServiceVm_VmUuid" /> cmdlet</returns>
-        public static Sample.API.Cmdlets.RemoveServiceVm_VmUuid FromJsonString(string jsonText) => string.IsNullOrEmpty(jsonText) ? null : FromJson(Carbon.Json.JsonObject.Parse(jsonText));
+        public static Nutanix.Powershell.Cmdlets.RemoveServiceVm_VmUuid FromJsonString(string jsonText) => string.IsNullOrEmpty(jsonText) ? null : FromJson(Carbon.Json.JsonObject.Parse(jsonText));
         /// <summary>Handles/Dispatches events during the call to the REST service.</summary>
         /// <param name="id">The message id</param>
         /// <param name="token">The message cancellation token. When this call is cancelled, this should be <c>true</c></param>
@@ -233,9 +233,9 @@ namespace Sample.API.Cmdlets
             {
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletGetPipeline); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 if (this.SkipSSL.ToBool()) {
-                    Pipeline = Sample.API.Module.Instance.CreatePipelineWithProxy(this.MyInvocation.BoundParameters);
+                    Pipeline = Nutanix.Powershell.Module.Instance.CreatePipelineWithProxy(this.MyInvocation.BoundParameters);
                 } else {
-                    Pipeline = Sample.API.Module.Instance.CreatePipeline(this.MyInvocation.BoundParameters);
+                    Pipeline = Nutanix.Powershell.Module.Instance.CreatePipeline(this.MyInvocation.BoundParameters);
                 } 
                 Pipeline.Prepend(HttpPipelinePrepend);
                 Pipeline.Append(HttpPipelineAppend);
@@ -317,16 +317,16 @@ namespace Sample.API.Cmdlets
         }
         /// <summary>a delegate that is called when the remote service returns 202 (Accepted).</summary>
         /// <param name="responseMessage">the raw response message as an System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="Sample.API.Models.IVmIntentResponse" /> from the remote call</param>
+        /// <param name="response">the body result as a <see cref="Nutanix.Powershell.Models.IVmIntentResponse" /> from the remote call</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
         /// </returns>
-        private async System.Threading.Tasks.Task onAccepted(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Sample.API.Models.IVmIntentResponse> response)
+        private async System.Threading.Tasks.Task onAccepted(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmIntentResponse> response)
         {
             using( NoSynchronizationContext )
             {
                 // onAccepted - response for 202 / application/json
-                // (await response) // should be Sample.API.Models.IVmIntentResponse
+                // (await response) // should be Nutanix.Powershell.Models.IVmIntentResponse
                 WriteObject(await response);
             }
         }
@@ -334,11 +334,11 @@ namespace Sample.API.Cmdlets
         /// a delegate that is called when the remote service returns default (any response code not handled elsewhere).
         /// </summary>
         /// <param name="responseMessage">the raw response message as an System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="Sample.API.Models.IVmStatus" /> from the remote call</param>
+        /// <param name="response">the body result as a <see cref="Nutanix.Powershell.Models.IVmStatus" /> from the remote call</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
         /// </returns>
-        private async System.Threading.Tasks.Task onDefault(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Sample.API.Models.IVmStatus> response)
+        private async System.Threading.Tasks.Task onDefault(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmStatus> response)
         {
             using( NoSynchronizationContext )
             {
@@ -348,16 +348,16 @@ namespace Sample.API.Cmdlets
         }
         /// <summary>a delegate that is called when the remote service returns 404 (NotFound).</summary>
         /// <param name="responseMessage">the raw response message as an System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="Sample.API.Models.IVmStatus" /> from the remote call</param>
+        /// <param name="response">the body result as a <see cref="Nutanix.Powershell.Models.IVmStatus" /> from the remote call</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
         /// </returns>
-        private async System.Threading.Tasks.Task onNotFound(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Sample.API.Models.IVmStatus> response)
+        private async System.Threading.Tasks.Task onNotFound(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmStatus> response)
         {
             using( NoSynchronizationContext )
             {
                 // onNotFound - response for 404 / application/json
-                // (await response) // should be Sample.API.Models.IVmStatus
+                // (await response) // should be Nutanix.Powershell.Models.IVmStatus
                 WriteObject(await response);
             }
         }

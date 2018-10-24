@@ -1,13 +1,13 @@
-namespace Sample.API.ModelCmdlets
+namespace Nutanix.Powershell.ModelCmdlets
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Cmdlet to create an in-memory instance of the <see cref="VmMetadata" /> object.</summary>
     [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.New, @"VmMetadataObject")]
-    [System.Management.Automation.OutputType(typeof(Sample.API.Models.IVmMetadata))]
+    [System.Management.Automation.OutputType(typeof(Nutanix.Powershell.Models.IVmMetadata))]
     public class NewVmMetadataObject : System.Management.Automation.PSCmdlet
     {
         /// <summary>Backing field for <see cref="VmMetadata" /></summary>
-        private Sample.API.Models.IVmMetadata _vmMetadata = new Sample.API.Models.VmMetadata();
+        private Nutanix.Powershell.Models.IVmMetadata _vmMetadata = new Nutanix.Powershell.Models.VmMetadata();
         /// <summary>Categories for the vm</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Categories for the vm")]
         public System.Collections.Generic.IDictionary<string,string> Categories
@@ -57,7 +57,7 @@ namespace Sample.API.ModelCmdlets
         {
             set
             {
-                _vmMetadata.ProjectReference = _vmMetadata.ProjectReference ?? new Sample.API.Models.ProjectReference();
+                _vmMetadata.ProjectReference = _vmMetadata.ProjectReference ?? new Nutanix.Powershell.Models.ProjectReference();
                 _vmMetadata.ProjectReference.Kind = "project";
             }
         }
@@ -67,7 +67,7 @@ namespace Sample.API.ModelCmdlets
         {
             set
             {
-                _vmMetadata.ProjectReference = _vmMetadata.ProjectReference ?? new Sample.API.Models.ProjectReference();
+                _vmMetadata.ProjectReference = _vmMetadata.ProjectReference ?? new Nutanix.Powershell.Models.ProjectReference();
                 _vmMetadata.ProjectReference.Name = value;
             }
         }
@@ -77,7 +77,7 @@ namespace Sample.API.ModelCmdlets
         {
             set
             {
-                _vmMetadata.ProjectReference = _vmMetadata.ProjectReference ?? new Sample.API.Models.ProjectReference();
+                _vmMetadata.ProjectReference = _vmMetadata.ProjectReference ?? new Nutanix.Powershell.Models.ProjectReference();
                 _vmMetadata.ProjectReference.Uuid = value;
             }
         }
@@ -104,7 +104,7 @@ namespace Sample.API.ModelCmdlets
         {
             set
             {
-                _vmMetadata.OwnerReference = _vmMetadata.OwnerReference ?? new Sample.API.Models.UserReference();
+                _vmMetadata.OwnerReference = _vmMetadata.OwnerReference ?? new Nutanix.Powershell.Models.UserReference();
                 _vmMetadata.OwnerReference.Kind = "user";
             }
         }
@@ -114,7 +114,7 @@ namespace Sample.API.ModelCmdlets
         {
             set
             {
-                _vmMetadata.OwnerReference = _vmMetadata.OwnerReference ?? new Sample.API.Models.UserReference();
+                _vmMetadata.OwnerReference = _vmMetadata.OwnerReference ?? new Nutanix.Powershell.Models.UserReference();
                 _vmMetadata.OwnerReference.Name = value;
             }
         }
@@ -124,7 +124,7 @@ namespace Sample.API.ModelCmdlets
         {
             set
             {
-                _vmMetadata.OwnerReference = _vmMetadata.OwnerReference ?? new Sample.API.Models.UserReference();
+                _vmMetadata.OwnerReference = _vmMetadata.OwnerReference ?? new Nutanix.Powershell.Models.UserReference();
                 _vmMetadata.OwnerReference.Uuid = value;
             }
         }

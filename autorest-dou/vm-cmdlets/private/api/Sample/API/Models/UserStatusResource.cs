@@ -1,14 +1,14 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>User Resource Definition.</summary>
-    public partial class UserStatusResource : Sample.API.Models.IUserStatusResource, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class UserStatusResource : Nutanix.Powershell.Models.IUserStatusResource, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for AccessControlPolicyReferenceList property</summary>
-        private Sample.API.Models.IAccessControlPolicyReference[] _accessControlPolicyReferenceList;
+        private Nutanix.Powershell.Models.IAccessControlPolicyReference[] _accessControlPolicyReferenceList;
 
         /// <summary>List of ACP references.</summary>
-        public Sample.API.Models.IAccessControlPolicyReference[] AccessControlPolicyReferenceList
+        public Nutanix.Powershell.Models.IAccessControlPolicyReference[] AccessControlPolicyReferenceList
         {
             get
             {
@@ -20,10 +20,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for DirectoryServiceUser property</summary>
-        private Sample.API.Models.IDirectoryServiceUserStatus _directoryServiceUser;
+        private Nutanix.Powershell.Models.IDirectoryServiceUserStatus _directoryServiceUser;
 
         /// <summary>A Directory Service user.</summary>
-        public Sample.API.Models.IDirectoryServiceUserStatus DirectoryServiceUser
+        public Nutanix.Powershell.Models.IDirectoryServiceUserStatus DirectoryServiceUser
         {
             get
             {
@@ -52,10 +52,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for ProjectsReferenceList property</summary>
-        private Sample.API.Models.IProjectReference[] _projectsReferenceList;
+        private Nutanix.Powershell.Models.IProjectReference[] _projectsReferenceList;
 
         /// <summary>A list of projects the user is part of.</summary>
-        public Sample.API.Models.IProjectReference[] ProjectsReferenceList
+        public Nutanix.Powershell.Models.IProjectReference[] ProjectsReferenceList
         {
             get
             {
@@ -67,9 +67,9 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for ResourceUsageSummary property</summary>
-        private Sample.API.Models.IUserStatusResourceResourceUsageSummary _resourceUsageSummary;
+        private Nutanix.Powershell.Models.IUserStatusResourceResourceUsageSummary _resourceUsageSummary;
 
-        public Sample.API.Models.IUserStatusResourceResourceUsageSummary ResourceUsageSummary
+        public Nutanix.Powershell.Models.IUserStatusResourceResourceUsageSummary ResourceUsageSummary
         {
             get
             {
@@ -122,11 +122,11 @@ namespace Sample.API.Models
     }
     /// User Resource Definition.
     public partial interface IUserStatusResource : Microsoft.Rest.ClientRuntime.IJsonSerializable {
-        Sample.API.Models.IAccessControlPolicyReference[] AccessControlPolicyReferenceList { get; set; }
-        Sample.API.Models.IDirectoryServiceUserStatus DirectoryServiceUser { get; set; }
+        Nutanix.Powershell.Models.IAccessControlPolicyReference[] AccessControlPolicyReferenceList { get; set; }
+        Nutanix.Powershell.Models.IDirectoryServiceUserStatus DirectoryServiceUser { get; set; }
         string DisplayName { get; set; }
-        Sample.API.Models.IProjectReference[] ProjectsReferenceList { get; set; }
-        Sample.API.Models.IUserStatusResourceResourceUsageSummary ResourceUsageSummary { get; set; }
+        Nutanix.Powershell.Models.IProjectReference[] ProjectsReferenceList { get; set; }
+        Nutanix.Powershell.Models.IUserStatusResourceResourceUsageSummary ResourceUsageSummary { get; set; }
         string UserType { get; set; }
     }
 }

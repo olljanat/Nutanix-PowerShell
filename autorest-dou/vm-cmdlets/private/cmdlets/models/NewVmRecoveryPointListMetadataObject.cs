@@ -1,15 +1,15 @@
-namespace Sample.API.ModelCmdlets
+namespace Nutanix.Powershell.ModelCmdlets
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>
     /// Cmdlet to create an in-memory instance of the <see cref="VmRecoveryPointListMetadata" /> object.
     /// </summary>
     [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.New, @"VmRecoveryPointListMetadataObject")]
-    [System.Management.Automation.OutputType(typeof(Sample.API.Models.IVmRecoveryPointListMetadata))]
+    [System.Management.Automation.OutputType(typeof(Nutanix.Powershell.Models.IVmRecoveryPointListMetadata))]
     public class NewVmRecoveryPointListMetadataObject : System.Management.Automation.PSCmdlet
     {
         /// <summary>Backing field for <see cref="VmRecoveryPointListMetadata" /></summary>
-        private Sample.API.Models.IVmRecoveryPointListMetadata _vmRecoveryPointListMetadata = new Sample.API.Models.VmRecoveryPointListMetadata();
+        private Nutanix.Powershell.Models.IVmRecoveryPointListMetadata _vmRecoveryPointListMetadata = new Nutanix.Powershell.Models.VmRecoveryPointListMetadata();
         /// <summary>The filter in FIQL syntax used for the results.</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "The filter in FIQL syntax used for the results.")]
         public string Filter

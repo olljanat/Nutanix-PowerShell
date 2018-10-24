@@ -1,14 +1,14 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Information regarding guest tools.</summary>
-    public partial class GuestToolsStatus : Sample.API.Models.IGuestToolsStatus, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class GuestToolsStatus : Nutanix.Powershell.Models.IGuestToolsStatus, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for NutanixGuestTools property</summary>
-        private Sample.API.Models.INutanixGuestToolsStatus _nutanixGuestTools;
+        private Nutanix.Powershell.Models.INutanixGuestToolsStatus _nutanixGuestTools;
 
         /// <summary>Nutanix Guest Tools information</summary>
-        public Sample.API.Models.INutanixGuestToolsStatus NutanixGuestTools
+        public Nutanix.Powershell.Models.INutanixGuestToolsStatus NutanixGuestTools
         {
             get
             {
@@ -36,6 +36,6 @@ namespace Sample.API.Models
     }
     /// Information regarding guest tools.
     public partial interface IGuestToolsStatus : Microsoft.Rest.ClientRuntime.IJsonSerializable {
-        Sample.API.Models.INutanixGuestToolsStatus NutanixGuestTools { get; set; }
+        Nutanix.Powershell.Models.INutanixGuestToolsStatus NutanixGuestTools { get; set; }
     }
 }

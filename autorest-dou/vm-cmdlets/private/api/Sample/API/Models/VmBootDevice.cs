@@ -1,16 +1,16 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>
     /// Indicates which device a VM should boot from. One of disk_address or mac_address should be provided.
     /// </summary>
-    public partial class VmBootDevice : Sample.API.Models.IVmBootDevice, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class VmBootDevice : Nutanix.Powershell.Models.IVmBootDevice, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for DiskAddress property</summary>
-        private Sample.API.Models.IDiskAddress _diskAddress;
+        private Nutanix.Powershell.Models.IDiskAddress _diskAddress;
 
         /// <summary>Address of disk to boot from.</summary>
-        public Sample.API.Models.IDiskAddress DiskAddress
+        public Nutanix.Powershell.Models.IDiskAddress DiskAddress
         {
             get
             {
@@ -54,7 +54,7 @@ namespace Sample.API.Models
     }
     /// Indicates which device a VM should boot from. One of disk_address or mac_address should be provided.
     public partial interface IVmBootDevice : Microsoft.Rest.ClientRuntime.IJsonSerializable {
-        Sample.API.Models.IDiskAddress DiskAddress { get; set; }
+        Nutanix.Powershell.Models.IDiskAddress DiskAddress { get; set; }
         string MacAddress { get; set; }
     }
 }

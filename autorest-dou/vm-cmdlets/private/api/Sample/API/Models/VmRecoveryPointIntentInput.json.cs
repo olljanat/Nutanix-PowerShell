@@ -1,4 +1,4 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>An intentful representation of a vm_recovery_point</summary>
@@ -38,11 +38,11 @@ namespace Sample.API.Models
         /// instantly.</param>
         partial void BeforeToJson(ref Carbon.Json.JsonObject container, ref bool returnNow);
         /// <summary>
-        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Sample.API.Models.IVmRecoveryPointIntentInput.
+        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Nutanix.Powershell.Models.IVmRecoveryPointIntentInput.
         /// </summary>
         /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
-        /// <returns>an instance of Sample.API.Models.IVmRecoveryPointIntentInput.</returns>
-        public static Sample.API.Models.IVmRecoveryPointIntentInput FromJson(Carbon.Json.JsonNode node)
+        /// <returns>an instance of Nutanix.Powershell.Models.IVmRecoveryPointIntentInput.</returns>
+        public static Nutanix.Powershell.Models.IVmRecoveryPointIntentInput FromJson(Carbon.Json.JsonNode node)
         {
             return node is Carbon.Json.JsonObject json ? new VmRecoveryPointIntentInput(json) : null;
         }
@@ -84,8 +84,8 @@ namespace Sample.API.Models
                 return;
             }
             _apiVersion = If( json?.PropertyT<Carbon.Json.JsonString>("api_version"), out var __jsonApiVersion) ? (string)__jsonApiVersion : (string)ApiVersion;
-            _metadata = If( json?.PropertyT<Carbon.Json.JsonObject>("metadata"), out var __jsonMetadata) ? Sample.API.Models.VmRecoveryPointMetadata.FromJson(__jsonMetadata) : Metadata;
-            _spec = If( json?.PropertyT<Carbon.Json.JsonObject>("spec"), out var __jsonSpec) ? Sample.API.Models.VmRecoveryPoint.FromJson(__jsonSpec) : Spec;
+            _metadata = If( json?.PropertyT<Carbon.Json.JsonObject>("metadata"), out var __jsonMetadata) ? Nutanix.Powershell.Models.VmRecoveryPointMetadata.FromJson(__jsonMetadata) : Metadata;
+            _spec = If( json?.PropertyT<Carbon.Json.JsonObject>("spec"), out var __jsonSpec) ? Nutanix.Powershell.Models.VmRecoveryPoint.FromJson(__jsonSpec) : Spec;
             AfterFromJson(json);
         }
     }

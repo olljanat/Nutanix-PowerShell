@@ -1,14 +1,14 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>An intentful representation of a vm status</summary>
-    public partial class VmDefStatus : Sample.API.Models.IVmDefStatus, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class VmDefStatus : Nutanix.Powershell.Models.IVmDefStatus, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for AvailabilityZoneReference property</summary>
-        private Sample.API.Models.IAvailabilityZoneReference _availabilityZoneReference;
+        private Nutanix.Powershell.Models.IAvailabilityZoneReference _availabilityZoneReference;
 
         /// <summary>The reference to a availability_zone</summary>
-        public Sample.API.Models.IAvailabilityZoneReference AvailabilityZoneReference
+        public Nutanix.Powershell.Models.IAvailabilityZoneReference AvailabilityZoneReference
         {
             get
             {
@@ -20,10 +20,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for ClusterReference property</summary>
-        private Sample.API.Models.IClusterReference _clusterReference;
+        private Nutanix.Powershell.Models.IClusterReference _clusterReference;
 
         /// <summary>The reference to a cluster</summary>
-        public Sample.API.Models.IClusterReference ClusterReference
+        public Nutanix.Powershell.Models.IClusterReference ClusterReference
         {
             get
             {
@@ -80,10 +80,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for Resources property</summary>
-        private Sample.API.Models.IVmResourcesDefStatus _resources;
+        private Nutanix.Powershell.Models.IVmResourcesDefStatus _resources;
 
         /// <summary>VM Resources Status Definition.</summary>
-        public Sample.API.Models.IVmResourcesDefStatus Resources
+        public Nutanix.Powershell.Models.IVmResourcesDefStatus Resources
         {
             get
             {
@@ -130,12 +130,12 @@ namespace Sample.API.Models
     }
     /// An intentful representation of a vm status
     public partial interface IVmDefStatus : Microsoft.Rest.ClientRuntime.IJsonSerializable {
-        Sample.API.Models.IAvailabilityZoneReference AvailabilityZoneReference { get; set; }
-        Sample.API.Models.IClusterReference ClusterReference { get; set; }
+        Nutanix.Powershell.Models.IAvailabilityZoneReference AvailabilityZoneReference { get; set; }
+        Nutanix.Powershell.Models.IClusterReference ClusterReference { get; set; }
         string Description { get; set; }
         string MessageList { get; set; }
         string Name { get; set; }
-        Sample.API.Models.IVmResourcesDefStatus Resources { get; set; }
+        Nutanix.Powershell.Models.IVmResourcesDefStatus Resources { get; set; }
         string State { get; set; }
     }
 }

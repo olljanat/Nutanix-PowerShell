@@ -92,9 +92,9 @@ schemas:
       csharp:
         name: AccessControlPolicyListIntentResponse
         description: Response object for intentful operation of access_control_policys
-        fullname: Sample.API.Models.AccessControlPolicyListIntentResponse
+        fullname: Nutanix.Powershell.Models.AccessControlPolicyListIntentResponse
         interfaceName: IAccessControlPolicyListIntentResponse
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: access_control_policy_list_intent_response
         description: Response object for intentful operation of access_control_policys
@@ -312,9 +312,9 @@ schemas:
         description: >
           All api calls that return a list will have this metadata block as
           input
-        fullname: Sample.API.Models.AccessControlPolicyListMetadata
+        fullname: Nutanix.Powershell.Models.AccessControlPolicyListMetadata
         interfaceName: IAccessControlPolicyListMetadata
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: access_control_policy_list_metadata
         description: >
@@ -455,9 +455,9 @@ schemas:
       csharp:
         name: AccessControlPolicyReference
         description: The reference to a access_control_policy
-        fullname: Sample.API.Models.AccessControlPolicyReference
+        fullname: Nutanix.Powershell.Models.AccessControlPolicyReference
         interfaceName: IAccessControlPolicyReference
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: access_control_policy_reference
         description: The reference to a access_control_policy
@@ -633,9 +633,9 @@ schemas:
         description: |
           The status of a REST API call. Only used when there is a failure to
           report.
-        fullname: Sample.API.Models.AccessControlPolicyStatus
+        fullname: Nutanix.Powershell.Models.AccessControlPolicyStatus
         interfaceName: IAccessControlPolicyStatus
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: access_control_policy_status
         description: |
@@ -776,9 +776,9 @@ schemas:
       csharp:
         name: AvailabilityZoneReference
         description: The reference to a availability_zone
-        fullname: Sample.API.Models.AvailabilityZoneReference
+        fullname: Nutanix.Powershell.Models.AvailabilityZoneReference
         interfaceName: IAvailabilityZoneReference
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: availability_zone_reference
         description: The reference to a availability_zone
@@ -917,9 +917,9 @@ schemas:
       csharp:
         name: ClusterReference
         description: The reference to a cluster
-        fullname: Sample.API.Models.ClusterReference
+        fullname: Nutanix.Powershell.Models.ClusterReference
         interfaceName: IClusterReference
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: cluster_reference
         description: The reference to a cluster
@@ -965,9 +965,9 @@ schemas:
       csharp:
         name: CustomGenericKeyValuePair
         description: Generic key value pair used for custom attributes
-        fullname: Sample.API.Models.CustomGenericKeyValuePair
+        fullname: Nutanix.Powershell.Models.CustomGenericKeyValuePair
         interfaceName: ICustomGenericKeyValuePair
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: custom_generic_key_value_pair
         description: Generic key value pair used for custom attributes
@@ -1107,9 +1107,9 @@ schemas:
       csharp:
         name: DirectoryServiceReference
         description: The reference to a directory_service
-        fullname: Sample.API.Models.DirectoryServiceReference
+        fullname: Nutanix.Powershell.Models.DirectoryServiceReference
         interfaceName: IDirectoryServiceReference
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: directory_service_reference
         description: The reference to a directory_service
@@ -1191,9 +1191,9 @@ schemas:
       csharp:
         name: DirectoryServiceUser
         description: A Directory Service user.
-        fullname: Sample.API.Models.DirectoryServiceUser
+        fullname: Nutanix.Powershell.Models.DirectoryServiceUser
         interfaceName: IDirectoryServiceUser
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: directory_service_user
         description: A Directory Service user.
@@ -1329,9 +1329,9 @@ schemas:
       csharp:
         name: DirectoryServiceUserStatus
         description: A Directory Service user.
-        fullname: Sample.API.Models.DirectoryServiceUserStatus
+        fullname: Nutanix.Powershell.Models.DirectoryServiceUserStatus
         interfaceName: IDirectoryServiceUserStatus
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: directory_service_user_status
         description: A Directory Service user.
@@ -1434,9 +1434,9 @@ schemas:
       csharp:
         name: DiskAddress
         description: Disk Address.
-        fullname: Sample.API.Models.DiskAddress
+        fullname: Nutanix.Powershell.Models.DiskAddress
         interfaceName: IDiskAddress
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: disk_address
         description: Disk Address.
@@ -1627,9 +1627,9 @@ schemas:
                 cloud-init. Either user_data or custom_key_values should be
                 provided. If custom_key_ves are provided then the user data will
                 be generated using these key-value pairs.
-              fullname: Sample.API.Models.GuestCustomizationCloudInit
+              fullname: Nutanix.Powershell.Models.GuestCustomizationCloudInit
               interfaceName: IGuestCustomizationCloudInit
-              namespace: Sample.API.Models
+              namespace: Nutanix.Powershell.Models
             default:
               name: .guest_customization.cloud_init
               description: >
@@ -1847,9 +1847,9 @@ schemas:
                 Sysprep. Either unattend_xml or custom_key_values should be
                 provided. If custom_key_values are provided then the unattended
                 answer file will be generated using these key-value pairs.
-              fullname: Sample.API.Models.GuestCustomizationSysprep
+              fullname: Nutanix.Powershell.Models.GuestCustomizationSysprep
               interfaceName: IGuestCustomizationSysprep
-              namespace: Sample.API.Models
+              namespace: Nutanix.Powershell.Models
             default:
               name: .guest_customization.sysprep
               description: >
@@ -1904,9 +1904,9 @@ schemas:
           specified. For example - in the context of VM template creation if
           "override_script" is set to "True" then the deployer can upload their
           own custom script.
-        fullname: Sample.API.Models.GuestCustomization
+        fullname: Nutanix.Powershell.Models.GuestCustomization
         interfaceName: IGuestCustomization
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: guest_customization
         description: >
@@ -2105,9 +2105,9 @@ schemas:
                 cloud-init. Either user_data or custom_key_values should be
                 provided. If custom_key_ves are provided then the user data will
                 be generated using these key-value pairs.
-              fullname: Sample.API.Models.GuestCustomizationStatusCloudInit
+              fullname: Nutanix.Powershell.Models.GuestCustomizationStatusCloudInit
               interfaceName: IGuestCustomizationStatusCloudInit
-              namespace: Sample.API.Models
+              namespace: Nutanix.Powershell.Models
             default:
               name: .guest_customization_status.cloud_init
               description: >
@@ -2323,9 +2323,9 @@ schemas:
                 Sysprep. Either unattend_xml or custom_key_values should be
                 provided. If custom_key_values are provided then the unattended
                 answer file will be generated using these key-value pairs.
-              fullname: Sample.API.Models.GuestCustomizationStatusSysprep
+              fullname: Nutanix.Powershell.Models.GuestCustomizationStatusSysprep
               interfaceName: IGuestCustomizationStatusSysprep
-              namespace: Sample.API.Models
+              namespace: Nutanix.Powershell.Models
             default:
               name: .guest_customization_status.sysprep
               description: >
@@ -2380,9 +2380,9 @@ schemas:
           specified. For example - in the context of VM template creation if
           "override_script" is set to "True" then the deployer can upload their
           own custom script.
-        fullname: Sample.API.Models.GuestCustomizationStatus
+        fullname: Nutanix.Powershell.Models.GuestCustomizationStatus
         interfaceName: IGuestCustomizationStatus
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: guest_customization_status
         description: >
@@ -2547,9 +2547,9 @@ schemas:
             csharp:
               name: NutanixGuestToolsSpec
               description: Information regarding Nutanix Guest Tools.
-              fullname: Sample.API.Models.NutanixGuestToolsSpec
+              fullname: Nutanix.Powershell.Models.NutanixGuestToolsSpec
               interfaceName: INutanixGuestToolsSpec
-              namespace: Sample.API.Models
+              namespace: Nutanix.Powershell.Models
             default:
               name: nutanix_guest_tools_spec
               description: Information regarding Nutanix Guest Tools.
@@ -2574,9 +2574,9 @@ schemas:
       csharp:
         name: GuestToolsSpec
         description: Information regarding guest tools.
-        fullname: Sample.API.Models.GuestToolsSpec
+        fullname: Nutanix.Powershell.Models.GuestToolsSpec
         interfaceName: IGuestToolsSpec
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: guest_tools_spec
         description: Information regarding guest tools.
@@ -2960,9 +2960,9 @@ schemas:
             csharp:
               name: NutanixGuestToolsStatus
               description: Information regarding Nutanix Guest Tools.
-              fullname: Sample.API.Models.NutanixGuestToolsStatus
+              fullname: Nutanix.Powershell.Models.NutanixGuestToolsStatus
               interfaceName: INutanixGuestToolsStatus
-              namespace: Sample.API.Models
+              namespace: Nutanix.Powershell.Models
             default:
               name: nutanix_guest_tools_status
               description: Information regarding Nutanix Guest Tools.
@@ -2987,9 +2987,9 @@ schemas:
       csharp:
         name: GuestToolsStatus
         description: Information regarding guest tools.
-        fullname: Sample.API.Models.GuestToolsStatus
+        fullname: Nutanix.Powershell.Models.GuestToolsStatus
         interfaceName: IGuestToolsStatus
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: guest_tools_status
         description: Information regarding guest tools.
@@ -3099,9 +3099,9 @@ schemas:
       csharp:
         name: IpAddress
         description: An IP address.
-        fullname: Sample.API.Models.IpAddress
+        fullname: Nutanix.Powershell.Models.IpAddress
         interfaceName: IIpAddress
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: ip_address
         description: An IP address.
@@ -3299,9 +3299,9 @@ schemas:
             csharp:
               name: MessageResourceDetails
               description: Custom key-value details relevant to the status.
-              fullname: Sample.API.Models.MessageResourceDetails
+              fullname: Nutanix.Powershell.Models.MessageResourceDetails
               interfaceName: IMessageResourceDetails
-              namespace: Sample.API.Models
+              namespace: Nutanix.Powershell.Models
             default:
               name: .message_resource.details
               description: Custom key-value details relevant to the status.
@@ -3328,9 +3328,9 @@ schemas:
       csharp:
         name: MessageResource
         description: message.
-        fullname: Sample.API.Models.MessageResource
+        fullname: Nutanix.Powershell.Models.MessageResource
         interfaceName: IMessageResource
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: message_resource
         description: message.
@@ -3469,9 +3469,9 @@ schemas:
       csharp:
         name: NetworkFunctionChainReference
         description: The reference to a network_function_chain
-        fullname: Sample.API.Models.NetworkFunctionChainReference
+        fullname: Nutanix.Powershell.Models.NetworkFunctionChainReference
         interfaceName: INetworkFunctionChainReference
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: network_function_chain_reference
         description: The reference to a network_function_chain
@@ -3612,9 +3612,9 @@ schemas:
       csharp:
         name: ProjectReference
         description: The reference to a project
-        fullname: Sample.API.Models.ProjectReference
+        fullname: Nutanix.Powershell.Models.ProjectReference
         interfaceName: IProjectReference
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: project_reference
         description: The reference to a project
@@ -3750,9 +3750,9 @@ schemas:
       csharp:
         name: Reference
         description: Reference to a kind
-        fullname: Sample.API.Models.Reference
+        fullname: Nutanix.Powershell.Models.Reference
         interfaceName: IReference
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: reference
         description: Reference to a kind
@@ -3944,9 +3944,9 @@ schemas:
               csharp:
                 name: ResourceUtilizationStatus
                 description: stores resource utilization and limits for a domain
-                fullname: Sample.API.Models.ResourceUtilizationStatus
+                fullname: Nutanix.Powershell.Models.ResourceUtilizationStatus
                 interfaceName: IResourceUtilizationStatus
-                namespace: Sample.API.Models
+                namespace: Nutanix.Powershell.Models
               default:
                 name: resource_utilization_status
                 description: stores resource utilization and limits for a domain
@@ -3989,9 +3989,9 @@ schemas:
       csharp:
         name: ResourceDomainResourcesStatus
         description: The status for a resource domain (limits and values)
-        fullname: Sample.API.Models.ResourceDomainResourcesStatus
+        fullname: Nutanix.Powershell.Models.ResourceDomainResourcesStatus
         interfaceName: IResourceDomainResourcesStatus
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: resource_domain_resources_status
         description: The status for a resource domain (limits and values)
@@ -4159,9 +4159,9 @@ schemas:
       csharp:
         name: SubnetReference
         description: The reference to a subnet
-        fullname: Sample.API.Models.SubnetReference
+        fullname: Nutanix.Powershell.Models.SubnetReference
         interfaceName: ISubnetReference
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: subnet_reference
         description: The reference to a subnet
@@ -4212,9 +4212,9 @@ schemas:
             csharp:
               name: UserInputResource
               description: User Resource Definition.
-              fullname: Sample.API.Models.UserInputResource
+              fullname: Nutanix.Powershell.Models.UserInputResource
               interfaceName: IUserInputResource
-              namespace: Sample.API.Models
+              namespace: Nutanix.Powershell.Models
             default:
               name: user_input_resource
               description: User Resource Definition.
@@ -4240,9 +4240,9 @@ schemas:
       csharp:
         name: User
         description: User Input Definition.
-        fullname: Sample.API.Models.User
+        fullname: Nutanix.Powershell.Models.User
         interfaceName: IUser
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: user
         description: User Input Definition.
@@ -4508,9 +4508,9 @@ schemas:
                   csharp:
                     name: UserStatusResourceResourceUsageSummary
                     description: ''
-                    fullname: Sample.API.Models.UserStatusResourceResourceUsageSummary
+                    fullname: Nutanix.Powershell.Models.UserStatusResourceResourceUsageSummary
                     interfaceName: IUserStatusResourceResourceUsageSummary
-                    namespace: Sample.API.Models
+                    namespace: Nutanix.Powershell.Models
                   default:
                     name: .user_status_resource.resource_usage_summary
                     description: ''
@@ -4574,9 +4574,9 @@ schemas:
             csharp:
               name: UserStatusResource
               description: User Resource Definition.
-              fullname: Sample.API.Models.UserStatusResource
+              fullname: Nutanix.Powershell.Models.UserStatusResource
               interfaceName: IUserStatusResource
-              namespace: Sample.API.Models
+              namespace: Nutanix.Powershell.Models
             default:
               name: user_status_resource
               description: User Resource Definition.
@@ -4640,9 +4640,9 @@ schemas:
       csharp:
         name: UserDefStatus
         description: User status definition.
-        fullname: Sample.API.Models.UserDefStatus
+        fullname: Nutanix.Powershell.Models.UserDefStatus
         interfaceName: IUserDefStatus
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: user_def_status
         description: User status definition.
@@ -4784,9 +4784,9 @@ schemas:
                   csharp:
                     name: UserMetadataCategories
                     description: Categories for the user
-                    fullname: Sample.API.Models.UserMetadataCategories
+                    fullname: Nutanix.Powershell.Models.UserMetadataCategories
                     interfaceName: IUserMetadataCategories
-                    namespace: Sample.API.Models
+                    namespace: Nutanix.Powershell.Models
                   default:
                     name: .user_metadata.categories
                     description: Categories for the user
@@ -5065,9 +5065,9 @@ schemas:
                   csharp:
                     name: UserReference
                     description: The reference to a user
-                    fullname: Sample.API.Models.UserReference
+                    fullname: Nutanix.Powershell.Models.UserReference
                     interfaceName: IUserReference
-                    namespace: Sample.API.Models
+                    namespace: Nutanix.Powershell.Models
                   default:
                     name: user_reference
                     description: The reference to a user
@@ -5224,9 +5224,9 @@ schemas:
             csharp:
               name: UserMetadata
               description: The user kind metadata
-              fullname: Sample.API.Models.UserMetadata
+              fullname: Nutanix.Powershell.Models.UserMetadata
               interfaceName: IUserMetadata
-              namespace: Sample.API.Models
+              namespace: Nutanix.Powershell.Models
             default:
               name: user_metadata
               description: The user kind metadata
@@ -5281,9 +5281,9 @@ schemas:
       csharp:
         name: UserIntentResponse
         description: Response object for intentful operations on a user
-        fullname: Sample.API.Models.UserIntentResponse
+        fullname: Nutanix.Powershell.Models.UserIntentResponse
         interfaceName: IUserIntentResponse
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: user_intent_response
         description: Response object for intentful operations on a user
@@ -5498,9 +5498,9 @@ schemas:
         description: |
           The status of a REST API call. Only used when there is a failure to
           report.
-        fullname: Sample.API.Models.UserStatus
+        fullname: Nutanix.Powershell.Models.UserStatus
         interfaceName: IUserStatus
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: user_status
         description: |
@@ -5725,9 +5725,9 @@ schemas:
                           description: >
                             Indicates which device a VM should boot from. One of
                             disk_address or mac_address should be provided.
-                          fullname: Sample.API.Models.VmBootDevice
+                          fullname: Nutanix.Powershell.Models.VmBootDevice
                           interfaceName: IVmBootDevice
-                          namespace: Sample.API.Models
+                          namespace: Nutanix.Powershell.Models
                         default:
                           name: vm_boot_device
                           description: >
@@ -5819,9 +5819,9 @@ schemas:
                     name: VmBootConfig
                     description: |
                       Indicates which device a VM should boot from.
-                    fullname: Sample.API.Models.VmBootConfig
+                    fullname: Nutanix.Powershell.Models.VmBootConfig
                     interfaceName: IVmBootConfig
-                    namespace: Sample.API.Models
+                    namespace: Nutanix.Powershell.Models
                   default:
                     name: vm_boot_config
                     description: |
@@ -6406,9 +6406,9 @@ schemas:
                         csharp:
                           name: VmGuestPowerStateTransitionConfig
                           description: Extra configs related to power state transition.
-                          fullname: Sample.API.Models.VmGuestPowerStateTransitionConfig
+                          fullname: Nutanix.Powershell.Models.VmGuestPowerStateTransitionConfig
                           interfaceName: IVmGuestPowerStateTransitionConfig
-                          namespace: Sample.API.Models
+                          namespace: Nutanix.Powershell.Models
                         default:
                           name: vm_guest_power_state_transition_config
                           description: Extra configs related to power state transition.
@@ -6477,9 +6477,9 @@ schemas:
                       Indicates the mechanism guiding the VM power state
                       transition. Currently used for the transition to "OFF"
                       state.
-                    fullname: Sample.API.Models.VmPowerStateMechanism
+                    fullname: Nutanix.Powershell.Models.VmPowerStateMechanism
                     interfaceName: IVmPowerStateMechanism
-                    namespace: Sample.API.Models
+                    namespace: Nutanix.Powershell.Models
                   default:
                     name: vm_power_state_mechanism
                     description: >
@@ -6603,9 +6603,9 @@ schemas:
                     name: VmVnumaConfig
                     description: |
                       Indicates how VM vNUMA should be configured
-                    fullname: Sample.API.Models.VmVnumaConfig
+                    fullname: Nutanix.Powershell.Models.VmVnumaConfig
                     interfaceName: IVmVnumaConfig
-                    namespace: Sample.API.Models
+                    namespace: Nutanix.Powershell.Models
                   default:
                     name: vm_vnuma_config
                     description: |
@@ -6631,9 +6631,9 @@ schemas:
             csharp:
               name: VmResources
               description: VM Resources Definition.
-              fullname: Sample.API.Models.VmResources
+              fullname: Nutanix.Powershell.Models.VmResources
               interfaceName: IVmResources
-              namespace: Sample.API.Models
+              namespace: Nutanix.Powershell.Models
             default:
               name: vm_resources
               description: VM Resources Definition.
@@ -6660,9 +6660,9 @@ schemas:
       csharp:
         name: Vm
         description: An intentful representation of a vm spec
-        fullname: Sample.API.Models.Vm
+        fullname: Nutanix.Powershell.Models.Vm
         interfaceName: IVm
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: vm
         description: An intentful representation of a vm spec
@@ -7421,9 +7421,9 @@ schemas:
             csharp:
               name: VmResourcesDefStatus
               description: VM Resources Status Definition.
-              fullname: Sample.API.Models.VmResourcesDefStatus
+              fullname: Nutanix.Powershell.Models.VmResourcesDefStatus
               interfaceName: IVmResourcesDefStatus
-              namespace: Sample.API.Models
+              namespace: Nutanix.Powershell.Models
             default:
               name: vm_resources_def_status
               description: VM Resources Status Definition.
@@ -7487,9 +7487,9 @@ schemas:
       csharp:
         name: VmDefStatus
         description: An intentful representation of a vm status
-        fullname: Sample.API.Models.VmDefStatus
+        fullname: Nutanix.Powershell.Models.VmDefStatus
         interfaceName: IVmDefStatus
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: vm_def_status
         description: An intentful representation of a vm status
@@ -7590,9 +7590,9 @@ schemas:
             csharp:
               name: VmDiskDeviceProperties
               description: ''
-              fullname: Sample.API.Models.VmDiskDeviceProperties
+              fullname: Nutanix.Powershell.Models.VmDiskDeviceProperties
               interfaceName: IVmDiskDeviceProperties
-              namespace: Sample.API.Models
+              namespace: Nutanix.Powershell.Models
             default:
               name: .vm_disk.device_properties
               description: ''
@@ -7768,9 +7768,9 @@ schemas:
       csharp:
         name: VmDisk
         description: VirtualMachine Disk (VM Disk).
-        fullname: Sample.API.Models.VmDisk
+        fullname: Nutanix.Powershell.Models.VmDisk
         interfaceName: IVmDisk
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: vm_disk
         description: VirtualMachine Disk (VM Disk).
@@ -7913,9 +7913,9 @@ schemas:
       csharp:
         name: VmGpu
         description: Graphics resource information for the Virtual Machine.
-        fullname: Sample.API.Models.VmGpu
+        fullname: Nutanix.Powershell.Models.VmGpu
         interfaceName: IVmGpu
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: vm_gpu
         description: Graphics resource information for the Virtual Machine.
@@ -8327,9 +8327,9 @@ schemas:
       csharp:
         name: VmGpuOutputStatus
         description: Graphics resource status information for the Virtual Machine.
-        fullname: Sample.API.Models.VmGpuOutputStatus
+        fullname: Nutanix.Powershell.Models.VmGpuOutputStatus
         interfaceName: IVmGpuOutputStatus
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: vm_gpu_output_status
         description: Graphics resource status information for the Virtual Machine.
@@ -8472,9 +8472,9 @@ schemas:
                   csharp:
                     name: VmMetadataCategories
                     description: Categories for the vm
-                    fullname: Sample.API.Models.VmMetadataCategories
+                    fullname: Nutanix.Powershell.Models.VmMetadataCategories
                     interfaceName: IVmMetadataCategories
-                    namespace: Sample.API.Models
+                    namespace: Nutanix.Powershell.Models
                   default:
                     name: .vm_metadata.categories
                     description: Categories for the vm
@@ -8771,9 +8771,9 @@ schemas:
             csharp:
               name: VmMetadata
               description: The vm kind metadata
-              fullname: Sample.API.Models.VmMetadata
+              fullname: Nutanix.Powershell.Models.VmMetadata
               interfaceName: IVmMetadata
-              namespace: Sample.API.Models
+              namespace: Nutanix.Powershell.Models
             default:
               name: vm_metadata
               description: The vm kind metadata
@@ -8814,9 +8814,9 @@ schemas:
       csharp:
         name: VmIntentInput
         description: An intentful representation of a vm
-        fullname: Sample.API.Models.VmIntentInput
+        fullname: Nutanix.Powershell.Models.VmIntentInput
         interfaceName: IVmIntentInput
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: vm_intent_input
         description: An intentful representation of a vm
@@ -8918,9 +8918,9 @@ schemas:
       csharp:
         name: VmIntentResource
         description: Response object for intentful operations on a vm
-        fullname: Sample.API.Models.VmIntentResource
+        fullname: Nutanix.Powershell.Models.VmIntentResource
         interfaceName: IVmIntentResource
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: vm_intent_resource
         description: Response object for intentful operations on a vm
@@ -9023,9 +9023,9 @@ schemas:
       csharp:
         name: VmIntentResponse
         description: Response object for intentful operations on a vm
-        fullname: Sample.API.Models.VmIntentResponse
+        fullname: Nutanix.Powershell.Models.VmIntentResponse
         interfaceName: IVmIntentResponse
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: vm_intent_response
         description: Response object for intentful operations on a vm
@@ -9372,9 +9372,9 @@ schemas:
               name: VmListMetadataOutput
               description: |
                 All api calls that return a list will have this metadata block
-              fullname: Sample.API.Models.VmListMetadataOutput
+              fullname: Nutanix.Powershell.Models.VmListMetadataOutput
               interfaceName: IVmListMetadataOutput
-              namespace: Sample.API.Models
+              namespace: Nutanix.Powershell.Models
             default:
               name: vm_list_metadata_output
               description: |
@@ -9405,9 +9405,9 @@ schemas:
       csharp:
         name: VmListIntentResponse
         description: Response object for intentful operation of vms
-        fullname: Sample.API.Models.VmListIntentResponse
+        fullname: Nutanix.Powershell.Models.VmListIntentResponse
         interfaceName: IVmListIntentResponse
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: vm_list_intent_response
         description: Response object for intentful operation of vms
@@ -9639,9 +9639,9 @@ schemas:
         description: >
           All api calls that return a list will have this metadata block as
           input
-        fullname: Sample.API.Models.VmListMetadata
+        fullname: Nutanix.Powershell.Models.VmListMetadata
         interfaceName: IVmListMetadata
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: vm_list_metadata
         description: >
@@ -9957,9 +9957,9 @@ schemas:
       csharp:
         name: VmNic
         description: Virtual Machine NIC.
-        fullname: Sample.API.Models.VmNic
+        fullname: Nutanix.Powershell.Models.VmNic
         interfaceName: IVmNic
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: vm_nic
         description: Virtual Machine NIC.
@@ -10309,9 +10309,9 @@ schemas:
       csharp:
         name: VmNicOutputStatus
         description: Virtual Machine NIC Status.
-        fullname: Sample.API.Models.VmNicOutputStatus
+        fullname: Nutanix.Powershell.Models.VmNicOutputStatus
         interfaceName: IVmNicOutputStatus
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: vm_nic_output_status
         description: Virtual Machine NIC Status.
@@ -10526,9 +10526,9 @@ schemas:
         description: |
           The status of a REST API call. Only used when there is a failure to
           report.
-        fullname: Sample.API.Models.VmStatus
+        fullname: Nutanix.Powershell.Models.VmStatus
         interfaceName: IVmStatus
-        namespace: Sample.API.Models
+        namespace: Nutanix.Powershell.Models
       default:
         name: vm_status
         description: |
@@ -10845,7 +10845,7 @@ http:
                   (OK).
                 headerType: ''
                 isErrorResponse: false
-                responseType: Sample.API.Models.IAccessControlPolicyListIntentResponse
+                responseType: Nutanix.Powershell.Models.IAccessControlPolicyListIntentResponse
               default:
                 name: 200 application/json
                 description: MISSING DESCRIPTION 09
@@ -10866,7 +10866,7 @@ http:
                   default (any response code not handled elsewhere).
                 headerType: ''
                 isErrorResponse: true
-                responseType: Sample.API.Models.IAccessControlPolicyStatus
+                responseType: Nutanix.Powershell.Models.IAccessControlPolicyStatus
               default:
                 name: default application/json
                 description: MISSING DESCRIPTION 09
@@ -10922,7 +10922,7 @@ http:
                   (OK).
                 headerType: ''
                 isErrorResponse: false
-                responseType: Sample.API.Models.IUserIntentResponse
+                responseType: Nutanix.Powershell.Models.IUserIntentResponse
               default:
                 name: 200 application/json
                 description: MISSING DESCRIPTION 09
@@ -10943,7 +10943,7 @@ http:
                   default (any response code not handled elsewhere).
                 headerType: ''
                 isErrorResponse: true
-                responseType: Sample.API.Models.IUserStatus
+                responseType: Nutanix.Powershell.Models.IUserStatus
               default:
                 name: default application/json
                 description: MISSING DESCRIPTION 09
@@ -10993,7 +10993,7 @@ http:
                   (OK).
                 headerType: ''
                 isErrorResponse: false
-                responseType: Sample.API.Models.IVmListIntentResponse
+                responseType: Nutanix.Powershell.Models.IVmListIntentResponse
               default:
                 name: 200 application/json
                 description: MISSING DESCRIPTION 09
@@ -11014,7 +11014,7 @@ http:
                   default (any response code not handled elsewhere).
                 headerType: ''
                 isErrorResponse: true
-                responseType: Sample.API.Models.IVmStatus
+                responseType: Nutanix.Powershell.Models.IVmStatus
               default:
                 name: default application/json
                 description: MISSING DESCRIPTION 09
@@ -11175,8 +11175,8 @@ details:
   csharp:
     name: NutanixIntentfulAPI
     description: ''
-    fullname: Sample.API.NutanixIntentfulAPI
-    namespace: Sample.API
+    fullname: Nutanix.Powershell.NutanixIntentfulAPI
+    namespace: Nutanix.Powershell
   default:
     name: Nutanix Intentful API
     description: ''

@@ -2,7 +2,7 @@ function New-ServiceVm {
 [CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact='Medium')]
 param(
     [Parameter(ParameterSetName='VmApiVersionMetadataSpec', Mandatory=$true, ValueFromPipeline=$true, HelpMessage='An intentful representation of a vm')]
-    [Sample.API.Models.IVmIntentInput]
+    [Nutanix.Powershell.Models.IVmIntentInput]
     ${Body},
 
     [Parameter(ParameterSetName='VmApiVersionMetadataSpec', HelpMessage='SendAsync Pipeline Steps to be appended to the front of the pipeline')]
@@ -74,11 +74,11 @@ param(
     ${ApiVersion},
 
     [Parameter(ParameterSetName='VmApiVersionMetadataSpecExpanded', Mandatory=$true, HelpMessage='The vm kind metadata')]
-    [Sample.API.Models.IVmMetadata]
+    [Nutanix.Powershell.Models.IVmMetadata]
     ${Metadata},
 
     [Parameter(ParameterSetName='VmApiVersionMetadataSpecExpanded', Mandatory=$true, HelpMessage='An intentful representation of a vm spec')]
-    [Sample.API.Models.IVm]
+    [Nutanix.Powershell.Models.IVm]
     ${Spec})
 
 begin

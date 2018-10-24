@@ -1,4 +1,4 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
 
     /// <summary>FIXME: Class UserStatusResourceResourceUsageSummary is MISSING DESCRIPTION</summary>
@@ -12,7 +12,7 @@ namespace Sample.API.Models
         /// </summary>
         /// <param name="jsonText">a string containing a JSON serialized instance of this model.</param>
         /// <returns>an instance of the <see cref="className" /> model class.</returns>
-        public static Sample.API.Models.IUserStatusResourceResourceUsageSummary FromJsonString(string jsonText) => FromJson(Carbon.Json.JsonNode.Parse(jsonText));
+        public static Nutanix.Powershell.Models.IUserStatusResourceResourceUsageSummary FromJsonString(string jsonText) => FromJson(Carbon.Json.JsonNode.Parse(jsonText));
         /// <summary>Serializes this instance to a json string.</summary>
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, Microsoft.Rest.ClientRuntime.SerializationMode.IncludeAll)?.ToString();

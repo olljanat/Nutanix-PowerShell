@@ -1,10 +1,10 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>
     /// All api calls that return a list will have this metadata block as input
     /// </summary>
-    public partial class VmRecoveryPointListMetadata : Sample.API.Models.IVmRecoveryPointListMetadata, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class VmRecoveryPointListMetadata : Nutanix.Powershell.Models.IVmRecoveryPointListMetadata, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for Filter property</summary>
         private string _filter;

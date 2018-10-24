@@ -1,4 +1,4 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>The user kind metadata</summary>
@@ -38,11 +38,11 @@ namespace Sample.API.Models
         /// instantly.</param>
         partial void BeforeToJson(ref Carbon.Json.JsonObject container, ref bool returnNow);
         /// <summary>
-        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Sample.API.Models.IUserMetadata.
+        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Nutanix.Powershell.Models.IUserMetadata.
         /// </summary>
         /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
-        /// <returns>an instance of Sample.API.Models.IUserMetadata.</returns>
-        public static Sample.API.Models.IUserMetadata FromJson(Carbon.Json.JsonNode node)
+        /// <returns>an instance of Nutanix.Powershell.Models.IUserMetadata.</returns>
+        public static Nutanix.Powershell.Models.IUserMetadata FromJson(Carbon.Json.JsonNode node)
         {
             return node is Carbon.Json.JsonObject json ? new UserMetadata(json) : null;
         }
@@ -107,8 +107,8 @@ namespace Sample.API.Models
             _creationTime = If( json?.PropertyT<Carbon.Json.JsonString>("creation_time"), out var __jsonCreationTime) ? System.DateTime.TryParse((string)__jsonCreationTime, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.AdjustToUniversal, out var __jsonCreationTimeValue) ? __jsonCreationTimeValue : CreationTime : CreationTime;
             _kind = If( json?.PropertyT<Carbon.Json.JsonString>("kind"), out var __jsonKind) ? (string)__jsonKind : (string)Kind;
             _lastUpdateTime = If( json?.PropertyT<Carbon.Json.JsonString>("last_update_time"), out var __jsonLastUpdateTime) ? System.DateTime.TryParse((string)__jsonLastUpdateTime, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.AdjustToUniversal, out var __jsonLastUpdateTimeValue) ? __jsonLastUpdateTimeValue : LastUpdateTime : LastUpdateTime;
-            _ownerReference = If( json?.PropertyT<Carbon.Json.JsonObject>("owner_reference"), out var __jsonOwnerReference) ? Sample.API.Models.UserReference.FromJson(__jsonOwnerReference) : OwnerReference;
-            _projectReference = If( json?.PropertyT<Carbon.Json.JsonObject>("project_reference"), out var __jsonProjectReference) ? Sample.API.Models.ProjectReference.FromJson(__jsonProjectReference) : ProjectReference;
+            _ownerReference = If( json?.PropertyT<Carbon.Json.JsonObject>("owner_reference"), out var __jsonOwnerReference) ? Nutanix.Powershell.Models.UserReference.FromJson(__jsonOwnerReference) : OwnerReference;
+            _projectReference = If( json?.PropertyT<Carbon.Json.JsonObject>("project_reference"), out var __jsonProjectReference) ? Nutanix.Powershell.Models.ProjectReference.FromJson(__jsonProjectReference) : ProjectReference;
             _specHash = If( json?.PropertyT<Carbon.Json.JsonString>("spec_hash"), out var __jsonSpecHash) ? (string)__jsonSpecHash : (string)SpecHash;
             _specVersion = If( json?.PropertyT<Carbon.Json.JsonNumber>("spec_version"), out var __jsonSpecVersion) ? (int?)__jsonSpecVersion : SpecVersion;
             _uuid = If( json?.PropertyT<Carbon.Json.JsonString>("uuid"), out var __jsonUuid) ? (string)__jsonUuid : (string)Uuid;

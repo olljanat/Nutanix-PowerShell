@@ -61,7 +61,7 @@ Accept wildcard characters: False
 An intentful representation of a vm
 
 ```yaml
-Type: Sample.API.Models.IVmIntentInput
+Type: Nutanix.Powershell.Models.IVmIntentInput
 Parameter Sets: VmApiVersionMetadataSpec
 Aliases:
 
@@ -121,7 +121,7 @@ Accept wildcard characters: False
 The vm kind metadata
 
 ```yaml
-Type: Sample.API.Models.IVmMetadata
+Type: Nutanix.Powershell.Models.IVmMetadata
 Parameter Sets: VmApiVersionMetadataSpecExpanded
 Aliases:
 
@@ -256,7 +256,7 @@ Accept wildcard characters: False
 An intentful representation of a vm spec
 
 ```yaml
-Type: Sample.API.Models.IVm
+Type: Nutanix.Powershell.Models.IVm
 Parameter Sets: VmApiVersionMetadataSpecExpanded
 Aliases:
 

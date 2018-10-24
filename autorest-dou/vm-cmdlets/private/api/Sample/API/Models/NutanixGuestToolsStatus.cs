@@ -1,8 +1,8 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Information regarding Nutanix Guest Tools.</summary>
-    public partial class NutanixGuestToolsStatus : Sample.API.Models.INutanixGuestToolsStatus
+    public partial class NutanixGuestToolsStatus : Nutanix.Powershell.Models.INutanixGuestToolsStatus
     {
         /// <summary>Backing field for AvailableVersion property</summary>
         private string _availableVersion;

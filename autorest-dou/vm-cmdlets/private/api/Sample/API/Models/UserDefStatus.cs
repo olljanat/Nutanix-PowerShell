@@ -1,13 +1,13 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>User status definition.</summary>
-    public partial class UserDefStatus : Sample.API.Models.IUserDefStatus, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class UserDefStatus : Nutanix.Powershell.Models.IUserDefStatus, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for MessageList property</summary>
-        private Sample.API.Models.IMessageResource[] _messageList;
+        private Nutanix.Powershell.Models.IMessageResource[] _messageList;
 
-        public Sample.API.Models.IMessageResource[] MessageList
+        public Nutanix.Powershell.Models.IMessageResource[] MessageList
         {
             get
             {
@@ -34,10 +34,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for Resources property</summary>
-        private Sample.API.Models.IUserStatusResource _resources;
+        private Nutanix.Powershell.Models.IUserStatusResource _resources;
 
         /// <summary>User Resource Definition.</summary>
-        public Sample.API.Models.IUserStatusResource Resources
+        public Nutanix.Powershell.Models.IUserStatusResource Resources
         {
             get
             {
@@ -87,9 +87,9 @@ namespace Sample.API.Models
     }
     /// User status definition.
     public partial interface IUserDefStatus : Microsoft.Rest.ClientRuntime.IJsonSerializable {
-        Sample.API.Models.IMessageResource[] MessageList { get; set; }
+        Nutanix.Powershell.Models.IMessageResource[] MessageList { get; set; }
         string Name { get; set; }
-        Sample.API.Models.IUserStatusResource Resources { get; set; }
+        Nutanix.Powershell.Models.IUserStatusResource Resources { get; set; }
         string State { get; set; }
     }
 }

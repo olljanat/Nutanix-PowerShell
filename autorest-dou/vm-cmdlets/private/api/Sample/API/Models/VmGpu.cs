@@ -1,8 +1,8 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Graphics resource information for the Virtual Machine.</summary>
-    public partial class VmGpu : Sample.API.Models.IVmGpu
+    public partial class VmGpu : Nutanix.Powershell.Models.IVmGpu
     {
         /// <summary>Backing field for DeviceId property</summary>
         private int? _deviceId;

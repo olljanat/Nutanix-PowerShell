@@ -59,7 +59,7 @@ Accept wildcard characters: False
 All api calls that return a list will have this metadata block as input
 
 ```yaml
-Type: Sample.API.Models.IAccessControlPolicyListMetadata
+Type: Nutanix.Powershell.Models.IAccessControlPolicyListMetadata
 Parameter Sets: OperationFilterKindLengthOffsetSortAttribute
 Aliases:
 

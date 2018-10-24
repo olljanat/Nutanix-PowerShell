@@ -1,4 +1,4 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>The status for a resource domain (limits and values)</summary>
@@ -38,11 +38,11 @@ namespace Sample.API.Models
         /// instantly.</param>
         partial void BeforeToJson(ref Carbon.Json.JsonObject container, ref bool returnNow);
         /// <summary>
-        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Sample.API.Models.IResourceDomainResourcesStatus.
+        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Nutanix.Powershell.Models.IResourceDomainResourcesStatus.
         /// </summary>
         /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
-        /// <returns>an instance of Sample.API.Models.IResourceDomainResourcesStatus.</returns>
-        public static Sample.API.Models.IResourceDomainResourcesStatus FromJson(Carbon.Json.JsonNode node)
+        /// <returns>an instance of Nutanix.Powershell.Models.IResourceDomainResourcesStatus.</returns>
+        public static Nutanix.Powershell.Models.IResourceDomainResourcesStatus FromJson(Carbon.Json.JsonNode node)
         {
             return node is Carbon.Json.JsonObject json ? new ResourceDomainResourcesStatus(json) : null;
         }
@@ -58,7 +58,7 @@ namespace Sample.API.Models
             {
                 return;
             }
-            _resources = If( json?.PropertyT<Carbon.Json.JsonArray>("resources"), out var __jsonResources) ? If( __jsonResources, out var __w) ? new System.Func<Sample.API.Models.IResourceUtilizationStatus[]>(()=> System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select( __w, (__v)=> Sample.API.Models.ResourceUtilizationStatus.FromJson(__v)  ) ) )() : null : Resources;
+            _resources = If( json?.PropertyT<Carbon.Json.JsonArray>("resources"), out var __jsonResources) ? If( __jsonResources, out var __w) ? new System.Func<Nutanix.Powershell.Models.IResourceUtilizationStatus[]>(()=> System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select( __w, (__v)=> Nutanix.Powershell.Models.ResourceUtilizationStatus.FromJson(__v)  ) ) )() : null : Resources;
             AfterFromJson(json);
         }
         /// <summary>

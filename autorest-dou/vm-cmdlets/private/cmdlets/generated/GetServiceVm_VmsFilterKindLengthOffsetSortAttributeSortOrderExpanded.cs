@@ -1,15 +1,15 @@
-namespace Sample.API.Cmdlets
+namespace Nutanix.Powershell.Cmdlets
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Implement a variant of the cmdlet Get-ServiceVm.</summary>
     [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.Get, @"ServiceVm_VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded", SupportsShouldProcess = true)]
-    [System.Management.Automation.OutputType(typeof(Sample.API.Models.IVmListIntentResponse))]
+    [System.Management.Automation.OutputType(typeof(Nutanix.Powershell.Models.IVmListIntentResponse))]
     public class GetServiceVm_VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded : System.Management.Automation.PSCmdlet, Microsoft.Rest.ClientRuntime.IEventListener
     {
         /// <summary>The <see cref="System.Threading.CancellationTokenSource" /> for this operation.</summary>
         private System.Threading.CancellationTokenSource _cancellationTokenSource = new System.Threading.CancellationTokenSource();
         /// <summary>The reference to the client API class.</summary>
-        public Sample.API.NutanixIntentfulAPI Client => Sample.API.Module.Instance.ClientAPI;
+        public Nutanix.Powershell.NutanixIntentfulAPI Client => Nutanix.Powershell.Module.Instance.ClientAPI;
         /// <summary>The filter in FIQL syntax used for the results.</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "The filter in FIQL syntax used for the results.")]
         public string Filter
@@ -20,12 +20,12 @@ namespace Sample.API.Cmdlets
             }
         }
         /// <summary>Backing field for GetEntitiesRequest property</summary>
-        private Sample.API.Models.IVmListMetadata _getEntitiesRequest= new Sample.API.Models.VmListMetadata();
+        private Nutanix.Powershell.Models.IVmListMetadata _getEntitiesRequest= new Nutanix.Powershell.Models.VmListMetadata();
 
         /// <summary>
         /// All api calls that return a list will have this metadata block as input
         /// </summary>
-        public Sample.API.Models.IVmListMetadata GetEntitiesRequest
+        public Nutanix.Powershell.Models.IVmListMetadata GetEntitiesRequest
         {
             get
             {
@@ -163,7 +163,7 @@ namespace Sample.API.Cmdlets
         /// <returns>
         /// a duplicate instance of GetServiceVm_VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded
         /// </returns>
-        public Sample.API.Cmdlets.GetServiceVm_VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded Clone()
+        public Nutanix.Powershell.Cmdlets.GetServiceVm_VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded Clone()
         {
             var clone = FromJson(this.ToJson(null, Microsoft.Rest.ClientRuntime.SerializationMode.IncludeAll));
             clone.HttpPipelinePrepend = this.HttpPipelinePrepend;
@@ -182,7 +182,7 @@ namespace Sample.API.Cmdlets
         /// <returns>
         /// an instance of GetServiceVm_VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded.
         /// </returns>
-        public static Sample.API.Cmdlets.GetServiceVm_VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded FromJson(Carbon.Json.JsonNode node)
+        public static Nutanix.Powershell.Cmdlets.GetServiceVm_VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded FromJson(Carbon.Json.JsonNode node)
         {
             return node is Carbon.Json.JsonObject json ? new GetServiceVm_VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded(json) : null;
         }
@@ -193,7 +193,7 @@ namespace Sample.API.Cmdlets
         /// <returns>
         /// returns a new instance of the <see cref="GetServiceVm_VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded" /> cmdlet
         /// </returns>
-        public static Sample.API.Cmdlets.GetServiceVm_VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded FromJsonString(string jsonText) => string.IsNullOrEmpty(jsonText) ? null : FromJson(Carbon.Json.JsonObject.Parse(jsonText));
+        public static Nutanix.Powershell.Cmdlets.GetServiceVm_VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded FromJsonString(string jsonText) => string.IsNullOrEmpty(jsonText) ? null : FromJson(Carbon.Json.JsonObject.Parse(jsonText));
         /// <summary>
         /// Intializes a new instance of the <see cref="GetServiceVm_VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded" /> cmdlet
         /// class.
@@ -206,7 +206,7 @@ namespace Sample.API.Cmdlets
         internal GetServiceVm_VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded(Carbon.Json.JsonObject json)
         {
             // deserialize the contents
-            _getEntitiesRequest = If( json?.PropertyT<Carbon.Json.JsonObject>("GetEntitiesRequest"), out var __jsonGetEntitiesRequest) ? Sample.API.Models.VmListMetadata.FromJson(__jsonGetEntitiesRequest) : GetEntitiesRequest;
+            _getEntitiesRequest = If( json?.PropertyT<Carbon.Json.JsonObject>("GetEntitiesRequest"), out var __jsonGetEntitiesRequest) ? Nutanix.Powershell.Models.VmListMetadata.FromJson(__jsonGetEntitiesRequest) : GetEntitiesRequest;
         }
         /// <summary>Handles/Dispatches events during the call to the REST service.</summary>
         /// <param name="id">The message id</param>
@@ -299,9 +299,9 @@ namespace Sample.API.Cmdlets
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletGetPipeline); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
 
                 if (SkipSSL.ToBool()) {
-                    Pipeline = Sample.API.Module.Instance.CreatePipelineWithProxy(this.MyInvocation.BoundParameters);
+                    Pipeline = Nutanix.Powershell.Module.Instance.CreatePipelineWithProxy(this.MyInvocation.BoundParameters);
                 } else { 
-                    Pipeline = Sample.API.Module.Instance.CreatePipeline(this.MyInvocation.BoundParameters);
+                    Pipeline = Nutanix.Powershell.Module.Instance.CreatePipeline(this.MyInvocation.BoundParameters);
                 }
                 Pipeline.Prepend(HttpPipelinePrepend);
                 Pipeline.Append(HttpPipelineAppend); 
@@ -379,11 +379,11 @@ namespace Sample.API.Cmdlets
         /// a delegate that is called when the remote service returns default (any response code not handled elsewhere).
         /// </summary>
         /// <param name="responseMessage">the raw response message as an System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="Sample.API.Models.IVmStatus" /> from the remote call</param>
+        /// <param name="response">the body result as a <see cref="Nutanix.Powershell.Models.IVmStatus" /> from the remote call</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
         /// </returns>
-        private async System.Threading.Tasks.Task onDefault(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Sample.API.Models.IVmStatus> response)
+        private async System.Threading.Tasks.Task onDefault(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmStatus> response)
         {
             using( NoSynchronizationContext )
             {
@@ -393,27 +393,27 @@ namespace Sample.API.Cmdlets
         }
         /// <summary>a delegate that is called when the remote service returns 200 (OK).</summary>
         /// <param name="responseMessage">the raw response message as an System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="Sample.API.Models.IVmListIntentResponse" /> from the remote call</param>
+        /// <param name="response">the body result as a <see cref="Nutanix.Powershell.Models.IVmListIntentResponse" /> from the remote call</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
         /// </returns>
-        private async System.Threading.Tasks.Task onOK(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Sample.API.Models.IVmListIntentResponse> response)
+        private async System.Threading.Tasks.Task onOK(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmListIntentResponse> response)
         {
             using( NoSynchronizationContext )
             {
                 // onOK - response for 200 / application/json
-                // (await response) // should be Sample.API.Models.IVmListIntentResponse
+                // (await response) // should be Nutanix.Powershell.Models.IVmListIntentResponse
                 WriteObject(await response);
             }
         }
 
         
-        private async System.Threading.Tasks.Task onOK2(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Sample.API.Models.IVmIntentResource[]> response)
+        private async System.Threading.Tasks.Task onOK2(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmIntentResource[]> response)
         {
             using( NoSynchronizationContext )
             {
                 // onOK - response for 200 / application/json
-                // (await response) // should be Sample.API.Models.IVmListIntentResponse
+                // (await response) // should be Nutanix.Powershell.Models.IVmListIntentResponse
                 WriteObject(await response);
             }
         }

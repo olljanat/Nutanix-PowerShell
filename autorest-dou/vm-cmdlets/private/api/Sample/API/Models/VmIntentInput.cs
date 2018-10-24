@@ -1,8 +1,8 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>An intentful representation of a vm</summary>
-    public partial class VmIntentInput : Sample.API.Models.IVmIntentInput, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class VmIntentInput : Nutanix.Powershell.Models.IVmIntentInput, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for ApiVersion property</summary>
         private string _apiVersion;
@@ -19,10 +19,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for Metadata property</summary>
-        private Sample.API.Models.IVmMetadata _metadata;
+        private Nutanix.Powershell.Models.IVmMetadata _metadata;
 
         /// <summary>The vm kind metadata</summary>
-        public Sample.API.Models.IVmMetadata Metadata
+        public Nutanix.Powershell.Models.IVmMetadata Metadata
         {
             get
             {
@@ -34,10 +34,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for Spec property</summary>
-        private Sample.API.Models.IVm _spec;
+        private Nutanix.Powershell.Models.IVm _spec;
 
         /// <summary>An intentful representation of a vm spec</summary>
-        public Sample.API.Models.IVm Spec
+        public Nutanix.Powershell.Models.IVm Spec
         {
             get
             {
@@ -69,7 +69,7 @@ namespace Sample.API.Models
     /// An intentful representation of a vm
     public partial interface IVmIntentInput : Microsoft.Rest.ClientRuntime.IJsonSerializable {
         string ApiVersion { get; set; }
-        Sample.API.Models.IVmMetadata Metadata { get; set; }
-        Sample.API.Models.IVm Spec { get; set; }
+        Nutanix.Powershell.Models.IVmMetadata Metadata { get; set; }
+        Nutanix.Powershell.Models.IVm Spec { get; set; }
     }
 }

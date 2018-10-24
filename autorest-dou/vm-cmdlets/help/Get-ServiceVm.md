@@ -85,7 +85,7 @@ Accept wildcard characters: False
 All api calls that return a list will have this metadata block as input
 
 ```yaml
-Type: Sample.API.Models.IVmListMetadata
+Type: Nutanix.Powershell.Models.IVmListMetadata
 Parameter Sets: VmsFilterKindLengthOffsetSortAttributeSortOrder
 Aliases:
 

@@ -1,16 +1,16 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Recovery point resources</summary>
-    public partial class VmRecoveryPointResources : Sample.API.Models.IVmRecoveryPointResources, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class VmRecoveryPointResources : Nutanix.Powershell.Models.IVmRecoveryPointResources, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for ParentVmReference property</summary>
-        private Sample.API.Models.IVmReference _parentVmReference;
+        private Nutanix.Powershell.Models.IVmReference _parentVmReference;
 
         /// <summary>
         /// Reference to vm that this recovery point is a snapshot of.
         /// </summary>
-        public Sample.API.Models.IVmReference ParentVmReference
+        public Nutanix.Powershell.Models.IVmReference ParentVmReference
         {
             get
             {
@@ -22,14 +22,14 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for SourceAvailabilityZoneReference property</summary>
-        private Sample.API.Models.IAvailabilityZoneReference _sourceAvailabilityZoneReference;
+        private Nutanix.Powershell.Models.IAvailabilityZoneReference _sourceAvailabilityZoneReference;
 
         /// <summary>
         /// Reference to the availability zone where the source recovery
         /// point exists. This need to be set to copy a recovery from some
         /// other location.
         /// </summary>
-        public Sample.API.Models.IAvailabilityZoneReference SourceAvailabilityZoneReference
+        public Nutanix.Powershell.Models.IAvailabilityZoneReference SourceAvailabilityZoneReference
         {
             get
             {
@@ -41,12 +41,12 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for SourceClusterReference property</summary>
-        private Sample.API.Models.IClusterReference _sourceClusterReference;
+        private Nutanix.Powershell.Models.IClusterReference _sourceClusterReference;
 
         /// <summary>
         /// Reference to the cluster in the source availability zone.
         /// </summary>
-        public Sample.API.Models.IClusterReference SourceClusterReference
+        public Nutanix.Powershell.Models.IClusterReference SourceClusterReference
         {
             get
             {
@@ -96,9 +96,9 @@ namespace Sample.API.Models
     }
     /// Recovery point resources
     public partial interface IVmRecoveryPointResources : Microsoft.Rest.ClientRuntime.IJsonSerializable {
-        Sample.API.Models.IVmReference ParentVmReference { get; set; }
-        Sample.API.Models.IAvailabilityZoneReference SourceAvailabilityZoneReference { get; set; }
-        Sample.API.Models.IClusterReference SourceClusterReference { get; set; }
+        Nutanix.Powershell.Models.IVmReference ParentVmReference { get; set; }
+        Nutanix.Powershell.Models.IAvailabilityZoneReference SourceAvailabilityZoneReference { get; set; }
+        Nutanix.Powershell.Models.IClusterReference SourceClusterReference { get; set; }
         string VmRecoveryPointLocationAgnosticUuid { get; set; }
     }
 }

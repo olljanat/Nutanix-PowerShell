@@ -1,14 +1,14 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>An intentful representation of a vm spec</summary>
-    public partial class Vm : Sample.API.Models.IVm, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class Vm : Nutanix.Powershell.Models.IVm, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for AvailabilityZoneReference property</summary>
-        private Sample.API.Models.IAvailabilityZoneReference _availabilityZoneReference;
+        private Nutanix.Powershell.Models.IAvailabilityZoneReference _availabilityZoneReference;
 
         /// <summary>The reference to a availability_zone</summary>
-        public Sample.API.Models.IAvailabilityZoneReference AvailabilityZoneReference
+        public Nutanix.Powershell.Models.IAvailabilityZoneReference AvailabilityZoneReference
         {
             get
             {
@@ -20,10 +20,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for ClusterReference property</summary>
-        private Sample.API.Models.IClusterReference _clusterReference;
+        private Nutanix.Powershell.Models.IClusterReference _clusterReference;
 
         /// <summary>The reference to a cluster</summary>
-        public Sample.API.Models.IClusterReference ClusterReference
+        public Nutanix.Powershell.Models.IClusterReference ClusterReference
         {
             get
             {
@@ -65,10 +65,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for Resources property</summary>
-        private Sample.API.Models.IVmResources _resources;
+        private Nutanix.Powershell.Models.IVmResources _resources;
 
         /// <summary>VM Resources Definition.</summary>
-        public Sample.API.Models.IVmResources Resources
+        public Nutanix.Powershell.Models.IVmResources Resources
         {
             get
             {
@@ -102,10 +102,10 @@ namespace Sample.API.Models
     }
     /// An intentful representation of a vm spec
     public partial interface IVm : Microsoft.Rest.ClientRuntime.IJsonSerializable {
-        Sample.API.Models.IAvailabilityZoneReference AvailabilityZoneReference { get; set; }
-        Sample.API.Models.IClusterReference ClusterReference { get; set; }
+        Nutanix.Powershell.Models.IAvailabilityZoneReference AvailabilityZoneReference { get; set; }
+        Nutanix.Powershell.Models.IClusterReference ClusterReference { get; set; }
         string Description { get; set; }
         string Name { get; set; }
-        Sample.API.Models.IVmResources Resources { get; set; }
+        Nutanix.Powershell.Models.IVmResources Resources { get; set; }
     }
 }

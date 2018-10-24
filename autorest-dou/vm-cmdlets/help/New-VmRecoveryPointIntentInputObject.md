@@ -34,7 +34,7 @@ PS C:\> {{ Add example code here }}
 The vm_recovery_point kind metadata
 
 ```yaml
-Type: Sample.API.Models.IVmRecoveryPointMetadata
+Type: Nutanix.Powershell.Models.IVmRecoveryPointMetadata
 Parameter Sets: (All)
 Aliases:
 
@@ -49,7 +49,7 @@ Accept wildcard characters: False
 The input object that defines a vm recovery point.
 
 ```yaml
-Type: Sample.API.Models.IVmRecoveryPoint
+Type: Nutanix.Powershell.Models.IVmRecoveryPoint
 Parameter Sets: (All)
 Aliases:
 

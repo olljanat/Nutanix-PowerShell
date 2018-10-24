@@ -1,11 +1,11 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>
     /// The status of a REST API call. Only used when there is a failure to
     /// report.
     /// </summary>
-    public partial class VmStatus : Sample.API.Models.IVmStatus
+    public partial class VmStatus : Nutanix.Powershell.Models.IVmStatus
     {
         /// <summary>Backing field for ApiVersion property</summary>
         private string _apiVersion;

@@ -1,14 +1,14 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>VirtualMachine Disk (VM Disk).</summary>
-    public partial class VmDisk : Sample.API.Models.IVmDisk, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class VmDisk : Nutanix.Powershell.Models.IVmDisk, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for DataSourceReference property</summary>
-        private Sample.API.Models.IReference _dataSourceReference;
+        private Nutanix.Powershell.Models.IReference _dataSourceReference;
 
         /// <summary>Reference to a kind</summary>
-        public Sample.API.Models.IReference DataSourceReference
+        public Nutanix.Powershell.Models.IReference DataSourceReference
         {
             get
             {
@@ -20,9 +20,9 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for DeviceProperties property</summary>
-        private Sample.API.Models.IVmDiskDeviceProperties _deviceProperties;
+        private Nutanix.Powershell.Models.IVmDiskDeviceProperties _deviceProperties;
 
-        public Sample.API.Models.IVmDiskDeviceProperties DeviceProperties
+        public Nutanix.Powershell.Models.IVmDiskDeviceProperties DeviceProperties
         {
             get
             {
@@ -84,10 +84,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for VolumeGroupReference property</summary>
-        private Sample.API.Models.IReference _volumeGroupReference;
+        private Nutanix.Powershell.Models.IReference _volumeGroupReference;
 
         /// <summary>Reference to a kind</summary>
-        public Sample.API.Models.IReference VolumeGroupReference
+        public Nutanix.Powershell.Models.IReference VolumeGroupReference
         {
             get
             {
@@ -120,11 +120,11 @@ namespace Sample.API.Models
     }
     /// VirtualMachine Disk (VM Disk).
     public partial interface IVmDisk : Microsoft.Rest.ClientRuntime.IJsonSerializable {
-        Sample.API.Models.IReference DataSourceReference { get; set; }
-        Sample.API.Models.IVmDiskDeviceProperties DeviceProperties { get; set; }
+        Nutanix.Powershell.Models.IReference DataSourceReference { get; set; }
+        Nutanix.Powershell.Models.IVmDiskDeviceProperties DeviceProperties { get; set; }
         long? DiskSizeBytes { get; set; }
         int? DiskSizeMib { get; set; }
         string Uuid { get; set; }
-        Sample.API.Models.IReference VolumeGroupReference { get; set; }
+        Nutanix.Powershell.Models.IReference VolumeGroupReference { get; set; }
     }
 }

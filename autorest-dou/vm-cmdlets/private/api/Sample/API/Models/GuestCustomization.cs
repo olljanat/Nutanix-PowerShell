@@ -1,4 +1,4 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>
@@ -8,16 +8,16 @@ namespace Sample.API.Models
     /// in an error. Additional properties can be specified. For example - in the context of VM template creation if "override_script"
     /// is set to "True" then the deployer can upload their own custom script.
     /// </summary>
-    public partial class GuestCustomization : Sample.API.Models.IGuestCustomization, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class GuestCustomization : Nutanix.Powershell.Models.IGuestCustomization, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for CloudInit property</summary>
-        private Sample.API.Models.IGuestCustomizationCloudInit _cloudInit;
+        private Nutanix.Powershell.Models.IGuestCustomizationCloudInit _cloudInit;
 
         /// <summary>
         /// If this field is set, the guest will be customized using cloud-init. Either user_data or custom_key_values should be provided.
         /// If custom_key_ves are provided then the user data will be generated using these key-value pairs.
         /// </summary>
-        public Sample.API.Models.IGuestCustomizationCloudInit CloudInit
+        public Nutanix.Powershell.Models.IGuestCustomizationCloudInit CloudInit
         {
             get
             {
@@ -44,13 +44,13 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for Sysprep property</summary>
-        private Sample.API.Models.IGuestCustomizationSysprep _sysprep;
+        private Nutanix.Powershell.Models.IGuestCustomizationSysprep _sysprep;
 
         /// <summary>
         /// If this field is set, the guest will be customized using Sysprep. Either unattend_xml or custom_key_values should be provided.
         /// If custom_key_values are provided then the unattended answer file will be generated using these key-value pairs.
         /// </summary>
-        public Sample.API.Models.IGuestCustomizationSysprep Sysprep
+        public Nutanix.Powershell.Models.IGuestCustomizationSysprep Sysprep
         {
             get
             {
@@ -83,8 +83,8 @@ namespace Sample.API.Models
     /// in an error. Additional properties can be specified. For example - in the context of VM template creation if "override_script"
     /// is set to "True" then the deployer can upload their own custom script.
     public partial interface IGuestCustomization : Microsoft.Rest.ClientRuntime.IJsonSerializable {
-        Sample.API.Models.IGuestCustomizationCloudInit CloudInit { get; set; }
+        Nutanix.Powershell.Models.IGuestCustomizationCloudInit CloudInit { get; set; }
         bool? IsOverridable { get; set; }
-        Sample.API.Models.IGuestCustomizationSysprep Sysprep { get; set; }
+        Nutanix.Powershell.Models.IGuestCustomizationSysprep Sysprep { get; set; }
     }
 }

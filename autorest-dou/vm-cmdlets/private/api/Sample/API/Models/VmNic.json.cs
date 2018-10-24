@@ -1,4 +1,4 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Virtual Machine NIC.</summary>
@@ -38,11 +38,11 @@ namespace Sample.API.Models
         /// instantly.</param>
         partial void BeforeToJson(ref Carbon.Json.JsonObject container, ref bool returnNow);
         /// <summary>
-        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Sample.API.Models.IVmNic.
+        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Nutanix.Powershell.Models.IVmNic.
         /// </summary>
         /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
-        /// <returns>an instance of Sample.API.Models.IVmNic.</returns>
-        public static Sample.API.Models.IVmNic FromJson(Carbon.Json.JsonNode node)
+        /// <returns>an instance of Nutanix.Powershell.Models.IVmNic.</returns>
+        public static Nutanix.Powershell.Models.IVmNic FromJson(Carbon.Json.JsonNode node)
         {
             return node is Carbon.Json.JsonObject json ? new VmNic(json) : null;
         }
@@ -91,10 +91,10 @@ namespace Sample.API.Models
             _ipEndpointList = If( json?.PropertyT<Carbon.Json.JsonString>("ip_endpoint_list"), out var __jsonIpEndpointList) ? (string)__jsonIpEndpointList : (string)IpEndpointList;
             _macAddress = If( json?.PropertyT<Carbon.Json.JsonString>("mac_address"), out var __jsonMacAddress) ? (string)__jsonMacAddress : (string)MacAddress;
             _model = If( json?.PropertyT<Carbon.Json.JsonString>("model"), out var __jsonModel) ? (string)__jsonModel : (string)Model;
-            _networkFunctionChainReference = If( json?.PropertyT<Carbon.Json.JsonObject>("network_function_chain_reference"), out var __jsonNetworkFunctionChainReference) ? Sample.API.Models.NetworkFunctionChainReference.FromJson(__jsonNetworkFunctionChainReference) : NetworkFunctionChainReference;
+            _networkFunctionChainReference = If( json?.PropertyT<Carbon.Json.JsonObject>("network_function_chain_reference"), out var __jsonNetworkFunctionChainReference) ? Nutanix.Powershell.Models.NetworkFunctionChainReference.FromJson(__jsonNetworkFunctionChainReference) : NetworkFunctionChainReference;
             _networkFunctionNicType = If( json?.PropertyT<Carbon.Json.JsonString>("network_function_nic_type"), out var __jsonNetworkFunctionNicType) ? (string)__jsonNetworkFunctionNicType : (string)NetworkFunctionNicType;
             _nicType = If( json?.PropertyT<Carbon.Json.JsonString>("nic_type"), out var __jsonNicType) ? (string)__jsonNicType : (string)NicType;
-            _subnetReference = If( json?.PropertyT<Carbon.Json.JsonObject>("subnet_reference"), out var __jsonSubnetReference) ? Sample.API.Models.SubnetReference.FromJson(__jsonSubnetReference) : SubnetReference;
+            _subnetReference = If( json?.PropertyT<Carbon.Json.JsonObject>("subnet_reference"), out var __jsonSubnetReference) ? Nutanix.Powershell.Models.SubnetReference.FromJson(__jsonSubnetReference) : SubnetReference;
             _uuid = If( json?.PropertyT<Carbon.Json.JsonString>("uuid"), out var __jsonUuid) ? (string)__jsonUuid : (string)Uuid;
             AfterFromJson(json);
         }

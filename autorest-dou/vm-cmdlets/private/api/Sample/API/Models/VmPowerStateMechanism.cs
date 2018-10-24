@@ -1,16 +1,16 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>
     /// Indicates the mechanism guiding the VM power state transition. Currently used for the transition to "OFF" state.
     /// </summary>
-    public partial class VmPowerStateMechanism : Sample.API.Models.IVmPowerStateMechanism, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class VmPowerStateMechanism : Nutanix.Powershell.Models.IVmPowerStateMechanism, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for GuestTransitionConfig property</summary>
-        private Sample.API.Models.IVmGuestPowerStateTransitionConfig _guestTransitionConfig;
+        private Nutanix.Powershell.Models.IVmGuestPowerStateTransitionConfig _guestTransitionConfig;
 
         /// <summary>Extra configs related to power state transition.</summary>
-        public Sample.API.Models.IVmGuestPowerStateTransitionConfig GuestTransitionConfig
+        public Nutanix.Powershell.Models.IVmGuestPowerStateTransitionConfig GuestTransitionConfig
         {
             get
             {
@@ -53,7 +53,7 @@ namespace Sample.API.Models
     }
     /// Indicates the mechanism guiding the VM power state transition. Currently used for the transition to "OFF" state.
     public partial interface IVmPowerStateMechanism : Microsoft.Rest.ClientRuntime.IJsonSerializable {
-        Sample.API.Models.IVmGuestPowerStateTransitionConfig GuestTransitionConfig { get; set; }
+        Nutanix.Powershell.Models.IVmGuestPowerStateTransitionConfig GuestTransitionConfig { get; set; }
         string Mechanism { get; set; }
     }
 }

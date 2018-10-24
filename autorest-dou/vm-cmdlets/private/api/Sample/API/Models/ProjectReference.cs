@@ -1,8 +1,8 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>The reference to a project</summary>
-    public partial class ProjectReference : Sample.API.Models.IProjectReference, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class ProjectReference : Nutanix.Powershell.Models.IProjectReference, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for Kind property</summary>
         private string _kind;

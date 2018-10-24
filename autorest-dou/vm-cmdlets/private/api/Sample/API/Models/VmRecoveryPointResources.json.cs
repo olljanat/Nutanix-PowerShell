@@ -1,4 +1,4 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Recovery point resources</summary>
@@ -38,11 +38,11 @@ namespace Sample.API.Models
         /// instantly.</param>
         partial void BeforeToJson(ref Carbon.Json.JsonObject container, ref bool returnNow);
         /// <summary>
-        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Sample.API.Models.IVmRecoveryPointResources.
+        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Nutanix.Powershell.Models.IVmRecoveryPointResources.
         /// </summary>
         /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
-        /// <returns>an instance of Sample.API.Models.IVmRecoveryPointResources.</returns>
-        public static Sample.API.Models.IVmRecoveryPointResources FromJson(Carbon.Json.JsonNode node)
+        /// <returns>an instance of Nutanix.Powershell.Models.IVmRecoveryPointResources.</returns>
+        public static Nutanix.Powershell.Models.IVmRecoveryPointResources FromJson(Carbon.Json.JsonNode node)
         {
             return node is Carbon.Json.JsonObject json ? new VmRecoveryPointResources(json) : null;
         }
@@ -84,9 +84,9 @@ namespace Sample.API.Models
             {
                 return;
             }
-            _parentVmReference = If( json?.PropertyT<Carbon.Json.JsonObject>("parent_vm_reference"), out var __jsonParentVmReference) ? Sample.API.Models.VmReference.FromJson(__jsonParentVmReference) : ParentVmReference;
-            _sourceAvailabilityZoneReference = If( json?.PropertyT<Carbon.Json.JsonObject>("source_availability_zone_reference"), out var __jsonSourceAvailabilityZoneReference) ? Sample.API.Models.AvailabilityZoneReference.FromJson(__jsonSourceAvailabilityZoneReference) : SourceAvailabilityZoneReference;
-            _sourceClusterReference = If( json?.PropertyT<Carbon.Json.JsonObject>("source_cluster_reference"), out var __jsonSourceClusterReference) ? Sample.API.Models.ClusterReference.FromJson(__jsonSourceClusterReference) : SourceClusterReference;
+            _parentVmReference = If( json?.PropertyT<Carbon.Json.JsonObject>("parent_vm_reference"), out var __jsonParentVmReference) ? Nutanix.Powershell.Models.VmReference.FromJson(__jsonParentVmReference) : ParentVmReference;
+            _sourceAvailabilityZoneReference = If( json?.PropertyT<Carbon.Json.JsonObject>("source_availability_zone_reference"), out var __jsonSourceAvailabilityZoneReference) ? Nutanix.Powershell.Models.AvailabilityZoneReference.FromJson(__jsonSourceAvailabilityZoneReference) : SourceAvailabilityZoneReference;
+            _sourceClusterReference = If( json?.PropertyT<Carbon.Json.JsonObject>("source_cluster_reference"), out var __jsonSourceClusterReference) ? Nutanix.Powershell.Models.ClusterReference.FromJson(__jsonSourceClusterReference) : SourceClusterReference;
             _vmRecoveryPointLocationAgnosticUuid = If( json?.PropertyT<Carbon.Json.JsonString>("vm_recovery_point_location_agnostic_uuid"), out var __jsonVmRecoveryPointLocationAgnosticUuid) ? (string)__jsonVmRecoveryPointLocationAgnosticUuid : (string)VmRecoveryPointLocationAgnosticUuid;
             AfterFromJson(json);
         }

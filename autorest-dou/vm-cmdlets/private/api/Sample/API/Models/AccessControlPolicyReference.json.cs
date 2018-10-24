@@ -1,4 +1,4 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>The reference to a access_control_policy</summary>
@@ -55,11 +55,11 @@ namespace Sample.API.Models
             AfterFromJson(json);
         }
         /// <summary>
-        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Sample.API.Models.IAccessControlPolicyReference.
+        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Nutanix.Powershell.Models.IAccessControlPolicyReference.
         /// </summary>
         /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
-        /// <returns>an instance of Sample.API.Models.IAccessControlPolicyReference.</returns>
-        public static Sample.API.Models.IAccessControlPolicyReference FromJson(Carbon.Json.JsonNode node)
+        /// <returns>an instance of Nutanix.Powershell.Models.IAccessControlPolicyReference.</returns>
+        public static Nutanix.Powershell.Models.IAccessControlPolicyReference FromJson(Carbon.Json.JsonNode node)
         {
             return node is Carbon.Json.JsonObject json ? new AccessControlPolicyReference(json) : null;
         }

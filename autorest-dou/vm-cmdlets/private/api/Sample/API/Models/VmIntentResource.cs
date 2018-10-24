@@ -1,8 +1,8 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Response object for intentful operations on a vm</summary>
-    public partial class VmIntentResource : Sample.API.Models.IVmIntentResource, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class VmIntentResource : Nutanix.Powershell.Models.IVmIntentResource, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for ApiVersion property</summary>
         private string _apiVersion;
@@ -19,10 +19,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for Metadata property</summary>
-        private Sample.API.Models.IVmMetadata _metadata;
+        private Nutanix.Powershell.Models.IVmMetadata _metadata;
 
         /// <summary>The vm kind metadata</summary>
-        public Sample.API.Models.IVmMetadata Metadata
+        public Nutanix.Powershell.Models.IVmMetadata Metadata
         {
             get
             {
@@ -34,10 +34,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for Spec property</summary>
-        private Sample.API.Models.IVm _spec;
+        private Nutanix.Powershell.Models.IVm _spec;
 
         /// <summary>An intentful representation of a vm spec</summary>
-        public Sample.API.Models.IVm Spec
+        public Nutanix.Powershell.Models.IVm Spec
         {
             get
             {
@@ -49,10 +49,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for Status property</summary>
-        private Sample.API.Models.IVmDefStatus _status;
+        private Nutanix.Powershell.Models.IVmDefStatus _status;
 
         /// <summary>An intentful representation of a vm status</summary>
-        public Sample.API.Models.IVmDefStatus Status
+        public Nutanix.Powershell.Models.IVmDefStatus Status
         {
             get
             {
@@ -84,8 +84,8 @@ namespace Sample.API.Models
     /// Response object for intentful operations on a vm
     public partial interface IVmIntentResource : Microsoft.Rest.ClientRuntime.IJsonSerializable {
         string ApiVersion { get; set; }
-        Sample.API.Models.IVmMetadata Metadata { get; set; }
-        Sample.API.Models.IVm Spec { get; set; }
-        Sample.API.Models.IVmDefStatus Status { get; set; }
+        Nutanix.Powershell.Models.IVmMetadata Metadata { get; set; }
+        Nutanix.Powershell.Models.IVm Spec { get; set; }
+        Nutanix.Powershell.Models.IVmDefStatus Status { get; set; }
     }
 }

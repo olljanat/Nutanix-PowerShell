@@ -1,4 +1,4 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>A Directory Service user.</summary>
@@ -50,16 +50,16 @@ namespace Sample.API.Models
                 return;
             }
             _defaultUserPrincipalName = If( json?.PropertyT<Carbon.Json.JsonString>("default_user_principal_name"), out var __jsonDefaultUserPrincipalName) ? (string)__jsonDefaultUserPrincipalName : (string)DefaultUserPrincipalName;
-            _directoryServiceReference = If( json?.PropertyT<Carbon.Json.JsonObject>("directory_service_reference"), out var __jsonDirectoryServiceReference) ? Sample.API.Models.DirectoryServiceReference.FromJson(__jsonDirectoryServiceReference) : DirectoryServiceReference;
+            _directoryServiceReference = If( json?.PropertyT<Carbon.Json.JsonObject>("directory_service_reference"), out var __jsonDirectoryServiceReference) ? Nutanix.Powershell.Models.DirectoryServiceReference.FromJson(__jsonDirectoryServiceReference) : DirectoryServiceReference;
             _userPrincipalName = If( json?.PropertyT<Carbon.Json.JsonString>("user_principal_name"), out var __jsonUserPrincipalName) ? (string)__jsonUserPrincipalName : (string)UserPrincipalName;
             AfterFromJson(json);
         }
         /// <summary>
-        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Sample.API.Models.IDirectoryServiceUserStatus.
+        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Nutanix.Powershell.Models.IDirectoryServiceUserStatus.
         /// </summary>
         /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
-        /// <returns>an instance of Sample.API.Models.IDirectoryServiceUserStatus.</returns>
-        public static Sample.API.Models.IDirectoryServiceUserStatus FromJson(Carbon.Json.JsonNode node)
+        /// <returns>an instance of Nutanix.Powershell.Models.IDirectoryServiceUserStatus.</returns>
+        public static Nutanix.Powershell.Models.IDirectoryServiceUserStatus FromJson(Carbon.Json.JsonNode node)
         {
             return node is Carbon.Json.JsonObject json ? new DirectoryServiceUserStatus(json) : null;
         }

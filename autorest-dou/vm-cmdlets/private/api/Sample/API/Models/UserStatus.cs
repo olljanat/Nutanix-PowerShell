@@ -1,11 +1,11 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>
     /// The status of a REST API call. Only used when there is a failure to
     /// report.
     /// </summary>
-    public partial class UserStatus : Sample.API.Models.IUserStatus, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class UserStatus : Nutanix.Powershell.Models.IUserStatus, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for ApiVersion property</summary>
         private string _apiVersion;
@@ -52,9 +52,9 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for MessageList property</summary>
-        private Sample.API.Models.IMessageResource[] _messageList;
+        private Nutanix.Powershell.Models.IMessageResource[] _messageList;
 
-        public Sample.API.Models.IMessageResource[] MessageList
+        public Nutanix.Powershell.Models.IMessageResource[] MessageList
         {
             get
             {
@@ -104,7 +104,7 @@ namespace Sample.API.Models
         string ApiVersion { get;  }
         int? Code { get;  }
         string Kind { get;  }
-        Sample.API.Models.IMessageResource[] MessageList { get;  }
+        Nutanix.Powershell.Models.IMessageResource[] MessageList { get;  }
         string State { get;  }
     }
 }

@@ -1,8 +1,8 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>The reference to a access_control_policy</summary>
-    public partial class AccessControlPolicyReference : Sample.API.Models.IAccessControlPolicyReference, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class AccessControlPolicyReference : Nutanix.Powershell.Models.IAccessControlPolicyReference, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for Kind property</summary>
         private string _kind;

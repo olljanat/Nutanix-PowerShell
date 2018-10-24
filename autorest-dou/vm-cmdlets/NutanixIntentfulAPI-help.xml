@@ -164,9 +164,9 @@
           <maml:Description>
             <maml:para>All api calls that return a list will have this metadata block as input</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Sample.API.Models.IAccessControlPolicyListMetadata</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IAccessControlPolicyListMetadata</command:parameterValue>
           <dev:type>
-            <maml:name>Sample.API.Models.IAccessControlPolicyListMetadata</maml:name>
+            <maml:name>Nutanix.Powershell.Models.IAccessControlPolicyListMetadata</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -272,9 +272,9 @@
         <maml:Description>
           <maml:para>All api calls that return a list will have this metadata block as input</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">Sample.API.Models.IAccessControlPolicyListMetadata</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IAccessControlPolicyListMetadata</command:parameterValue>
         <dev:type>
-          <maml:name>Sample.API.Models.IAccessControlPolicyListMetadata</maml:name>
+          <maml:name>Nutanix.Powershell.Models.IAccessControlPolicyListMetadata</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -701,9 +701,9 @@
           <maml:Description>
             <maml:para>All api calls that return a list will have this metadata block as input</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Sample.API.Models.IVmListMetadata</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IVmListMetadata</command:parameterValue>
           <dev:type>
-            <maml:name>Sample.API.Models.IVmListMetadata</maml:name>
+            <maml:name>Nutanix.Powershell.Models.IVmListMetadata</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -1071,9 +1071,9 @@
         <maml:Description>
           <maml:para>All api calls that return a list will have this metadata block as input</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">Sample.API.Models.IVmListMetadata</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IVmListMetadata</command:parameterValue>
         <dev:type>
-          <maml:name>Sample.API.Models.IVmListMetadata</maml:name>
+          <maml:name>Nutanix.Powershell.Models.IVmListMetadata</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -1681,9 +1681,9 @@
           <maml:Description>
             <maml:para>All api calls that return a list will have this metadata block as input</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Sample.API.Models.IVmListMetadata</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IVmListMetadata</command:parameterValue>
           <dev:type>
-            <maml:name>Sample.API.Models.IVmListMetadata</maml:name>
+            <maml:name>Nutanix.Powershell.Models.IVmListMetadata</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -1824,9 +1824,9 @@
         <maml:Description>
           <maml:para>All api calls that return a list will have this metadata block as input</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">Sample.API.Models.IVmListMetadata</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IVmListMetadata</command:parameterValue>
         <dev:type>
-          <maml:name>Sample.API.Models.IVmListMetadata</maml:name>
+          <maml:name>Nutanix.Powershell.Models.IVmListMetadata</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -2739,9 +2739,9 @@
           <maml:Description>
             <maml:para>The vm kind metadata</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Sample.API.Models.IVmMetadata</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IVmMetadata</command:parameterValue>
           <dev:type>
-            <maml:name>Sample.API.Models.IVmMetadata</maml:name>
+            <maml:name>Nutanix.Powershell.Models.IVmMetadata</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -2845,9 +2845,9 @@
           <maml:Description>
             <maml:para>An intentful representation of a vm spec</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Sample.API.Models.IVm</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IVm</command:parameterValue>
           <dev:type>
-            <maml:name>Sample.API.Models.IVm</maml:name>
+            <maml:name>Nutanix.Powershell.Models.IVm</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -2894,9 +2894,9 @@
           <maml:Description>
             <maml:para>An intentful representation of a vm</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Sample.API.Models.IVmIntentInput</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IVmIntentInput</command:parameterValue>
           <dev:type>
-            <maml:name>Sample.API.Models.IVmIntentInput</maml:name>
+            <maml:name>Nutanix.Powershell.Models.IVmIntentInput</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -3085,9 +3085,9 @@
         <maml:Description>
           <maml:para>An intentful representation of a vm</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">Sample.API.Models.IVmIntentInput</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IVmIntentInput</command:parameterValue>
         <dev:type>
-          <maml:name>Sample.API.Models.IVmIntentInput</maml:name>
+          <maml:name>Nutanix.Powershell.Models.IVmIntentInput</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -3133,9 +3133,9 @@
         <maml:Description>
           <maml:para>The vm kind metadata</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">Sample.API.Models.IVmMetadata</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IVmMetadata</command:parameterValue>
         <dev:type>
-          <maml:name>Sample.API.Models.IVmMetadata</maml:name>
+          <maml:name>Nutanix.Powershell.Models.IVmMetadata</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -3241,9 +3241,9 @@
         <maml:Description>
           <maml:para>An intentful representation of a vm spec</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">Sample.API.Models.IVm</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IVm</command:parameterValue>
         <dev:type>
-          <maml:name>Sample.API.Models.IVm</maml:name>
+          <maml:name>Nutanix.Powershell.Models.IVm</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -3408,9 +3408,9 @@
           <maml:Description>
             <maml:para>The vm kind metadata</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Sample.API.Models.IVmMetadata</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IVmMetadata</command:parameterValue>
           <dev:type>
-            <maml:name>Sample.API.Models.IVmMetadata</maml:name>
+            <maml:name>Nutanix.Powershell.Models.IVmMetadata</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -3420,9 +3420,9 @@
           <maml:Description>
             <maml:para>An intentful representation of a vm spec</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Sample.API.Models.IVm</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IVm</command:parameterValue>
           <dev:type>
-            <maml:name>Sample.API.Models.IVm</maml:name>
+            <maml:name>Nutanix.Powershell.Models.IVm</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -3435,9 +3435,9 @@
         <maml:Description>
           <maml:para>The vm kind metadata</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">Sample.API.Models.IVmMetadata</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IVmMetadata</command:parameterValue>
         <dev:type>
-          <maml:name>Sample.API.Models.IVmMetadata</maml:name>
+          <maml:name>Nutanix.Powershell.Models.IVmMetadata</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -3447,9 +3447,9 @@
         <maml:Description>
           <maml:para>An intentful representation of a vm spec</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">Sample.API.Models.IVm</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IVm</command:parameterValue>
         <dev:type>
-          <maml:name>Sample.API.Models.IVm</maml:name>
+          <maml:name>Nutanix.Powershell.Models.IVm</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -4047,9 +4047,9 @@
           <maml:Description>
             <maml:para>VM Resources Definition.</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Sample.API.Models.IVmResources</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IVmResources</command:parameterValue>
           <dev:type>
-            <maml:name>Sample.API.Models.IVmResources</maml:name>
+            <maml:name>Nutanix.Powershell.Models.IVmResources</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -4134,9 +4134,9 @@
         <maml:Description>
           <maml:para>VM Resources Definition.</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">Sample.API.Models.IVmResources</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IVmResources</command:parameterValue>
         <dev:type>
-          <maml:name>Sample.API.Models.IVmResources</maml:name>
+          <maml:name>Nutanix.Powershell.Models.IVmResources</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -4180,9 +4180,9 @@
           <maml:Description>
             <maml:para>The vm_recovery_point kind metadata</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Sample.API.Models.IVmRecoveryPointMetadata</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IVmRecoveryPointMetadata</command:parameterValue>
           <dev:type>
-            <maml:name>Sample.API.Models.IVmRecoveryPointMetadata</maml:name>
+            <maml:name>Nutanix.Powershell.Models.IVmRecoveryPointMetadata</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -4192,9 +4192,9 @@
           <maml:Description>
             <maml:para>The input object that defines a vm recovery point.</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Sample.API.Models.IVmRecoveryPoint</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IVmRecoveryPoint</command:parameterValue>
           <dev:type>
-            <maml:name>Sample.API.Models.IVmRecoveryPoint</maml:name>
+            <maml:name>Nutanix.Powershell.Models.IVmRecoveryPoint</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -4207,9 +4207,9 @@
         <maml:Description>
           <maml:para>The vm_recovery_point kind metadata</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">Sample.API.Models.IVmRecoveryPointMetadata</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IVmRecoveryPointMetadata</command:parameterValue>
         <dev:type>
-          <maml:name>Sample.API.Models.IVmRecoveryPointMetadata</maml:name>
+          <maml:name>Nutanix.Powershell.Models.IVmRecoveryPointMetadata</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -4219,9 +4219,9 @@
         <maml:Description>
           <maml:para>The input object that defines a vm recovery point.</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">Sample.API.Models.IVmRecoveryPoint</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IVmRecoveryPoint</command:parameterValue>
         <dev:type>
-          <maml:name>Sample.API.Models.IVmRecoveryPoint</maml:name>
+          <maml:name>Nutanix.Powershell.Models.IVmRecoveryPoint</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -4771,9 +4771,9 @@
           <maml:Description>
             <maml:para>Disks attached to the VM.</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Sample.API.Models.IVmDisk[]</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IVmDisk[]</command:parameterValue>
           <dev:type>
-            <maml:name>Sample.API.Models.IVmDisk[]</maml:name>
+            <maml:name>Nutanix.Powershell.Models.IVmDisk[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -4783,9 +4783,9 @@
           <maml:Description>
             <maml:para>GPUs attached to the VM.</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Sample.API.Models.IVmGpu[]</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IVmGpu[]</command:parameterValue>
           <dev:type>
-            <maml:name>Sample.API.Models.IVmGpu[]</maml:name>
+            <maml:name>Nutanix.Powershell.Models.IVmGpu[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -4795,9 +4795,9 @@
           <maml:Description>
             <maml:para>VM guests may be customized at boot time using one of several different methods. Currently, cloud-init w/ ConfigDriveV2 (for Linux VMs) and Sysprep (for Windows VMs) are supported. Only ONE OF sysprep or cloud_init should be provided. Note that guest customization can currently only be set during VM creation. Attempting to change it after creation will result in an error. Additional properties can be specified. For example - in the context of VM template creation if "override_script" is set to "True" then the deployer can upload their own custom script.</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Sample.API.Models.IGuestCustomization</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IGuestCustomization</command:parameterValue>
           <dev:type>
-            <maml:name>Sample.API.Models.IGuestCustomization</maml:name>
+            <maml:name>Nutanix.Powershell.Models.IGuestCustomization</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -4843,9 +4843,9 @@
           <maml:Description>
             <maml:para>NICs attached to the VM.</maml:para>
           </maml:Description>
-          <command:parameterValue required="true" variableLength="false">Sample.API.Models.IVmNic[]</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IVmNic[]</command:parameterValue>
           <dev:type>
-            <maml:name>Sample.API.Models.IVmNic[]</maml:name>
+            <maml:name>Nutanix.Powershell.Models.IVmNic[]</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -5071,9 +5071,9 @@
         <maml:Description>
           <maml:para>Disks attached to the VM.</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">Sample.API.Models.IVmDisk[]</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IVmDisk[]</command:parameterValue>
         <dev:type>
-          <maml:name>Sample.API.Models.IVmDisk[]</maml:name>
+          <maml:name>Nutanix.Powershell.Models.IVmDisk[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -5083,9 +5083,9 @@
         <maml:Description>
           <maml:para>GPUs attached to the VM.</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">Sample.API.Models.IVmGpu[]</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IVmGpu[]</command:parameterValue>
         <dev:type>
-          <maml:name>Sample.API.Models.IVmGpu[]</maml:name>
+          <maml:name>Nutanix.Powershell.Models.IVmGpu[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -5095,9 +5095,9 @@
         <maml:Description>
           <maml:para>VM guests may be customized at boot time using one of several different methods. Currently, cloud-init w/ ConfigDriveV2 (for Linux VMs) and Sysprep (for Windows VMs) are supported. Only ONE OF sysprep or cloud_init should be provided. Note that guest customization can currently only be set during VM creation. Attempting to change it after creation will result in an error. Additional properties can be specified. For example - in the context of VM template creation if "override_script" is set to "True" then the deployer can upload their own custom script.</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">Sample.API.Models.IGuestCustomization</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IGuestCustomization</command:parameterValue>
         <dev:type>
-          <maml:name>Sample.API.Models.IGuestCustomization</maml:name>
+          <maml:name>Nutanix.Powershell.Models.IGuestCustomization</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -5143,9 +5143,9 @@
         <maml:Description>
           <maml:para>NICs attached to the VM.</maml:para>
         </maml:Description>
-        <command:parameterValue required="true" variableLength="false">Sample.API.Models.IVmNic[]</command:parameterValue>
+        <command:parameterValue required="true" variableLength="false">Nutanix.Powershell.Models.IVmNic[]</command:parameterValue>
         <dev:type>
-          <maml:name>Sample.API.Models.IVmNic[]</maml:name>
+          <maml:name>Nutanix.Powershell.Models.IVmNic[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>

@@ -125,7 +125,7 @@ Accept wildcard characters: False
 VM Resources Definition.
 
 ```yaml
-Type: Sample.API.Models.IVmResources
+Type: Nutanix.Powershell.Models.IVmResources
 Parameter Sets: (All)
 Aliases:
 

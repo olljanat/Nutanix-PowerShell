@@ -1,15 +1,15 @@
-namespace Sample.API.ModelCmdlets
+namespace Nutanix.Powershell.ModelCmdlets
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>
     /// Cmdlet to create an in-memory instance of the <see cref="VmRecoveryPointMetadata" /> object.
     /// </summary>
     [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.New, @"VmRecoveryPointMetadataObject")]
-    [System.Management.Automation.OutputType(typeof(Sample.API.Models.IVmRecoveryPointMetadata))]
+    [System.Management.Automation.OutputType(typeof(Nutanix.Powershell.Models.IVmRecoveryPointMetadata))]
     public class NewVmRecoveryPointMetadataObject : System.Management.Automation.PSCmdlet
     {
         /// <summary>Backing field for <see cref="VmRecoveryPointMetadata" /></summary>
-        private Sample.API.Models.IVmRecoveryPointMetadata _vmRecoveryPointMetadata = new Sample.API.Models.VmRecoveryPointMetadata();
+        private Nutanix.Powershell.Models.IVmRecoveryPointMetadata _vmRecoveryPointMetadata = new Nutanix.Powershell.Models.VmRecoveryPointMetadata();
         /// <summary>Categories for the vm_recovery_point</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Categories for the vm_recovery_point")]
         public System.Collections.Generic.IDictionary<string,string> Categories
@@ -59,7 +59,7 @@ namespace Sample.API.ModelCmdlets
         {
             set
             {
-                _vmRecoveryPointMetadata.ProjectReference = _vmRecoveryPointMetadata.ProjectReference ?? new Sample.API.Models.ProjectReference();
+                _vmRecoveryPointMetadata.ProjectReference = _vmRecoveryPointMetadata.ProjectReference ?? new Nutanix.Powershell.Models.ProjectReference();
                 _vmRecoveryPointMetadata.ProjectReference.Kind = value;
             }
         }
@@ -69,7 +69,7 @@ namespace Sample.API.ModelCmdlets
         {
             set
             {
-                _vmRecoveryPointMetadata.ProjectReference = _vmRecoveryPointMetadata.ProjectReference ?? new Sample.API.Models.ProjectReference();
+                _vmRecoveryPointMetadata.ProjectReference = _vmRecoveryPointMetadata.ProjectReference ?? new Nutanix.Powershell.Models.ProjectReference();
                 _vmRecoveryPointMetadata.ProjectReference.Name = value;
             }
         }
@@ -79,7 +79,7 @@ namespace Sample.API.ModelCmdlets
         {
             set
             {
-                _vmRecoveryPointMetadata.ProjectReference = _vmRecoveryPointMetadata.ProjectReference ?? new Sample.API.Models.ProjectReference();
+                _vmRecoveryPointMetadata.ProjectReference = _vmRecoveryPointMetadata.ProjectReference ?? new Nutanix.Powershell.Models.ProjectReference();
                 _vmRecoveryPointMetadata.ProjectReference.Uuid = value;
             }
         }
@@ -107,7 +107,7 @@ namespace Sample.API.ModelCmdlets
         {
             set
             {
-                _vmRecoveryPointMetadata.OwnerReference = _vmRecoveryPointMetadata.OwnerReference ?? new Sample.API.Models.UserReference();
+                _vmRecoveryPointMetadata.OwnerReference = _vmRecoveryPointMetadata.OwnerReference ?? new Nutanix.Powershell.Models.UserReference();
                 _vmRecoveryPointMetadata.OwnerReference.Kind = value;
             }
         }
@@ -117,7 +117,7 @@ namespace Sample.API.ModelCmdlets
         {
             set
             {
-                _vmRecoveryPointMetadata.OwnerReference = _vmRecoveryPointMetadata.OwnerReference ?? new Sample.API.Models.UserReference();
+                _vmRecoveryPointMetadata.OwnerReference = _vmRecoveryPointMetadata.OwnerReference ?? new Nutanix.Powershell.Models.UserReference();
                 _vmRecoveryPointMetadata.OwnerReference.Name = value;
             }
         }
@@ -127,7 +127,7 @@ namespace Sample.API.ModelCmdlets
         {
             set
             {
-                _vmRecoveryPointMetadata.OwnerReference = _vmRecoveryPointMetadata.OwnerReference ?? new Sample.API.Models.UserReference();
+                _vmRecoveryPointMetadata.OwnerReference = _vmRecoveryPointMetadata.OwnerReference ?? new Nutanix.Powershell.Models.UserReference();
                 _vmRecoveryPointMetadata.OwnerReference.Uuid = value;
             }
         }

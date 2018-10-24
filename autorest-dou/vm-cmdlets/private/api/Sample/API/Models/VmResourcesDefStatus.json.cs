@@ -1,4 +1,4 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>VM Resources Status Definition.</summary>
@@ -38,11 +38,11 @@ namespace Sample.API.Models
         /// instantly.</param>
         partial void BeforeToJson(ref Carbon.Json.JsonObject container, ref bool returnNow);
         /// <summary>
-        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Sample.API.Models.IVmResourcesDefStatus.
+        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Nutanix.Powershell.Models.IVmResourcesDefStatus.
         /// </summary>
         /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
-        /// <returns>an instance of Sample.API.Models.IVmResourcesDefStatus.</returns>
-        public static Sample.API.Models.IVmResourcesDefStatus FromJson(Carbon.Json.JsonNode node)
+        /// <returns>an instance of Nutanix.Powershell.Models.IVmResourcesDefStatus.</returns>
+        public static Nutanix.Powershell.Models.IVmResourcesDefStatus FromJson(Carbon.Json.JsonNode node)
         {
             return node is Carbon.Json.JsonObject json ? new VmResourcesDefStatus(json) : null;
         }
@@ -98,24 +98,24 @@ namespace Sample.API.Models
             {
                 return;
             }
-            _bootConfig = If( json?.PropertyT<Carbon.Json.JsonObject>("boot_config"), out var __jsonBootConfig) ? Sample.API.Models.VmBootConfig.FromJson(__jsonBootConfig) : BootConfig;
+            _bootConfig = If( json?.PropertyT<Carbon.Json.JsonObject>("boot_config"), out var __jsonBootConfig) ? Nutanix.Powershell.Models.VmBootConfig.FromJson(__jsonBootConfig) : BootConfig;
             _diskList = If( json?.PropertyT<Carbon.Json.JsonString>("disk_list"), out var __jsonDiskList) ? (string)__jsonDiskList : (string)DiskList;
             _gpuList = If( json?.PropertyT<Carbon.Json.JsonString>("gpu_list"), out var __jsonGpuList) ? (string)__jsonGpuList : (string)GpuList;
-            _guestCustomization = If( json?.PropertyT<Carbon.Json.JsonObject>("guest_customization"), out var __jsonGuestCustomization) ? Sample.API.Models.GuestCustomizationStatus.FromJson(__jsonGuestCustomization) : GuestCustomization;
+            _guestCustomization = If( json?.PropertyT<Carbon.Json.JsonObject>("guest_customization"), out var __jsonGuestCustomization) ? Nutanix.Powershell.Models.GuestCustomizationStatus.FromJson(__jsonGuestCustomization) : GuestCustomization;
             _guestOsId = If( json?.PropertyT<Carbon.Json.JsonString>("guest_os_id"), out var __jsonGuestOsId) ? (string)__jsonGuestOsId : (string)GuestOsId;
-            _guestTools = If( json?.PropertyT<Carbon.Json.JsonObject>("guest_tools"), out var __jsonGuestTools) ? Sample.API.Models.GuestToolsStatus.FromJson(__jsonGuestTools) : GuestTools;
+            _guestTools = If( json?.PropertyT<Carbon.Json.JsonObject>("guest_tools"), out var __jsonGuestTools) ? Nutanix.Powershell.Models.GuestToolsStatus.FromJson(__jsonGuestTools) : GuestTools;
             _hardwareClockTimezone = If( json?.PropertyT<Carbon.Json.JsonString>("hardware_clock_timezone"), out var __jsonHardwareClockTimezone) ? (string)__jsonHardwareClockTimezone : (string)HardwareClockTimezone;
-            _hostReference = If( json?.PropertyT<Carbon.Json.JsonObject>("host_reference"), out var __jsonHostReference) ? Sample.API.Models.Reference.FromJson(__jsonHostReference) : HostReference;
+            _hostReference = If( json?.PropertyT<Carbon.Json.JsonObject>("host_reference"), out var __jsonHostReference) ? Nutanix.Powershell.Models.Reference.FromJson(__jsonHostReference) : HostReference;
             _hypervisorType = If( json?.PropertyT<Carbon.Json.JsonString>("hypervisor_type"), out var __jsonHypervisorType) ? (string)__jsonHypervisorType : (string)HypervisorType;
             _memorySizeMib = If( json?.PropertyT<Carbon.Json.JsonNumber>("memory_size_mib"), out var __jsonMemorySizeMib) ? (int?)__jsonMemorySizeMib : MemorySizeMib;
             _nicList = If( json?.PropertyT<Carbon.Json.JsonString>("nic_list"), out var __jsonNicList) ? (string)__jsonNicList : (string)NicList;
             _numSockets = If( json?.PropertyT<Carbon.Json.JsonNumber>("num_sockets"), out var __jsonNumSockets) ? (int?)__jsonNumSockets : NumSockets;
             _numVcpusPerSocket = If( json?.PropertyT<Carbon.Json.JsonNumber>("num_vcpus_per_socket"), out var __jsonNumVcpusPerSocket) ? (int?)__jsonNumVcpusPerSocket : NumVcpusPerSocket;
-            _parentReference = If( json?.PropertyT<Carbon.Json.JsonObject>("parent_reference"), out var __jsonParentReference) ? Sample.API.Models.Reference.FromJson(__jsonParentReference) : ParentReference;
+            _parentReference = If( json?.PropertyT<Carbon.Json.JsonObject>("parent_reference"), out var __jsonParentReference) ? Nutanix.Powershell.Models.Reference.FromJson(__jsonParentReference) : ParentReference;
             _powerState = If( json?.PropertyT<Carbon.Json.JsonString>("power_state"), out var __jsonPowerState) ? (string)__jsonPowerState : (string)PowerState;
-            _powerStateMechanism = If( json?.PropertyT<Carbon.Json.JsonObject>("power_state_mechanism"), out var __jsonPowerStateMechanism) ? Sample.API.Models.VmPowerStateMechanism.FromJson(__jsonPowerStateMechanism) : PowerStateMechanism;
+            _powerStateMechanism = If( json?.PropertyT<Carbon.Json.JsonObject>("power_state_mechanism"), out var __jsonPowerStateMechanism) ? Nutanix.Powershell.Models.VmPowerStateMechanism.FromJson(__jsonPowerStateMechanism) : PowerStateMechanism;
             _vgaConsoleEnabled = If( json?.PropertyT<Carbon.Json.JsonBoolean>("vga_console_enabled"), out var __jsonVgaConsoleEnabled) ? (bool?)__jsonVgaConsoleEnabled : VgaConsoleEnabled;
-            _vnumaConfig = If( json?.PropertyT<Carbon.Json.JsonObject>("vnuma_config"), out var __jsonVnumaConfig) ? Sample.API.Models.VmVnumaConfig.FromJson(__jsonVnumaConfig) : VnumaConfig;
+            _vnumaConfig = If( json?.PropertyT<Carbon.Json.JsonObject>("vnuma_config"), out var __jsonVnumaConfig) ? Nutanix.Powershell.Models.VmVnumaConfig.FromJson(__jsonVnumaConfig) : VnumaConfig;
             AfterFromJson(json);
         }
     }

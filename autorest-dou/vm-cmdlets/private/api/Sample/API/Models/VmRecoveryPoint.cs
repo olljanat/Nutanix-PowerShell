@@ -1,17 +1,17 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>The input object that defines a vm recovery point.</summary>
-    public partial class VmRecoveryPoint : Sample.API.Models.IVmRecoveryPoint, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class VmRecoveryPoint : Nutanix.Powershell.Models.IVmRecoveryPoint, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for AvailabilityZoneReference property</summary>
-        private Sample.API.Models.IAvailabilityZoneReference _availabilityZoneReference;
+        private Nutanix.Powershell.Models.IAvailabilityZoneReference _availabilityZoneReference;
 
         /// <summary>
         /// Reference to the availability zone where this recovery point is
         /// located
         /// </summary>
-        public Sample.API.Models.IAvailabilityZoneReference AvailabilityZoneReference
+        public Nutanix.Powershell.Models.IAvailabilityZoneReference AvailabilityZoneReference
         {
             get
             {
@@ -23,13 +23,13 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for ClusterReference property</summary>
-        private Sample.API.Models.IClusterReference _clusterReference;
+        private Nutanix.Powershell.Models.IClusterReference _clusterReference;
 
         /// <summary>
         /// Reference to the cluster in the availability zone where this recovery
         /// point is located.
         /// </summary>
-        public Sample.API.Models.IClusterReference ClusterReference
+        public Nutanix.Powershell.Models.IClusterReference ClusterReference
         {
             get
             {
@@ -112,10 +112,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for Resources property</summary>
-        private Sample.API.Models.IVmRecoveryPointResources _resources;
+        private Nutanix.Powershell.Models.IVmRecoveryPointResources _resources;
 
         /// <summary>Recovery point resources</summary>
-        public Sample.API.Models.IVmRecoveryPointResources Resources
+        public Nutanix.Powershell.Models.IVmRecoveryPointResources Resources
         {
             get
             {
@@ -146,12 +146,12 @@ namespace Sample.API.Models
     }
     /// The input object that defines a vm recovery point.
     public partial interface IVmRecoveryPoint : Microsoft.Rest.ClientRuntime.IJsonSerializable {
-        Sample.API.Models.IAvailabilityZoneReference AvailabilityZoneReference { get; set; }
-        Sample.API.Models.IClusterReference ClusterReference { get; set; }
+        Nutanix.Powershell.Models.IAvailabilityZoneReference AvailabilityZoneReference { get; set; }
+        Nutanix.Powershell.Models.IClusterReference ClusterReference { get; set; }
         System.DateTime? CreationTime { get; set; }
         System.DateTime? ExpirationTime { get; set; }
         string Name { get; set; }
         string RecoveryPointType { get; set; }
-        Sample.API.Models.IVmRecoveryPointResources Resources { get; set; }
+        Nutanix.Powershell.Models.IVmRecoveryPointResources Resources { get; set; }
     }
 }

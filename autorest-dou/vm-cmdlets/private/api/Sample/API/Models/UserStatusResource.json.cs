@@ -1,4 +1,4 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>User Resource Definition.</summary>
@@ -38,11 +38,11 @@ namespace Sample.API.Models
         /// instantly.</param>
         partial void BeforeToJson(ref Carbon.Json.JsonObject container, ref bool returnNow);
         /// <summary>
-        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Sample.API.Models.IUserStatusResource.
+        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Nutanix.Powershell.Models.IUserStatusResource.
         /// </summary>
         /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
-        /// <returns>an instance of Sample.API.Models.IUserStatusResource.</returns>
-        public static Sample.API.Models.IUserStatusResource FromJson(Carbon.Json.JsonNode node)
+        /// <returns>an instance of Nutanix.Powershell.Models.IUserStatusResource.</returns>
+        public static Nutanix.Powershell.Models.IUserStatusResource FromJson(Carbon.Json.JsonNode node)
         {
             return node is Carbon.Json.JsonObject json ? new UserStatusResource(json) : null;
         }
@@ -102,11 +102,11 @@ namespace Sample.API.Models
             {
                 return;
             }
-            _accessControlPolicyReferenceList = If( json?.PropertyT<Carbon.Json.JsonArray>("access_control_policy_reference_list"), out var __jsonAccessControlPolicyReferenceList) ? If( __jsonAccessControlPolicyReferenceList, out var __w) ? new System.Func<Sample.API.Models.IAccessControlPolicyReference[]>(()=> System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select( __w, (__v)=> Sample.API.Models.AccessControlPolicyReference.FromJson(__v)  ) ) )() : null : AccessControlPolicyReferenceList;
-            _directoryServiceUser = If( json?.PropertyT<Carbon.Json.JsonObject>("directory_service_user"), out var __jsonDirectoryServiceUser) ? Sample.API.Models.DirectoryServiceUserStatus.FromJson(__jsonDirectoryServiceUser) : DirectoryServiceUser;
+            _accessControlPolicyReferenceList = If( json?.PropertyT<Carbon.Json.JsonArray>("access_control_policy_reference_list"), out var __jsonAccessControlPolicyReferenceList) ? If( __jsonAccessControlPolicyReferenceList, out var __w) ? new System.Func<Nutanix.Powershell.Models.IAccessControlPolicyReference[]>(()=> System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select( __w, (__v)=> Nutanix.Powershell.Models.AccessControlPolicyReference.FromJson(__v)  ) ) )() : null : AccessControlPolicyReferenceList;
+            _directoryServiceUser = If( json?.PropertyT<Carbon.Json.JsonObject>("directory_service_user"), out var __jsonDirectoryServiceUser) ? Nutanix.Powershell.Models.DirectoryServiceUserStatus.FromJson(__jsonDirectoryServiceUser) : DirectoryServiceUser;
             _displayName = If( json?.PropertyT<Carbon.Json.JsonString>("display_name"), out var __jsonDisplayName) ? (string)__jsonDisplayName : (string)DisplayName;
-            _projectsReferenceList = If( json?.PropertyT<Carbon.Json.JsonArray>("projects_reference_list"), out var __jsonProjectsReferenceList) ? If( __jsonProjectsReferenceList, out var __r) ? new System.Func<Sample.API.Models.IProjectReference[]>(()=> System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select( __r, (__q)=> Sample.API.Models.ProjectReference.FromJson(__q)  ) ) )() : null : ProjectsReferenceList;
-            _resourceUsageSummary = If( json?.PropertyT<Carbon.Json.JsonObject>("resource_usage_summary"), out var __jsonResourceUsageSummary) ? Sample.API.Models.UserStatusResourceResourceUsageSummary.FromJson(__jsonResourceUsageSummary) : ResourceUsageSummary;
+            _projectsReferenceList = If( json?.PropertyT<Carbon.Json.JsonArray>("projects_reference_list"), out var __jsonProjectsReferenceList) ? If( __jsonProjectsReferenceList, out var __r) ? new System.Func<Nutanix.Powershell.Models.IProjectReference[]>(()=> System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select( __r, (__q)=> Nutanix.Powershell.Models.ProjectReference.FromJson(__q)  ) ) )() : null : ProjectsReferenceList;
+            _resourceUsageSummary = If( json?.PropertyT<Carbon.Json.JsonObject>("resource_usage_summary"), out var __jsonResourceUsageSummary) ? Nutanix.Powershell.Models.UserStatusResourceResourceUsageSummary.FromJson(__jsonResourceUsageSummary) : ResourceUsageSummary;
             _userType = If( json?.PropertyT<Carbon.Json.JsonString>("user_type"), out var __jsonUserType) ? (string)__jsonUserType : (string)UserType;
             AfterFromJson(json);
         }

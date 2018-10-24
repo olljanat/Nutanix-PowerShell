@@ -1,8 +1,8 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>A Directory Service user.</summary>
-    public partial class DirectoryServiceUserStatus : Sample.API.Models.IDirectoryServiceUserStatus, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class DirectoryServiceUserStatus : Nutanix.Powershell.Models.IDirectoryServiceUserStatus, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for DefaultUserPrincipalName property</summary>
         private string _defaultUserPrincipalName;
@@ -22,12 +22,12 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for DirectoryServiceReference property</summary>
-        private Sample.API.Models.IDirectoryServiceReference _directoryServiceReference;
+        private Nutanix.Powershell.Models.IDirectoryServiceReference _directoryServiceReference;
 
         /// <summary>
         /// Directory service reference if the user type is directory service.
         /// </summary>
-        public Sample.API.Models.IDirectoryServiceReference DirectoryServiceReference
+        public Nutanix.Powershell.Models.IDirectoryServiceReference DirectoryServiceReference
         {
             get
             {
@@ -76,7 +76,7 @@ namespace Sample.API.Models
     /// A Directory Service user.
     public partial interface IDirectoryServiceUserStatus : Microsoft.Rest.ClientRuntime.IJsonSerializable {
         string DefaultUserPrincipalName { get; set; }
-        Sample.API.Models.IDirectoryServiceReference DirectoryServiceReference { get; set; }
+        Nutanix.Powershell.Models.IDirectoryServiceReference DirectoryServiceReference { get; set; }
         string UserPrincipalName { get; set; }
     }
 }

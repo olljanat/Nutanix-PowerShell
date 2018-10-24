@@ -1,7 +1,7 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
-    public partial class VmDiskDeviceProperties : Sample.API.Models.IVmDiskDeviceProperties, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class VmDiskDeviceProperties : Nutanix.Powershell.Models.IVmDiskDeviceProperties, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for DeviceType property</summary>
         private string _deviceType;
@@ -18,10 +18,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for DiskAddress property</summary>
-        private Sample.API.Models.IDiskAddress _diskAddress;
+        private Nutanix.Powershell.Models.IDiskAddress _diskAddress;
 
         /// <summary>Disk Address.</summary>
-        public Sample.API.Models.IDiskAddress DiskAddress
+        public Nutanix.Powershell.Models.IDiskAddress DiskAddress
         {
             get
             {
@@ -49,6 +49,6 @@ namespace Sample.API.Models
     }
     public partial interface IVmDiskDeviceProperties : Microsoft.Rest.ClientRuntime.IJsonSerializable {
         string DeviceType { get; set; }
-        Sample.API.Models.IDiskAddress DiskAddress { get; set; }
+        Nutanix.Powershell.Models.IDiskAddress DiskAddress { get; set; }
     }
 }

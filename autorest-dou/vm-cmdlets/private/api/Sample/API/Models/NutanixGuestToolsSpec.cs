@@ -1,8 +1,8 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Information regarding Nutanix Guest Tools.</summary>
-    public partial class NutanixGuestToolsSpec : Sample.API.Models.INutanixGuestToolsSpec
+    public partial class NutanixGuestToolsSpec : Nutanix.Powershell.Models.INutanixGuestToolsSpec
     {
         /// <summary>Backing field for EnabledCapabilityList property</summary>
         private string[] _enabledCapabilityList;

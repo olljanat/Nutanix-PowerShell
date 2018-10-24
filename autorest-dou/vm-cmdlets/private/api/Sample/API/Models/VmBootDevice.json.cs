@@ -1,4 +1,4 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>
@@ -40,11 +40,11 @@ namespace Sample.API.Models
         /// instantly.</param>
         partial void BeforeToJson(ref Carbon.Json.JsonObject container, ref bool returnNow);
         /// <summary>
-        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Sample.API.Models.IVmBootDevice.
+        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Nutanix.Powershell.Models.IVmBootDevice.
         /// </summary>
         /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
-        /// <returns>an instance of Sample.API.Models.IVmBootDevice.</returns>
-        public static Sample.API.Models.IVmBootDevice FromJson(Carbon.Json.JsonNode node)
+        /// <returns>an instance of Nutanix.Powershell.Models.IVmBootDevice.</returns>
+        public static Nutanix.Powershell.Models.IVmBootDevice FromJson(Carbon.Json.JsonNode node)
         {
             return node is Carbon.Json.JsonObject json ? new VmBootDevice(json) : null;
         }
@@ -84,7 +84,7 @@ namespace Sample.API.Models
             {
                 return;
             }
-            _diskAddress = If( json?.PropertyT<Carbon.Json.JsonObject>("disk_address"), out var __jsonDiskAddress) ? Sample.API.Models.DiskAddress.FromJson(__jsonDiskAddress) : DiskAddress;
+            _diskAddress = If( json?.PropertyT<Carbon.Json.JsonObject>("disk_address"), out var __jsonDiskAddress) ? Nutanix.Powershell.Models.DiskAddress.FromJson(__jsonDiskAddress) : DiskAddress;
             _macAddress = If( json?.PropertyT<Carbon.Json.JsonString>("mac_address"), out var __jsonMacAddress) ? (string)__jsonMacAddress : (string)MacAddress;
             AfterFromJson(json);
         }

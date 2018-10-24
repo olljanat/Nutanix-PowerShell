@@ -1,4 +1,4 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>A Directory Service user.</summary>
@@ -49,16 +49,16 @@ namespace Sample.API.Models
             {
                 return;
             }
-            _directoryServiceReference = If( json?.PropertyT<Carbon.Json.JsonObject>("directory_service_reference"), out var __jsonDirectoryServiceReference) ? Sample.API.Models.DirectoryServiceReference.FromJson(__jsonDirectoryServiceReference) : DirectoryServiceReference;
+            _directoryServiceReference = If( json?.PropertyT<Carbon.Json.JsonObject>("directory_service_reference"), out var __jsonDirectoryServiceReference) ? Nutanix.Powershell.Models.DirectoryServiceReference.FromJson(__jsonDirectoryServiceReference) : DirectoryServiceReference;
             _userPrincipalName = If( json?.PropertyT<Carbon.Json.JsonString>("user_principal_name"), out var __jsonUserPrincipalName) ? (string)__jsonUserPrincipalName : (string)UserPrincipalName;
             AfterFromJson(json);
         }
         /// <summary>
-        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Sample.API.Models.IDirectoryServiceUser.
+        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Nutanix.Powershell.Models.IDirectoryServiceUser.
         /// </summary>
         /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
-        /// <returns>an instance of Sample.API.Models.IDirectoryServiceUser.</returns>
-        public static Sample.API.Models.IDirectoryServiceUser FromJson(Carbon.Json.JsonNode node)
+        /// <returns>an instance of Nutanix.Powershell.Models.IDirectoryServiceUser.</returns>
+        public static Nutanix.Powershell.Models.IDirectoryServiceUser FromJson(Carbon.Json.JsonNode node)
         {
             return node is Carbon.Json.JsonObject json ? new DirectoryServiceUser(json) : null;
         }

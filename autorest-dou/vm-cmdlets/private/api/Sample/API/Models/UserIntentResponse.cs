@@ -1,8 +1,8 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Response object for intentful operations on a user</summary>
-    public partial class UserIntentResponse : Sample.API.Models.IUserIntentResponse, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class UserIntentResponse : Nutanix.Powershell.Models.IUserIntentResponse, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for ApiVersion property</summary>
         private string _apiVersion;
@@ -19,10 +19,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for Metadata property</summary>
-        private Sample.API.Models.IUserMetadata _metadata;
+        private Nutanix.Powershell.Models.IUserMetadata _metadata;
 
         /// <summary>The user kind metadata</summary>
-        public Sample.API.Models.IUserMetadata Metadata
+        public Nutanix.Powershell.Models.IUserMetadata Metadata
         {
             get
             {
@@ -34,10 +34,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for Spec property</summary>
-        private Sample.API.Models.IUser _spec;
+        private Nutanix.Powershell.Models.IUser _spec;
 
         /// <summary>User Input Definition.</summary>
-        public Sample.API.Models.IUser Spec
+        public Nutanix.Powershell.Models.IUser Spec
         {
             get
             {
@@ -49,10 +49,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for Status property</summary>
-        private Sample.API.Models.IUserDefStatus _status;
+        private Nutanix.Powershell.Models.IUserDefStatus _status;
 
         /// <summary>User status definition.</summary>
-        public Sample.API.Models.IUserDefStatus Status
+        public Nutanix.Powershell.Models.IUserDefStatus Status
         {
             get
             {
@@ -85,8 +85,8 @@ namespace Sample.API.Models
     /// Response object for intentful operations on a user
     public partial interface IUserIntentResponse : Microsoft.Rest.ClientRuntime.IJsonSerializable {
         string ApiVersion { get; set; }
-        Sample.API.Models.IUserMetadata Metadata { get; set; }
-        Sample.API.Models.IUser Spec { get; set; }
-        Sample.API.Models.IUserDefStatus Status { get; set; }
+        Nutanix.Powershell.Models.IUserMetadata Metadata { get; set; }
+        Nutanix.Powershell.Models.IUser Spec { get; set; }
+        Nutanix.Powershell.Models.IUserDefStatus Status { get; set; }
     }
 }

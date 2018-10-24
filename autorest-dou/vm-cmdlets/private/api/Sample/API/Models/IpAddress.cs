@@ -1,8 +1,8 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>An IP address.</summary>
-    public partial class IpAddress : Sample.API.Models.IIpAddress, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class IpAddress : Nutanix.Powershell.Models.IIpAddress, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for Ip property</summary>
         private string _ip;

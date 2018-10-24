@@ -1,14 +1,14 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>The status for a resource domain (limits and values)</summary>
-    public partial class ResourceDomainResourcesStatus : Sample.API.Models.IResourceDomainResourcesStatus, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class ResourceDomainResourcesStatus : Nutanix.Powershell.Models.IResourceDomainResourcesStatus, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for Resources property</summary>
-        private Sample.API.Models.IResourceUtilizationStatus[] _resources;
+        private Nutanix.Powershell.Models.IResourceUtilizationStatus[] _resources;
 
         /// <summary>The utilization/limit for resource types</summary>
-        public Sample.API.Models.IResourceUtilizationStatus[] Resources
+        public Nutanix.Powershell.Models.IResourceUtilizationStatus[] Resources
         {
             get
             {
@@ -41,6 +41,6 @@ namespace Sample.API.Models
     }
     /// The status for a resource domain (limits and values)
     public partial interface IResourceDomainResourcesStatus : Microsoft.Rest.ClientRuntime.IJsonSerializable {
-        Sample.API.Models.IResourceUtilizationStatus[] Resources { get; set; }
+        Nutanix.Powershell.Models.IResourceUtilizationStatus[] Resources { get; set; }
     }
 }

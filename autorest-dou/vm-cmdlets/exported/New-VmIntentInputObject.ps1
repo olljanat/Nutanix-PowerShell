@@ -2,11 +2,11 @@ function New-VmIntentInputObject {
 [CmdletBinding()]
 param(
     [Parameter(ParameterSetName='default', Mandatory=$true, HelpMessage='The vm kind metadata')]
-    [Sample.API.Models.IVmMetadata]
+    [Nutanix.Powershell.Models.IVmMetadata]
     ${Metadata},
 
     [Parameter(ParameterSetName='default', Mandatory=$true, HelpMessage='An intentful representation of a vm spec')]
-    [Sample.API.Models.IVm]
+    [Nutanix.Powershell.Models.IVm]
     ${Spec})
 
 begin

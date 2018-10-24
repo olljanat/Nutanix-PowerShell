@@ -1,8 +1,8 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>stores resource utilization and limits for a domain</summary>
-    public partial class ResourceUtilizationStatus : Sample.API.Models.IResourceUtilizationStatus, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class ResourceUtilizationStatus : Nutanix.Powershell.Models.IResourceUtilizationStatus, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for Limit property</summary>
         private int? _limit;

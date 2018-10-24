@@ -1,24 +1,24 @@
-namespace Sample.API.ModelCmdlets
+namespace Nutanix.Powershell.ModelCmdlets
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>
     /// Cmdlet to create an in-memory instance of the <see cref="VmResources" /> object.
     /// </summary>
     [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.New, @"VmResourcesObject")]
-    [System.Management.Automation.OutputType(typeof(Sample.API.Models.IVmResources))]
+    [System.Management.Automation.OutputType(typeof(Nutanix.Powershell.Models.IVmResources))]
     public class NewVmResourcesObject : System.Management.Automation.PSCmdlet
     {
         /// <summary>Backing field for <see cref="VmResources" /></summary>
-        private Sample.API.Models.IVmResources _vmResources = new Sample.API.Models.VmResources();
+        private Nutanix.Powershell.Models.IVmResources _vmResources = new Nutanix.Powershell.Models.VmResources();
         /// <summary>HELP MESSAGE MISSING</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string DiskAddressAdapterType
         {
             set
             {
-                _vmResources.BootConfig = _vmResources.BootConfig ?? new Sample.API.Models.VmBootConfig();
-                _vmResources.BootConfig.BootDevice = _vmResources.BootConfig.BootDevice ?? new Sample.API.Models.VmBootDevice();
-                _vmResources.BootConfig.BootDevice.DiskAddress = _vmResources.BootConfig.BootDevice.DiskAddress ?? new Sample.API.Models.DiskAddress();
+                _vmResources.BootConfig = _vmResources.BootConfig ?? new Nutanix.Powershell.Models.VmBootConfig();
+                _vmResources.BootConfig.BootDevice = _vmResources.BootConfig.BootDevice ?? new Nutanix.Powershell.Models.VmBootDevice();
+                _vmResources.BootConfig.BootDevice.DiskAddress = _vmResources.BootConfig.BootDevice.DiskAddress ?? new Nutanix.Powershell.Models.DiskAddress();
                 _vmResources.BootConfig.BootDevice.DiskAddress.AdapterType = value;
             }
         }
@@ -28,15 +28,15 @@ namespace Sample.API.ModelCmdlets
         {
             set
             {
-                _vmResources.BootConfig = _vmResources.BootConfig ?? new Sample.API.Models.VmBootConfig();
-                _vmResources.BootConfig.BootDevice = _vmResources.BootConfig.BootDevice ?? new Sample.API.Models.VmBootDevice();
-                _vmResources.BootConfig.BootDevice.DiskAddress = _vmResources.BootConfig.BootDevice.DiskAddress ?? new Sample.API.Models.DiskAddress();
+                _vmResources.BootConfig = _vmResources.BootConfig ?? new Nutanix.Powershell.Models.VmBootConfig();
+                _vmResources.BootConfig.BootDevice = _vmResources.BootConfig.BootDevice ?? new Nutanix.Powershell.Models.VmBootDevice();
+                _vmResources.BootConfig.BootDevice.DiskAddress = _vmResources.BootConfig.BootDevice.DiskAddress ?? new Nutanix.Powershell.Models.DiskAddress();
                 _vmResources.BootConfig.BootDevice.DiskAddress.DeviceIndex = value;
             }
         }
         /// <summary>Disks attached to the VM.</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Disks attached to the VM.")]
-        public Sample.API.Models.IVmDisk[] DiskList
+        public Nutanix.Powershell.Models.IVmDisk[] DiskList
         {
             set
             {
@@ -45,7 +45,7 @@ namespace Sample.API.ModelCmdlets
         }
         /// <summary>GPUs attached to the VM.</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "GPUs attached to the VM.")]
-        public Sample.API.Models.IVmGpu[] GpuList
+        public Nutanix.Powershell.Models.IVmGpu[] GpuList
         {
             set
             {
@@ -60,7 +60,7 @@ namespace Sample.API.ModelCmdlets
         /// is set to "True" then the deployer can upload their own custom script.
         /// </summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "VM guests may be customized at boot time using one of several different methods. Currently, cloud-init w/ ConfigDriveV2 (for Linux VMs) and Sysprep (for Windows VMs) are supported. Only ONE OF sysprep or cloud_init should be provided. Note that guest customization can currently only be set during VM creation. Attempting to change it after creation will result in an error. Additional properties can be specified. For example - in the context of VM template creation if \"override_script\" is set to \"True\" then the deployer can upload their own custom script.")]
-        public Sample.API.Models.IGuestCustomization GuestCustomization
+        public Nutanix.Powershell.Models.IGuestCustomization GuestCustomization
         {
             set
             {
@@ -99,7 +99,7 @@ namespace Sample.API.ModelCmdlets
         }
         /// <summary>NICs attached to the VM.</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "NICs attached to the VM.")]
-        public Sample.API.Models.IVmNic[] NicList
+        public Nutanix.Powershell.Models.IVmNic[] NicList
         {
             set
             {
@@ -130,8 +130,8 @@ namespace Sample.API.ModelCmdlets
         {
             set
             {
-                _vmResources.GuestTools = _vmResources.GuestTools ?? new Sample.API.Models.GuestToolsSpec();
-                _vmResources.GuestTools.NutanixGuestTools = _vmResources.GuestTools.NutanixGuestTools ?? new Sample.API.Models.NutanixGuestToolsSpec();
+                _vmResources.GuestTools = _vmResources.GuestTools ?? new Nutanix.Powershell.Models.GuestToolsSpec();
+                _vmResources.GuestTools.NutanixGuestTools = _vmResources.GuestTools.NutanixGuestTools ?? new Nutanix.Powershell.Models.NutanixGuestToolsSpec();
                 _vmResources.GuestTools.NutanixGuestTools.EnabledCapabilityList = value;
             }
         }
@@ -141,8 +141,8 @@ namespace Sample.API.ModelCmdlets
         {
             set
             {
-                _vmResources.GuestTools = _vmResources.GuestTools ?? new Sample.API.Models.GuestToolsSpec();
-                _vmResources.GuestTools.NutanixGuestTools = _vmResources.GuestTools.NutanixGuestTools ?? new Sample.API.Models.NutanixGuestToolsSpec();
+                _vmResources.GuestTools = _vmResources.GuestTools ?? new Nutanix.Powershell.Models.GuestToolsSpec();
+                _vmResources.GuestTools.NutanixGuestTools = _vmResources.GuestTools.NutanixGuestTools ?? new Nutanix.Powershell.Models.NutanixGuestToolsSpec();
                 _vmResources.GuestTools.NutanixGuestTools.IsoMountState = value;
             }
         }
@@ -152,8 +152,8 @@ namespace Sample.API.ModelCmdlets
         {
             set
             {
-                _vmResources.GuestTools = _vmResources.GuestTools ?? new Sample.API.Models.GuestToolsSpec();
-                _vmResources.GuestTools.NutanixGuestTools = _vmResources.GuestTools.NutanixGuestTools ?? new Sample.API.Models.NutanixGuestToolsSpec();
+                _vmResources.GuestTools = _vmResources.GuestTools ?? new Nutanix.Powershell.Models.GuestToolsSpec();
+                _vmResources.GuestTools.NutanixGuestTools = _vmResources.GuestTools.NutanixGuestTools ?? new Nutanix.Powershell.Models.NutanixGuestToolsSpec();
                 _vmResources.GuestTools.NutanixGuestTools.State = value;
             }
         }
@@ -172,7 +172,7 @@ namespace Sample.API.ModelCmdlets
         {
             set
             {
-                _vmResources.ParentReference = _vmResources.ParentReference ?? new Sample.API.Models.Reference();
+                _vmResources.ParentReference = _vmResources.ParentReference ?? new Nutanix.Powershell.Models.Reference();
                 _vmResources.ParentReference.Kind = value;
             }
         }
@@ -182,7 +182,7 @@ namespace Sample.API.ModelCmdlets
         {
             set
             {
-                _vmResources.ParentReference = _vmResources.ParentReference ?? new Sample.API.Models.Reference();
+                _vmResources.ParentReference = _vmResources.ParentReference ?? new Nutanix.Powershell.Models.Reference();
                 _vmResources.ParentReference.Name = value;
             }
         }
@@ -192,7 +192,7 @@ namespace Sample.API.ModelCmdlets
         {
             set
             {
-                _vmResources.ParentReference = _vmResources.ParentReference ?? new Sample.API.Models.Reference();
+                _vmResources.ParentReference = _vmResources.ParentReference ?? new Nutanix.Powershell.Models.Reference();
                 _vmResources.ParentReference.Uuid = value;
             }
         }
@@ -214,7 +214,7 @@ namespace Sample.API.ModelCmdlets
         {
             set
             {
-                _vmResources.BootConfig = _vmResources.BootConfig ?? new Sample.API.Models.VmBootConfig();
+                _vmResources.BootConfig = _vmResources.BootConfig ?? new Nutanix.Powershell.Models.VmBootConfig();
                 _vmResources.BootConfig.BootDeviceOrderList = value;
             }
         }
@@ -224,8 +224,8 @@ namespace Sample.API.ModelCmdlets
         {
             set
             {
-                _vmResources.BootConfig = _vmResources.BootConfig ?? new Sample.API.Models.VmBootConfig();
-                _vmResources.BootConfig.BootDevice = _vmResources.BootConfig.BootDevice ?? new Sample.API.Models.VmBootDevice();
+                _vmResources.BootConfig = _vmResources.BootConfig ?? new Nutanix.Powershell.Models.VmBootConfig();
+                _vmResources.BootConfig.BootDevice = _vmResources.BootConfig.BootDevice ?? new Nutanix.Powershell.Models.VmBootDevice();
                 _vmResources.BootConfig.BootDevice.MacAddress = value;
             }
         }
@@ -235,8 +235,8 @@ namespace Sample.API.ModelCmdlets
         {
             set
             {
-                _vmResources.PowerStateMechanism = _vmResources.PowerStateMechanism ?? new Sample.API.Models.VmPowerStateMechanism();
-                _vmResources.PowerStateMechanism.GuestTransitionConfig = _vmResources.PowerStateMechanism.GuestTransitionConfig ?? new Sample.API.Models.VmGuestPowerStateTransitionConfig();
+                _vmResources.PowerStateMechanism = _vmResources.PowerStateMechanism ?? new Nutanix.Powershell.Models.VmPowerStateMechanism();
+                _vmResources.PowerStateMechanism.GuestTransitionConfig = _vmResources.PowerStateMechanism.GuestTransitionConfig ?? new Nutanix.Powershell.Models.VmGuestPowerStateTransitionConfig();
                 _vmResources.PowerStateMechanism.GuestTransitionConfig.EnableScriptExec = value.ToBool();
             }
         }
@@ -246,8 +246,8 @@ namespace Sample.API.ModelCmdlets
         {
             set
             {
-                _vmResources.PowerStateMechanism = _vmResources.PowerStateMechanism ?? new Sample.API.Models.VmPowerStateMechanism();
-                _vmResources.PowerStateMechanism.GuestTransitionConfig = _vmResources.PowerStateMechanism.GuestTransitionConfig ?? new Sample.API.Models.VmGuestPowerStateTransitionConfig();
+                _vmResources.PowerStateMechanism = _vmResources.PowerStateMechanism ?? new Nutanix.Powershell.Models.VmPowerStateMechanism();
+                _vmResources.PowerStateMechanism.GuestTransitionConfig = _vmResources.PowerStateMechanism.GuestTransitionConfig ?? new Nutanix.Powershell.Models.VmGuestPowerStateTransitionConfig();
                 _vmResources.PowerStateMechanism.GuestTransitionConfig.ShouldFailOnScriptFailure = value.ToBool();
             }
         }
@@ -257,7 +257,7 @@ namespace Sample.API.ModelCmdlets
         {
             set
             {
-                _vmResources.PowerStateMechanism = _vmResources.PowerStateMechanism ?? new Sample.API.Models.VmPowerStateMechanism();
+                _vmResources.PowerStateMechanism = _vmResources.PowerStateMechanism ?? new Nutanix.Powershell.Models.VmPowerStateMechanism();
                 _vmResources.PowerStateMechanism.Mechanism = value;
             }
         }
@@ -267,7 +267,7 @@ namespace Sample.API.ModelCmdlets
         {
             set
             {
-                _vmResources.VnumaConfig = _vmResources.VnumaConfig ?? new Sample.API.Models.VmVnumaConfig();
+                _vmResources.VnumaConfig = _vmResources.VnumaConfig ?? new Nutanix.Powershell.Models.VmVnumaConfig();
                 _vmResources.VnumaConfig.NumVnumaNodes = value;
             }
         }

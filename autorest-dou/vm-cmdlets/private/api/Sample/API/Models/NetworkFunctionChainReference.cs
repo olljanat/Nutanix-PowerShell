@@ -1,8 +1,8 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>The reference to a network_function_chain</summary>
-    public partial class NetworkFunctionChainReference : Sample.API.Models.INetworkFunctionChainReference, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class NetworkFunctionChainReference : Nutanix.Powershell.Models.INetworkFunctionChainReference, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for Kind property</summary>
         private string _kind;

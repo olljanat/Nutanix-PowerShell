@@ -1,4 +1,4 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     public partial class UserStatusResourceResourceUsageSummary
@@ -37,11 +37,11 @@ namespace Sample.API.Models
         /// instantly.</param>
         partial void BeforeToJson(ref Carbon.Json.JsonObject container, ref bool returnNow);
         /// <summary>
-        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Sample.API.Models.IUserStatusResourceResourceUsageSummary.
+        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Nutanix.Powershell.Models.IUserStatusResourceResourceUsageSummary.
         /// </summary>
         /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
-        /// <returns>an instance of Sample.API.Models.IUserStatusResourceResourceUsageSummary.</returns>
-        public static Sample.API.Models.IUserStatusResourceResourceUsageSummary FromJson(Carbon.Json.JsonNode node)
+        /// <returns>an instance of Nutanix.Powershell.Models.IUserStatusResourceResourceUsageSummary.</returns>
+        public static Nutanix.Powershell.Models.IUserStatusResourceResourceUsageSummary FromJson(Carbon.Json.JsonNode node)
         {
             return node is Carbon.Json.JsonObject json ? new UserStatusResourceResourceUsageSummary(json) : null;
         }
@@ -81,7 +81,7 @@ namespace Sample.API.Models
             {
                 return;
             }
-            _resourceDomain = If( json?.PropertyT<Carbon.Json.JsonObject>("resource_domain"), out var __jsonResourceDomain) ? Sample.API.Models.ResourceDomainResourcesStatus.FromJson(__jsonResourceDomain) : ResourceDomain;
+            _resourceDomain = If( json?.PropertyT<Carbon.Json.JsonObject>("resource_domain"), out var __jsonResourceDomain) ? Nutanix.Powershell.Models.ResourceDomainResourcesStatus.FromJson(__jsonResourceDomain) : ResourceDomain;
             AfterFromJson(json);
         }
     }

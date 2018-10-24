@@ -1,8 +1,8 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Response object for intentful operation of vms</summary>
-    public partial class VmListIntentResponse : Sample.API.Models.IVmListIntentResponse, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class VmListIntentResponse : Nutanix.Powershell.Models.IVmListIntentResponse, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for ApiVersion property</summary>
         private string _apiVersion;
@@ -19,9 +19,9 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for Entities property</summary>
-        private Sample.API.Models.IVmIntentResource[] _entities;
+        private Nutanix.Powershell.Models.IVmIntentResource[] _entities;
 
-        public Sample.API.Models.IVmIntentResource[] Entities
+        public Nutanix.Powershell.Models.IVmIntentResource[] Entities
         {
             get
             {
@@ -33,12 +33,12 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for Metadata property</summary>
-        private Sample.API.Models.IVmListMetadataOutput _metadata;
+        private Nutanix.Powershell.Models.IVmListMetadataOutput _metadata;
 
         /// <summary>
         /// All api calls that return a list will have this metadata block
         /// </summary>
-        public Sample.API.Models.IVmListMetadataOutput Metadata
+        public Nutanix.Powershell.Models.IVmListMetadataOutput Metadata
         {
             get
             {
@@ -74,7 +74,7 @@ namespace Sample.API.Models
     /// Response object for intentful operation of vms
     public partial interface IVmListIntentResponse : Microsoft.Rest.ClientRuntime.IJsonSerializable {
         string ApiVersion { get; set; }
-        Sample.API.Models.IVmIntentResource[] Entities { get; set; }
-        Sample.API.Models.IVmListMetadataOutput Metadata { get; set; }
+        Nutanix.Powershell.Models.IVmIntentResource[] Entities { get; set; }
+        Nutanix.Powershell.Models.IVmListMetadataOutput Metadata { get; set; }
     }
 }

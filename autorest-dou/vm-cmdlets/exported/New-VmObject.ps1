@@ -26,7 +26,7 @@ param(
     ${Name},
 
     [Parameter(ParameterSetName='default', Mandatory=$true, HelpMessage='VM Resources Definition.')]
-    [Sample.API.Models.IVmResources]
+    [Nutanix.Powershell.Models.IVmResources]
     ${Resources})
 
 begin

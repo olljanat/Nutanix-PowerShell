@@ -1,8 +1,8 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Extra configs related to power state transition.</summary>
-    public partial class VmGuestPowerStateTransitionConfig : Sample.API.Models.IVmGuestPowerStateTransitionConfig
+    public partial class VmGuestPowerStateTransitionConfig : Nutanix.Powershell.Models.IVmGuestPowerStateTransitionConfig
     {
         /// <summary>Backing field for EnableScriptExec property</summary>
         private bool? _enableScriptExec;

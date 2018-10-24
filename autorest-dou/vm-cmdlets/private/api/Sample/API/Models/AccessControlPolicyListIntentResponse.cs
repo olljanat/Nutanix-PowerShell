@@ -1,8 +1,8 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Response object for intentful operation of access_control_policys</summary>
-    public partial class AccessControlPolicyListIntentResponse : Sample.API.Models.IAccessControlPolicyListIntentResponse, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class AccessControlPolicyListIntentResponse : Nutanix.Powershell.Models.IAccessControlPolicyListIntentResponse, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for ApiVersion property</summary>
         private string _apiVersion;

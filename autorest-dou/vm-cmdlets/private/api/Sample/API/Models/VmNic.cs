@@ -1,8 +1,8 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Virtual Machine NIC.</summary>
-    public partial class VmNic : Sample.API.Models.IVmNic, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class VmNic : Nutanix.Powershell.Models.IVmNic, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for IpEndpointList property</summary>
         private string _ipEndpointList;
@@ -53,10 +53,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for NetworkFunctionChainReference property</summary>
-        private Sample.API.Models.INetworkFunctionChainReference _networkFunctionChainReference;
+        private Nutanix.Powershell.Models.INetworkFunctionChainReference _networkFunctionChainReference;
 
         /// <summary>The reference to a network_function_chain</summary>
-        public Sample.API.Models.INetworkFunctionChainReference NetworkFunctionChainReference
+        public Nutanix.Powershell.Models.INetworkFunctionChainReference NetworkFunctionChainReference
         {
             get
             {
@@ -100,10 +100,10 @@ namespace Sample.API.Models
             }
         }
         /// <summary>Backing field for SubnetReference property</summary>
-        private Sample.API.Models.ISubnetReference _subnetReference;
+        private Nutanix.Powershell.Models.ISubnetReference _subnetReference;
 
         /// <summary>The reference to a subnet</summary>
-        public Sample.API.Models.ISubnetReference SubnetReference
+        public Nutanix.Powershell.Models.ISubnetReference SubnetReference
         {
             get
             {
@@ -155,10 +155,10 @@ namespace Sample.API.Models
         string IpEndpointList { get; set; }
         string MacAddress { get; set; }
         string Model { get; set; }
-        Sample.API.Models.INetworkFunctionChainReference NetworkFunctionChainReference { get; set; }
+        Nutanix.Powershell.Models.INetworkFunctionChainReference NetworkFunctionChainReference { get; set; }
         string NetworkFunctionNicType { get; set; }
         string NicType { get; set; }
-        Sample.API.Models.ISubnetReference SubnetReference { get; set; }
+        Nutanix.Powershell.Models.ISubnetReference SubnetReference { get; set; }
         string Uuid { get; set; }
     }
 }

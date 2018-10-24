@@ -1,11 +1,11 @@
-namespace Sample.API.Models
+namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>
     /// If this field is set, the guest will be customized using cloud-init. Either user_data or custom_key_values should be provided.
     /// If custom_key_ves are provided then the user data will be generated using these key-value pairs.
     /// </summary>
-    public partial class GuestCustomizationCloudInit : Sample.API.Models.IGuestCustomizationCloudInit, Microsoft.Rest.ClientRuntime.IValidates
+    public partial class GuestCustomizationCloudInit : Nutanix.Powershell.Models.IGuestCustomizationCloudInit, Microsoft.Rest.ClientRuntime.IValidates
     {
         /// <summary>Backing field for CustomKeyValues property</summary>
         private System.Collections.Generic.IDictionary<string,string> _customKeyValues;

@@ -1,4 +1,4 @@
-namespace Sample.API
+namespace Nutanix.Powershell
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     using SignalDelegateI = System.Func<string, System.Threading.CancellationToken, System.Func<System.EventArgs>, System.Threading.Tasks.Task>;
@@ -29,12 +29,12 @@ namespace Sample.API
         /// <summary>FIXME: Field _webProxy is MISSING DESCRIPTION</summary>
         public System.Net.WebProxy _webProxy = new System.Net.WebProxy();
         /// <summary>The instance of the Client API</summary>
-        public Sample.API.NutanixIntentfulAPI ClientAPI {get;set;}
+        public Nutanix.Powershell.NutanixIntentfulAPI ClientAPI {get;set;}
         /// <summary>Backing field for Instance property</summary>
-        private static Sample.API.Module _instance;
+        private static Nutanix.Powershell.Module _instance;
 
         /// <summary>the singleton of this module class</summary>
-        public static Sample.API.Module Instance => Sample.API.Module._instance?? (Sample.API.Module._instance = new Sample.API.Module());
+        public static Nutanix.Powershell.Module Instance => Nutanix.Powershell.Module._instance?? (Nutanix.Powershell.Module._instance = new Nutanix.Powershell.Module());
         /// <summary>FIXME: Method AfterCreatePipeline is MISSING DESCRIPTION</summary>
         /// <param name="boundParams">FIXME: Parameter boundParams is MISSING DESCRIPTION</param>
         /// <param name="pipeline">FIXME: Parameter pipeline is MISSING DESCRIPTION</param>
@@ -80,7 +80,7 @@ namespace Sample.API
         private Module()
         {
             /// constructor
-            ClientAPI = new Sample.API.NutanixIntentfulAPI();
+            ClientAPI = new Nutanix.Powershell.NutanixIntentfulAPI();
             _handler.Proxy = _webProxy;
 
             // SkipSSL handlers

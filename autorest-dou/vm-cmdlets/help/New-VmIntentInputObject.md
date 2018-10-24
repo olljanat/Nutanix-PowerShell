@@ -33,7 +33,7 @@ PS C:\> {{ Add example code here }}
 The vm kind metadata
 
 ```yaml
-Type: Sample.API.Models.IVmMetadata
+Type: Nutanix.Powershell.Models.IVmMetadata
 Parameter Sets: (All)
 Aliases:
 
@@ -48,7 +48,7 @@ Accept wildcard characters: False
 An intentful representation of a vm spec
 
 ```yaml
-Type: Sample.API.Models.IVm
+Type: Nutanix.Powershell.Models.IVm
 Parameter Sets: (All)
 Aliases:
 

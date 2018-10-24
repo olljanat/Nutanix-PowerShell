@@ -1,6 +1,6 @@
 # region Initialization
     # this module instance.
-    $instance =  [Sample.API.Module]::Instance
+    $instance =  [Nutanix.Powershell.Module]::Instance
 
     # load nested script module if it exists
     if( test-path "$PSScriptRoot/bin/NutanixIntentfulAPI.scripts.psm1" )  {

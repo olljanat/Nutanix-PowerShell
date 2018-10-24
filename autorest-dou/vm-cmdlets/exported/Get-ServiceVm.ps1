@@ -3,7 +3,7 @@ function Get-ServiceVm {
 param(
     [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrder', Mandatory=$true, ValueFromPipeline=$true, HelpMessage='All api calls that return a list will have this metadata block as input
 ')]
-    [Sample.API.Models.IVmListMetadata]
+    [Nutanix.Powershell.Models.IVmListMetadata]
     ${GetEntitiesRequest},
 
     [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='SendAsync Pipeline Steps to be appended to the front of the pipeline')]
