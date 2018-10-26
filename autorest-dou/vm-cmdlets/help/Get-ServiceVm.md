@@ -15,7 +15,7 @@ schema: 2.0.0
 ```
 Get-ServiceVm -GetEntitiesRequest <IVmListMetadata> [-HttpPipelineAppend <SendAsyncStep[]>]
  [-HttpPipelinePrepend <SendAsyncStep[]>] [-Proxy <Uri>] [-ProxyCredential <PSCredential>]
- [-ProxyUseDefaultCredentials] [-username <String>] [-password <String>] [-SkipSSL]
+ [-ProxyUseDefaultCredentials] [-Username <String>] [-Password <SecureString>] [-SkipSSL]
  [-Credential <PSCredential>] [-Server <String>] [-Port <String>] [-Protocol <String>] [-WhatIf] [-Confirm]
  [<CommonParameters>]
 ```
@@ -23,18 +23,18 @@ Get-ServiceVm -GetEntitiesRequest <IVmListMetadata> [-HttpPipelineAppend <SendAs
 ### VmUuid
 ```
 Get-ServiceVm [-HttpPipelineAppend <SendAsyncStep[]>] [-HttpPipelinePrepend <SendAsyncStep[]>] [-Proxy <Uri>]
- [-ProxyCredential <PSCredential>] [-ProxyUseDefaultCredentials] [-username <String>] [-password <String>]
- [-SkipSSL] [-Credential <PSCredential>] [-Server <String>] [-Port <String>] [-Protocol <String>]
- -Uuid <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-ProxyCredential <PSCredential>] [-ProxyUseDefaultCredentials] [-Username <String>]
+ [-Password <SecureString>] [-SkipSSL] [-Credential <PSCredential>] [-Server <String>] [-Port <String>]
+ [-Protocol <String>] -Uuid <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded
 ```
 Get-ServiceVm [-HttpPipelineAppend <SendAsyncStep[]>] [-HttpPipelinePrepend <SendAsyncStep[]>] [-Proxy <Uri>]
- [-ProxyCredential <PSCredential>] [-ProxyUseDefaultCredentials] [-username <String>] [-password <String>]
- [-SkipSSL] [-Credential <PSCredential>] [-Server <String>] [-Port <String>] [-Protocol <String>]
- [-Filter <String>] [-Kind <String>] [-Length <Int32>] [-Offset <Int32>] [-SortAttribute <String>]
- [-SortOrder <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-ProxyCredential <PSCredential>] [-ProxyUseDefaultCredentials] [-Username <String>]
+ [-Password <SecureString>] [-SkipSSL] [-Credential <PSCredential>] [-Server <String>] [-Port <String>]
+ [-Protocol <String>] [-Filter <String>] [-Kind <String>] [-Length <Int32>] [-Offset <Int32>]
+ [-SortAttribute <String>] [-SortOrder <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -171,11 +171,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -password
+### -Password
 The password for authentication
 
 ```yaml
-Type: System.String
+Type: System.Security.SecureString
 Parameter Sets: (All)
 Aliases:
 
@@ -321,7 +321,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -username
+### -Username
 The username for authentication
 
 ```yaml

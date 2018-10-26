@@ -13,8 +13,8 @@ schema: 2.0.0
 
 ```
 Remove-ServiceVm [-HttpPipelineAppend <SendAsyncStep[]>] [-HttpPipelinePrepend <SendAsyncStep[]>]
- [-Proxy <Uri>] [-ProxyCredential <PSCredential>] [-ProxyUseDefaultCredentials] [-username <String>]
- [-password <String>] [-SkipSSL] [-Credential <PSCredential>] [-Server <String>] [-Port <String>]
+ [-Proxy <Uri>] [-ProxyCredential <PSCredential>] [-ProxyUseDefaultCredentials] [-Username <String>]
+ [-Password <SecureString>] [-SkipSSL] [-Credential <PSCredential>] [-Server <String>] [-Port <String>]
  [-Protocol <String>] -Uuid <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -77,11 +77,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -password
+### -Password
 The password for authentication
 
 ```yaml
-Type: System.String
+Type: System.Security.SecureString
 Parameter Sets: (All)
 Aliases:
 
@@ -197,7 +197,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -username
+### -Username
 The username for authentication
 
 ```yaml

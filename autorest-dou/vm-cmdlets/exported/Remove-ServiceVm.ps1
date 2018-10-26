@@ -24,32 +24,32 @@ param(
     [switch]
     ${ProxyUseDefaultCredentials},
 
-    [Parameter(ParameterSetName='VmUuid', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='VmUuid', HelpMessage='The Username for authentication')]
     [string]
-    ${username},
+    ${Username},
 
-    [Parameter(ParameterSetName='VmUuid', HelpMessage='The password for authentication')]
-    [string]
-    ${password},
+    [Parameter(ParameterSetName='VmUuid', HelpMessage='The Password as a secure string for authentication')]
+    [securestring]
+    ${Password},
 
     [Parameter(ParameterSetName='VmUuid', HelpMessage='Skip the ssl validation')]
     [switch]
     ${SkipSSL},
 
-    [Parameter(ParameterSetName='VmUuid', HelpMessage='Skip the ssl validation')]
+    [Parameter(ParameterSetName='VmUuid', HelpMessage='A PSCredental with username and password')]
     [ValidateNotNull()]
     [pscredential]
     ${Credential},
 
-    [Parameter(ParameterSetName='VmUuid', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='VmUuid', HelpMessage='The IP address or the domain of the server')]
     [string]
     ${Server},
 
-    [Parameter(ParameterSetName='VmUuid', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='VmUuid', HelpMessage='The Port of where the API is served')]
     [string]
     ${Port},
 
-    [Parameter(ParameterSetName='VmUuid', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='VmUuid', HelpMessage='The Proocol used on the server (http/https)')]
     [string]
     ${Protocol},
 

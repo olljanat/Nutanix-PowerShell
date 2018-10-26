@@ -70,26 +70,28 @@ namespace Nutanix.Powershell.Cmdlets
         public string Username {get; set;}
 
         /// <summary>The Password for authentication</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Password for authentication")]
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Password as a secure string for authentication")]
         public System.Security.SecureString Password {get; set;}
 
+        /// <summary>Skip the ssl validation</summary>
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Skip the ssl validation")]
         public System.Management.Automation.SwitchParameter SkipSSL {get; set;}
 
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Skip the ssl validation")]
+        /// <summary>A PSCredental with username and password</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "A PSCredental with username and password")]
         [System.Management.Automation.ValidateNotNull]
         public System.Management.Automation.PSCredential Credential {get; set;}
 
         /// <summary>The Username for authentication</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Username for authentication")]
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The IP address or the domain of the server")]
         public string Server {get; set;}
 
           /// <summary>The Username for authentication</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Username for authentication")]
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Port of where the API is served")]
         public string Port {get; set;}
 
         /// <summary>The Username for authentication</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Username for authentication")]
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Proocol used on the server (http/https)")]
         public string Protocol {get; set;}
         
 

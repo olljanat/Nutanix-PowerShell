@@ -26,6 +26,9 @@ Locale: {{ Update Locale }}
 ### [New-DiskObject](New-DiskObject.md)
 
 
+### [New-NutanixCredential](New-NutanixCredential.md)
+
+
 ### [New-ProjectReferenceObject](New-ProjectReferenceObject.md)
 
 
@@ -60,5 +63,8 @@ Locale: {{ Update Locale }}
 
 
 ### [Remove-ServiceVm](Remove-ServiceVm.md)
+
+
+### [Set-NutanixCredential](Set-NutanixCredential.md)
 
 

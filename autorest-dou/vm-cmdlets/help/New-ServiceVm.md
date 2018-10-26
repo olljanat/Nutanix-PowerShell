@@ -15,7 +15,7 @@ schema: 2.0.0
 ```
 New-ServiceVm -Body <IVmIntentInput> [-HttpPipelineAppend <SendAsyncStep[]>]
  [-HttpPipelinePrepend <SendAsyncStep[]>] [-Proxy <Uri>] [-ProxyCredential <PSCredential>]
- [-ProxyUseDefaultCredentials] [-username <String>] [-password <String>] [-SkipSSL]
+ [-ProxyUseDefaultCredentials] [-Username <String>] [-Password <SecureString>] [-SkipSSL]
  [-Credential <PSCredential>] [-Server <String>] [-Port <String>] [-Protocol <String>] [-WhatIf] [-Confirm]
  [<CommonParameters>]
 ```
@@ -23,9 +23,10 @@ New-ServiceVm -Body <IVmIntentInput> [-HttpPipelineAppend <SendAsyncStep[]>]
 ### VmApiVersionMetadataSpecExpanded
 ```
 New-ServiceVm [-HttpPipelineAppend <SendAsyncStep[]>] [-HttpPipelinePrepend <SendAsyncStep[]>] [-Proxy <Uri>]
- [-ProxyCredential <PSCredential>] [-ProxyUseDefaultCredentials] [-username <String>] [-password <String>]
- [-SkipSSL] [-Credential <PSCredential>] [-Server <String>] [-Port <String>] [-Protocol <String>]
- [-ApiVersion <String>] -Metadata <IVmMetadata> -Spec <IVm> [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-ProxyCredential <PSCredential>] [-ProxyUseDefaultCredentials] [-Username <String>]
+ [-Password <SecureString>] [-SkipSSL] [-Credential <PSCredential>] [-Server <String>] [-Port <String>]
+ [-Protocol <String>] [-ApiVersion <String>] -Metadata <IVmMetadata> -Spec <IVm> [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -132,11 +133,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -password
+### -Password
 The password for authentication
 
 ```yaml
-Type: System.String
+Type: System.Security.SecureString
 Parameter Sets: (All)
 Aliases:
 
@@ -267,7 +268,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -username
+### -Username
 The username for authentication
 
 ```yaml

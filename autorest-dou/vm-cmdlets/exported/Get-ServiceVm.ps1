@@ -39,17 +39,17 @@ param(
     [switch]
     ${ProxyUseDefaultCredentials},
 
-    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='The username for authentication')]
-    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The username for authentication')]
-    [Parameter(ParameterSetName='VmUuid', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='The Username for authentication')]
+    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The Username for authentication')]
+    [Parameter(ParameterSetName='VmUuid', HelpMessage='The Username for authentication')]
     [string]
-    ${username},
+    ${Username},
 
-    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='The password for authentication')]
-    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The password for authentication')]
-    [Parameter(ParameterSetName='VmUuid', HelpMessage='The password for authentication')]
-    [string]
-    ${password},
+    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='The Password for authentication')]
+    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The Password for authentication')]
+    [Parameter(ParameterSetName='VmUuid', HelpMessage='The Password for authentication')]
+    [securestring]
+    ${Password},
 
     [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='Skip the ssl validation')]
     [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='Skip the ssl validation')]
@@ -64,21 +64,21 @@ param(
     [pscredential]
     ${Credential},
 
-    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='The username for authentication')]
-    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The username for authentication')]
-    [Parameter(ParameterSetName='VmUuid', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='The Username for authentication')]
+    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The Username for authentication')]
+    [Parameter(ParameterSetName='VmUuid', HelpMessage='The Username for authentication')]
     [string]
     ${Server},
 
-    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='The username for authentication')]
-    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The username for authentication')]
-    [Parameter(ParameterSetName='VmUuid', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='The Username for authentication')]
+    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The Username for authentication')]
+    [Parameter(ParameterSetName='VmUuid', HelpMessage='The Username for authentication')]
     [string]
     ${Port},
 
-    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='The username for authentication')]
-    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The username for authentication')]
-    [Parameter(ParameterSetName='VmUuid', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrder', HelpMessage='The Username for authentication')]
+    [Parameter(ParameterSetName='VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded', HelpMessage='The Username for authentication')]
+    [Parameter(ParameterSetName='VmUuid', HelpMessage='The Username for authentication')]
     [string]
     ${Protocol},
 
@@ -114,24 +114,6 @@ begin
 {
   switch ($PsCmdlet.ParameterSetName) { 
 
-  'VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded' {
-
-    try {
-        $outBuffer = $null
-        if ($PSBoundParameters.TryGetValue('OutBuffer', [ref]$outBuffer))
-        {
-            $PSBoundParameters['OutBuffer'] = 1
-        }
-        $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('NutanixIntentfulAPI.private\Get-ServiceVm_VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded', [System.Management.Automation.CommandTypes]::Cmdlet)
-        $scriptCmd = {& $wrappedCmd @PSBoundParameters }
-        $steppablePipeline = $scriptCmd.GetSteppablePipeline($myInvocation.CommandOrigin)
-        $steppablePipeline.Begin($PSCmdlet)
-    } catch {
-        throw
-    }
-
-}
-
   'VmsFilterKindLengthOffsetSortAttributeSortOrder' {
 
     try {
@@ -141,6 +123,24 @@ begin
             $PSBoundParameters['OutBuffer'] = 1
         }
         $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('NutanixIntentfulAPI.private\Get-ServiceVm_VmsFilterKindLengthOffsetSortAttributeSortOrder', [System.Management.Automation.CommandTypes]::Cmdlet)
+        $scriptCmd = {& $wrappedCmd @PSBoundParameters }
+        $steppablePipeline = $scriptCmd.GetSteppablePipeline($myInvocation.CommandOrigin)
+        $steppablePipeline.Begin($PSCmdlet)
+    } catch {
+        throw
+    }
+
+}
+
+  'VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded' {
+
+    try {
+        $outBuffer = $null
+        if ($PSBoundParameters.TryGetValue('OutBuffer', [ref]$outBuffer))
+        {
+            $PSBoundParameters['OutBuffer'] = 1
+        }
+        $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand('NutanixIntentfulAPI.private\Get-ServiceVm_VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded', [System.Management.Automation.CommandTypes]::Cmdlet)
         $scriptCmd = {& $wrappedCmd @PSBoundParameters }
         $steppablePipeline = $scriptCmd.GetSteppablePipeline($myInvocation.CommandOrigin)
         $steppablePipeline.Begin($PSCmdlet)
