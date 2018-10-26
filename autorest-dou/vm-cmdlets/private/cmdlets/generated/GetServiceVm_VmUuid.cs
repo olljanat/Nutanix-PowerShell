@@ -55,7 +55,7 @@ namespace Nutanix.Powershell.Cmdlets
 
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Skip the ssl validation")]
         [System.Management.Automation.ValidateNotNull]
-        public System.Management.Automation.PSCredential Credential {get; set;}
+        public Nutanix.Powershell.Models.NutanixCredential Credential {get; set;}
 
          /// <summary>The Username for authentication</summary>
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Username for authentication")]
@@ -227,38 +227,38 @@ namespace Nutanix.Powershell.Cmdlets
                 Pipeline.Append(HttpPipelineAppend);
                 // get the client instance
 
-                if (Port == null){
-                    Port = System.Environment.GetEnvironmentVariable("NutanixPort") ?? "9440";
-                }
+               if (Credential == null) {
 
-                if (Protocol == null) {
-                    Protocol = System.Environment.GetEnvironmentVariable("NutanixProtocol") ?? "https";
-                }
+                    if (Port == null){
+                        Port = System.Environment.GetEnvironmentVariable("NutanixPort") ?? "9440";
+                    }
 
-                if (Server == null) {
-                    Server = System.Environment.GetEnvironmentVariable("NutanixServer") ?? "localhost";
-                }
+                    if (Protocol == null) {
+                        Protocol = System.Environment.GetEnvironmentVariable("NutanixProtocol") ?? "https";
+                    }
 
-                if (Username == null) {
-                    Username = System.Environment.GetEnvironmentVariable("NutanixUsername") ?? "";
-                }
+                    if (Server == null) {
+                        Server = System.Environment.GetEnvironmentVariable("NutanixServer") ?? "localhost";
+                    }
 
-                if (Password == null) {
-                    var psw = System.Environment.GetEnvironmentVariable("NutanixPassword") ?? "";
-                    System.Security.SecureString result = new System.Security.SecureString();
-                    foreach (char c in psw)
-                        result.AppendChar(c);
+                    if (Username == null) {
+                        Username = System.Environment.GetEnvironmentVariable("NutanixUsername") ?? "";
+                    }
 
-                    Password = result;
-                }
-                if (Credential == null) {
-                    Credential = new System.Management.Automation.PSCredential(Username, Password);
-                }
+                    if (Password == null) {
+                        var psw = System.Environment.GetEnvironmentVariable("NutanixPassword") ?? "";
+                        System.Security.SecureString result = new System.Security.SecureString();
+                        foreach (char c in psw)
+                            result.AppendChar(c);
 
-                //build url 
-                var url = $"{Protocol}://{Server}:{Port}";
+                        Password = result;
+                    }
+                    //build url 
+                    var url = $"{Protocol}://{Server}:{Port}";
+                    Credential = new Nutanix.Powershell.Models.NutanixCredential(url,Username, Password);
+                }
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                await this.Client.GetVm(Uuid, onOK, onNotFound, onDefault, this, Pipeline, Credential, url);
+                await this.Client.GetVm(Uuid, onOK, onNotFound, onDefault, this, Pipeline, Credential);
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }
         }

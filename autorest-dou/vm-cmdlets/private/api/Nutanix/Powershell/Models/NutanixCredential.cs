@@ -39,26 +39,19 @@ namespace Nutanix.Powershell.Models
 
 
             Username = username ?? "";
-            // System.Security.SecureString result = new System.Security.SecureString();
-            // if (password.Length > 0 ) {
-            //     foreach (char c in password)
-            //             result.AppendChar(c);
-            // }   
-            // Password = result;
+            System.Security.SecureString result = new System.Security.SecureString();
+            if (password.Length > 0 ) {
+                foreach (char c in password)
+                        result.AppendChar(c);
+            }   
+            Password = result;
         }
 
-        public NutanixCredential(string uri, string username, string password)
+        public NutanixCredential(string uri, string username, System.Security.SecureString password)
         {
             var _uri = new System.Uri(uri); 
-            Uri = _uri;
-
-            Username = username ?? "";
-            System.Security.SecureString result = new System.Security.SecureString();
-        //     if (password.Length > 0 ) {
-        //         foreach (char c in password)
-        //                 result.AppendChar(c);
-        //     }   
-        //     Password = result;
+            Uri = _uri;  
+            Password = password;
         }
 
         public NutanixCredential(){}

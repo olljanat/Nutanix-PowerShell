@@ -92,7 +92,7 @@ namespace Nutanix.Powershell.Cmdlets
         public System.Management.Automation.SwitchParameter SkipSSL {get; set;}
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Skip the ssl validation")]
         [System.Management.Automation.ValidateNotNull]
-        public System.Management.Automation.PSCredential Credential {get; set;}
+        public Nutanix.Powershell.Models.NutanixCredential Credential {get; set;}
 
         /// <summary>The Username for authentication</summary>
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Username for authentication")]
@@ -255,44 +255,46 @@ namespace Nutanix.Powershell.Cmdlets
                 
                 Pipeline.Prepend(HttpPipelinePrepend);
                 Pipeline.Append(HttpPipelineAppend);
+                await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletGetPipeline); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
 
-                if (Port == null){
-                    Port = System.Environment.GetEnvironmentVariable("NutanixPort") ?? "9440";
-                }
-
-                if (Protocol == null) {
-                    Protocol = System.Environment.GetEnvironmentVariable("NutanixProtocol") ?? "https";
-                }
-
-                if (Server == null) {
-                    Server = System.Environment.GetEnvironmentVariable("NutanixServer") ?? "localhost";
-                }
-
-                if (Username == null) {
-                    Username = System.Environment.GetEnvironmentVariable("NutanixUsername") ?? "";
-                }
-
-                if (Password == null) {
-                    var psw = System.Environment.GetEnvironmentVariable("NutanixPassword") ?? "";
-                    System.Security.SecureString result = new System.Security.SecureString();
-                    foreach (char c in psw)
-                        result.AppendChar(c);
-
-                    Password = result;
-                }
 
                 if (Credential == null) {
-                    Credential = new System.Management.Automation.PSCredential(Username, Password);
+
+                    if (Port == null){
+                        Port = System.Environment.GetEnvironmentVariable("NutanixPort") ?? "9440";
+                    }
+
+                    if (Protocol == null) {
+                        Protocol = System.Environment.GetEnvironmentVariable("NutanixProtocol") ?? "https";
+                    }
+
+                    if (Server == null) {
+                        Server = System.Environment.GetEnvironmentVariable("NutanixServer") ?? "localhost";
+                    }
+
+                    if (Username == null) {
+                        Username = System.Environment.GetEnvironmentVariable("NutanixUsername") ?? "";
+                    }
+
+                    if (Password == null) {
+                        var psw = System.Environment.GetEnvironmentVariable("NutanixPassword") ?? "";
+                        System.Security.SecureString result = new System.Security.SecureString();
+                        foreach (char c in psw)
+                            result.AppendChar(c);
+
+                        Password = result;
+                    }
+                    //build url 
+                    var url = $"{Protocol}://{Server}:{Port}";
+                    Credential = new Nutanix.Powershell.Models.NutanixCredential(url,Username, Password);
                 }
 
 
-                //build url 
-                var url = $"{Protocol}://{Server}:{Port}";
+                
 
-                await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletGetPipeline); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 // get the client instance
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                await this.Client.GetVms(GetEntitiesRequest, onOK, onDefault, this, Pipeline, Credential, url);
+                await this.Client.GetVms(GetEntitiesRequest, onOK, onDefault, this, Pipeline, Credential);
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }
         }
