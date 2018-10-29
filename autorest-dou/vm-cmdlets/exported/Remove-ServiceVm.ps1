@@ -24,13 +24,13 @@ param(
     [switch]
     ${ProxyUseDefaultCredentials},
 
-    [Parameter(ParameterSetName='VmUuid', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='VmUuid', HelpMessage='The Username for authentication')]
     [string]
-    ${username},
+    ${Username},
 
-    [Parameter(ParameterSetName='VmUuid', HelpMessage='The password for authentication')]
-    [string]
-    ${password},
+    [Parameter(ParameterSetName='VmUuid', HelpMessage='The Password for authentication')]
+    [securestring]
+    ${Password},
 
     [Parameter(ParameterSetName='VmUuid', HelpMessage='Skip the ssl validation')]
     [switch]
@@ -41,15 +41,15 @@ param(
     [pscredential]
     ${Credential},
 
-    [Parameter(ParameterSetName='VmUuid', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='VmUuid', HelpMessage='The Username for authentication')]
     [string]
     ${Server},
 
-    [Parameter(ParameterSetName='VmUuid', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='VmUuid', HelpMessage='The Username for authentication')]
     [string]
     ${Port},
 
-    [Parameter(ParameterSetName='VmUuid', HelpMessage='The username for authentication')]
+    [Parameter(ParameterSetName='VmUuid', HelpMessage='The Username for authentication')]
     [string]
     ${Protocol},
 
