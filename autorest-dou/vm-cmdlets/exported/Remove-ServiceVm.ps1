@@ -28,7 +28,7 @@ param(
     [string]
     ${Username},
 
-    [Parameter(ParameterSetName='VmUuid', HelpMessage='The Password as a secure string for authentication')]
+    [Parameter(ParameterSetName='VmUuid', HelpMessage='The Password for authentication')]
     [securestring]
     ${Password},
 
@@ -41,15 +41,15 @@ param(
     [pscredential]
     ${Credential},
 
-    [Parameter(ParameterSetName='VmUuid', HelpMessage='The IP address or the domain of the server')]
+    [Parameter(ParameterSetName='VmUuid', HelpMessage='The Username for authentication')]
     [string]
     ${Server},
 
-    [Parameter(ParameterSetName='VmUuid', HelpMessage='The Port of where the API is served')]
+    [Parameter(ParameterSetName='VmUuid', HelpMessage='The Username for authentication')]
     [string]
     ${Port},
 
-    [Parameter(ParameterSetName='VmUuid', HelpMessage='The Proocol used on the server (http/https)')]
+    [Parameter(ParameterSetName='VmUuid', HelpMessage='The Username for authentication')]
     [string]
     ${Protocol},
 
