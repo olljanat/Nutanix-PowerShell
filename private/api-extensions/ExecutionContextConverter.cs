@@ -1,12 +1,7 @@
 namespace Nutanix.Powershell.Models
 {
-
-    /// <summary>
-    /// A PowerShell PSTypeConverter to support converting to an instance of <see cref="VmDefStatus" />
-    /// </summary>
-    public class VmDefStatusTypeConverter : System.Management.Automation.PSTypeConverter
+    public class ExecutionContextConverter : System.Management.Automation.PSTypeConverter
     {
-
         /// <summary>
         /// Determines if the converter can convert the <see cref="sourceValue"/> parameter to the <see cref="destinationType" />
         /// parameter.
@@ -22,10 +17,10 @@ namespace Nutanix.Powershell.Models
         /// Determines if the converter can convert the <see cref="sourceValue"/> parameter to the <see cref="destinationType" />
         /// parameter.
         /// </summary>
-        /// <param name="sourceValue">the <see cref="System.Object" /> instance to check if it can be converted to the <see cref="VmDefStatus"
+        /// <param name="sourceValue">the <see cref="System.Object" /> instance to check if it can be converted to the <see cref="ExecutionContext"
         /// /> type.</param>
         /// <returns>
-        /// <c>true</c> if the instance could be converted to a <see cref="VmDefStatus" /> type, otherwise <c>false</c>
+        /// <c>true</c> if the instance could be converted to a <see cref="ExecutionContext" /> type, otherwise <c>false</c>
         /// </returns>
         public static bool CanConvertFrom(dynamic sourceValue)
         {
@@ -73,16 +68,16 @@ namespace Nutanix.Powershell.Models
         /// <param name="formatProvider">not used by this TypeConverter.</param>
         /// <param name="ignoreCase">when set to <c>true</c>, will ignore the case when converting.</param>
         /// <returns>
-        /// an instance of <see cref="VmDefStatus" />, or <c>null</c> if there is no suitable conversion.
+        /// an instance of <see cref="ExecutionContext" />, or <c>null</c> if there is no suitable conversion.
         /// </returns>
         public override object ConvertFrom(object sourceValue, System.Type destinationType, System.IFormatProvider formatProvider, bool ignoreCase) => ConvertFrom(sourceValue);
         /// <summary>
         /// Converts the <see cref="sourceValue" /> parameter to the <see cref="destinationType" /> parameter using <see cref="formatProvider"
         /// /> and <see cref="ignoreCase" />
         /// </summary>
-        /// <param name="sourceValue">the value to convert into an instance of <see cref="VmDefStatus" />.</param>
+        /// <param name="sourceValue">the value to convert into an instance of <see cref="ExecutionContext" />.</param>
         /// <returns>
-        /// an instance of <see cref="VmDefStatus" />, or <c>null</c> if there is no suitable conversion.
+        /// an instance of <see cref="ExecutionContext" />, or <c>null</c> if there is no suitable conversion.
         /// </returns>
         public static object ConvertFrom(dynamic sourceValue)
         {
@@ -92,7 +87,7 @@ namespace Nutanix.Powershell.Models
             }
             try
             {
-                VmDefStatus.FromJsonString(typeof(string) == sourceValue.GetType() ? sourceValue : sourceValue.ToJsonString());
+                ExecutionContext.FromJsonString(typeof(string) == sourceValue.GetType() ? sourceValue : sourceValue.ToJsonString());
             }
             catch
             {
@@ -100,16 +95,9 @@ namespace Nutanix.Powershell.Models
             }
             try
             {
-                return new VmDefStatus
+                return new ExecutionContext
                 {
-                Name = sourceValue.Name,
-                Description = sourceValue.Description,
-                AvailabilityZoneReference = AvailabilityZoneReferenceTypeConverter.ConvertFrom(sourceValue.AvailabilityZoneReference),
-                ClusterReference = ClusterReferenceTypeConverter.ConvertFrom(sourceValue.ClusterReference),
-                MessageList = sourceValue.MessageList,
-                Resources = VmResourcesDefStatusTypeConverter.ConvertFrom(sourceValue.Resources),
-                State = sourceValue.State,
-                ExecutionContext = ExecutionContextConverter.ConvertFrom(sourceValue.ExecutionContext)
+                TaskUuid = sourceValue.TaskUuid
                 };
             }
             catch
@@ -124,5 +112,6 @@ namespace Nutanix.Powershell.Models
         /// <param name="ignoreCase">when set to <c>true</c>, will ignore the case when converting.</param>
         /// <returns>will always return <c>null</c>.</returns>
         public override object ConvertTo(object sourceValue, System.Type destinationType, System.IFormatProvider formatProvider, bool ignoreCase) => null;
+    
     }
 }

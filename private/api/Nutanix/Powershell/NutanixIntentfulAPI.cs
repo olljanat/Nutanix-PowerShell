@@ -1599,6 +1599,54 @@ namespace Nutanix.Powershell
                 }
             }
         }
+        /// <summary>Actual wire call for <see cref="NewVm" /> method.</summary>
+        /// <param name="request">the prepared HttpRequestMessage to send.</param>
+        /// <param name="onAccepted">a delegate that is called when the remote service returns 202 (Accepted).</param>
+        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
+        /// elsewhere).</param>
+        /// <param name="eventListener">an <see cref="Microsoft.Rest.ClientRuntime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an Microsoft.Rest.ClientRuntime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async System.Threading.Tasks.Task NewVm_Call_Sync(System.Net.Http.HttpRequestMessage request, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender)
+        {   
+            using( NoSynchronizationContext )
+            {
+                System.Net.Http.HttpResponseMessage _response = null;
+                try
+                {
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeCall, request); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    _response = await sender.SendAsync(request, eventListener);
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    var _contentType = _response.Content.Headers.ContentType?.MediaType;
+
+                    switch ( _response.StatusCode )
+                    {
+                        case System.Net.HttpStatusCode.Accepted:
+                        {
+                            await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            var vmTask = await _response.Content.ReadAsStringAsync().ContinueWith( body => Nutanix.Powershell.Models.VmIntentResponse.FromJson(Carbon.Json.JsonNode.Parse(body.Result)) );
+                            
+                            break;
+                        }
+                        default:
+                        {
+                            await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onDefault(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => Nutanix.Powershell.Models.VmStatus.FromJson(Carbon.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                    }
+                }
+                finally
+                {
+                    // finally statements
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.Finally, request, _response);
+                    _response?.Dispose();
+                    request?.Dispose();
+                }
+            }
+        }
         /// <summary>Actual wire call for <see cref="GetVm" /> method.</summary>
         /// <param name="request">the prepared HttpRequestMessage to send.</param>
         /// <param name="onOK">a delegate that is called when the remote service returns 200 (OK).</param>
@@ -1679,17 +1727,17 @@ namespace Nutanix.Powershell
 
 
     public sealed class RetryWithExponentialBackoff
-{
-    private readonly int maxRetries, delayMilliseconds, maxDelayMilliseconds;
-
-    public RetryWithExponentialBackoff(int maxRetries = 50,
-        int delayMilliseconds = 200,
-        int maxDelayMilliseconds = 2000)
     {
-        this.maxRetries = maxRetries;
-        this.delayMilliseconds = delayMilliseconds;
-        this.maxDelayMilliseconds = maxDelayMilliseconds;
-    }
+        private readonly int maxRetries, delayMilliseconds, maxDelayMilliseconds;
+
+        public RetryWithExponentialBackoff(int maxRetries = 50,
+            int delayMilliseconds = 200,
+            int maxDelayMilliseconds = 2000)
+        {
+            this.maxRetries = maxRetries;
+            this.delayMilliseconds = delayMilliseconds;
+            this.maxDelayMilliseconds = maxDelayMilliseconds;
+        }
 
         public async System.Threading.Tasks.Task RunAsync(System.Func<System.Threading.Tasks.Task> func)
         {

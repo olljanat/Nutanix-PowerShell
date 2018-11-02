@@ -109,6 +109,20 @@ namespace Nutanix.Powershell.Models
                 this._state = value;
             }
         }
+
+        private Nutanix.Powershell.Models.IExecutionContext _executionContext;
+        public Nutanix.Powershell.Models.IExecutionContext ExecutionContext {
+            get
+            {
+                return this._executionContext;
+            } 
+            
+            set
+            {
+                this._executionContext = value;
+            }
+        }
+
         /// <summary>Validates that this object meets the validation criteria.</summary>
         /// <param name="eventListener">an <see cref="Microsoft.Rest.ClientRuntime.IEventListener" /> instance that will receive validation
         /// events.</param>
@@ -137,5 +151,6 @@ namespace Nutanix.Powershell.Models
         string Name { get; set; }
         Nutanix.Powershell.Models.IVmResourcesDefStatus Resources { get; set; }
         string State { get; set; }
+        Nutanix.Powershell.Models.IExecutionContext ExecutionContext {get; set;}
     }
 }
