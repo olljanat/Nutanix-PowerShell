@@ -65,7 +65,7 @@ namespace Nutanix.Powershell.Models
             _code = If( json?.PropertyT<Carbon.Json.JsonNumber>("code"), out var __jsonCode) ? (int?)__jsonCode : Code;
             _kind = If( json?.PropertyT<Carbon.Json.JsonString>("kind"), out var __jsonKind) ? (string)__jsonKind : (string)Kind;
             _messageList = If( json?.PropertyT<Carbon.Json.JsonArray>("message_list"), out var __jsonMessageList) ? If( __jsonMessageList, out var __v) ? new System.Func<Nutanix.Powershell.Models.IMessageResource[]>(()=> System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select( __v, (__u)=> Nutanix.Powershell.Models.MessageResource.FromJson(__u)  ) ) )() : null : MessageList;
-            _state = If( json?.PropertyT<Carbon.Json.JsonString>("state"), out var __jsonState) ? (string)__jsonState : (string)State;
+            _state = If( json?.PropertyT<Carbon.Json.JsonString>("status"), out var __jsonState) ? (string)__jsonState : (string)State;
             AfterFromJson(json);
         }
         /// <summary>

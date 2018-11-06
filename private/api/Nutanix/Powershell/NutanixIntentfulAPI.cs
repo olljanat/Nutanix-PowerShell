@@ -1101,6 +1101,52 @@ namespace Nutanix.Powershell
                 await this.NewVm_Call(request,onAccepted,onDefault,eventListener,sender);
             }
         }
+
+
+               /// <summary>
+        /// This operation submits a request to create a VM based on the input parameters.
+        /// </summary>
+        /// <param name="body">An intentful representation of a vm</param>
+        /// <param name="onAccepted">a delegate that is called when the remote service returns 202 (Accepted).</param>
+        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
+        /// elsewhere).</param>
+        /// <param name="eventListener">an <see cref="Microsoft.Rest.ClientRuntime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an Microsoft.Rest.ClientRuntime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async System.Threading.Tasks.Task NewVm_Sync(Nutanix.Powershell.Models.IVmIntentInput body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmStatus>, System.Threading.Tasks.Task> onDefault, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmIntentResponse>, System.Threading.Tasks.Task> onOk,System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmStatus>, System.Threading.Tasks.Task> onNotFound,  Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // construct URL
+                var _url = new System.Uri((
+                        $"{credential.Uri.ToString()}/api/nutanix/v3//vms"
+                        ).TrimEnd('?','&'));
+
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new System.Net.Http.HttpRequestMessage(Microsoft.Rest.ClientRuntime.Method.Post, _url);
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                byte[] byteArray;
+                
+                byteArray = System.Text.Encoding.ASCII.GetBytes($"{credential.Username}:{CreateString(credential.Password)}");
+                
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", System.Convert.ToBase64String(byteArray));
+                // set body content
+                request.Content = new System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", System.Text.Encoding.UTF8);
+                request.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                // await this.NewVm_Call(request,onAccepted,onDefault,eventListener,sender);
+                await this.NewVm_Call_Sync(request, onAccepted, onOk, onDefault, onNotFound, eventListener, sender, credential);
+
+            }
+        }
         /// <summary>Actual wire call for <see cref="Users" /> method.</summary>
         /// <param name="request">the prepared HttpRequestMessage to send.</param>
         /// <param name="onOK">a delegate that is called when the remote service returns 200 (OK).</param>
@@ -1609,11 +1655,12 @@ namespace Nutanix.Powershell
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async System.Threading.Tasks.Task NewVm_Call_Sync(System.Net.Http.HttpRequestMessage request, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender)
+        internal async System.Threading.Tasks.Task NewVm_Call_Sync(System.Net.Http.HttpRequestMessage request, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmIntentResponse>, System.Threading.Tasks.Task> onAccepted,System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmIntentResponse>, System.Threading.Tasks.Task> onOk,  System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmStatus>, System.Threading.Tasks.Task> onDefault, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmStatus>, System.Threading.Tasks.Task> onNotFound, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential)
         {   
             using( NoSynchronizationContext )
             {
                 System.Net.Http.HttpResponseMessage _response = null;
+                Nutanix.Powershell.Models.IVmIntentResponse _vmTask = null;
                 try
                 {
                     await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeCall, request); if( eventListener.Token.IsCancellationRequested ) { return; }
@@ -1626,8 +1673,7 @@ namespace Nutanix.Powershell
                         case System.Net.HttpStatusCode.Accepted:
                         {
                             await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            var vmTask = await _response.Content.ReadAsStringAsync().ContinueWith( body => Nutanix.Powershell.Models.VmIntentResponse.FromJson(Carbon.Json.JsonNode.Parse(body.Result)) );
-                            
+                            _vmTask = await _response.Content.ReadAsStringAsync().ContinueWith( body => Nutanix.Powershell.Models.VmIntentResponse.FromJson(Carbon.Json.JsonNode.Parse(body.Result)) );
                             break;
                         }
                         default:
@@ -1645,6 +1691,18 @@ namespace Nutanix.Powershell
                     _response?.Dispose();
                     request?.Dispose();
                 }
+
+                var retry = new RetryWithExponentialBackoff();
+                await retry.RunAsync(async () =>
+                {
+                     var _task = await GetTaskStatus(_vmTask.Status.ExecutionContext.TaskUuid, eventListener, sender, credential);
+                     if (_task.State !=  "SUCCEEDED" || _task.State !=  "FAILED") 
+                     {
+                        throw new System.ApplicationException("Status is not completed", new System.Exception($"Status is {_task.State}"));
+                     } 
+
+                });
+                await this.GetVm(_vmTask.Metadata.Uuid, onOk, onNotFound, onDefault, eventListener, sender, credential);
             }
         }
         /// <summary>Actual wire call for <see cref="GetVm" /> method.</summary>
@@ -1700,6 +1758,65 @@ namespace Nutanix.Powershell
                 }
             }
         }
+        // System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ITaskStatus>, System.Threading.Tasks.Task> onNotFound,
+        internal async System.Threading.Tasks.Task<Nutanix.Powershell.Models.ITaskStatus> GetTaskStatus(string uuid, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential) {
+                // Constant Parameters
+            using (NoSynchronizationContext)
+            {
+                // construct URL
+                var _url = new System.Uri((
+                        $"{credential.Uri.ToString()}/api/nutanix/v3//tasks/"
+                        + System.Uri.EscapeDataString(uuid)
+                        + ""
+                        ).TrimEnd('?', '&'));
+
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.URLCreated, _url); if (eventListener.Token.IsCancellationRequested) { return null; }
+
+                // generate request object
+                var request = new System.Net.Http.HttpRequestMessage(Microsoft.Rest.ClientRuntime.Method.Get, _url);
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.RequestCreated, _url); if (eventListener.Token.IsCancellationRequested) { return null; }
+
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.HeaderParametersAdded, _url); if (eventListener.Token.IsCancellationRequested) { return null; }
+                // make the call
+                System.Net.Http.HttpResponseMessage _response = null;
+                try
+                {
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeCall, request); if (eventListener.Token.IsCancellationRequested) { return null; }
+                    _response = await sender.SendAsync(request, eventListener);
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.ResponseCreated, _response); if (eventListener.Token.IsCancellationRequested) { return null; }
+                    var _contentType = _response.Content.Headers.ContentType?.MediaType;
+                    switch (_response.StatusCode)
+                    {
+                        case System.Net.HttpStatusCode.OK:
+                            {
+                                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeResponseDispatch, _response); if (eventListener.Token.IsCancellationRequested) { return null; }
+                                return await _response.Content.ReadAsStringAsync().ContinueWith(body => Nutanix.Powershell.Models.TaskStatus.FromJson(Carbon.Json.JsonNode.Parse(body.Result)));
+                            }
+                        case System.Net.HttpStatusCode.NotFound:
+                            {
+                                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeResponseDispatch, _response); if (eventListener.Token.IsCancellationRequested) { return null; }
+                                // await onNotFound(_response, _response.Content.ReadAsStringAsync().ContinueWith(body => Nutanix.Powershell.Models.TaskStatus.FromJson(Carbon.Json.JsonNode.Parse(body.Result))));
+                                break;
+                            }
+                        default:
+                            {
+                                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeResponseDispatch, _response); if (eventListener.Token.IsCancellationRequested) { return null; }
+                                // await onDefault(_response, _response.Content.ReadAsStringAsync().ContinueWith(body => Nutanix.Powershell.Models.TaskStatus.FromJson(Carbon.Json.JsonNode.Parse(body.Result))));
+                               break;
+                            }
+                    }
+                }
+                finally
+                {
+                    // finally statements
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.Finally, request, _response);
+                    _response?.Dispose();
+                    request?.Dispose();
+                }
+                
+            }
+            return null;
+        }
 
         private static string CreateString(System.Security.SecureString secureString)
         {
@@ -1726,9 +1843,9 @@ namespace Nutanix.Powershell
     }
 
 
-    public sealed class RetryWithExponentialBackoff
+    internal sealed class RetryWithExponentialBackoff
     {
-        private readonly int maxRetries, delayMilliseconds, maxDelayMilliseconds;
+        public readonly int maxRetries, delayMilliseconds, maxDelayMilliseconds;
 
         public RetryWithExponentialBackoff(int maxRetries = 50,
             int delayMilliseconds = 200,
@@ -1750,20 +1867,15 @@ namespace Nutanix.Powershell
                 await func();
             }
             catch (System.Exception ex) when (ex is System.TimeoutException ||
-                ex is System.Net.Http.HttpRequestException)
+                ex is System.Net.Http.HttpRequestException || ex is System.ApplicationException)
             {
-                System.Console.WriteLine("Exception raised is: " +
-                    ex.GetType().ToString() +
-                    " –Message: " + ex.Message +
-                    " -- Inner Message: " +
-                    ex.InnerException.Message);
                 await backoff.Delay();
                 goto retry;
             }
         }
     }
 
-    public struct ExponentialBackoff
+    internal struct ExponentialBackoff
     {
         private readonly int m_maxRetries, m_delayMilliseconds, m_maxDelayMilliseconds;
         private int m_retries, m_pow;
