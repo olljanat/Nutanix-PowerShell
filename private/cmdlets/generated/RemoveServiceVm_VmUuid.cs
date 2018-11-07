@@ -77,6 +77,10 @@ namespace Nutanix.Powershell.Cmdlets
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Skip the ssl validation")]
         public System.Management.Automation.SwitchParameter SkipSSL {get; set;}
 
+         /// <summary>Run the cmdlet asynchronous</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Run the cmdlet asynchronous")]
+        public System.Management.Automation.SwitchParameter Async {get; set;}
+
         /// <summary>A PSCredental with username and password</summary>
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "A PSCredental with username and password")]
         [System.Management.Automation.ValidateNotNull]
@@ -275,7 +279,16 @@ namespace Nutanix.Powershell.Cmdlets
 
                 // get the client instance
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                await this.Client.DeleteVm(Uuid, onAccepted, onNotFound, onDefault, this, Pipeline, Credential);
+
+                if (this.Async.ToBool()) 
+                {
+                    await this.Client.DeleteVm(Uuid, onAccepted, onNotFound, onDefault, this, Pipeline, Credential);
+                }
+                else 
+                {
+                    await this.Client.DeleteVm_Sync(Uuid, onAccepted, onNotFound, onDefault, this, Pipeline, Credential);
+                }
+
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }
         }
@@ -321,7 +334,7 @@ namespace Nutanix.Powershell.Cmdlets
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
         /// </returns>
-        private async System.Threading.Tasks.Task onAccepted(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmIntentResponse> response)
+        private async System.Threading.Tasks.Task onAccepted(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IDeleteTask> response)
         {
             using( NoSynchronizationContext )
             {
