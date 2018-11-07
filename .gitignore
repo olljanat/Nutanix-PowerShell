@@ -3,6 +3,7 @@ deps/
 
 bin/
 obj/
+help/
 project.lock.json
 *-tests.xml
 /debug/
