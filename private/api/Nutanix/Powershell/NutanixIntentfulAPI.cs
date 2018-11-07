@@ -47,14 +47,14 @@ namespace Nutanix.Powershell
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async System.Threading.Tasks.Task UpdateImage(string uuid, Nutanix.Powershell.Models.IImageIntentInput body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, System.Management.Automation.PSCredential credential, string url)
+        public async System.Threading.Tasks.Task UpdateImage(string uuid, Nutanix.Powershell.Models.IImageIntentInput body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
             {
                 // construct URL
                 var _url = new System.Uri((
-                        $"{url}/api/nutanix/v3//images/"
+                        $"{credential.Uri.ToString()}/api/nutanix/v3//images/"
                         + System.Uri.EscapeDataString(uuid)
                         + ""
                         ).TrimEnd('?','&'));
@@ -131,14 +131,14 @@ namespace Nutanix.Powershell
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async System.Threading.Tasks.Task GetImage(string uuid, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageIntentResponse>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, System.Management.Automation.PSCredential credential, string url)
+        public async System.Threading.Tasks.Task GetImage(string uuid, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageIntentResponse>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
             {
                 // construct URL
                 var _url = new System.Uri((
-                        $"{url}/api/nutanix/v3//images/"
+                        $"{credential.Uri.ToString()}/api/nutanix/v3//images/"
                         + System.Uri.EscapeDataString(uuid)
                         + ""
                         ).TrimEnd('?','&'));
@@ -214,14 +214,14 @@ namespace Nutanix.Powershell
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async System.Threading.Tasks.Task GetImages(Nutanix.Powershell.Models.IImageListMetadata body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageListIntentResponse>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, System.Management.Automation.PSCredential credential, string url)
+        public async System.Threading.Tasks.Task GetImages(Nutanix.Powershell.Models.IImageListMetadata body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageListIntentResponse>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
             {
                 // construct URL
                 var _url = new System.Uri((
-                        $"{url}/api/nutanix/v3//images/list"
+                        $"{credential.Uri.ToString()}/api/nutanix/v3//images/list"
                         ).TrimEnd('?','&'));
 
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
@@ -295,14 +295,14 @@ namespace Nutanix.Powershell
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async System.Threading.Tasks.Task DeleteImage(string uuid, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, System.Management.Automation.PSCredential credential, string url)
+        public async System.Threading.Tasks.Task DeleteImage(string uuid, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
             {
                 // construct URL
                 var _url = new System.Uri((
-                        $"{url}/api/nutanix/v3//images/"
+                        $"{credential.Uri.ToString()}/api/nutanix/v3//images/"
                         + System.Uri.EscapeDataString(uuid)
                         + ""
                         ).TrimEnd('?','&'));
@@ -374,14 +374,14 @@ namespace Nutanix.Powershell
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async System.Threading.Tasks.Task Images(string uuid, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<System.IO.Stream>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, System.Management.Automation.PSCredential credential, string url)
+        public async System.Threading.Tasks.Task Images(string uuid, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<System.IO.Stream>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
             {
                 // construct URL
                 var _url = new System.Uri((
-                        $"{url}/api/nutanix/v3//images/"
+                        $"{credential.Uri.ToString()}/api/nutanix/v3//images/"
                         + System.Uri.EscapeDataString(uuid)
                         + "/file"
                         ).TrimEnd('?','&'));
@@ -411,14 +411,14 @@ namespace Nutanix.Powershell
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async System.Threading.Tasks.Task GetTaskList(Nutanix.Powershell.Models.ITaskListMetadata body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ITaskListIntentResponse>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ITaskStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, System.Management.Automation.PSCredential credential, string url)
+        public async System.Threading.Tasks.Task GetTaskList(Nutanix.Powershell.Models.ITaskListMetadata body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ITaskListIntentResponse>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ITaskStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential)
         {
             // Constant Parameters
             using (NoSynchronizationContext)
             {
                 // construct URL
                 var _url = new System.Uri((
-                        $"{url}/api/nutanix/v3//tasks/list"
+                        $"{credential.Uri.ToString()}/api/nutanix/v3//tasks/list"
                         ).TrimEnd('?', '&'));
 
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.URLCreated, _url); if (eventListener.Token.IsCancellationRequested) { return; }
@@ -493,14 +493,14 @@ namespace Nutanix.Powershell
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async System.Threading.Tasks.Task GetTask(string uuid, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ITask>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ITaskStatus>, System.Threading.Tasks.Task> onNotFound, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ITaskStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, System.Management.Automation.PSCredential credential, string url)
+        public async System.Threading.Tasks.Task GetTask(string uuid, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ITask>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ITaskStatus>, System.Threading.Tasks.Task> onNotFound, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ITaskStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential)
         {
             // Constant Parameters
             using (NoSynchronizationContext)
             {
                 // construct URL
                 var _url = new System.Uri((
-                        $"{url}/api/nutanix/v3//tasks/"
+                        $"{credential.Uri.ToString()}/api/nutanix/v3//tasks/"
                         + System.Uri.EscapeDataString(uuid)
                         + ""
                         ).TrimEnd('?', '&'));
@@ -579,14 +579,14 @@ namespace Nutanix.Powershell
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async System.Threading.Tasks.Task NewPoll(Nutanix.Powershell.Models.ITaskPollInput body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ITaskPollResponse>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ITaskStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, System.Management.Automation.PSCredential credential, string url)
+        public async System.Threading.Tasks.Task NewPoll(Nutanix.Powershell.Models.ITaskPollInput body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ITaskPollResponse>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ITaskStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential)
         {
             // Constant Parameters
             using (NoSynchronizationContext)
             {
                 // construct URL
                 var _url = new System.Uri((
-                        $"{url}/api/nutanix/v3//tasks/poll"
+                        $"{credential.Uri.ToString()}/api/nutanix/v3//tasks/poll"
                         ).TrimEnd('?', '&'));
 
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.URLCreated, _url); if (eventListener.Token.IsCancellationRequested) { return; }
@@ -710,14 +710,14 @@ namespace Nutanix.Powershell
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async System.Threading.Tasks.Task NewImage(Nutanix.Powershell.Models.IImageIntentInput body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, System.Management.Automation.PSCredential credential, string url)
+        public async System.Threading.Tasks.Task NewImage(Nutanix.Powershell.Models.IImageIntentInput body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
             {
                 // construct URL
                 var _url = new System.Uri((
-                        $"{url}/api/nutanix/v3//images"
+                        $"{credential.Uri.ToString()}/api/nutanix/v3//images"
                         ).TrimEnd('?','&'));
 
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
@@ -814,14 +814,14 @@ namespace Nutanix.Powershell
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async System.Threading.Tasks.Task NewMigrate(Nutanix.Powershell.Models.IImageMigrateInput body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IProceduralResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IProceduralErrorResponse>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, System.Management.Automation.PSCredential credential, string url)
+        public async System.Threading.Tasks.Task NewMigrate(Nutanix.Powershell.Models.IImageMigrateInput body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IProceduralResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IProceduralErrorResponse>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
             {
                 // construct URL
                 var _url = new System.Uri((
-                        $"{url}/api/nutanix/v3//images/migrate"
+                        $"{credential.Uri.ToString()}/api/nutanix/v3//images/migrate"
                         ).TrimEnd('?','&'));
 
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
@@ -1088,10 +1088,9 @@ namespace Nutanix.Powershell
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
 
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
-                byte[] byteArray;
-                
-                byteArray = System.Text.Encoding.ASCII.GetBytes($"{credential.Username}:{CreateString(credential.Password)}");
-                
+
+                var byteArray = System.Text.Encoding.ASCII.GetBytes($"{credential.Username}:{CreateString(credential.Password)}");
+
                 request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", System.Convert.ToBase64String(byteArray));
                 // set body content
                 request.Content = new System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", System.Text.Encoding.UTF8);
@@ -1132,10 +1131,9 @@ namespace Nutanix.Powershell
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
 
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
-                byte[] byteArray;
-                
-                byteArray = System.Text.Encoding.ASCII.GetBytes($"{credential.Username}:{CreateString(credential.Password)}");
-                
+
+                var byteArray = System.Text.Encoding.ASCII.GetBytes($"{credential.Username}:{CreateString(credential.Password)}");
+
                 request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", System.Convert.ToBase64String(byteArray));
                 // set body content
                 request.Content = new System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", System.Text.Encoding.UTF8);
@@ -1274,7 +1272,7 @@ namespace Nutanix.Powershell
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async System.Threading.Tasks.Task Vms(Nutanix.Powershell.Models.IVmListMetadata body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmListIntentResponse>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, string username, string password, System.Management.Automation.PSCredential credential, string url)
+        public async System.Threading.Tasks.Task Vms(Nutanix.Powershell.Models.IVmListMetadata body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmListIntentResponse>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -1282,7 +1280,7 @@ namespace Nutanix.Powershell
                 System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
                 // construct URL
                 var _url = new System.Uri((
-                        $"{url}/api/nutanix/v3//vms/list"
+                        $"{credential.Uri.ToString()}/api/nutanix/v3//vms/list"
                         ).TrimEnd('?','&'));
 
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
@@ -1295,13 +1293,8 @@ namespace Nutanix.Powershell
                 // set body content
                 request.Content = new System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                
-                byte[] byteArray;
-                if (credential != null) {
-                    byteArray = System.Text.Encoding.ASCII.GetBytes($"{credential.UserName}:{CreateString(credential.Password)}");
-                } else {
-                    byteArray = System.Text.Encoding.ASCII.GetBytes($"{username}:{password}");
-                }
+
+                var byteArray = System.Text.Encoding.ASCII.GetBytes($"{credential.Username}:{CreateString(credential.Password)}");
 
                 request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", System.Convert.ToBase64String(byteArray));
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
