@@ -1,84 +1,165 @@
-# Nutanix PowerShell
+# Nutanix Powershell
 
-Microsoft PowerShell module to integrate with Nutanix Enterprise Cloud
+This repository contains a set of PowerShell cmdlets for developers and administrators to develop, deploy and manage Nutanix Enterprise Cloud Applications
+[![GoDoc](https://godoc.org/github.com/tools/godep?status.svg)](https://developer.nutanix.com/reference/prism_central/v3/)
 
-NOTE: This PowerShell module is currently tech preview as of 13 June 2018. See "Current Development Status" below.
+Nutanix Powershell cmdlets helps to manage Nutanix Enterprise Cloud Applications using Powershell 6 with Powershell Core.
 
-NOTE: This is open source, and we love pull requests! Please see the GitHub issues for help wanted, and feel free to chip in with pull requests!
+This tools asumes that you already have a Nutanix Account created and its credentials.
 
-#### Project, Build, Quality Status
+## Requirements
 
-[![Waffle.io - Columns and their card count](https://badge.waffle.io/nutanix/PowerShell.svg?columns=all)](https://waffle.io/nutanix/PowerShell) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/31363a609f9e422097824a083e983357)](https://www.codacy.com/app/JonKohler/PowerShell?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nutanix/PowerShell&amp;utm_campaign=Badge_Grade) [![CodeFactor](https://www.codefactor.io/repository/github/nutanix/powershell/badge)](https://www.codefactor.io/repository/github/nutanix/powershell) [![codecov](https://codecov.io/gh/nutanix/PowerShell/branch/master/graph/badge.svg)](https://codecov.io/gh/nutanix/PowerShell)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fnutanix%2FPowerShell.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fnutanix%2FPowerShell?ref=badge_shield)
+ - Powershell v6
+ - Powershell Core
+ - S.O. Windows, Linux or Mac
+ - Nutanix Account
 
-| Master                                                                                                                                                          | Develop                                                                                                                                                           |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [![CircleCI](https://circleci.com/gh/nutanix/PowerShell.svg?style=svg)](https://circleci.com/gh/nutanix/PowerShell) | (TBD) |
+## Install
+
+After clone the Nutanix Powershell repository, run:
+
+```console
+Import-Module -Name [C:\Users\developer\Documents\Nutanix-Powershell\NutanixIntentfulAPI.psd1]
+```
+
+## Verify Nutanix Module Installation
+
+To verify the Nutanix Powershell module, run:
+
+```console
+> Get-Module -Name NutanixIntentfulAPI
+```
+
+This will retrieve the Nutanix Module info
+
+``` console
+ModuleType Version    Name                                ExportedCommands
+---------- -------    ----                                ----------------
+Manifest   1.0        NutanixIntentfulAPI                 {Get-Image, Get-ServiceVm, Get-Task, Get-TaskList...}
+```
+
+## How to get the availables cmdlets
+
+After import the NutanixIntentful we could get the avaibles cmdlets running the command:
+
+```console
+> Get-Command -Module NutanixIntentfulAPI
+```
+
+This will retrieve a list with the availables cmdlets of the Module
+
+``` console
+CommandType     Name                                               Version    Source
+-----------     ----                                               -------    ------
+Function        Get-Image                                          1.0        NutanixIntentfulAPI
+Function        Get-ServiceVm                                      1.0        NutanixIntentfulAPI
+Function        Get-Task                                           1.0        NutanixIntentfulAPI
+Function        Get-TaskList                                       1.0        NutanixIntentfulAPI
+Function        Invoke-Image                                       1.0        NutanixIntentfulAPI
+Function        New-AccessControlPolicyListMetadataObject          1.0        NutanixIntentfulAPI
+Function        New-AvailabilityZoneReferenceObject                1.0        NutanixIntentfulAPI
+Function        New-ChecksumObject                                 1.0        NutanixIntentfulAPI
+Function        New-ClusterReferenceObject                         1.0        NutanixIntentfulAPI
+Function        New-DiskObject                                     1.0        NutanixIntentfulAPI
+Function        New-Image                                          1.0        NutanixIntentfulAPI
+Function        New-ImageIntentInputObject                         1.0        NutanixIntentfulAPI
+Function        New-ImageListMetadataObject                        1.0        NutanixIntentfulAPI
+Function        New-ImageMetadataObject                            1.0        NutanixIntentfulAPI
+Function        New-ImageMigrateInputObject                        1.0        NutanixIntentfulAPI
+Function        New-ImageObject                                    1.0        NutanixIntentfulAPI
+Function        New-ImageResourcesObject                           1.0        NutanixIntentfulAPI
+Function        New-ImageVersionResourcesObject                    1.0        NutanixIntentfulAPI
+Function        New-Migrate                                        1.0        NutanixIntentfulAPI
+Function        New-NutanixCredential                              1.0        NutanixIntentfulAPI
+Function        New-Poll                                           1.0        NutanixIntentfulAPI
+Function        New-ProjectReferenceObject                         1.0        NutanixIntentfulAPI
+Function        New-ServiceVm                                      1.0        NutanixIntentfulAPI
+Function        New-TaskListMetadataObject                         1.0        NutanixIntentfulAPI
+Function        New-TaskPollInputObject                            1.0        NutanixIntentfulAPI
+Function        New-UserReferenceObject                            1.0        NutanixIntentfulAPI
+Function        New-VmIntentInputObject                            1.0        NutanixIntentfulAPI
+Function        New-VmListMetadataObject                           1.0        NutanixIntentfulAPI
+Function        New-VmMetadataObject                               1.0        NutanixIntentfulAPI
+Function        New-VmObject                                       1.0        NutanixIntentfulAPI
+Function        New-VmRecoveryPointIntentInputObject               1.0        NutanixIntentfulAPI
+Function        New-VmRecoveryPointListMetadataObject              1.0        NutanixIntentfulAPI
+Function        New-VmRecoveryPointMetadataObject                  1.0        NutanixIntentfulAPI
+Function        New-VmResourcesObject                              1.0        NutanixIntentfulAPI
+Function        Remove-Image                                       1.0        NutanixIntentfulAPI
+Function        Remove-ServiceVm                                   1.0        NutanixIntentfulAPI
+Function        Set-Image                                          1.0        NutanixIntentfulAPI
+Function        Set-NutanixCredential                              1.0        NutanixIntentfulAPI
+```
+
+## Get Cmdlets Help
+
+At this points, every single cmdlet has it's own documentation/help section, to invoke this option, run:
+
+``` console
+Get-Help [CmdletName]
+```
+
+By example, at test this option with the **New-ServiceVm** cmdlets we got:
+
+```console
+PS C:\Users\\Documents\repositories\PowerShell> Get-Help New-ServiceVm
+
+NAME
+    New-ServiceVm
+
+SYNOPSIS
 
 
+SYNTAX
+    New-ServiceVm [-HttpPipelineAppend <SendAsyncStep[]>] [-HttpPipelinePrepend <SendAsyncStep[]>] [-Proxy <Uri>] [-ProxyCredential <PSCredential>]
+    [-ProxyUseDefaultCredentials] [-Username <String>] [-Password <SecureString>] [-SkipSSL] [-Credential <NutanixCredential>] [-Server <String>] [-Port <String>]
+    [-Protocol <String>] [-ApiVersion <String>] -Metadata <IVmMetadata> -Spec <IVm> [-Async] [-WhatIf] [-Confirm] [<CommonParameters>]
 
-What, Why, and Goals
---------------------
-Nutanix is committed to making PowerShell a first-class feature. In service of that goal, Nutanix is planning to deprecate the existing PowerShell cmdlets, in favor of this fully open source project.
+    New-ServiceVm [-HttpPipelineAppend <SendAsyncStep[]>] [-HttpPipelinePrepend <SendAsyncStep[]>] [-Proxy <Uri>] [-ProxyCredential <PSCredential>]
+    [-ProxyUseDefaultCredentials] [-Username <String>] [-Password <SecureString>] [-SkipSSL] [-Credential <NutanixCredential>] [-Server <String>] [-Port <String>]
+    [-Protocol <String>] -Body <IVmIntentInput> [-WhatIf] [-Confirm] [<CommonParameters>]
 
-Nutanix cmdlets are being replaced with a "from the ground up" rewrite, leveraging our latest API's and Microsoft's PowerShell 6.x code train.
+    New-ServiceVm [-HttpPipelineAppend <SendAsyncStep[]>] [-HttpPipelinePrepend <SendAsyncStep[]>] [-DiskSizeMib <Int32>] [-NumSockets <Int32>] [-NumVcpusPerSocket
+    <Int32>] [-MemorySizeMib <Int32>] [-PowerState <String>] [-ClusterReferenceUuid <String>] [-Name <String>] [-Description <String>] [-Proxy <Uri>]
+    [-ProxyCredential <PSCredential>] [-ProxyUseDefaultCredentials] [-Username <String>] [-Password <SecureString>] [-SkipSSL] [-Credential <NutanixCredential>]
+    [-Server <String>] [-Port <String>] [-Protocol <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 
-This new release will fundamentally enhance our functionality, including:
-* PowerShell 6.0 Support for Windows, Linux, and OSX
-* Module support, for easy integration with editors like Visual Studio Code
-* PowerShell Gallery support, for ease of deployment
-* Simplified, easy to use Cmdlets with traditional virtualization sysadmin semantics
-* Verbose Get-Help with detailed examples on each cmdlet
-* Production supported, with additional Open Source community collaboration on GitHub and Slack
-* Nutanix v3 API support - This means Calm, Micro Seg, and all of the other goodies.
-* Note: legacy API’s will only be leveraged for methods not yet available in v3 API
 
-Nutanix is taking an inclusive approach to developing this new feature and welcomes customer feedback. Please see our development project on GitHub, comment on requirements and/or design, and feel free to join us on Slack. Instructions on commenting, contributing, and joining our community Slack channel are all located within our GitHub Readme.
+DESCRIPTION
 
-For a slack invite, please contact PowerShell@nutanix.com from your business address, and we'll add you.
 
-Roadmap
---------------------
-If you're reading this, you're in on the ground floor. Really, the parking garage. We've just started to put in the foundation for this project, and we're "soft launching" by opening up so people can check out our development progress.
+RELATED LINKS
 
-In the short term, we'll be adding our full requirements list as we build our our documentation, and start baking in a proper readme, etc.
+REMARKS
+    To see the examples, type: "get-help New-ServiceVm -examples".
+    For more information, type: "get-help New-ServiceVm -detailed".
+    For technical information, type: "get-help New-ServiceVm -full".
+```
 
-##### TODO - tune up the install / dev docs based on the new processes
-Quick Install
--------------
+## Uninstalling
 
-Just try out the Docker image?
+To remove the module from the Powershell env, run:
 
-    sudo docker run -it kasprosian/ntnx-powershell bash
+```console
+Remove-Module NutanixIntentfulAPI
+```
 
-Then inside the container:
+At this point, no metadata stays on your env so we could install the NutanixIntentfulAPI Module without issues
 
-    cd /Powershell
-    sh test/sanity_test.sh
+## Verify uninstall
 
-Install Dependencies
---------------------
+To verify that we already uninstall the NutanixIntentfulAPI module was successful, run:
 
-Make sure nuget is installed (check via `which nuget`).
+``` console
+Get-Module NutanixIntentfulAPI
+```
 
-    make deps
+And we should see nothing in the powershell
 
-Install from source
--------------------
+## Next features
 
-    make
-
-Install from package
---------------------
-
-TODO: coming soon, a way to install from powershell gallery.
-
-Install PowerShell 6.1.0-Preview3++: https://github.com/PowerShell/PowerShell/releases
-Launch PowerShell Preview: pwsh-preview
-import-module -Name /Users/jon/git/PowerShell/src/Nutanix.PowerShell.SDK/bin/Debug/netcoreapp2.1/Nutanix.PowerShell.SDK.psm1 -Verbose
-    (this assumes you've compiled and moved the psm1/psd1 to the bin/debug/netcoreapp2.1 folder)
-$pass = ConvertTo-SecureString -string "Nutanix/1234" -force -AsPlainText
-Connect-Cluster -Server 10.5.80.60 -UserName admin -Password $pass -AcceptInvalidSslCerts
-
-## License
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fnutanix%2FPowerShell.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fnutanix%2FPowerShell?ref=badge_large)
+ 1. New cmdlets to work with:
+   - Vmware
+	 - Security Rules
+	 - Disk
+	 - etc
