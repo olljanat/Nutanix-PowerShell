@@ -55,7 +55,7 @@ namespace Nutanix.Powershell.Cmdlets
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Use the default credentials for the proxy")]
         public System.Management.Automation.SwitchParameter ProxyUseDefaultCredentials {get;set;}
 
-        /// <summary>The Username for authentication</summary>
+       /// <summary>The Username for authentication</summary>
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Username for authentication")]
         public string Username {get; set;}
 
@@ -66,20 +66,20 @@ namespace Nutanix.Powershell.Cmdlets
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Skip the ssl validation")]
         public System.Management.Automation.SwitchParameter SkipSSL {get; set;}
 
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Skip the ssl validation")]
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Nutanix Credential object for authentication")]
         [System.Management.Automation.ValidateNotNull]
         public Nutanix.Powershell.Models.NutanixCredential Credential {get; set;}
 
         /// <summary>The Username for authentication</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Username for authentication")]
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Server address")]
         public string Server {get; set;}
 
-          /// <summary>The Username for authentication</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Username for authentication")]
+        /// <summary>The Username for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Server Port, defaults to 9440")]
         public string Port {get; set;}
 
         /// <summary>The Username for authentication</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Username for authentication")]
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The HTTP protocol, defaults to https")]
         public string Protocol {get; set;}
 
         /// <summary>
