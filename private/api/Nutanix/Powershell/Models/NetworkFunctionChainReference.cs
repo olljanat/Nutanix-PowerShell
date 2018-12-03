@@ -14,7 +14,7 @@ namespace Nutanix.Powershell.Models
             {
                 return this._kind;
             }
-            internal set
+            set
             {
                 this._kind = value;
             }
@@ -28,7 +28,7 @@ namespace Nutanix.Powershell.Models
             {
                 return this._name;
             }
-            internal set
+            set
             {
                 this._name = value;
             }
@@ -65,8 +65,8 @@ namespace Nutanix.Powershell.Models
     }
     /// The reference to a network_function_chain
     public partial interface INetworkFunctionChainReference : Microsoft.Rest.ClientRuntime.IJsonSerializable {
-        string Kind { get;  }
-        string Name { get;  }
+        string Kind { get;  set;}
+        string Name { get;  set;}
         string Uuid { get; set; }
     }
 }

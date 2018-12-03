@@ -1920,6 +1920,534 @@ namespace Nutanix.Powershell
             return null;
         }
 
+        /// <summary>
+        /// This operation submits a request to create a subnet based on the input parameters.
+        /// A subnet is a block of IP addresses.
+        /// </summary>
+        /// <param name="body">An intentful representation of a subnet</param>
+        /// <param name="onAccepted">a delegate that is called when the remote service returns 202 (Accepted).</param>
+        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
+        /// elsewhere).</param>
+        /// <param name="eventListener">an <see cref="Microsoft.Rest.ClientRuntime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an Microsoft.Rest.ClientRuntime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async System.Threading.Tasks.Task CreateSubnet(Nutanix.Powershell.Models.ISubnetIntentInput body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // construct URL
+                var _url = new System.Uri((
+                        "http://35.196.200.179:9440/api/nutanix/v3//subnets"
+                        ).TrimEnd('?','&'));
+
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new System.Net.Http.HttpRequestMessage(Microsoft.Rest.ClientRuntime.Method.Post, _url);
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // set body content
+                request.Content = new System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", System.Text.Encoding.UTF8);
+                request.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.CreateSubnet_Call(request,onAccepted,onDefault,eventListener,sender);
+            }
+        }
+        /// <summary>Actual wire call for <see cref="CreateSubnet" /> method.</summary>
+        /// <param name="request">the prepared HttpRequestMessage to send.</param>
+        /// <param name="onAccepted">a delegate that is called when the remote service returns 202 (Accepted).</param>
+        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
+        /// elsewhere).</param>
+        /// <param name="eventListener">an <see cref="Microsoft.Rest.ClientRuntime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an Microsoft.Rest.ClientRuntime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async System.Threading.Tasks.Task CreateSubnet_Call(System.Net.Http.HttpRequestMessage request, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender)
+        {
+            using( NoSynchronizationContext )
+            {
+                System.Net.Http.HttpResponseMessage _response = null;
+                try
+                {
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeCall, request); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    _response = await sender.SendAsync(request, eventListener);
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    var _contentType = _response.Content.Headers.ContentType?.MediaType;
+                    switch ( _response.StatusCode )
+                    {
+                        case System.Net.HttpStatusCode.Accepted:
+                        {
+                            await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onAccepted(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => Nutanix.Powershell.Models.SubnetIntentResponse.FromJson(Carbon.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        default:
+                        {
+                            await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onDefault(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => Nutanix.Powershell.Models.SubnetStatus.FromJson(Carbon.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                    }
+                }
+                finally
+                {
+                    // finally statements
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.Finally, request, _response);
+                    _response?.Dispose();
+                    request?.Dispose();
+                }
+            }
+        }
+
+         /// <summary>
+        /// Validation method for <see cref="CreateSubnet" /> method. Call this like the actual call, but you will get validation
+        /// events back.
+        /// </summary>
+        /// <param name="body">An intentful representation of a subnet</param>
+        /// <param name="eventListener">an <see cref="Microsoft.Rest.ClientRuntime.IEventListener" /> instance that will receive events.</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async System.Threading.Tasks.Task CreateSubnet_Validate(Nutanix.Powershell.Models.ISubnetIntentInput body, Microsoft.Rest.ClientRuntime.IEventListener eventListener)
+        {
+            using( NoSynchronizationContext )
+            {
+                await eventListener.AssertNotNull(nameof(body), body);
+                await eventListener.AssertObjectIsValid(nameof(body), body);
+            }
+        }
+        /// <summary>This operation submits a request to delete a subnet.</summary>
+        /// <param name="uuid">The UUID of the entity.</param>
+        /// <param name="onAccepted">a delegate that is called when the remote service returns 202 (Accepted).</param>
+        /// <param name="onNotFound">a delegate that is called when the remote service returns 404 (NotFound).</param>
+        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
+        /// elsewhere).</param>
+        /// <param name="eventListener">an <see cref="Microsoft.Rest.ClientRuntime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an Microsoft.Rest.ClientRuntime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async System.Threading.Tasks.Task DeleteSubnet(string uuid, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onNotFound, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // construct URL
+                var _url = new System.Uri((
+                        "http://35.196.200.179:9440/api/nutanix/v3//subnets/"
+                        + System.Uri.EscapeDataString(uuid)
+                        + ""
+                        ).TrimEnd('?','&'));
+
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new System.Net.Http.HttpRequestMessage(Microsoft.Rest.ClientRuntime.Method.Delete, _url);
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.DeleteSubnet_Call(request,onAccepted,onNotFound,onDefault,eventListener,sender);
+            }
+        }
+        /// <summary>Actual wire call for <see cref="DeleteSubnet" /> method.</summary>
+        /// <param name="request">the prepared HttpRequestMessage to send.</param>
+        /// <param name="onAccepted">a delegate that is called when the remote service returns 202 (Accepted).</param>
+        /// <param name="onNotFound">a delegate that is called when the remote service returns 404 (NotFound).</param>
+        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
+        /// elsewhere).</param>
+        /// <param name="eventListener">an <see cref="Microsoft.Rest.ClientRuntime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an Microsoft.Rest.ClientRuntime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async System.Threading.Tasks.Task DeleteSubnet_Call(System.Net.Http.HttpRequestMessage request, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onNotFound, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender)
+        {
+            using( NoSynchronizationContext )
+            {
+                System.Net.Http.HttpResponseMessage _response = null;
+                try
+                {
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeCall, request); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    _response = await sender.SendAsync(request, eventListener);
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    var _contentType = _response.Content.Headers.ContentType?.MediaType;
+                    switch ( _response.StatusCode )
+                    {
+                        case System.Net.HttpStatusCode.Accepted:
+                        {
+                            await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onAccepted(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => Nutanix.Powershell.Models.SubnetIntentResponse.FromJson(Carbon.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case System.Net.HttpStatusCode.NotFound:
+                        {
+                            await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => Nutanix.Powershell.Models.SubnetStatus.FromJson(Carbon.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        default:
+                        {
+                            await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onDefault(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => Nutanix.Powershell.Models.SubnetStatus.FromJson(Carbon.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                    }
+                }
+                finally
+                {
+                    // finally statements
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.Finally, request, _response);
+                    _response?.Dispose();
+                    request?.Dispose();
+                }
+            }
+        }
+        /// <summary>
+        /// Validation method for <see cref="DeleteSubnet" /> method. Call this like the actual call, but you will get validation
+        /// events back.
+        /// </summary>
+        /// <param name="uuid">The UUID of the entity.</param>
+        /// <param name="eventListener">an <see cref="Microsoft.Rest.ClientRuntime.IEventListener" /> instance that will receive events.</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async System.Threading.Tasks.Task DeleteSubnet_Validate(string uuid, Microsoft.Rest.ClientRuntime.IEventListener eventListener)
+        {
+            using( NoSynchronizationContext )
+            {
+                await eventListener.AssertNotNull(nameof(uuid),uuid);
+                await eventListener.AssertRegEx(nameof(uuid),uuid,@"^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$");
+            }
+        }
+        /// <summary>This operation gets a subnet.</summary>
+        /// <param name="uuid">The UUID of the entity.</param>
+        /// <param name="onOK">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onNotFound">a delegate that is called when the remote service returns 404 (NotFound).</param>
+        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
+        /// elsewhere).</param>
+        /// <param name="eventListener">an <see cref="Microsoft.Rest.ClientRuntime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an Microsoft.Rest.ClientRuntime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async System.Threading.Tasks.Task GetSubnet(string uuid, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetIntentResponse>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onNotFound, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // construct URL
+                var _url = new System.Uri((
+                        "http://35.196.200.179:9440/api/nutanix/v3//subnets/"
+                        + System.Uri.EscapeDataString(uuid)
+                        + ""
+                        ).TrimEnd('?','&'));
+
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new System.Net.Http.HttpRequestMessage(Microsoft.Rest.ClientRuntime.Method.Get, _url);
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.GetSubnet_Call(request,onOK,onNotFound,onDefault,eventListener,sender);
+            }
+        }
+        /// <summary>Actual wire call for <see cref="GetSubnet" /> method.</summary>
+        /// <param name="request">the prepared HttpRequestMessage to send.</param>
+        /// <param name="onOK">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onNotFound">a delegate that is called when the remote service returns 404 (NotFound).</param>
+        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
+        /// elsewhere).</param>
+        /// <param name="eventListener">an <see cref="Microsoft.Rest.ClientRuntime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an Microsoft.Rest.ClientRuntime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async System.Threading.Tasks.Task GetSubnet_Call(System.Net.Http.HttpRequestMessage request, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetIntentResponse>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onNotFound, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender)
+        {
+            using( NoSynchronizationContext )
+            {
+                System.Net.Http.HttpResponseMessage _response = null;
+                try
+                {
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeCall, request); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    _response = await sender.SendAsync(request, eventListener);
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    var _contentType = _response.Content.Headers.ContentType?.MediaType;
+                    switch ( _response.StatusCode )
+                    {
+                        case System.Net.HttpStatusCode.OK:
+                        {
+                            await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onOK(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => Nutanix.Powershell.Models.SubnetIntentResponse.FromJson(Carbon.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case System.Net.HttpStatusCode.NotFound:
+                        {
+                            await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => Nutanix.Powershell.Models.SubnetStatus.FromJson(Carbon.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        default:
+                        {
+                            await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onDefault(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => Nutanix.Powershell.Models.SubnetStatus.FromJson(Carbon.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                    }
+                }
+                finally
+                {
+                    // finally statements
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.Finally, request, _response);
+                    _response?.Dispose();
+                    request?.Dispose();
+                }
+            }
+        }
+        /// <summary>
+        /// Validation method for <see cref="GetSubnet" /> method. Call this like the actual call, but you will get validation events
+        /// back.
+        /// </summary>
+        /// <param name="uuid">The UUID of the entity.</param>
+        /// <param name="eventListener">an <see cref="Microsoft.Rest.ClientRuntime.IEventListener" /> instance that will receive events.</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async System.Threading.Tasks.Task GetSubnet_Validate(string uuid, Microsoft.Rest.ClientRuntime.IEventListener eventListener)
+        {
+            using( NoSynchronizationContext )
+            {
+                await eventListener.AssertNotNull(nameof(uuid),uuid);
+                await eventListener.AssertRegEx(nameof(uuid),uuid,@"^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$");
+            }
+        }
+        /// <summary>
+        /// This operation gets a list of subnets, allowing for sorting and pagination. Note: Entities that have not been created
+        /// successfully are not listed.
+        /// </summary>
+        /// <param name="body">All api calls that return a list will have this metadata block as input
+        /// </param>
+        /// <param name="onOK">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
+        /// elsewhere).</param>
+        /// <param name="eventListener">an <see cref="Microsoft.Rest.ClientRuntime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an Microsoft.Rest.ClientRuntime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async System.Threading.Tasks.Task ListSubnets(Nutanix.Powershell.Models.ISubnetListMetadata body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetListIntentResponse>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // construct URL
+                var _url = new System.Uri((
+                        "http://35.196.200.179:9440/api/nutanix/v3//subnets/list"
+                        ).TrimEnd('?','&'));
+
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new System.Net.Http.HttpRequestMessage(Microsoft.Rest.ClientRuntime.Method.Post, _url);
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // set body content
+                request.Content = new System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", System.Text.Encoding.UTF8);
+                request.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.ListSubnets_Call(request,onOK,onDefault,eventListener,sender);
+            }
+        }
+        /// <summary>Actual wire call for <see cref="ListSubnets" /> method.</summary>
+        /// <param name="request">the prepared HttpRequestMessage to send.</param>
+        /// <param name="onOK">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
+        /// elsewhere).</param>
+        /// <param name="eventListener">an <see cref="Microsoft.Rest.ClientRuntime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an Microsoft.Rest.ClientRuntime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async System.Threading.Tasks.Task ListSubnets_Call(System.Net.Http.HttpRequestMessage request, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetListIntentResponse>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender)
+        {
+            using( NoSynchronizationContext )
+            {
+                System.Net.Http.HttpResponseMessage _response = null;
+                try
+                {
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeCall, request); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    _response = await sender.SendAsync(request, eventListener);
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    var _contentType = _response.Content.Headers.ContentType?.MediaType;
+                    switch ( _response.StatusCode )
+                    {
+                        case System.Net.HttpStatusCode.OK:
+                        {
+                            await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onOK(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => Nutanix.Powershell.Models.SubnetListIntentResponse.FromJson(Carbon.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        default:
+                        {
+                            await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onDefault(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => Nutanix.Powershell.Models.SubnetStatus.FromJson(Carbon.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                    }
+                }
+                finally
+                {
+                    // finally statements
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.Finally, request, _response);
+                    _response?.Dispose();
+                    request?.Dispose();
+                }
+            }
+        }
+        /// <summary>
+        /// Validation method for <see cref="ListSubnets" /> method. Call this like the actual call, but you will get validation events
+        /// back.
+        /// </summary>
+        /// <param name="body">All api calls that return a list will have this metadata block as input
+        /// </param>
+        /// <param name="eventListener">an <see cref="Microsoft.Rest.ClientRuntime.IEventListener" /> instance that will receive events.</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async System.Threading.Tasks.Task ListSubnets_Validate(Nutanix.Powershell.Models.ISubnetListMetadata body, Microsoft.Rest.ClientRuntime.IEventListener eventListener)
+        {
+            using( NoSynchronizationContext )
+            {
+                await eventListener.AssertNotNull(nameof(body), body);
+                await eventListener.AssertObjectIsValid(nameof(body), body);
+            }
+        }
+        /// <summary>
+        /// This operation submits a request to update a subnet based on the input parameters.
+        /// </summary>
+        /// <param name="uuid">The UUID of the entity.</param>
+        /// <param name="body">An intentful representation of a subnet</param>
+        /// <param name="onAccepted">a delegate that is called when the remote service returns 202 (Accepted).</param>
+        /// <param name="onNotFound">a delegate that is called when the remote service returns 404 (NotFound).</param>
+        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
+        /// elsewhere).</param>
+        /// <param name="eventListener">an <see cref="Microsoft.Rest.ClientRuntime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an Microsoft.Rest.ClientRuntime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async System.Threading.Tasks.Task UpdateSubnet(string uuid, Nutanix.Powershell.Models.ISubnetIntentInput body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onNotFound, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // construct URL
+                var _url = new System.Uri((
+                        "http://35.196.200.179:9440/api/nutanix/v3//subnets/"
+                        + System.Uri.EscapeDataString(uuid)
+                        + ""
+                        ).TrimEnd('?','&'));
+
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new System.Net.Http.HttpRequestMessage(Microsoft.Rest.ClientRuntime.Method.Put, _url);
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // set body content
+                request.Content = new System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", System.Text.Encoding.UTF8);
+                request.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.UpdateSubnet_Call(request,onAccepted,onNotFound,onDefault,eventListener,sender);
+            }
+        }
+        /// <summary>Actual wire call for <see cref="UpdateSubnet" /> method.</summary>
+        /// <param name="request">the prepared HttpRequestMessage to send.</param>
+        /// <param name="onAccepted">a delegate that is called when the remote service returns 202 (Accepted).</param>
+        /// <param name="onNotFound">a delegate that is called when the remote service returns 404 (NotFound).</param>
+        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
+        /// elsewhere).</param>
+        /// <param name="eventListener">an <see cref="Microsoft.Rest.ClientRuntime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an Microsoft.Rest.ClientRuntime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async System.Threading.Tasks.Task UpdateSubnet_Call(System.Net.Http.HttpRequestMessage request, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onNotFound, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender)
+        {
+            using( NoSynchronizationContext )
+            {
+                System.Net.Http.HttpResponseMessage _response = null;
+                try
+                {
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeCall, request); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    _response = await sender.SendAsync(request, eventListener);
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    var _contentType = _response.Content.Headers.ContentType?.MediaType;
+                    switch ( _response.StatusCode )
+                    {
+                        case System.Net.HttpStatusCode.Accepted:
+                        {
+                            await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onAccepted(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => Nutanix.Powershell.Models.SubnetIntentResponse.FromJson(Carbon.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case System.Net.HttpStatusCode.NotFound:
+                        {
+                            await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => Nutanix.Powershell.Models.SubnetStatus.FromJson(Carbon.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        default:
+                        {
+                            await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onDefault(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => Nutanix.Powershell.Models.SubnetStatus.FromJson(Carbon.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                    }
+                }
+                finally
+                {
+                    // finally statements
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.Finally, request, _response);
+                    _response?.Dispose();
+                    request?.Dispose();
+                }
+            }
+        }
+        /// <summary>
+        /// Validation method for <see cref="UpdateSubnet" /> method. Call this like the actual call, but you will get validation
+        /// events back.
+        /// </summary>
+        /// <param name="uuid">The UUID of the entity.</param>
+        /// <param name="body">An intentful representation of a subnet</param>
+        /// <param name="eventListener">an <see cref="Microsoft.Rest.ClientRuntime.IEventListener" /> instance that will receive events.</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async System.Threading.Tasks.Task UpdateSubnet_Validate(string uuid, Nutanix.Powershell.Models.ISubnetIntentInput body, Microsoft.Rest.ClientRuntime.IEventListener eventListener)
+        {
+            using( NoSynchronizationContext )
+            {
+                await eventListener.AssertNotNull(nameof(uuid),uuid);
+                await eventListener.AssertRegEx(nameof(uuid),uuid,@"^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$");
+                await eventListener.AssertNotNull(nameof(body), body);
+                await eventListener.AssertObjectIsValid(nameof(body), body);
+            }
+        }
+
         private static string CreateString(System.Security.SecureString secureString)
         {
             System.IntPtr intPtr = System.IntPtr.Zero;
