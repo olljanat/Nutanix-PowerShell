@@ -31,7 +31,7 @@ namespace Nutanix.Powershell
         /// <param name="sslPolicyErrors"></param>
         /// <returns>true</returns>
         private static bool AcceptAllCertifications(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certification, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors){
-         return true;   
+         return true;
         }
 
         /// <summary>
@@ -735,6 +735,45 @@ namespace Nutanix.Powershell
                 await this.NewImage_Call(request,onAccepted,onDefault,eventListener,sender);
             }
         }
+        /// <summary>
+        /// Images are raw ISO, QCOW2, or VMDK files that are uploaded by a user can be attached to a VM. An ISO image is attached
+        /// as a virtual CD-ROM drive, and QCOW2 and VMDK files are attached as SCSI disks. An image has to be explicitly added to
+        /// the self-service catalog before users can create VMs from it.
+        /// </summary>
+        /// <param name="body">An intentful representation of a image</param>
+        /// <param name="onAccepted">a delegate that is called when the remote service returns 202 (Accepted).</param>
+        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
+        /// elsewhere).</param>
+        /// <param name="eventListener">an <see cref="Microsoft.Rest.ClientRuntime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an Microsoft.Rest.ClientRuntime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async System.Threading.Tasks.Task NewImage_Sync(Nutanix.Powershell.Models.IImageIntentInput body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageStatus>, System.Threading.Tasks.Task> onDefault,  System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageIntentResponse>, System.Threading.Tasks.Task> onOK,Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // construct URL
+                var _url = new System.Uri((
+                        $"{credential.Uri.ToString()}/api/nutanix/v3//images"
+                        ).TrimEnd('?','&'));
+
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new System.Net.Http.HttpRequestMessage(Microsoft.Rest.ClientRuntime.Method.Post, _url);
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // set body content
+                request.Content = new System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", System.Text.Encoding.UTF8);
+                request.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.NewImage_Call_Sync(request,onAccepted,onDefault,onOK,eventListener,sender, credential);
+            }
+        }
         /// <summary>Actual wire call for <see cref="NewImage" /> method.</summary>
         /// <param name="request">the prepared HttpRequestMessage to send.</param>
         /// <param name="onAccepted">a delegate that is called when the remote service returns 202 (Accepted).</param>
@@ -780,6 +819,68 @@ namespace Nutanix.Powershell
                     request?.Dispose();
                 }
             }
+        }
+         /// <summary>Actual wire call for <see cref="NewImage" /> method.</summary>
+        /// <param name="request">the prepared HttpRequestMessage to send.</param>
+        /// <param name="onAccepted">a delegate that is called when the remote service returns 202 (Accepted).</param>
+        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
+        /// elsewhere).</param>
+        /// <param name="eventListener">an <see cref="Microsoft.Rest.ClientRuntime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an Microsoft.Rest.ClientRuntime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async System.Threading.Tasks.Task NewImage_Call_Sync(System.Net.Http.HttpRequestMessage request, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageStatus>, System.Threading.Tasks.Task> onDefault,  System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageIntentResponse>, System.Threading.Tasks.Task> onOK,Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential)
+        {
+            using( NoSynchronizationContext )
+            {
+                System.Net.Http.HttpResponseMessage _response = null;
+                Nutanix.Powershell.Models.IImageIntentResponse _imageTask = null;
+
+                try
+                {
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeCall, request); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    _response = await sender.SendAsync(request, eventListener);
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    var _contentType = _response.Content.Headers.ContentType?.MediaType;
+                    switch ( _response.StatusCode )
+                    {
+                        case System.Net.HttpStatusCode.Accepted:
+                        {
+                            await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            _imageTask = await _response.Content.ReadAsStringAsync().ContinueWith( body => Nutanix.Powershell.Models.ImageIntentResponse.FromJson(Carbon.Json.JsonNode.Parse(body.Result)) );
+                            break;
+                        }
+                        default:
+                        {
+                            await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onDefault(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => Nutanix.Powershell.Models.ImageStatus.FromJson(Carbon.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                    }
+                }
+                finally
+                {
+                    // finally statements
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.Finally, request, _response);
+                    _response?.Dispose();
+                    request?.Dispose();
+                }
+
+                var retry = new RetryWithExponentialBackoff();
+                await retry.RunAsync(async () =>
+                {
+                    var _task = await GetTaskStatus(_imageTask.Status.ExecutionContext.TaskUuid, eventListener, sender, credential);
+                    if (_task.State !=  "SUCCEEDED")
+                    {
+                        throw new System.ApplicationException("Status is not completed", new System.Exception($"Status is {_task.State}"));
+                    }
+
+                });
+
+                await this.GetImage(_imageTask.Metadata.Uuid, onOK, onDefault, eventListener, sender, credential);
+            }
+
         }
         /// <summary>
         /// Validation method for <see cref="NewImage" /> method. Call this like the actual call, but you will get validation events
@@ -885,7 +986,7 @@ namespace Nutanix.Powershell
                 }
             }
         }
-        
+
         /// <summary>
         /// This operation gets a list of Access Control Policies, allowing for sorting and pagination. Note: Entities that have not
         /// been created successfully are not listed.
@@ -920,7 +1021,7 @@ namespace Nutanix.Powershell
                 // set body content
                 request.Content = new System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-               
+
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
                 // make the call
                 await this.ListOperation_Call(request,onOK,onDefault,eventListener,sender);
@@ -1050,9 +1151,9 @@ namespace Nutanix.Powershell
                 // generate request object
                 var request =  new System.Net.Http.HttpRequestMessage(Microsoft.Rest.ClientRuntime.Method.Delete, _url);
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
-                
+
                 var byteArray = System.Text.Encoding.ASCII.GetBytes($"{credential.Username}:{CreateString(credential.Password)}");
-                
+
                 request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", System.Convert.ToBase64String(byteArray));
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
                 // make the call
@@ -1090,9 +1191,9 @@ namespace Nutanix.Powershell
                 // generate request object
                 var request =  new System.Net.Http.HttpRequestMessage(Microsoft.Rest.ClientRuntime.Method.Delete, _url);
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
-                
+
                 var byteArray = System.Text.Encoding.ASCII.GetBytes($"{credential.Username}:{CreateString(credential.Password)}");
-                
+
                 request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", System.Convert.ToBase64String(byteArray));
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
                 // make the call
@@ -1142,7 +1243,7 @@ namespace Nutanix.Powershell
         }
 
 
-               /// <summary>
+        /// <summary>
         /// This operation submits a request to create a VM based on the input parameters.
         /// </summary>
         /// <param name="body">An intentful representation of a vm</param>
@@ -1328,8 +1429,8 @@ namespace Nutanix.Powershell
                         {
                             await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
                             _deleteTask = await _response.Content.ReadAsStringAsync().ContinueWith( body => Nutanix.Powershell.Models.DeleteTask.FromJson(Carbon.Json.JsonNode.Parse(body.Result)) );
-                            
-                            
+
+
                             break;
                         }
                         case System.Net.HttpStatusCode.NotFound:
@@ -1359,7 +1460,7 @@ namespace Nutanix.Powershell
                 await retry.RunAsync(async () =>
                 {
                     _task = await GetTaskStatus(_deleteTask.Status.ExecutionContext.TaskUuid , eventListener, sender, credential);
-                     if (_task.State !=  "SUCCEEDED") 
+                     if (_task.State !=  "SUCCEEDED")
                      {
                         throw new System.ApplicationException("Status is not completed", new System.Exception($"Status is {_task.State}"));
                      }
@@ -1441,9 +1542,9 @@ namespace Nutanix.Powershell
 
                 // generate request object
                 var request =  new System.Net.Http.HttpRequestMessage(Microsoft.Rest.ClientRuntime.Method.Get, _url);
-               
+
                 var byteArray = System.Text.Encoding.ASCII.GetBytes($"{credential.Username}:{CreateString(credential.Password)}");
-                
+
                 request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", System.Convert.ToBase64String(byteArray));
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
 
@@ -1488,10 +1589,10 @@ namespace Nutanix.Powershell
                 // set body content
                 request.Content = new System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                
-                
+
+
                 var byteArray = System.Text.Encoding.ASCII.GetBytes($"{credential.Username}:{CreateString(credential.Password)}");
-                
+
 
                 request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", System.Convert.ToBase64String(byteArray));
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
@@ -1503,7 +1604,7 @@ namespace Nutanix.Powershell
         public async System.Threading.Tasks.Task GetVms_All(Nutanix.Powershell.Models.IVmListMetadata body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmIntentResource[]>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential)
         {
 
-            // set the body to fetch the first 
+            // set the body to fetch the first
             // Constant Parameters
             using( NoSynchronizationContext )
             {
@@ -1523,7 +1624,7 @@ namespace Nutanix.Powershell
 
                 List<Nutanix.Powershell.Models.IVmIntentResource> result = new List<Nutanix.Powershell.Models.IVmIntentResource>();
                 while (hasNext) {
-                
+
                     await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
 
                     // generate request object
@@ -1538,8 +1639,8 @@ namespace Nutanix.Powershell
                     var byteArray = System.Text.Encoding.ASCII.GetBytes($"{credential.Username}:{CreateString(credential.Password)}");
                     request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", System.Convert.ToBase64String(byteArray));
                     await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
-                    
-                    // make the call                    
+
+                    // make the call
                         System.Net.Http.HttpResponseMessage _response = null;
                         try
                         {
@@ -1547,7 +1648,7 @@ namespace Nutanix.Powershell
                             _response = await sender.SendAsync(request, eventListener);
                             await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
                             var _contentType = _response.Content.Headers.ContentType?.MediaType;
-                            
+
                             switch ( _response.StatusCode )
                             {
                                 case System.Net.HttpStatusCode.OK:
@@ -1582,12 +1683,12 @@ namespace Nutanix.Powershell
                             _response?.Dispose();
                             request?.Dispose();
                         }
-                    
+
                 }
 
                 System.Func<System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmIntentResource[]>> anonfunc = async () => result.ToArray();
                 await onOK(null, anonfunc());
-                
+
             }
         }
 
@@ -1758,7 +1859,7 @@ namespace Nutanix.Powershell
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
         internal async System.Threading.Tasks.Task NewVm_Call_Sync(System.Net.Http.HttpRequestMessage request, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmIntentResponse>, System.Threading.Tasks.Task> onAccepted,System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmIntentResponse>, System.Threading.Tasks.Task> onOk,  System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmStatus>, System.Threading.Tasks.Task> onDefault, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmStatus>, System.Threading.Tasks.Task> onNotFound, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential)
-        {   
+        {
             using( NoSynchronizationContext )
             {
                 System.Net.Http.HttpResponseMessage _response = null;
@@ -1798,10 +1899,10 @@ namespace Nutanix.Powershell
                 await retry.RunAsync(async () =>
                 {
                      var _task = await GetTaskStatus(_vmTask.Status.ExecutionContext.TaskUuid, eventListener, sender, credential);
-                     if (_task.State !=  "SUCCEEDED") 
+                     if (_task.State !=  "SUCCEEDED")
                      {
                         throw new System.ApplicationException("Status is not completed", new System.Exception($"Status is {_task.State}"));
-                     } 
+                     }
 
                 });
                 await this.GetVm(_vmTask.Metadata.Uuid, onOk, onNotFound, onDefault, eventListener, sender, credential);
@@ -1915,7 +2016,7 @@ namespace Nutanix.Powershell
                     _response?.Dispose();
                     request?.Dispose();
                 }
-                
+
             }
             return null;
         }
@@ -2462,12 +2563,12 @@ namespace Nutanix.Powershell
                 result = System.Runtime.InteropServices.Marshal.PtrToStringBSTR(intPtr);
             }
             finally
-            {       
+            {
                 if (intPtr != System.IntPtr.Zero)
                 {
                     System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(intPtr);
                 }
-            }      
+            }
             return result;
         }
     }

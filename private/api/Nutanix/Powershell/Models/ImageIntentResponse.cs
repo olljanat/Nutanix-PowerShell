@@ -49,10 +49,10 @@ namespace Nutanix.Powershell.Models
             }
         }
         /// <summary>Backing field for <see cref="Status" /> property.</summary>
-        private Nutanix.Powershell.Models.IImageDefStatus _status;
+        private Nutanix.Powershell.Models.IVmDefStatus _status;
 
         /// <summary>An intentful representation of a image status</summary>
-        public Nutanix.Powershell.Models.IImageDefStatus Status
+        public Nutanix.Powershell.Models.IVmDefStatus Status
         {
             get
             {
@@ -87,6 +87,6 @@ namespace Nutanix.Powershell.Models
         string ApiVersion { get; set; }
         Nutanix.Powershell.Models.IImageMetadata Metadata { get; set; }
         Nutanix.Powershell.Models.IImage Spec { get; set; }
-        Nutanix.Powershell.Models.IImageDefStatus Status { get; set; }
+        Nutanix.Powershell.Models.IVmDefStatus Status { get; set; }
     }
 }

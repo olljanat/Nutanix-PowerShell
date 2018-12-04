@@ -80,6 +80,9 @@ namespace Nutanix.Powershell.Cmdlets
         /// <summary>The Username for authentication</summary>
         [System.Management.Automation.Parameter(Mandatory = false, DontShow = true, HelpMessage = "The Username for authentication")]
         public string Protocol { get; set; }
+
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Run the command asynchronous")]
+        public System.Management.Automation.SwitchParameter Async {get; set;}
         /// <summary>
         /// (overrides the default BeginProcessing method in System.Management.Automation.PSCmdlet)
         /// </summary>
@@ -269,7 +272,14 @@ namespace Nutanix.Powershell.Cmdlets
                     Credential = new Nutanix.Powershell.Models.NutanixCredential(url, Username, Password);
                 }
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                await this.Client.NewImage(Body, onAccepted, onDefault, this, Pipeline, Credential);
+                if (Async.ToBool())
+                {
+                    await this.Client.NewImage_Sync(Body, onAccepted, onDefault, onOK, this, Pipeline, Credential);
+                }
+                else
+                {
+                    await this.Client.NewImage(Body, onAccepted, onDefault, this, Pipeline, Credential);
+                }
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }
         }
@@ -324,7 +334,24 @@ namespace Nutanix.Powershell.Cmdlets
             using( NoSynchronizationContext )
             {
                 // Error Response : default
-                WriteError(new System.Management.Automation.ErrorRecord(new System.Exception($"The service encountered an unexpected result: {responseMessage.StatusCode}"), responseMessage.StatusCode.ToString(), System.Management.Automation.ErrorCategory.InvalidOperation, new { Body}));
+                 WriteError(new System.Management.Automation.ErrorRecord(new System.Exception($"The service encountered an unexpected result: {responseMessage.StatusCode}"), responseMessage.StatusCode.ToString(), System.Management.Automation.ErrorCategory.InvalidOperation, new { Body}));
+
+            }
+        }
+        /// <summary>a delegate that is called when the remote service returns 200 (OK).</summary>
+        /// <param name="responseMessage">the raw response message as an System.Net.Http.HttpResponseMessage.</param>
+        /// <param name="response">the body result as a <see cref="System.IO.Stream" /> from the remote call</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
+        /// </returns>
+
+        private async System.Threading.Tasks.Task onOK(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageIntentResponse> response)
+        {
+            using( NoSynchronizationContext )
+            {
+                // onOK - response for 200 / application/json
+                // (await response) // should be Nutanix.Powershell.Models.IImageIntentResponse
+                WriteObject(await response);
             }
         }
     }

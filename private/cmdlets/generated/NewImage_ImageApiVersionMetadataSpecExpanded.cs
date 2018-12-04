@@ -14,22 +14,22 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.ApiVersion = value;
+                Body.ApiVersion = value;
             }
         }
-        /// <summary>Backing field for <see cref="BodyBody" /> property.</summary>
-        private Nutanix.Powershell.Models.IImageIntentInput _bodyBody= new Nutanix.Powershell.Models.ImageIntentInput();
+        /// <summary>Backing field for <see cref="Body" /> property.</summary>
+        private Nutanix.Powershell.Models.IImageIntentInput _Body= new Nutanix.Powershell.Models.ImageIntentInput();
 
         /// <summary>An intentful representation of a image</summary>
-        private Nutanix.Powershell.Models.IImageIntentInput BodyBody
+        private Nutanix.Powershell.Models.IImageIntentInput Body
         {
             get
             {
-                return this._bodyBody;
+                return this._Body;
             }
             set
             {
-                this._bodyBody = value;
+                this._Body = value;
             }
         }
         /// <summary>The reference to the client API class.</summary>
@@ -48,8 +48,8 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.Image();
-                BodyBody.Spec.Description = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.Image();
+                Body.Spec.Description = value;
             }
         }
         /// <summary>image Name.</summary>
@@ -58,8 +58,8 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.Image();
-                BodyBody.Spec.Name = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.Image();
+                Body.Spec.Name = value;
             }
         }
         /// <summary>Describes the image spec resources object.</summary>
@@ -68,8 +68,8 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.Image();
-                BodyBody.Spec.Resources = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.Image();
+                Body.Spec.Resources = value;
             }
         }
         /// <summary>The image kind metadata</summary>
@@ -78,7 +78,7 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Metadata = value;
+                Body.Metadata = value;
             }
         }
         /// <summary>
@@ -127,6 +127,9 @@ namespace Nutanix.Powershell.Cmdlets
         /// <summary>The Username for authentication</summary>
         [System.Management.Automation.Parameter(Mandatory = false, DontShow = true, HelpMessage = "The Username for authentication")]
         public string Protocol { get; set; }
+
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Run the command asynchronous")]
+        public System.Management.Automation.SwitchParameter Async {get; set;}
         /// <summary>
         /// (overrides the default BeginProcessing method in System.Management.Automation.PSCmdlet)
         /// </summary>
@@ -224,7 +227,7 @@ namespace Nutanix.Powershell.Cmdlets
         internal NewImage_ImageApiVersionMetadataSpecExpanded(Carbon.Json.JsonObject json)
         {
             // deserialize the contents
-            _bodyBody = If( json?.PropertyT<Carbon.Json.JsonObject>("BodyBody"), out var __jsonBodyBody) ? Nutanix.Powershell.Models.ImageIntentInput.FromJson(__jsonBodyBody) : BodyBody;
+            _Body = If( json?.PropertyT<Carbon.Json.JsonObject>("Body"), out var __jsonBody) ? Nutanix.Powershell.Models.ImageIntentInput.FromJson(__jsonBody) : Body;
         }
         /// <summary>Performs execution of the command.</summary>
 
@@ -311,12 +314,19 @@ namespace Nutanix.Powershell.Cmdlets
 
                         Password = result;
                     }
-                    //build url 
+                    //build url
                     var url = $"{Protocol}://{Server}:{Port}";
                     Credential = new Nutanix.Powershell.Models.NutanixCredential(url, Username, Password);
                 }
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                await this.Client.NewImage(BodyBody, onAccepted, onDefault, this, Pipeline, Credential);
+                if (Async.ToBool())
+                {
+                    await this.Client.NewImage_Sync(Body, onAccepted, onDefault, onOK, this, Pipeline, Credential);
+                }
+                else
+                {
+                    await this.Client.NewImage(Body, onAccepted, onDefault, this, Pipeline, Credential);
+                }
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }
         }
@@ -341,7 +351,7 @@ namespace Nutanix.Powershell.Cmdlets
         {
             // serialization method
             container = container ?? new Carbon.Json.JsonObject();
-            AddIf( null != BodyBody ? (Carbon.Json.JsonNode) BodyBody.ToJson(null) : null, "BodyBody" ,container.Add );
+            AddIf( null != Body ? (Carbon.Json.JsonNode) Body.ToJson(null) : null, "Body" ,container.Add );
             return container;
         }
         /// <summary>a delegate that is called when the remote service returns 202 (Accepted).</summary>
@@ -372,7 +382,23 @@ namespace Nutanix.Powershell.Cmdlets
             using( NoSynchronizationContext )
             {
                 // Error Response : default
-                WriteError(new System.Management.Automation.ErrorRecord(new System.Exception($"The service encountered an unexpected result: {responseMessage.StatusCode}"), responseMessage.StatusCode.ToString(), System.Management.Automation.ErrorCategory.InvalidOperation, new { BodyBody}));
+                WriteError(new System.Management.Automation.ErrorRecord(new System.Exception($"The service encountered an unexpected result: {responseMessage.StatusCode}"), responseMessage.StatusCode.ToString(), System.Management.Automation.ErrorCategory.InvalidOperation, new { Body}));
+            }
+        }
+        /// <summary>a delegate that is called when the remote service returns 200 (OK).</summary>
+        /// <param name="responseMessage">the raw response message as an System.Net.Http.HttpResponseMessage.</param>
+        /// <param name="response">the body result as a <see cref="System.IO.Stream" /> from the remote call</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
+        /// </returns>
+
+        private async System.Threading.Tasks.Task onOK(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageIntentResponse> response)
+        {
+            using( NoSynchronizationContext )
+            {
+                // onOK - response for 200 / application/json
+                // (await response) // should be Nutanix.Powershell.Models.IImageIntentResponse
+                WriteObject(await response);
             }
         }
     }
