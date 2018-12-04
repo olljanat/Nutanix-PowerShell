@@ -295,10 +295,8 @@ namespace Nutanix.Powershell.Cmdlets
                     Credential = new Nutanix.Powershell.Models.NutanixCredential(url, Username, Password);
                 }
 
-
-
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                await this.Client.UpdateSubnet(Uuid, BodyBody, onAccepted, onNotFound, onDefault, this, Pipeline);
+                await this.Client.UpdateSubnet(Uuid, BodyBody, onAccepted, onNotFound, onDefault, this, Pipeline, Credential);
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }
         }

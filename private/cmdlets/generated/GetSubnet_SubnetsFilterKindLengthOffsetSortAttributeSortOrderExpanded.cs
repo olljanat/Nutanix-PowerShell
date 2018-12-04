@@ -91,6 +91,34 @@ namespace Nutanix.Powershell.Cmdlets
         /// <summary>Use the default credentials for the proxy</summary>
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Use the default credentials for the proxy")]
         public System.Management.Automation.SwitchParameter ProxyUseDefaultCredentials {get;set;}
+
+              /// <summary>The Username for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Username for authentication")]
+        public string Username {get; set;}
+
+        /// <summary>The Password for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Password for authentication")]
+        public System.Security.SecureString Password {get; set;}
+
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Skip the ssl validation")]
+        public System.Management.Automation.SwitchParameter SkipSSL {get; set;}
+
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Nutanix Credential object for authentication")]
+        [System.Management.Automation.ValidateNotNull]
+        public Nutanix.Powershell.Models.NutanixCredential Credential {get; set;}
+
+        /// <summary>The Username for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Server address")]
+        public string Server {get; set;}
+
+        /// <summary>The Username for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Server Port, defaults to 9440")]
+        public string Port {get; set;}
+
+        /// <summary>The Username for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The HTTP protocol, defaults to https")]
+        public string Protocol {get; set;}
+
         /// <summary>The attribute to perform sort on</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "The attribute to perform sort on")]
         public string SortAttribute
@@ -258,9 +286,47 @@ namespace Nutanix.Powershell.Cmdlets
                 Pipeline = Nutanix.Powershell.Module.Instance.CreatePipeline(this.MyInvocation.BoundParameters);
                 Pipeline.Prepend(HttpPipelinePrepend);
                 Pipeline.Append(HttpPipelineAppend);
+
+                if (Credential == null)
+                {
+
+                    if (Port == null)
+                    {
+                        Port = System.Environment.GetEnvironmentVariable("NutanixPort") ?? "9440";
+                    }
+
+                    if (Protocol == null)
+                    {
+                        Protocol = System.Environment.GetEnvironmentVariable("NutanixProtocol") ?? "https";
+                    }
+
+                    if (Server == null)
+                    {
+                        Server = System.Environment.GetEnvironmentVariable("NutanixServer") ?? "localhost";
+                    }
+
+                    if (Username == null)
+                    {
+                        Username = System.Environment.GetEnvironmentVariable("NutanixUsername") ?? "";
+                    }
+
+                    if (Password == null)
+                    {
+                        var psw = System.Environment.GetEnvironmentVariable("NutanixPassword") ?? "";
+                        System.Security.SecureString result = new System.Security.SecureString();
+                        foreach (char c in psw)
+                            result.AppendChar(c);
+
+                        Password = result;
+                    }
+                    //build url 
+                    var url = $"{Protocol}://{Server}:{Port}";
+                    Credential = new Nutanix.Powershell.Models.NutanixCredential(url, Username, Password);
+                }
+
                 // get the client instance
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                await this.Client.ListSubnets(GetEntitiesRequestBody, onOK, onDefault, this, Pipeline);
+                await this.Client.ListSubnets(GetEntitiesRequestBody, onOK, onDefault, this, Pipeline, Credential);
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }
         }

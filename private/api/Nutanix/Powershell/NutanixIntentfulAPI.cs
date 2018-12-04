@@ -1933,14 +1933,14 @@ namespace Nutanix.Powershell
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async System.Threading.Tasks.Task CreateSubnet(Nutanix.Powershell.Models.ISubnetIntentInput body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender)
+        public async System.Threading.Tasks.Task CreateSubnet(Nutanix.Powershell.Models.ISubnetIntentInput body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
             {
                 // construct URL
                 var _url = new System.Uri((
-                        "http://35.196.200.179:9440/api/nutanix/v3//subnets"
+                        credential.Uri.ToString()
                         ).TrimEnd('?','&'));
 
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
@@ -2033,14 +2033,14 @@ namespace Nutanix.Powershell
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async System.Threading.Tasks.Task DeleteSubnet(string uuid, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onNotFound, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender)
+        public async System.Threading.Tasks.Task DeleteSubnet(string uuid, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onNotFound, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
             {
                 // construct URL
                 var _url = new System.Uri((
-                        "http://35.196.200.179:9440/api/nutanix/v3//subnets/"
+                        credential.Uri.ToString()
                         + System.Uri.EscapeDataString(uuid)
                         + ""
                         ).TrimEnd('?','&'));
@@ -2137,14 +2137,14 @@ namespace Nutanix.Powershell
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async System.Threading.Tasks.Task GetSubnet(string uuid, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetIntentResponse>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onNotFound, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender)
+        public async System.Threading.Tasks.Task GetSubnet(string uuid, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetIntentResponse>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onNotFound, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
             {
                 // construct URL
                 var _url = new System.Uri((
-                        "http://35.196.200.179:9440/api/nutanix/v3//subnets/"
+                        credential.Uri.ToString()
                         + System.Uri.EscapeDataString(uuid)
                         + ""
                         ).TrimEnd('?','&'));
@@ -2244,14 +2244,14 @@ namespace Nutanix.Powershell
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async System.Threading.Tasks.Task ListSubnets(Nutanix.Powershell.Models.ISubnetListMetadata body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetListIntentResponse>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender)
+        public async System.Threading.Tasks.Task ListSubnets(Nutanix.Powershell.Models.ISubnetListMetadata body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetListIntentResponse>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
             {
                 // construct URL
                 var _url = new System.Uri((
-                        "http://35.196.200.179:9440/api/nutanix/v3//subnets/list"
+                        credential.Uri.ToString()
                         ).TrimEnd('?','&'));
 
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
@@ -2347,14 +2347,14 @@ namespace Nutanix.Powershell
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async System.Threading.Tasks.Task UpdateSubnet(string uuid, Nutanix.Powershell.Models.ISubnetIntentInput body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onNotFound, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender)
+        public async System.Threading.Tasks.Task UpdateSubnet(string uuid, Nutanix.Powershell.Models.ISubnetIntentInput body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onNotFound, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
             {
                 // construct URL
                 var _url = new System.Uri((
-                        "http://35.196.200.179:9440/api/nutanix/v3//subnets/"
+                        credential.Uri.ToString()
                         + System.Uri.EscapeDataString(uuid)
                         + ""
                         ).TrimEnd('?','&'));

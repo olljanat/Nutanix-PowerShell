@@ -272,7 +272,7 @@ namespace Nutanix.Powershell.Cmdlets
 
 
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                await this.Client.UpdateSubnet(Uuid, Body, onAccepted, onNotFound, onDefault, this, Pipeline);
+                await this.Client.UpdateSubnet(Uuid, Body, onAccepted, onNotFound, onDefault, this, Pipeline, Credential);
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }
         }

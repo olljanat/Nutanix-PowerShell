@@ -214,7 +214,7 @@ namespace Nutanix.Powershell.Cmdlets
                 Pipeline.Append(HttpPipelineAppend);
                 // get the client instance
 
-if (Credential == null)
+                if (Credential == null)
                 {
 
                     if (Port == null)
@@ -252,7 +252,7 @@ if (Credential == null)
                 }
 
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                await this.Client.DeleteSubnet(Uuid, onAccepted, onNotFound, onDefault, this, Pipeline);
+                await this.Client.DeleteSubnet(Uuid, onAccepted, onNotFound, onDefault, this, Pipeline, Credential);
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }
         }
