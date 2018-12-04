@@ -92,7 +92,7 @@ namespace Nutanix.Powershell.Cmdlets
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Skip the ssl validation")]
         public System.Management.Automation.SwitchParameter SkipSSL {get; set;}
 
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Skip the ssl validation")]
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Run the command asynchronous")]
         public System.Management.Automation.SwitchParameter Async {get; set;}
 
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Create a vm ")]
@@ -260,7 +260,7 @@ namespace Nutanix.Powershell.Cmdlets
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletGetPipeline); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 Pipeline.Prepend(HttpPipelinePrepend);
                 Pipeline.Append(HttpPipelineAppend);
-                
+
                 if (Credential == null) {
 
                     if (Port == null){
@@ -287,7 +287,7 @@ namespace Nutanix.Powershell.Cmdlets
 
                         Password = result;
                     }
-                    //build url 
+                    //build url
                     var url = $"{Protocol}://{Server}:{Port}";
                     Credential = new Nutanix.Powershell.Models.NutanixCredential(url,Username, Password);
                 }
@@ -299,7 +299,7 @@ namespace Nutanix.Powershell.Cmdlets
                 {
                     await this.Client.NewVm(Body, onAccepted, onDefault, this, Pipeline, Credential);
                 }
-                else 
+                else
                 {
                     await this.Client.NewVm_Sync(Body, onAccepted, onDefault, onOK, onNotFound, this, Pipeline, Credential);
                 }

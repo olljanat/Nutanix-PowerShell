@@ -123,9 +123,9 @@ namespace Nutanix.Powershell.Cmdlets
         {
             get
             {
-               
+
                 return Body.Spec.Resources.PowerState;
-                
+
             }
             set
             {
@@ -141,9 +141,9 @@ namespace Nutanix.Powershell.Cmdlets
         {
             get
             {
-               
+
                 return Body.Spec.ClusterReference.Uuid;
-                
+
             }
             set
             {
@@ -161,9 +161,9 @@ namespace Nutanix.Powershell.Cmdlets
         {
             get
             {
-               
+
                 return Body.Spec.Name;
-                
+
             }
             set
             {
@@ -178,9 +178,9 @@ namespace Nutanix.Powershell.Cmdlets
         {
             get
             {
-               
+
                 return Body.Spec.Description;
-                
+
             }
             set
             {
@@ -236,6 +236,9 @@ namespace Nutanix.Powershell.Cmdlets
         /// <summary>The Username for authentication</summary>
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Username for authentication")]
         public string Protocol {get; set;}
+
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Run the command asynchronous")]
+        public System.Management.Automation.SwitchParameter Async {get; set;}
 
         /// <summary>
         /// (overrides the default BeginProcessing method in System.Management.Automation.PSCmdlet)
@@ -386,7 +389,7 @@ namespace Nutanix.Powershell.Cmdlets
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletGetPipeline); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 Pipeline.Prepend(HttpPipelinePrepend);
                 Pipeline.Append(HttpPipelineAppend);
-                
+
                 if (Credential == null) {
 
                     if (Port == null){
@@ -413,7 +416,7 @@ namespace Nutanix.Powershell.Cmdlets
 
                         Password = result;
                     }
-                    //build url 
+                    //build url
                     var url = $"{Protocol}://{Server}:{Port}";
                     Credential = new Nutanix.Powershell.Models.NutanixCredential(url,Username, Password);
                 }
@@ -423,7 +426,14 @@ namespace Nutanix.Powershell.Cmdlets
 
                 // get the client instance
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                await this.Client.NewVm(Body, onAccepted, onDefault, this, Pipeline, Credential);
+                if (this.Async.ToBool())
+                {
+                    await this.Client.NewVm(Body, onAccepted, onDefault, this, Pipeline, Credential);
+                }
+                else
+                {
+                    await this.Client.NewVm_Sync(Body, onAccepted, onDefault, onOK, onNotFound, this, Pipeline, Credential);
+                }
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }
         }
@@ -463,6 +473,37 @@ namespace Nutanix.Powershell.Cmdlets
             {
                 // onAccepted - response for 202 / application/json
                 // (await response) // should be Nutanix.Powershell.Models.IVmIntentResponse
+                WriteObject(await response);
+            }
+        }
+                /// <summary>a delegate that is called when the remote service returns 200 (OK).</summary>
+        /// <param name="responseMessage">the raw response message as an System.Net.Http.HttpResponseMessage.</param>
+        /// <param name="response">the body result as a <see cref="Nutanix.Powershell.Models.IVmIntentResponse" /> from the remote call</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
+        /// </returns>
+        private async System.Threading.Tasks.Task onOK(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmIntentResponse> response)
+        {
+            using( NoSynchronizationContext )
+            {
+                // onOK - response for 200 / application/json
+                // (await response) // should be Nutanix.Powershell.Models.IVmIntentResponse
+                WriteObject(await response);
+            }
+        }
+
+        /// <summary>a delegate that is called when the remote service returns 404 (NotFound).</summary>
+        /// <param name="responseMessage">the raw response message as an System.Net.Http.HttpResponseMessage.</param>
+        /// <param name="response">the body result as a <see cref="Nutanix.Powershell.Models.IVmStatus" /> from the remote call</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
+        /// </returns>
+        private async System.Threading.Tasks.Task onNotFound(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmStatus> response)
+        {
+            using( NoSynchronizationContext )
+            {
+                // onNotFound - response for 404 / application/json
+                // (await response) // should be Nutanix.Powershell.Models.IVmStatus
                 WriteObject(await response);
             }
         }
