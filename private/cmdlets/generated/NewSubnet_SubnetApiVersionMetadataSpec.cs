@@ -275,8 +275,12 @@ namespace Nutanix.Powershell.Cmdlets
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 if (Async.ToBool())
                 {
+                    await this.Client.CreateSubnet_Sync(Body, onAccepted, onDefault, onOK, onNotFound, this, Pipeline, Credential);
                 }
-                await this.Client.CreateSubnet(Body, onAccepted, onDefault, this, Pipeline, Credential);
+                else
+                {
+                    await this.Client.CreateSubnet(Body, onAccepted, onDefault, this, Pipeline, Credential);
+                }
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }
         }
@@ -337,16 +341,32 @@ namespace Nutanix.Powershell.Cmdlets
         }
         /// <summary>a delegate that is called when the remote service returns 200 (OK).</summary>
         /// <param name="responseMessage">the raw response message as an System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="Nutanix.Powershell.Models.IImageIntentResponse" /> from the remote call</param>
+        /// <param name="response">the body result as a <see cref="Nutanix.Powershell.Models.ISubnetIntentResponse" /> from the remote
+        /// call</param>
         /// <returns>
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
         /// </returns>
-        private async System.Threading.Tasks.Task onOK(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageIntentResponse> response)
+        private async System.Threading.Tasks.Task onOK(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetIntentResponse> response)
         {
             using( NoSynchronizationContext )
             {
                 // onOK - response for 200 / application/json
-                // (await response) // should be Nutanix.Powershell.Models.IImageIntentResponse
+                // (await response) // should be Nutanix.Powershell.Models.ISubnetIntentResponse
+                WriteObject(await response);
+            }
+        }
+        /// <summary>a delegate that is called when the remote service returns 404 (NotFound).</summary>
+        /// <param name="responseMessage">the raw response message as an System.Net.Http.HttpResponseMessage.</param>
+        /// <param name="response">the body result as a <see cref="Nutanix.Powershell.Models.ISubnetStatus" /> from the remote call</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
+        /// </returns>
+        private async System.Threading.Tasks.Task onNotFound(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.ISubnetStatus> response)
+        {
+            using( NoSynchronizationContext )
+            {
+                // onNotFound - response for 404 / application/json
+                // (await response) // should be Nutanix.Powershell.Models.ISubnetStatus
                 WriteObject(await response);
             }
         }

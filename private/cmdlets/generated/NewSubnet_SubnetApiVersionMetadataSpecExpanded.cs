@@ -14,22 +14,22 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.ApiVersion = value;
+                Body.ApiVersion = value;
             }
         }
-        /// <summary>Backing field for <see cref="BodyBody" /> property.</summary>
-        private Nutanix.Powershell.Models.ISubnetIntentInput _bodyBody= new Nutanix.Powershell.Models.SubnetIntentInput();
+        /// <summary>Backing field for <see cref="Body" /> property.</summary>
+        private Nutanix.Powershell.Models.ISubnetIntentInput _body= new Nutanix.Powershell.Models.SubnetIntentInput();
 
         /// <summary>An intentful representation of a subnet</summary>
-        private Nutanix.Powershell.Models.ISubnetIntentInput BodyBody
+        private Nutanix.Powershell.Models.ISubnetIntentInput Body
         {
             get
             {
-                return this._bodyBody;
+                return this._body;
             }
             set
             {
-                this._bodyBody = value;
+                this._body = value;
             }
         }
         /// <summary>The reference to the client API class.</summary>
@@ -48,7 +48,7 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Metadata = value;
+                Body.Metadata = value;
             }
         }
         /// <summary>
@@ -108,7 +108,7 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = value;
+                Body.Spec = value;
             }
         }
         /// <summary>
@@ -208,7 +208,7 @@ namespace Nutanix.Powershell.Cmdlets
         internal NewSubnet_SubnetApiVersionMetadataSpecExpanded(Carbon.Json.JsonObject json)
         {
             // deserialize the contents
-            _bodyBody = If( json?.PropertyT<Carbon.Json.JsonObject>("BodyBody"), out var __jsonBodyBody) ? Nutanix.Powershell.Models.SubnetIntentInput.FromJson(__jsonBodyBody) : BodyBody;
+            _body = If( json?.PropertyT<Carbon.Json.JsonObject>("Body"), out var __jsonBody) ? Nutanix.Powershell.Models.SubnetIntentInput.FromJson(__jsonBody) : Body;
         }
         /// <summary>Performs execution of the command.</summary>
 
@@ -298,7 +298,7 @@ namespace Nutanix.Powershell.Cmdlets
                     Credential = new Nutanix.Powershell.Models.NutanixCredential(url, Username, Password);
                 }
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                await this.Client.CreateSubnet(BodyBody, onAccepted, onDefault, this, Pipeline, Credential);
+                await this.Client.CreateSubnet(Body, onAccepted, onDefault, this, Pipeline, Credential);
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }
         }
@@ -323,7 +323,7 @@ namespace Nutanix.Powershell.Cmdlets
         {
             // serialization method
             container = container ?? new Carbon.Json.JsonObject();
-            AddIf( null != BodyBody ? (Carbon.Json.JsonNode) BodyBody.ToJson(null) : null, "BodyBody" ,container.Add );
+            AddIf( null != Body ? (Carbon.Json.JsonNode) Body.ToJson(null) : null, "Body" ,container.Add );
             return container;
         }
         /// <summary>a delegate that is called when the remote service returns 202 (Accepted).</summary>
@@ -355,7 +355,7 @@ namespace Nutanix.Powershell.Cmdlets
             using( NoSynchronizationContext )
             {
                 // Error Response : default
-                WriteError(new System.Management.Automation.ErrorRecord(new System.Exception($"The service encountered an unexpected result: {responseMessage.StatusCode}"), responseMessage.StatusCode.ToString(), System.Management.Automation.ErrorCategory.InvalidOperation, new { BodyBody}));
+                WriteError(new System.Management.Automation.ErrorRecord(new System.Exception($"The service encountered an unexpected result: {responseMessage.StatusCode}"), responseMessage.StatusCode.ToString(), System.Management.Automation.ErrorCategory.InvalidOperation, new { Body}));
             }
         }
         /// <summary>a delegate that is called when the remote service returns 200 (OK).</summary>

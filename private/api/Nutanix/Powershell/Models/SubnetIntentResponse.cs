@@ -49,10 +49,10 @@ namespace Nutanix.Powershell.Models
             }
         }
         /// <summary>Backing field for <see cref="Status" /> property.</summary>
-        private Nutanix.Powershell.Models.ISubnetDefStatus _status;
+        private Nutanix.Powershell.Models.IVmDefStatus _status;
 
         /// <summary>An intentful representation of a subnet status</summary>
-        public Nutanix.Powershell.Models.ISubnetDefStatus Status
+        public Nutanix.Powershell.Models.IVmDefStatus Status
         {
             get
             {
@@ -87,6 +87,6 @@ namespace Nutanix.Powershell.Models
         string ApiVersion { get; set; }
         Nutanix.Powershell.Models.ISubnetMetadata Metadata { get; set; }
         Nutanix.Powershell.Models.ISubnet Spec { get; set; }
-        Nutanix.Powershell.Models.ISubnetDefStatus Status { get; set; }
+        Nutanix.Powershell.Models.IVmDefStatus Status { get; set; }
     }
 }
