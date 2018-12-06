@@ -1,6 +1,6 @@
 namespace Nutanix.Powershell.Cmdlets
 {
-    using static Microsoft.Rest.ClientRuntime.Extensions;
+     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Implement a variant of the cmdlet Remove-Subnet.</summary>
     [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.Remove, @"Subnet_SubnetUuid", SupportsShouldProcess = true)]
     [System.Management.Automation.OutputType(typeof(Nutanix.Powershell.Models.ISubnetIntentResponse))]
@@ -38,35 +38,39 @@ namespace Nutanix.Powershell.Cmdlets
         public System.Management.Automation.PSCredential ProxyCredential {get;set;}
         /// <summary>Use the default credentials for the proxy</summary>
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Use the default credentials for the proxy")]
-
-       /// <summary>The Username for authentication</summary>
+        public System.Management.Automation.SwitchParameter ProxyUseDefaultCredentials {get;set;}
+        /// <summary>The Username for authentication</summary>
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Username for authentication")]
         public string Username {get; set;}
 
         /// <summary>The Password for authentication</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Password for authentication")]
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Password as a secure string for authentication")]
         public System.Security.SecureString Password {get; set;}
 
+        /// <summary>Skip the ssl validation</summary>
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Skip the ssl validation")]
         public System.Management.Automation.SwitchParameter SkipSSL {get; set;}
 
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Nutanix Credential object for authentication")]
+         /// <summary>Run the cmdlet asynchronous</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Run the cmdlet asynchronous")]
+        public System.Management.Automation.SwitchParameter Async {get; set;}
+
+        /// <summary>A PSCredental with username and password</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "A PSCredental with username and password")]
         [System.Management.Automation.ValidateNotNull]
         public Nutanix.Powershell.Models.NutanixCredential Credential {get; set;}
 
         /// <summary>The Username for authentication</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Server address")]
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The IP address or the domain of the server")]
         public string Server {get; set;}
 
-        /// <summary>The Username for authentication</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Server Port, defaults to 9440")]
+          /// <summary>The Username for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Port of where the API is served")]
         public string Port {get; set;}
 
         /// <summary>The Username for authentication</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The HTTP protocol, defaults to https")]
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Proocol used on the server (http/https)")]
         public string Protocol {get; set;}
-
-        public System.Management.Automation.SwitchParameter ProxyUseDefaultCredentials {get;set;}
         /// <summary>Backing field for <see cref="Uuid" /> property.</summary>
         private string _uuid;
 
@@ -209,40 +213,25 @@ namespace Nutanix.Powershell.Cmdlets
             using( NoSynchronizationContext )
             {
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletGetPipeline); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                if (this.SkipSSL.ToBool()) {
-                    Pipeline = Nutanix.Powershell.Module.Instance.CreatePipelineWithProxy(this.MyInvocation.BoundParameters);
-                } else {
-                    Pipeline = Nutanix.Powershell.Module.Instance.CreatePipeline(this.MyInvocation.BoundParameters);
-                }
-                Pipeline.Prepend(HttpPipelinePrepend);
-                Pipeline.Append(HttpPipelineAppend);
-                // get the client instance
+                   if (Credential == null) {
 
-                if (Credential == null)
-                {
-
-                    if (Port == null)
-                    {
+                    if (Port == null){
                         Port = System.Environment.GetEnvironmentVariable("NutanixPort") ?? "9440";
                     }
 
-                    if (Protocol == null)
-                    {
+                    if (Protocol == null) {
                         Protocol = System.Environment.GetEnvironmentVariable("NutanixProtocol") ?? "https";
                     }
 
-                    if (Server == null)
-                    {
+                    if (Server == null) {
                         Server = System.Environment.GetEnvironmentVariable("NutanixServer") ?? "localhost";
                     }
 
-                    if (Username == null)
-                    {
+                    if (Username == null) {
                         Username = System.Environment.GetEnvironmentVariable("NutanixUsername") ?? "";
                     }
 
-                    if (Password == null)
-                    {
+                    if (Password == null) {
                         var psw = System.Environment.GetEnvironmentVariable("NutanixPassword") ?? "";
                         System.Security.SecureString result = new System.Security.SecureString();
                         foreach (char c in psw)
@@ -250,11 +239,14 @@ namespace Nutanix.Powershell.Cmdlets
 
                         Password = result;
                     }
-                    //build url 
+                    //build url
                     var url = $"{Protocol}://{Server}:{Port}";
-                    Credential = new Nutanix.Powershell.Models.NutanixCredential(url, Username, Password);
+                    Credential = new Nutanix.Powershell.Models.NutanixCredential(url,Username, Password);
                 }
 
+                Pipeline.Prepend(HttpPipelinePrepend);
+                Pipeline.Append(HttpPipelineAppend);
+                // get the client instance
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 await this.Client.DeleteSubnet(Uuid, onAccepted, onNotFound, onDefault, this, Pipeline, Credential);
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
