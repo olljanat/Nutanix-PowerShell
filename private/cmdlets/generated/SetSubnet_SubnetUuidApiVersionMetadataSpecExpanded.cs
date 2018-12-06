@@ -9,6 +9,38 @@ namespace Nutanix.Powershell.Cmdlets
     {
         /// <summary>The <see cref="System.Threading.CancellationTokenSource" /> for this operation.</summary>
         private System.Threading.CancellationTokenSource _cancellationTokenSource = new System.Threading.CancellationTokenSource();
+        /// <summary>The Username for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Username for authentication")]
+        public string Username {get; set;}
+
+        /// <summary>The Password for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Password as a secure string for authentication")]
+        public System.Security.SecureString Password {get; set;}
+
+        /// <summary>Skip the ssl validation</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Skip the ssl validation")]
+        public System.Management.Automation.SwitchParameter SkipSSL {get; set;}
+
+         /// <summary>Run the cmdlet asynchronous</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Run the cmdlet asynchronous")]
+        public System.Management.Automation.SwitchParameter Async {get; set;}
+
+        /// <summary>A PSCredental with username and password</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "A PSCredental with username and password")]
+        [System.Management.Automation.ValidateNotNull]
+        public Nutanix.Powershell.Models.NutanixCredential Credential {get; set;}
+
+        /// <summary>The Username for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The IP address or the domain of the server")]
+        public string Server {get; set;}
+
+          /// <summary>The Username for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Port of where the API is served")]
+        public string Port {get; set;}
+
+        /// <summary>The Username for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Proocol used on the server (http/https)")]
+        public string Protocol {get; set;}
         /// <summary>HELP MESSAGE MISSING</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string ApiVersion
@@ -74,34 +106,6 @@ namespace Nutanix.Powershell.Cmdlets
         public System.Management.Automation.SwitchParameter ProxyUseDefaultCredentials {get;set;}
         /// <summary>An intentful representation of a subnet spec</summary>
         [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "An intentful representation of a subnet spec")]
-
-        /// <summary>The Username for authentication</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Username for authentication")]
-        public string Username {get; set;}
-
-        /// <summary>The Password for authentication</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Password for authentication")]
-        public System.Security.SecureString Password {get; set;}
-
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Skip the ssl validation")]
-        public System.Management.Automation.SwitchParameter SkipSSL {get; set;}
-
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Nutanix Credential object for authentication")]
-        [System.Management.Automation.ValidateNotNull]
-        public Nutanix.Powershell.Models.NutanixCredential Credential {get; set;}
-
-        /// <summary>The Username for authentication</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Server address")]
-        public string Server {get; set;}
-
-        /// <summary>The Username for authentication</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Server Port, defaults to 9440")]
-        public string Port {get; set;}
-
-        /// <summary>The Username for authentication</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The HTTP protocol, defaults to https")]
-        public string Protocol {get; set;}
-
         public Nutanix.Powershell.Models.ISubnet Spec
         {
             set
@@ -148,11 +152,11 @@ namespace Nutanix.Powershell.Cmdlets
         {
         }
         /// <summary>
-        /// Deserializes a <see cref="Carbon.Json.JsonNode" /> into a new instance of this class.
+        /// Deserializes a <see cref="Carbon.Json.JsonNode " /> into a new instance of this class.
         /// </summary>
-        /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
+        /// <param name="node">a <see cref="Carbon.Json.JsonNode " /> to deserialize from.</param>
         /// <returns>an instance of SetSubnet_SubnetUuidApiVersionMetadataSpecExpanded.</returns>
-        public static Nutanix.Powershell.Cmdlets.SetSubnet_SubnetUuidApiVersionMetadataSpecExpanded FromJson(Carbon.Json.JsonNode node)
+        public static Nutanix.Powershell.Cmdlets.SetSubnet_SubnetUuidApiVersionMetadataSpecExpanded FromJson(Carbon.Json.JsonNode  node)
         {
             return node is Carbon.Json.JsonObject json ? new SetSubnet_SubnetUuidApiVersionMetadataSpecExpanded(json) : null;
         }
@@ -253,52 +257,10 @@ namespace Nutanix.Powershell.Cmdlets
             using( NoSynchronizationContext )
             {
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletGetPipeline); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                   if (this.SkipSSL.ToBool()) {
-                    Pipeline = Nutanix.Powershell.Module.Instance.CreatePipelineWithProxy(this.MyInvocation.BoundParameters);
-                } else {
-                    Pipeline = Nutanix.Powershell.Module.Instance.CreatePipeline(this.MyInvocation.BoundParameters);
-                }
+                Pipeline = Nutanix.Powershell.Module.Instance.CreatePipeline(this.MyInvocation.BoundParameters);
                 Pipeline.Prepend(HttpPipelinePrepend);
                 Pipeline.Append(HttpPipelineAppend);
                 // get the client instance
-
-                if (Credential == null)
-                {
-
-                    if (Port == null)
-                    {
-                        Port = System.Environment.GetEnvironmentVariable("NutanixPort") ?? "9440";
-                    }
-
-                    if (Protocol == null)
-                    {
-                        Protocol = System.Environment.GetEnvironmentVariable("NutanixProtocol") ?? "https";
-                    }
-
-                    if (Server == null)
-                    {
-                        Server = System.Environment.GetEnvironmentVariable("NutanixServer") ?? "localhost";
-                    }
-
-                    if (Username == null)
-                    {
-                        Username = System.Environment.GetEnvironmentVariable("NutanixUsername") ?? "";
-                    }
-
-                    if (Password == null)
-                    {
-                        var psw = System.Environment.GetEnvironmentVariable("NutanixPassword") ?? "";
-                        System.Security.SecureString result = new System.Security.SecureString();
-                        foreach (char c in psw)
-                            result.AppendChar(c);
-
-                        Password = result;
-                    }
-                    //build url 
-                    var url = $"{Protocol}://{Server}:{Port}";
-                    Credential = new Nutanix.Powershell.Models.NutanixCredential(url, Username, Password);
-                }
-
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 await this.Client.UpdateSubnet(Uuid, BodyBody, onAccepted, onNotFound, onDefault, this, Pipeline, Credential);
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
@@ -326,21 +288,21 @@ namespace Nutanix.Powershell.Cmdlets
             base.StopProcessing();
         }
         /// <summary>
-        /// Serializes the state of this cmdlet to a <see cref="Carbon.Json.JsonNode" /> object.
+        /// Serializes the state of this cmdlet to a <see cref="Carbon.Json.JsonNode " /> object.
         /// </summary>
         /// <param name="container">The <see cref="Carbon.Json.JsonObject"/> container to serialize this object into. If the caller
         /// passes in <c>null</c>, a new instance will be created and returned to the caller.</param>
         /// <param name="serializationMode">Allows the caller to choose the depth of the serialization. See <see cref="Microsoft.Rest.ClientRuntime.SerializationMode"/>.</param>
         /// <returns>
-        /// a serialized instance of <see cref="SetSubnet_SubnetUuidApiVersionMetadataSpecExpanded" /> as a <see cref="Carbon.Json.JsonNode"
+        /// a serialized instance of <see cref="SetSubnet_SubnetUuidApiVersionMetadataSpecExpanded" /> as a <see cref="Carbon.Json.JsonNode "
         /// />.
         /// </returns>
-        public Carbon.Json.JsonNode ToJson(Carbon.Json.JsonObject container, Microsoft.Rest.ClientRuntime.SerializationMode serializationMode)
+        public Carbon.Json.JsonNode  ToJson(Carbon.Json.JsonObject container, Microsoft.Rest.ClientRuntime.SerializationMode serializationMode)
         {
             // serialization method
             container = container ?? new Carbon.Json.JsonObject();
-            AddIf( null != Uuid ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(Uuid) : null, "Uuid" ,container.Add );
-            AddIf( null != BodyBody ? (Carbon.Json.JsonNode) BodyBody.ToJson(null) : null, "BodyBody" ,container.Add );
+            AddIf( null != Uuid ? (Carbon.Json.JsonNode ) new Carbon.Json.JsonString(Uuid) : null, "Uuid" ,container.Add );
+            AddIf( null != BodyBody ? (Carbon.Json.JsonNode ) BodyBody.ToJson(null) : null, "BodyBody" ,container.Add );
             return container;
         }
         /// <summary>a delegate that is called when the remote service returns 202 (Accepted).</summary>
