@@ -231,7 +231,33 @@ namespace Nutanix.Powershell.Cmdlets
             using( NoSynchronizationContext )
             {
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletGetPipeline); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                Pipeline = Nutanix.Powershell.Module.Instance.CreatePipeline(this.MyInvocation.BoundParameters);
+                    if (Credential == null) {
+
+                    if (Port == null){
+                        Port = System.Environment.GetEnvironmentVariable("NutanixPort") ?? "9440";
+                    }
+
+                    if (Protocol == null) {
+                        Protocol = System.Environment.GetEnvironmentVariable("NutanixProtocol") ?? "https";
+                    }
+
+                    if (Server == null) {
+                        Server = System.Environment.GetEnvironmentVariable("NutanixServer") ?? "localhost";
+                    }
+
+                    if (Username == null) {
+                        Username = System.Environment.GetEnvironmentVariable("NutanixUsername") ?? "";
+                    }
+
+                    if (Password == null) {
+                        var psw = System.Environment.GetEnvironmentVariable("NutanixPassword") ?? "";
+                        System.Security.SecureString result = new System.Security.SecureString();
+                        foreach (char c in psw)
+                            result.AppendChar(c);
+
+                        Password = result;
+                    }
+                }
                 Pipeline.Prepend(HttpPipelinePrepend);
                 Pipeline.Append(HttpPipelineAppend);
                 // get the client instance
