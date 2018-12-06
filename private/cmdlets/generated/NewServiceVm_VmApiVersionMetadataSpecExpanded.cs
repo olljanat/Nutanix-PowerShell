@@ -2,7 +2,7 @@ namespace Nutanix.Powershell.Cmdlets
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Implement a variant of the cmdlet New-ServiceVm.</summary>
-    [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.New, @"ServiceVm_VmApiVersionMetadataSpecExpanded", SupportsShouldProcess = true)]
+    [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.New, @"Vm_VmApiVersionMetadataSpecExpanded", SupportsShouldProcess = true)]
     [System.Management.Automation.OutputType(typeof(Nutanix.Powershell.Models.IVmIntentResponse))]
     public class NewServiceVm_VmApiVersionMetadataSpecExpanded : System.Management.Automation.PSCmdlet, Microsoft.Rest.ClientRuntime.IEventListener
     {

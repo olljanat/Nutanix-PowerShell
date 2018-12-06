@@ -2,7 +2,7 @@ namespace Nutanix.Powershell.Cmdlets
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Implement a variant of the cmdlet Remove-ServiceVm.</summary>
-    [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.Remove, @"ServiceVm_VmUuid", SupportsShouldProcess = true)]
+    [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.Remove, @"Vm_VmUuid", SupportsShouldProcess = true)]
     [System.Management.Automation.OutputType(typeof(Nutanix.Powershell.Models.IVmIntentResponse))]
     [System.Management.Automation.OutputType(typeof(Nutanix.Powershell.Models.IVmStatus))]
     public class RemoveServiceVm_VmUuid : System.Management.Automation.PSCmdlet, Microsoft.Rest.ClientRuntime.IEventListener
@@ -97,7 +97,7 @@ namespace Nutanix.Powershell.Cmdlets
         /// <summary>The Username for authentication</summary>
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Proocol used on the server (http/https)")]
         public string Protocol {get; set;}
-        
+
 
         /// <summary>The UUID of the entity.</summary>
         [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The UUID of the entity.")]
@@ -242,7 +242,7 @@ namespace Nutanix.Powershell.Cmdlets
                     Pipeline = Nutanix.Powershell.Module.Instance.CreatePipelineWithProxy(this.MyInvocation.BoundParameters);
                 } else {
                     Pipeline = Nutanix.Powershell.Module.Instance.CreatePipeline(this.MyInvocation.BoundParameters);
-                } 
+                }
                 Pipeline.Prepend(HttpPipelinePrepend);
                 Pipeline.Append(HttpPipelineAppend);
 
@@ -272,7 +272,7 @@ namespace Nutanix.Powershell.Cmdlets
 
                         Password = result;
                     }
-                    //build url 
+                    //build url
                     var url = $"{Protocol}://{Server}:{Port}";
                     Credential = new Nutanix.Powershell.Models.NutanixCredential(url,Username, Password);
                 }
@@ -280,11 +280,11 @@ namespace Nutanix.Powershell.Cmdlets
                 // get the client instance
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
 
-                if (this.Async.ToBool()) 
+                if (this.Async.ToBool())
                 {
                     await this.Client.DeleteVm(Uuid, onAccepted, onNotFound, onDefault, this, Pipeline, Credential);
                 }
-                else 
+                else
                 {
                     await this.Client.DeleteVm_Sync(Uuid, onAccepted, onNotFound, onDefault, this, Pipeline, Credential);
                 }

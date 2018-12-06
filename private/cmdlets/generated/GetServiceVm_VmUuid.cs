@@ -2,7 +2,7 @@ namespace Nutanix.Powershell.Cmdlets
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Implement a variant of the cmdlet Get-ServiceVm.</summary>
-    [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.Get, @"ServiceVm_VmUuid")]
+    [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.Get, @"Vm_VmUuid")]
     [System.Management.Automation.OutputType(typeof(Nutanix.Powershell.Models.IVmIntentResponse))]
     [System.Management.Automation.OutputType(typeof(Nutanix.Powershell.Models.IVmStatus))]
     public class GetServiceVm_VmUuid : System.Management.Automation.PSCmdlet, Microsoft.Rest.ClientRuntime.IEventListener
@@ -220,7 +220,7 @@ namespace Nutanix.Powershell.Cmdlets
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletGetPipeline); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 if (SkipSSL.ToBool()) {
                     Pipeline = Nutanix.Powershell.Module.Instance.CreatePipelineWithProxy(this.MyInvocation.BoundParameters);
-                } else { 
+                } else {
                     Pipeline = Nutanix.Powershell.Module.Instance.CreatePipeline(this.MyInvocation.BoundParameters);
                 }
                 Pipeline.Prepend(HttpPipelinePrepend);
@@ -253,7 +253,7 @@ namespace Nutanix.Powershell.Cmdlets
 
                         Password = result;
                     }
-                    //build url 
+                    //build url
                     var url = $"{Protocol}://{Server}:{Port}";
                     Credential = new Nutanix.Powershell.Models.NutanixCredential(url,Username, Password);
                 }

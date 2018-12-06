@@ -2,7 +2,7 @@ namespace Nutanix.Powershell.Cmdlets
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Implement a variant of the cmdlet Get-ServiceVm.</summary>
-    [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.Get, @"ServiceVm_VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded", SupportsShouldProcess = true)]
+    [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.Get, @"Vm_VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded", SupportsShouldProcess = true)]
     [System.Management.Automation.OutputType(typeof(Nutanix.Powershell.Models.IVmListIntentResponse))]
     public class GetServiceVm_VmsFilterKindLengthOffsetSortAttributeSortOrderExpanded : System.Management.Automation.PSCmdlet, Microsoft.Rest.ClientRuntime.IEventListener
     {
@@ -111,7 +111,7 @@ namespace Nutanix.Powershell.Cmdlets
                 GetEntitiesRequest.Offset = value;
             }
 
-            get 
+            get
             {
                 if (GetEntitiesRequest.Offset.HasValue){
                     return GetEntitiesRequest.Offset.Value;
@@ -300,11 +300,11 @@ namespace Nutanix.Powershell.Cmdlets
 
                 if (SkipSSL.ToBool()) {
                     Pipeline = Nutanix.Powershell.Module.Instance.CreatePipelineWithProxy(this.MyInvocation.BoundParameters);
-                } else { 
+                } else {
                     Pipeline = Nutanix.Powershell.Module.Instance.CreatePipeline(this.MyInvocation.BoundParameters);
                 }
                 Pipeline.Prepend(HttpPipelinePrepend);
-                Pipeline.Append(HttpPipelineAppend); 
+                Pipeline.Append(HttpPipelineAppend);
 
                 if (Credential == null) {
 
@@ -332,7 +332,7 @@ namespace Nutanix.Powershell.Cmdlets
 
                         Password = result;
                     }
-                    //build url 
+                    //build url
                     var url = $"{Protocol}://{Server}:{Port}";
                     Credential = new Nutanix.Powershell.Models.NutanixCredential(url,Username, Password);
                 }
@@ -405,7 +405,7 @@ namespace Nutanix.Powershell.Cmdlets
             }
         }
 
-        
+
         private async System.Threading.Tasks.Task onOK2(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmIntentResource[]> response)
         {
             using( NoSynchronizationContext )

@@ -2,7 +2,7 @@ namespace Nutanix.Powershell.Cmdlets
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Implement a variant of the cmdlet Get-ServiceVm.</summary>
-    [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.Get, @"ServiceVm_VmsFilterKindLengthOffsetSortAttributeSortOrder", SupportsShouldProcess = true)]
+    [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.Get, @"Vm_VmsFilterKindLengthOffsetSortAttributeSortOrder", SupportsShouldProcess = true)]
     [System.Management.Automation.OutputType(typeof(Nutanix.Powershell.Models.IVmListIntentResponse))]
     public class GetServiceVm_VmsFilterKindLengthOffsetSortAttributeSortOrder : System.Management.Automation.PSCmdlet, Microsoft.Rest.ClientRuntime.IEventListener
     {
@@ -252,7 +252,7 @@ namespace Nutanix.Powershell.Cmdlets
                 } else {
                     Pipeline = Nutanix.Powershell.Module.Instance.CreatePipeline(this.MyInvocation.BoundParameters);
                 }
-                
+
                 Pipeline.Prepend(HttpPipelinePrepend);
                 Pipeline.Append(HttpPipelineAppend);
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletGetPipeline); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
@@ -284,13 +284,13 @@ namespace Nutanix.Powershell.Cmdlets
 
                         Password = result;
                     }
-                    //build url 
+                    //build url
                     var url = $"{Protocol}://{Server}:{Port}";
                     Credential = new Nutanix.Powershell.Models.NutanixCredential(url,Username, Password);
                 }
 
 
-                
+
 
                 // get the client instance
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }

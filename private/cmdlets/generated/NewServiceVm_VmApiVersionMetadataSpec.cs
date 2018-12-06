@@ -2,7 +2,7 @@ namespace Nutanix.Powershell.Cmdlets
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Implement a variant of the cmdlet New-ServiceVm.</summary>
-    [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.New, @"ServiceVm_VmApiVersionMetadataSpec", SupportsShouldProcess = true)]
+    [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.New, @"Vm_VmApiVersionMetadataSpec", SupportsShouldProcess = true)]
     [System.Management.Automation.OutputType(typeof(Nutanix.Powershell.Models.IVmIntentResponse))]
     public class NewServiceVm_VmApiVersionMetadataSpec : System.Management.Automation.PSCmdlet, Microsoft.Rest.ClientRuntime.IEventListener
     {
@@ -260,7 +260,7 @@ namespace Nutanix.Powershell.Cmdlets
 
                         Password = result;
                     }
-                    //build url 
+                    //build url
                     var url = $"{Protocol}://{Server}:{Port}";
                     Credential = new Nutanix.Powershell.Models.NutanixCredential(url,Username, Password);
                 }
@@ -271,7 +271,7 @@ namespace Nutanix.Powershell.Cmdlets
                 {
                     await this.Client.NewVm(Body, onAccepted, onDefault, this, Pipeline, Credential);
                 }
-                else 
+                else
                 {
                     await this.Client.NewVm_Sync(Body, onAccepted, onDefault, onOK, onNotFound, this, Pipeline, Credential);
                 }
