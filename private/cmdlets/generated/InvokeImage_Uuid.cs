@@ -2,7 +2,7 @@ namespace Nutanix.Powershell.Cmdlets
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Implement a variant of the cmdlet Invoke-Image.</summary>
-    [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsLifecycle.Invoke, @"Image_Uuid")]
+    [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.Set, @"ImageFile_Uuid")]
     [System.Management.Automation.OutputType(typeof(System.IO.Stream))]
     public class InvokeImage_Uuid : System.Management.Automation.PSCmdlet, Microsoft.Rest.ClientRuntime.IEventListener
     {
@@ -257,7 +257,7 @@ namespace Nutanix.Powershell.Cmdlets
 
                         Password = result;
                     }
-                    //build url 
+                    //build url
                     var url = $"{Protocol}://{Server}:{Port}";
                     Credential = new Nutanix.Powershell.Models.NutanixCredential(url, Username, Password);
                 }
