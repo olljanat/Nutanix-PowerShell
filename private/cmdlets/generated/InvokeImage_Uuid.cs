@@ -80,6 +80,23 @@ namespace Nutanix.Powershell.Cmdlets
                 this._uuid = value;
             }
         }
+
+        /// <summary>Backing field for <see cref="Path" /> property.</summary>
+        private string _path;
+
+        /// <summary>The Path of the image to upload.</summary>
+        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The Path of the entity.")]
+        public string Path
+        {
+            get
+            {
+                return this._path;
+            }
+            set
+            {
+                this._path = value;
+            }
+        }
         /// <summary>
         /// (overrides the default BeginProcessing method in System.Management.Automation.PSCmdlet)
         /// </summary>
@@ -262,7 +279,7 @@ namespace Nutanix.Powershell.Cmdlets
                     Credential = new Nutanix.Powershell.Models.NutanixCredential(url, Username, Password);
                 }
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                await this.Client.Images(Uuid, onOK, onDefault, this, Pipeline, Credential);
+                await this.Client.Images(Uuid, Path, onOK, onDefault, this, Pipeline, Credential);
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }
         }
