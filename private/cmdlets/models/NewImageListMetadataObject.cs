@@ -19,14 +19,6 @@ namespace Nutanix.Powershell.ModelCmdlets
                 _imageListMetadata.Filter = value;
             }
         }
-        /// <summary>The kind name</summary>
-        public string Kind
-        {
-            set
-            {
-                _imageListMetadata.Kind = value;
-            }
-        }
         /// <summary>The number of records to retrieve relative to the offset</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "The number of records to retrieve relative to the offset")]
         public int Length

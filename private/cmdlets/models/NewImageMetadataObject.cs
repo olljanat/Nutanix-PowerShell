@@ -20,7 +20,7 @@ namespace Nutanix.Powershell.ModelCmdlets
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING")]
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string ProjectReferenceUuid
         {
             set
@@ -48,7 +48,7 @@ namespace Nutanix.Powershell.ModelCmdlets
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING")]
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string UserReferenceUuid
         {
             set
@@ -70,6 +70,7 @@ namespace Nutanix.Powershell.ModelCmdlets
 
         protected override void ProcessRecord()
         {
+            _imageMetadata.Kind = "image";
             WriteObject(_imageMetadata);
         }
     }

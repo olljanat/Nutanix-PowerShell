@@ -67,6 +67,9 @@ namespace Nutanix.Powershell.Cmdlets
         /// <summary>Backing field for <see cref="Uuid" /> property.</summary>
         private string _uuid;
 
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Run the command asynchronous")]
+        public System.Management.Automation.SwitchParameter Async {get; set;}
+
         /// <summary>The UUID of the entity.</summary>
         [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The UUID of the entity.")]
         public string Uuid
@@ -249,12 +252,19 @@ namespace Nutanix.Powershell.Cmdlets
 
                         Password = result;
                     }
-                    //build url 
+                    //build url
                     var url = $"{Protocol}://{Server}:{Port}";
                     Credential = new Nutanix.Powershell.Models.NutanixCredential(url, Username, Password);
                 }
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                await this.Client.DeleteImage(Uuid, onAccepted, onDefault, this, Pipeline, Credential);
+                if (this.Async.ToBool())
+                {
+                    await this.Client.DeleteImage(Uuid, onAccepted, onDefault, this, Pipeline, Credential);
+                }
+                else
+                {
+                    await this.Client.DeleteImage_Sync(Uuid, onAccepted, onDefault, this, Pipeline, Credential);
+                }
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }
         }

@@ -10,15 +10,6 @@ namespace Nutanix.Powershell.ModelCmdlets
     {
         /// <summary>Backing field for <see cref="ImageIntentInput" /></summary>
         private Nutanix.Powershell.Models.IImageIntentInput _imageIntentInput = new Nutanix.Powershell.Models.ImageIntentInput();
-        /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
-        public string ApiVersion
-        {
-            set
-            {
-                _imageIntentInput.ApiVersion = value;
-            }
-        }
         /// <summary>A description for image.</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "A description for image.")]
         public string ImageDescription
@@ -49,19 +40,12 @@ namespace Nutanix.Powershell.ModelCmdlets
                 _imageIntentInput.Spec.Resources = value;
             }
         }
-        /// <summary>The image kind metadata</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The image kind metadata")]
-        public Nutanix.Powershell.Models.IImageMetadata Metadata
-        {
-            set
-            {
-                _imageIntentInput.Metadata = value;
-            }
-        }
         /// <summary>Performs execution of the command.</summary>
 
         protected override void ProcessRecord()
         {
+            _imageIntentInput.ApiVersion = "3.1";
+            _imageIntentInput.Metadata.Kind = "image";
             WriteObject(_imageIntentInput);
         }
     }

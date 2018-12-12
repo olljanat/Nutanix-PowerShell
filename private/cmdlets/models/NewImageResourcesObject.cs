@@ -23,7 +23,7 @@ namespace Nutanix.Powershell.ModelCmdlets
             }
         }
         /// <summary>The type of checksum calculated for the image</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The type of checksum calculated for the image")]
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "The type of checksum calculated for the image")]
         public string ChecksumChecksumAlgorithm
         {
             set
@@ -33,7 +33,7 @@ namespace Nutanix.Powershell.ModelCmdlets
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING")]
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string ChecksumChecksumValue
         {
             set
@@ -52,7 +52,7 @@ namespace Nutanix.Powershell.ModelCmdlets
             }
         }
         /// <summary>Name of the producer/distribution of the image. For example windows or red hat.</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "Name of the producer/distribution of the image. For example windows or red hat.")]
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Name of the producer/distribution of the image. For example windows or red hat.")]
         public string ImageVersionResourcesProductName
         {
             set
@@ -62,7 +62,7 @@ namespace Nutanix.Powershell.ModelCmdlets
             }
         }
         /// <summary>Version string for the disk image.</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "Version string for the disk image.")]
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Version string for the disk image.")]
         public string ImageVersionResourcesProductVersion
         {
             set

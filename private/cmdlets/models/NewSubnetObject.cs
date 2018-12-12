@@ -8,16 +8,6 @@ namespace Nutanix.Powershell.ModelCmdlets
     {
         /// <summary>Backing field for <see cref="Subnet" /></summary>
         private Nutanix.Powershell.Models.ISubnet _subnet = new Nutanix.Powershell.Models.Subnet();
-        /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The kind name")]
-        public string AvailabilityZoneReferenceKind
-        {
-            set
-            {
-                _subnet.AvailabilityZoneReference = _subnet.AvailabilityZoneReference ?? new Nutanix.Powershell.Models.AvailabilityZoneReference();
-                _subnet.AvailabilityZoneReference.Kind = value;
-            }
-        }
         /// <summary>HELP MESSAGE MISSING</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string AvailabilityZoneReferenceName
@@ -29,23 +19,13 @@ namespace Nutanix.Powershell.ModelCmdlets
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING")]
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string AvailabilityZoneReferenceUuid
         {
             set
             {
                 _subnet.AvailabilityZoneReference = _subnet.AvailabilityZoneReference ?? new Nutanix.Powershell.Models.AvailabilityZoneReference();
                 _subnet.AvailabilityZoneReference.Uuid = value;
-            }
-        }
-        /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The kind name")]
-        public string ClusterReferenceKind
-        {
-            set
-            {
-                _subnet.ClusterReference = _subnet.ClusterReference ?? new Nutanix.Powershell.Models.ClusterReference();
-                _subnet.ClusterReference.Kind = value;
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
@@ -99,6 +79,14 @@ namespace Nutanix.Powershell.ModelCmdlets
 
         protected override void ProcessRecord()
         {
+            if (_subnet.AvailabilityZoneReference != null)
+            {
+                _subnet.AvailabilityZoneReference.Kind = "availabitliy_zone";
+            }
+            if(_subnet.ClusterReference != null)
+            {
+                _subnet.ClusterReference.Kind = "cluster";
+            }
             WriteObject(_subnet);
         }
     }

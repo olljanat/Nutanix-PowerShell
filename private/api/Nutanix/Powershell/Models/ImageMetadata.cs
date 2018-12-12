@@ -46,7 +46,7 @@ namespace Nutanix.Powershell.Models
             {
                 return this._kind;
             }
-            internal set
+            set
             {
                 this._kind = value;
             }
@@ -182,7 +182,7 @@ namespace Nutanix.Powershell.Models
     public partial interface IImageMetadata : Microsoft.Rest.ClientRuntime.IJsonSerializable {
         System.Collections.Generic.IDictionary<string,string> Categories { get; set; }
         System.DateTime? CreationTime { get;  }
-        string Kind { get;  }
+        string Kind { get;  set;}
         System.DateTime? LastUpdateTime { get;  }
         string Name { get;  }
         Nutanix.Powershell.Models.IUserReference OwnerReference { get; set; }

@@ -8,15 +8,6 @@ namespace Nutanix.Powershell.Cmdlets
     {
         /// <summary>The <see cref="System.Threading.CancellationTokenSource" /> for this operation.</summary>
         private System.Threading.CancellationTokenSource _cancellationTokenSource = new System.Threading.CancellationTokenSource();
-        /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
-        public string ApiVersion
-        {
-            set
-            {
-                Body.ApiVersion = value;
-            }
-        }
         /// <summary>Backing field for <see cref="Body" /> property.</summary>
         private Nutanix.Powershell.Models.ISubnetIntentInput _body= new Nutanix.Powershell.Models.SubnetIntentInput();
 
@@ -251,6 +242,8 @@ namespace Nutanix.Powershell.Cmdlets
         {
             using( NoSynchronizationContext )
             {
+
+                _body.ApiVersion = "3.1";
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletGetPipeline); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 if (this.SkipSSL.ToBool()) {
                     Pipeline = Nutanix.Powershell.Module.Instance.CreatePipelineWithProxy(this.MyInvocation.BoundParameters);
@@ -300,11 +293,11 @@ namespace Nutanix.Powershell.Cmdlets
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 if (Async.ToBool())
                 {
-                    await this.Client.CreateSubnet_Sync(Body, onAccepted, onDefault, onOK, onNotFound, this, Pipeline, Credential);
+                    await this.Client.CreateSubnet(Body, onAccepted, onDefault, this, Pipeline, Credential);
                 }
                 else
                 {
-                    await this.Client.CreateSubnet(Body, onAccepted, onDefault, this, Pipeline, Credential);
+                    await this.Client.CreateSubnet_Sync(Body, onAccepted, onDefault, onOK, onNotFound, this, Pipeline, Credential);
                 }
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }

@@ -19,16 +19,6 @@ namespace Nutanix.Powershell.ModelCmdlets
                 _subnetResources.IpConfig = value;
             }
         }
-        /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The kind name")]
-        public string NetworkFunctionChainReferenceKind
-        {
-            set
-            {
-                _subnetResources.NetworkFunctionChainReference = _subnetResources.NetworkFunctionChainReference ?? new Nutanix.Powershell.Models.NetworkFunctionChainReference();
-                _subnetResources.NetworkFunctionChainReference.Kind = value;
-            }
-        }
         /// <summary>HELP MESSAGE MISSING</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string NetworkFunctionChainReferenceName
@@ -40,7 +30,7 @@ namespace Nutanix.Powershell.ModelCmdlets
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING")]
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string NetworkFunctionChainReferenceUuid
         {
             set
@@ -80,6 +70,10 @@ namespace Nutanix.Powershell.ModelCmdlets
 
         protected override void ProcessRecord()
         {
+            if (_subnetResources.NetworkFunctionChainReference != null)
+            {
+                _subnetResources.NetworkFunctionChainReference.Kind = "network_function_chain";
+            }
             WriteObject(_subnetResources);
         }
     }

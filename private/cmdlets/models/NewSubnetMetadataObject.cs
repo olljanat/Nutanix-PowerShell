@@ -28,15 +28,6 @@ namespace Nutanix.Powershell.ModelCmdlets
                 _subnetMetadata.CreationTime = value;
             }
         }
-        /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The kind name")]
-        public string Kind
-        {
-            set
-            {
-                _subnetMetadata.Kind = value;
-            }
-        }
         /// <summary>UTC date and time in RFC-3339 format when subnet was last updated</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "UTC date and time in RFC-3339 format when subnet was last updated")]
         public System.DateTime LastUpdateTime
@@ -56,7 +47,7 @@ namespace Nutanix.Powershell.ModelCmdlets
             }
         }
         /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The kind name")]
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "The kind name")]
         public string ProjectReferenceKind
         {
             set
@@ -76,7 +67,7 @@ namespace Nutanix.Powershell.ModelCmdlets
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING")]
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string ProjectReferenceUuid
         {
             set
@@ -104,7 +95,7 @@ namespace Nutanix.Powershell.ModelCmdlets
             }
         }
         /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The kind name")]
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "The kind name")]
         public string UserReferenceKind
         {
             set
@@ -124,7 +115,7 @@ namespace Nutanix.Powershell.ModelCmdlets
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING")]
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string UserReferenceUuid
         {
             set
@@ -146,6 +137,7 @@ namespace Nutanix.Powershell.ModelCmdlets
 
         protected override void ProcessRecord()
         {
+            _subnetMetadata.Kind = "subnet";
             WriteObject(_subnetMetadata);
         }
     }

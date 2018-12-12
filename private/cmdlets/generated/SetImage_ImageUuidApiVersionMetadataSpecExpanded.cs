@@ -8,28 +8,19 @@ namespace Nutanix.Powershell.Cmdlets
     {
         /// <summary>The <see cref="System.Threading.CancellationTokenSource" /> for this operation.</summary>
         private System.Threading.CancellationTokenSource _cancellationTokenSource = new System.Threading.CancellationTokenSource();
-        /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
-        public string ApiVersion
-        {
-            set
-            {
-                BodyBody.ApiVersion = value;
-            }
-        }
-        /// <summary>Backing field for <see cref="BodyBody" /> property.</summary>
-        private Nutanix.Powershell.Models.IImageIntentInput _bodyBody= new Nutanix.Powershell.Models.ImageIntentInput();
+        /// <summary>Backing field for <see cref="Body" /> property.</summary>
+        private Nutanix.Powershell.Models.IImageIntentInput _body= new Nutanix.Powershell.Models.ImageIntentInput();
 
         /// <summary>An intentful representation of a image</summary>
-        private Nutanix.Powershell.Models.IImageIntentInput BodyBody
+        private Nutanix.Powershell.Models.IImageIntentInput Body
         {
             get
             {
-                return this._bodyBody;
+                return this._body;
             }
             set
             {
-                this._bodyBody = value;
+                this._body = value;
             }
         }
         /// <summary>The reference to the client API class.</summary>
@@ -48,8 +39,8 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.Image();
-                BodyBody.Spec.Description = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.Image();
+                Body.Spec.Description = value;
             }
         }
         /// <summary>image Name.</summary>
@@ -58,8 +49,8 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.Image();
-                BodyBody.Spec.Name = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.Image();
+                Body.Spec.Name = value;
             }
         }
         /// <summary>Describes the image spec resources object.</summary>
@@ -68,8 +59,8 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.Image();
-                BodyBody.Spec.Resources = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.Image();
+                Body.Spec.Resources = value;
             }
         }
         /// <summary>The image kind metadata</summary>
@@ -78,7 +69,7 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Metadata = value;
+                Body.Metadata = value;
             }
         }
         /// <summary>
@@ -314,12 +305,12 @@ namespace Nutanix.Powershell.Cmdlets
 
                         Password = result;
                     }
-                    //build url 
+                    //build url
                     var url = $"{Protocol}://{Server}:{Port}";
                     Credential = new Nutanix.Powershell.Models.NutanixCredential(url, Username, Password);
                 }
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                await this.Client.UpdateImage(Uuid, BodyBody, onAccepted, onDefault, this, Pipeline, Credential);
+                await this.Client.UpdateImage(Uuid, Body, onAccepted, onDefault, this, Pipeline, Credential);
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }
         }
@@ -335,7 +326,7 @@ namespace Nutanix.Powershell.Cmdlets
         {
             // deserialize the contents
             _uuid = If( json?.PropertyT<Carbon.Json.JsonString>("Uuid"), out var __jsonUuid) ? (string)__jsonUuid : (string)Uuid;
-            _bodyBody = If( json?.PropertyT<Carbon.Json.JsonObject>("BodyBody"), out var __jsonBodyBody) ? Nutanix.Powershell.Models.ImageIntentInput.FromJson(__jsonBodyBody) : BodyBody;
+            _body = If( json?.PropertyT<Carbon.Json.JsonObject>("Body"), out var __jsonBody) ? Nutanix.Powershell.Models.ImageIntentInput.FromJson(__jsonBody) : Body;
         }
         /// <summary>Interrupts currently running code within the command.</summary>
 
@@ -359,7 +350,7 @@ namespace Nutanix.Powershell.Cmdlets
             // serialization method
             container = container ?? new Carbon.Json.JsonObject();
             AddIf( null != Uuid ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(Uuid) : null, "Uuid" ,container.Add );
-            AddIf( null != BodyBody ? (Carbon.Json.JsonNode) BodyBody.ToJson(null) : null, "BodyBody" ,container.Add );
+            AddIf( null != Body ? (Carbon.Json.JsonNode) Body.ToJson(null) : null, "Body" ,container.Add );
             return container;
         }
         /// <summary>a delegate that is called when the remote service returns 202 (Accepted).</summary>
@@ -390,7 +381,7 @@ namespace Nutanix.Powershell.Cmdlets
             using( NoSynchronizationContext )
             {
                 // Error Response : default
-                WriteError(new System.Management.Automation.ErrorRecord(new System.Exception($"The service encountered an unexpected result: {responseMessage.StatusCode}"), responseMessage.StatusCode.ToString(), System.Management.Automation.ErrorCategory.InvalidOperation, new { Uuid,BodyBody}));
+                WriteError(new System.Management.Automation.ErrorRecord(new System.Exception($"The service encountered an unexpected result: {responseMessage.StatusCode}"), responseMessage.StatusCode.ToString(), System.Management.Automation.ErrorCategory.InvalidOperation, new { Uuid,Body}));
             }
         }
     }

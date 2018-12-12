@@ -68,11 +68,16 @@ namespace Nutanix.Powershell.ModelCmdlets
         }
         /// <summary>HELP MESSAGE MISSING</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
-        public Nutanix.Powershell.Models.IIpPool[] PoolList
+        public string[] PoolList
         {
             set
             {
-                _ipConfig.PoolList = value;
+                _ipConfig.PoolList = new Nutanix.Powershell.Models.IpPool[value.Length];
+                for (int i = 0; i < value.Length; i++)
+                {
+                    _ipConfig.PoolList[i] = new Nutanix.Powershell.Models.IpPool();
+                    _ipConfig.PoolList[i].Range = value[i];
+                }
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>

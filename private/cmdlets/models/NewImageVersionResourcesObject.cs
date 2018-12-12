@@ -11,7 +11,7 @@ namespace Nutanix.Powershell.ModelCmdlets
         /// <summary>Backing field for <see cref="ImageVersionResources" /></summary>
         private Nutanix.Powershell.Models.IImageVersionResources _imageVersionResources = new Nutanix.Powershell.Models.ImageVersionResources();
         /// <summary>Name of the producer/distribution of the image. For example windows or red hat.</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "Name of the producer/distribution of the image. For example windows or red hat.")]
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Name of the producer/distribution of the image. For example windows or red hat.")]
         public string ProductName
         {
             set
@@ -20,7 +20,7 @@ namespace Nutanix.Powershell.ModelCmdlets
             }
         }
         /// <summary>Version string for the disk image.</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "Version string for the disk image.")]
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Version string for the disk image.")]
         public string ProductVersion
         {
             set
