@@ -413,6 +413,21 @@ namespace Nutanix.Powershell.Cmdlets
             }
         }
 
+               [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "An intentful representation of a subnet", ValueFromPipeline = true)]
+        public System.Collections.Generic.IDictionary<string,string> Categories
+        {
+            get
+            {
+                return this._body.Metadata.Categories;
+            }
+            set
+            {
+                this._body.Spec = this._body.Spec ?? new Nutanix.Powershell.Models.Subnet();
+                this._body.Metadata = this._body.Metadata ?? new Nutanix.Powershell.Models.SubnetMetadata();
+                this._body.Metadata.Categories = value;
+            }
+        }
+
         /// <summary>The reference to the client API class.</summary>
         public Nutanix.Powershell.NutanixIntentfulAPI Client => Nutanix.Powershell.Module.Instance.ClientAPI;
         /// <summary>SendAsync Pipeline Steps to be appended to the front of the pipeline</summary>
@@ -612,6 +627,10 @@ namespace Nutanix.Powershell.Cmdlets
         /// </returns>
         protected async System.Threading.Tasks.Task ProcessRecordAsync()
         {
+
+            _body.Metadata = _body.Metadata ?? new Nutanix.Powershell.Models.SubnetMetadata();
+            _body.Metadata.Kind = "subnet";
+            _body.ApiVersion = "3.1";
             using( NoSynchronizationContext )
             {
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletGetPipeline); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
