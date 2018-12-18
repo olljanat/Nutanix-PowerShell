@@ -274,11 +274,12 @@ namespace Nutanix.Powershell.Cmdlets
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 if (Async.ToBool())
                 {
-                    await this.Client.NewImage_Sync(Body, onAccepted, onDefault, onOK, this, Pipeline, Credential);
+                    await this.Client.NewImage(Body, onAccepted, onDefault, this, Pipeline, Credential);
                 }
                 else
                 {
-                    await this.Client.NewImage(Body, onAccepted, onDefault, this, Pipeline, Credential);
+
+                    await this.Client.NewImage_Sync(Body, onAccepted, onDefault, onOK, this, Pipeline, Credential);
                 }
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }

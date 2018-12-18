@@ -65,7 +65,7 @@ namespace Nutanix.Powershell.Cmdlets
         }
         /// <summary>The image kind metadata</summary>
         [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The image kind metadata")]
-        public Nutanix.Powershell.Models.IImageMetadata Metadata
+        public Nutanix.Powershell.Models.VmMetadata Metadata
         {
             set
             {

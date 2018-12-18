@@ -5,11 +5,11 @@ namespace Nutanix.Powershell.ModelCmdlets
     /// Cmdlet to create an in-memory instance of the <see cref="ImageMetadata" /> object.
     /// </summary>
     [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.New, @"ImageMetadataObject")]
-    [System.Management.Automation.OutputType(typeof(Nutanix.Powershell.Models.IImageMetadata))]
+    [System.Management.Automation.OutputType(typeof(Nutanix.Powershell.Models.IVmMetadata))]
     public class NewImageMetadataObject : System.Management.Automation.PSCmdlet
     {
         /// <summary>Backing field for <see cref="ImageMetadata" /></summary>
-        private Nutanix.Powershell.Models.IImageMetadata _imageMetadata = new Nutanix.Powershell.Models.ImageMetadata();
+        private Nutanix.Powershell.Models.IVmMetadata _imageMetadata = new Nutanix.Powershell.Models.VmMetadata();
         /// <summary>Categories for the image</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Categories for the image")]
         public System.Collections.Generic.IDictionary<string,string> Categories

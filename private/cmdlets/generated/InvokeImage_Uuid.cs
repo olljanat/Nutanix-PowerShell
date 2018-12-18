@@ -85,7 +85,7 @@ namespace Nutanix.Powershell.Cmdlets
         private string _path;
 
         /// <summary>The Path of the image to upload.</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The Path of the entity.")]
+        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The Path of the image.")]
         public string Path
         {
             get

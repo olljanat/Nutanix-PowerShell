@@ -44,7 +44,7 @@ namespace Nutanix.Powershell.Cmdlets
             }
         }
         /// <summary>image Name.</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "image Name.")]
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "image Name.")]
         public string ImageName
         {
             set
@@ -54,7 +54,7 @@ namespace Nutanix.Powershell.Cmdlets
             }
         }
         /// <summary>Describes the image spec resources object.</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "Describes the image spec resources object.")]
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Describes the image spec resources object.")]
         public Nutanix.Powershell.Models.IImageResources ImageResources
         {
             set
@@ -65,11 +65,21 @@ namespace Nutanix.Powershell.Cmdlets
         }
         /// <summary>The image kind metadata</summary>
         [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The image kind metadata")]
-        public Nutanix.Powershell.Models.IImageMetadata Metadata
+        public Nutanix.Powershell.Models.IVmMetadata Metadata
         {
             set
             {
                 Body.Metadata = value;
+            }
+        }
+        /// <summary>Describes the image spec resources object.</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Describes the image spec resources object.")]
+        public Nutanix.Powershell.Models.IImage Spec
+        {
+            set
+            {
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.Image();
+                Body.Spec = value;
             }
         }
         /// <summary>
@@ -260,6 +270,7 @@ namespace Nutanix.Powershell.Cmdlets
         protected async System.Threading.Tasks.Task ProcessRecordAsync()
         {
             _Body.ApiVersion = "3.1";
+            _Body.Spec.Resources = _Body.Spec.Resources ?? new Nutanix.Powershell.Models.ImageResources();
             using( NoSynchronizationContext )
             {
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletGetPipeline); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
@@ -313,11 +324,11 @@ namespace Nutanix.Powershell.Cmdlets
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 if (Async.ToBool())
                 {
-                    await this.Client.NewImage_Sync(Body, onAccepted, onDefault, onOK, this, Pipeline, Credential);
+                    await this.Client.NewImage(Body, onAccepted, onDefault, this, Pipeline, Credential);
                 }
                 else
                 {
-                    await this.Client.NewImage(Body, onAccepted, onDefault, this, Pipeline, Credential);
+                    await this.Client.NewImage_Sync(Body, onAccepted, onDefault, onOK, this, Pipeline, Credential);
                 }
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }
@@ -386,6 +397,7 @@ namespace Nutanix.Powershell.Cmdlets
 
         private async System.Threading.Tasks.Task onOK(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageIntentResponse> response)
         {
+            Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.Image();
             using( NoSynchronizationContext )
             {
                 // onOK - response for 200 / application/json

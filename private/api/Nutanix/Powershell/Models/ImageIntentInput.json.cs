@@ -59,7 +59,7 @@ namespace Nutanix.Powershell.Models
                 return;
             }
             _apiVersion = If( json?.PropertyT<Carbon.Json.JsonString>("api_version"), out var __jsonApiVersion) ? (string)__jsonApiVersion : (string)ApiVersion;
-            _metadata = If( json?.PropertyT<Carbon.Json.JsonObject>("metadata"), out var __jsonMetadata) ? Nutanix.Powershell.Models.ImageMetadata.FromJson(__jsonMetadata) : Metadata;
+            _metadata = If( json?.PropertyT<Carbon.Json.JsonObject>("metadata"), out var __jsonMetadata) ? Nutanix.Powershell.Models.VmMetadata.FromJson(__jsonMetadata) : Metadata;
             _spec = If( json?.PropertyT<Carbon.Json.JsonObject>("spec"), out var __jsonSpec) ? Nutanix.Powershell.Models.Image.FromJson(__jsonSpec) : Spec;
             AfterFromJson(json);
         }

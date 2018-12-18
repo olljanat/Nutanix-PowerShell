@@ -149,6 +149,8 @@ namespace Nutanix.Powershell
 
                 // generate request object
                 var request =  new System.Net.Http.HttpRequestMessage(Microsoft.Rest.ClientRuntime.Method.Get, _url);
+                var byteArray = System.Text.Encoding.ASCII.GetBytes($"{credential.Username}:{CreateString(credential.Password)}");
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", System.Convert.ToBase64String(byteArray));
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
 
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
@@ -478,24 +480,20 @@ namespace Nutanix.Powershell
             {
                 // construct URL
                 var _url = new System.Uri((
-                        $"{credential.Uri.ToString()}/api/nutanix/v3//images/"
+                        $"{credential.Uri.ToString()}/api/nutanix/v3/images/"
                         + System.Uri.EscapeDataString(uuid)
                         + "/file"
                         ).TrimEnd('?','&'));
 
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                System.Net.Http.MultipartContent form = new System.Net.Http.MultipartContent();
-
                 // generate request object
                 var request =  new System.Net.Http.HttpRequestMessage(Microsoft.Rest.ClientRuntime.Method.Post, _url);
                 var byteArray = System.Text.Encoding.ASCII.GetBytes($"{credential.Username}:{CreateString(credential.Password)}");
                 request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", System.Convert.ToBase64String(byteArray));
-                request.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/octet-stream");
-
                 // Set the content
                 var fileBytes = System.IO.File.ReadAllBytes(path);
                 request.Content = new System.Net.Http.ByteArrayContent(fileBytes);
+                request.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/octet-stream");
 
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
 
@@ -837,6 +835,8 @@ namespace Nutanix.Powershell
                 // set body content
                 request.Content = new System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                var byteArray = System.Text.Encoding.ASCII.GetBytes($"{credential.Username}:{CreateString(credential.Password)}");
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", System.Convert.ToBase64String(byteArray));
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
                 // make the call
                 await this.NewImage_Call(request,onAccepted,onDefault,eventListener,sender);
@@ -876,6 +876,8 @@ namespace Nutanix.Powershell
                 // set body content
                 request.Content = new System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", System.Text.Encoding.UTF8);
                 request.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                var byteArray = System.Text.Encoding.ASCII.GetBytes($"{credential.Username}:{CreateString(credential.Password)}");
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", System.Convert.ToBase64String(byteArray));
                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
                 // make the call
                 await this.NewImage_Call_Sync(request,onAccepted,onDefault,onOK,eventListener,sender, credential);
@@ -974,7 +976,7 @@ namespace Nutanix.Powershell
                     request?.Dispose();
                 }
 
-                var retry = new RetryWithExponentialBackoff();
+                var retry = new RetryWithExponentialBackoff(100,200,600000);
                 await retry.RunAsync(async () =>
                 {
                     var _task = await GetTaskStatus(_imageTask.Status.ExecutionContext.TaskUuid, eventListener, sender, credential);

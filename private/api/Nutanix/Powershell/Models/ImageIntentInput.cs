@@ -19,10 +19,10 @@ namespace Nutanix.Powershell.Models
             }
         }
         /// <summary>Backing field for <see cref="Metadata" /> property.</summary>
-        private Nutanix.Powershell.Models.IImageMetadata _metadata;
+        private Nutanix.Powershell.Models.IVmMetadata _metadata;
 
         /// <summary>The image kind metadata</summary>
-        public Nutanix.Powershell.Models.IImageMetadata Metadata
+        public Nutanix.Powershell.Models.IVmMetadata Metadata
         {
             get
             {
@@ -69,7 +69,7 @@ namespace Nutanix.Powershell.Models
     /// An intentful representation of a image
     public partial interface IImageIntentInput : Microsoft.Rest.ClientRuntime.IJsonSerializable {
         string ApiVersion { get; set; }
-        Nutanix.Powershell.Models.IImageMetadata Metadata { get; set; }
+        Nutanix.Powershell.Models.IVmMetadata Metadata { get; set; }
         Nutanix.Powershell.Models.IImage Spec { get; set; }
     }
 }
