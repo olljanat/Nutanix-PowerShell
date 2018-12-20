@@ -1,8 +1,7 @@
 namespace Nutanix.Powershell.Models
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
-    /// <summary>message.</summary>
-    public partial class MessageResource
+    public partial class CategoryQueryResponseResultsItemType
     {
 
         /// <summary>
@@ -38,19 +37,10 @@ namespace Nutanix.Powershell.Models
         /// instantly.</param>
         partial void BeforeToJson(ref Carbon.Json.JsonObject container, ref bool returnNow);
         /// <summary>
-        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Nutanix.Powershell.Models.IMessageResource.
-        /// </summary>
-        /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
-        /// <returns>an instance of Nutanix.Powershell.Models.IMessageResource.</returns>
-        public static Nutanix.Powershell.Models.IMessageResource FromJson(Carbon.Json.JsonNode node)
-        {
-            return node is Carbon.Json.JsonObject json ? new MessageResource(json) : null;
-        }
-        /// <summary>
-        /// Deserializes a Carbon.Json.JsonObject into a new instance of <see cref="MessageResource" />.
+        /// Deserializes a Carbon.Json.JsonObject into a new instance of <see cref="CategoryQueryResponseResultsItemType" />.
         /// </summary>
         /// <param name="json">A Carbon.Json.JsonObject instance to deserialize from.</param>
-        internal MessageResource(Carbon.Json.JsonObject json)
+        internal CategoryQueryResponseResultsItemType(Carbon.Json.JsonObject json)
         {
             bool returnNow = false;
             BeforeFromJson(json, ref returnNow);
@@ -58,19 +48,30 @@ namespace Nutanix.Powershell.Models
             {
                 return;
             }
-            _message = If( json?.PropertyT<Carbon.Json.JsonString>("message"), out var __jsonMessage) ? (string)__jsonMessage : (string)Message;
-            _reason = If( json?.PropertyT<Carbon.Json.JsonString>("reason"), out var __jsonReason) ? (string)__jsonReason : (string)Reason;
-            _details = System.Linq.Enumerable.ToDictionary( json?.Keys ?? System.Linq.Enumerable.Empty<string>(), each => each, each => json.PropertyT<Carbon.Json.JsonNode>(each) is Carbon.Json.JsonString __v ? (string)__v : null );
+            _entityAnyReferenceList = If( json?.PropertyT<Carbon.Json.JsonArray>("entity_any_reference_list"), out var __jsonEntityAnyReferenceList) ? If( __jsonEntityAnyReferenceList, out var __v) ? new System.Func<Nutanix.Powershell.Models.IEntityReference[]>(()=> System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select( __v, (__u)=> Nutanix.Powershell.Models.EntityReference.FromJson(__u)  ) ) )() : null : EntityAnyReferenceList;
+            _filteredEntityCount = If( json?.PropertyT<Carbon.Json.JsonNumber>("filtered_entity_count"), out var __jsonFilteredEntityCount) ? (long?)__jsonFilteredEntityCount : FilteredEntityCount;
+            _kind = If( json?.PropertyT<Carbon.Json.JsonString>("kind"), out var __jsonKind) ? (string)__jsonKind : (string)Kind;
+            _totalEntityCount = If( json?.PropertyT<Carbon.Json.JsonNumber>("total_entity_count"), out var __jsonTotalEntityCount) ? (long?)__jsonTotalEntityCount : TotalEntityCount;
             AfterFromJson(json);
         }
         /// <summary>
-        /// Serializes this instance of <see cref="MessageResource" /> into a <see cref="Carbon.Json.JsonNode" />.
+        /// Deserializes a <see cref="Carbon.Json.JsonNode"/> into an instance of Nutanix.Powershell.Models.ICategoryQueryResponseResultsItemType.
+        /// </summary>
+        /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
+        /// <returns>an instance of Nutanix.Powershell.Models.ICategoryQueryResponseResultsItemType.</returns>
+        public static Nutanix.Powershell.Models.ICategoryQueryResponseResultsItemType FromJson(Carbon.Json.JsonNode node)
+        {
+            return node is Carbon.Json.JsonObject json ? new CategoryQueryResponseResultsItemType(json) : null;
+        }
+        /// <summary>
+        /// Serializes this instance of <see cref="CategoryQueryResponseResultsItemType" /> into a <see cref="Carbon.Json.JsonNode"
+        /// />.
         /// </summary>
         /// <param name="container">The <see cref="Carbon.Json.JsonObject"/> container to serialize this object into. If the caller
         /// passes in <c>null</c>, a new instance will be created and returned to the caller.</param>
         /// <param name="serializationMode">Allows the caller to choose the depth of the serialization. See <see cref="Microsoft.Rest.ClientRuntime."/>.</param>
         /// <returns>
-        /// a serialized instance of <see cref="MessageResource" /> as a <see cref="Carbon.Json.JsonNode" />.
+        /// a serialized instance of <see cref="CategoryQueryResponseResultsItemType" /> as a <see cref="Carbon.Json.JsonNode" />.
         /// </returns>
         public Carbon.Json.JsonNode ToJson(Carbon.Json.JsonObject container, Microsoft.Rest.ClientRuntime.SerializationMode serializationMode)
         {
@@ -82,15 +83,18 @@ namespace Nutanix.Powershell.Models
             {
                 return container;
             }
-            AddIf( null != Message ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(Message) : null, "message" ,container.Add );
-            AddIf( null != Reason ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(Reason) : null, "reason" ,container.Add );
-            if (null != Details)
+            if (null != EntityAnyReferenceList)
             {
-                foreach( var __x in Details )
+                var __w = new Carbon.Json.XNodeArray();
+                foreach( var __x in EntityAnyReferenceList )
                 {
-                    AddIf( null != __x.Value ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(__x.Value) : null,(__w) => container.Add(__x.Key,__w ) );
+                    AddIf(__x?.ToJson(null) ,__w.Add);
                 }
+                container.Add("entity_any_reference_list",__w);
             }
+            AddIf( null != FilteredEntityCount ? (Carbon.Json.JsonNode)new Carbon.Json.JsonNumber((long)FilteredEntityCount) : null, "filtered_entity_count" ,container.Add );
+            AddIf( null != Kind ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(Kind) : null, "kind" ,container.Add );
+            AddIf( null != TotalEntityCount ? (Carbon.Json.JsonNode)new Carbon.Json.JsonNumber((long)TotalEntityCount) : null, "total_entity_count" ,container.Add );
             AfterToJson(ref container);
             return container;
         }

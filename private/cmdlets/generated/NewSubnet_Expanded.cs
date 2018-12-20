@@ -2,7 +2,7 @@ namespace Nutanix.Powershell.Cmdlets
 {
     using static Microsoft.Rest.ClientRuntime.Extensions;
     /// <summary>Implement a variant of the cmdlet New-Subnet.</summary>
-    [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.New, @"Subnet_SubnetApiVersionMetadataSpec", SupportsShouldProcess = true)]
+    [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.New, @"Subnet_Expanded", SupportsShouldProcess = true)]
     [System.Management.Automation.OutputType(typeof(Nutanix.Powershell.Models.ISubnetIntentResponse))]
     public class NewSubnet_Expanded : System.Management.Automation.PSCmdlet, Microsoft.Rest.ClientRuntime.IEventListener
     {
