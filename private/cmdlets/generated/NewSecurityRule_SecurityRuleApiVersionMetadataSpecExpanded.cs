@@ -1,0 +1,628 @@
+namespace Nutanix.Powershell.Cmdlets
+{
+    using static Microsoft.Rest.ClientRuntime.Extensions;
+    /// <summary>Implement a variant of the cmdlet New-SecurityRule.</summary>
+    [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.New, @"SecurityRule_SecurityRuleApiVersionMetadataSpecExpanded", SupportsShouldProcess = true)]
+    [System.Management.Automation.OutputType(typeof(Nutanix.Powershell.Models.INetworkSecurityRuleIntentResponse))]
+    public class NewSecurityRule_SecurityRuleApiVersionMetadataSpecExpanded : System.Management.Automation.PSCmdlet, Microsoft.Rest.ClientRuntime.IEventListener
+    {
+        /// <summary>The <see cref="System.Threading.CancellationTokenSource" /> for this operation.</summary>
+        private System.Threading.CancellationTokenSource _cancellationTokenSource = new System.Threading.CancellationTokenSource();
+        /// <summary>HELP MESSAGE MISSING</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
+        public string ApiVersion
+        {
+            set
+            {
+                BodyBody.ApiVersion = value;
+            }
+        }
+        /// <summary>Backing field for <see cref="BodyBody" /> property.</summary>
+        private Nutanix.Powershell.Models.INetworkSecurityRuleIntentInput _bodyBody= new Nutanix.Powershell.Models.NetworkSecurityRuleIntentInput();
+
+        /// <summary>An intentful representation of a network_security_rule</summary>
+        private Nutanix.Powershell.Models.INetworkSecurityRuleIntentInput BodyBody
+        {
+            get
+            {
+                return this._bodyBody;
+            }
+            set
+            {
+                this._bodyBody = value;
+            }
+        }
+        /// <summary>List of kinds associated with this filter.</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "List of kinds associated with this filter.")]
+        public string[] CategoryFilterKindList
+        {
+            set
+            {
+                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                BodyBody.Spec.Resources.AppRule = BodyBody.Spec.Resources.AppRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesAppRule();
+                BodyBody.Spec.Resources.AppRule.TargetGroup = BodyBody.Spec.Resources.AppRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
+                BodyBody.Spec.Resources.AppRule.TargetGroup.Filter = BodyBody.Spec.Resources.AppRule.TargetGroup.Filter ?? new Nutanix.Powershell.Models.CategoryFilter();
+                BodyBody.Spec.Resources.AppRule.TargetGroup.Filter.KindList = value;
+            }
+        }
+        /// <summary>List of kinds associated with this filter.</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "List of kinds associated with this filter.")]
+        public string[] CategoryFilterKindList1
+        {
+            set
+            {
+                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                BodyBody.Spec.Resources.IsolationRule = BodyBody.Spec.Resources.IsolationRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesIsolationRule();
+                BodyBody.Spec.Resources.IsolationRule.FirstEntityFilter = BodyBody.Spec.Resources.IsolationRule.FirstEntityFilter ?? new Nutanix.Powershell.Models.CategoryFilter();
+                BodyBody.Spec.Resources.IsolationRule.FirstEntityFilter.KindList = value;
+            }
+        }
+        /// <summary>List of kinds associated with this filter.</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "List of kinds associated with this filter.")]
+        public string[] CategoryFilterKindList2
+        {
+            set
+            {
+                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                BodyBody.Spec.Resources.IsolationRule = BodyBody.Spec.Resources.IsolationRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesIsolationRule();
+                BodyBody.Spec.Resources.IsolationRule.SecondEntityFilter = BodyBody.Spec.Resources.IsolationRule.SecondEntityFilter ?? new Nutanix.Powershell.Models.CategoryFilter();
+                BodyBody.Spec.Resources.IsolationRule.SecondEntityFilter.KindList = value;
+            }
+        }
+        /// <summary>List of kinds associated with this filter.</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "List of kinds associated with this filter.")]
+        public string[] CategoryFilterKindList3
+        {
+            set
+            {
+                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                BodyBody.Spec.Resources.QuarantineRule = BodyBody.Spec.Resources.QuarantineRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesQuarantineRule();
+                BodyBody.Spec.Resources.QuarantineRule.TargetGroup = BodyBody.Spec.Resources.QuarantineRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
+                BodyBody.Spec.Resources.QuarantineRule.TargetGroup.Filter = BodyBody.Spec.Resources.QuarantineRule.TargetGroup.Filter ?? new Nutanix.Powershell.Models.CategoryFilter();
+                BodyBody.Spec.Resources.QuarantineRule.TargetGroup.Filter.KindList = value;
+            }
+        }
+        /// <summary>A list of category key and list of values.</summary>
+        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "A list of category key and list of values.")]
+        public System.Collections.Generic.IDictionary<string,string> CategoryFilterParams
+        {
+            set
+            {
+                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                BodyBody.Spec.Resources.AppRule = BodyBody.Spec.Resources.AppRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesAppRule();
+                BodyBody.Spec.Resources.AppRule.TargetGroup = BodyBody.Spec.Resources.AppRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
+                BodyBody.Spec.Resources.AppRule.TargetGroup.Filter = BodyBody.Spec.Resources.AppRule.TargetGroup.Filter ?? new Nutanix.Powershell.Models.CategoryFilter();
+                BodyBody.Spec.Resources.AppRule.TargetGroup.Filter.Params = value;
+            }
+        }
+        /// <summary>A list of category key and list of values.</summary>
+        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "A list of category key and list of values.")]
+        public System.Collections.Generic.IDictionary<string,string> CategoryFilterParams1
+        {
+            set
+            {
+                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                BodyBody.Spec.Resources.IsolationRule = BodyBody.Spec.Resources.IsolationRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesIsolationRule();
+                BodyBody.Spec.Resources.IsolationRule.FirstEntityFilter = BodyBody.Spec.Resources.IsolationRule.FirstEntityFilter ?? new Nutanix.Powershell.Models.CategoryFilter();
+                BodyBody.Spec.Resources.IsolationRule.FirstEntityFilter.Params = value;
+            }
+        }
+        /// <summary>A list of category key and list of values.</summary>
+        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "A list of category key and list of values.")]
+        public System.Collections.Generic.IDictionary<string,string> CategoryFilterParams2
+        {
+            set
+            {
+                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                BodyBody.Spec.Resources.IsolationRule = BodyBody.Spec.Resources.IsolationRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesIsolationRule();
+                BodyBody.Spec.Resources.IsolationRule.SecondEntityFilter = BodyBody.Spec.Resources.IsolationRule.SecondEntityFilter ?? new Nutanix.Powershell.Models.CategoryFilter();
+                BodyBody.Spec.Resources.IsolationRule.SecondEntityFilter.Params = value;
+            }
+        }
+        /// <summary>A list of category key and list of values.</summary>
+        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "A list of category key and list of values.")]
+        public System.Collections.Generic.IDictionary<string,string> CategoryFilterParams3
+        {
+            set
+            {
+                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                BodyBody.Spec.Resources.QuarantineRule = BodyBody.Spec.Resources.QuarantineRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesQuarantineRule();
+                BodyBody.Spec.Resources.QuarantineRule.TargetGroup = BodyBody.Spec.Resources.QuarantineRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
+                BodyBody.Spec.Resources.QuarantineRule.TargetGroup.Filter = BodyBody.Spec.Resources.QuarantineRule.TargetGroup.Filter ?? new Nutanix.Powershell.Models.CategoryFilter();
+                BodyBody.Spec.Resources.QuarantineRule.TargetGroup.Filter.Params = value;
+            }
+        }
+        /// <summary>The type of the filter being used.</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "The type of the filter being used.")]
+        public string CategoryFilterType
+        {
+            set
+            {
+                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                BodyBody.Spec.Resources.AppRule = BodyBody.Spec.Resources.AppRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesAppRule();
+                BodyBody.Spec.Resources.AppRule.TargetGroup = BodyBody.Spec.Resources.AppRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
+                BodyBody.Spec.Resources.AppRule.TargetGroup.Filter = BodyBody.Spec.Resources.AppRule.TargetGroup.Filter ?? new Nutanix.Powershell.Models.CategoryFilter();
+                BodyBody.Spec.Resources.AppRule.TargetGroup.Filter.Type = value;
+            }
+        }
+        /// <summary>The type of the filter being used.</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "The type of the filter being used.")]
+        public string CategoryFilterType1
+        {
+            set
+            {
+                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                BodyBody.Spec.Resources.IsolationRule = BodyBody.Spec.Resources.IsolationRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesIsolationRule();
+                BodyBody.Spec.Resources.IsolationRule.FirstEntityFilter = BodyBody.Spec.Resources.IsolationRule.FirstEntityFilter ?? new Nutanix.Powershell.Models.CategoryFilter();
+                BodyBody.Spec.Resources.IsolationRule.FirstEntityFilter.Type = value;
+            }
+        }
+        /// <summary>The type of the filter being used.</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "The type of the filter being used.")]
+        public string CategoryFilterType2
+        {
+            set
+            {
+                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                BodyBody.Spec.Resources.IsolationRule = BodyBody.Spec.Resources.IsolationRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesIsolationRule();
+                BodyBody.Spec.Resources.IsolationRule.SecondEntityFilter = BodyBody.Spec.Resources.IsolationRule.SecondEntityFilter ?? new Nutanix.Powershell.Models.CategoryFilter();
+                BodyBody.Spec.Resources.IsolationRule.SecondEntityFilter.Type = value;
+            }
+        }
+        /// <summary>The type of the filter being used.</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "The type of the filter being used.")]
+        public string CategoryFilterType3
+        {
+            set
+            {
+                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                BodyBody.Spec.Resources.QuarantineRule = BodyBody.Spec.Resources.QuarantineRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesQuarantineRule();
+                BodyBody.Spec.Resources.QuarantineRule.TargetGroup = BodyBody.Spec.Resources.QuarantineRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
+                BodyBody.Spec.Resources.QuarantineRule.TargetGroup.Filter = BodyBody.Spec.Resources.QuarantineRule.TargetGroup.Filter ?? new Nutanix.Powershell.Models.CategoryFilter();
+                BodyBody.Spec.Resources.QuarantineRule.TargetGroup.Filter.Type = value;
+            }
+        }
+        /// <summary>The reference to the client API class.</summary>
+        public Nutanix.Powershell.NutanixIntentfulAPI Client => Nutanix.Powershell.Module.Instance.ClientAPI;
+        /// <summary>SendAsync Pipeline Steps to be appended to the front of the pipeline</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "SendAsync Pipeline Steps to be appended to the front of the pipeline")]
+        [System.Management.Automation.ValidateNotNull]
+        public Microsoft.Rest.ClientRuntime.SendAsyncStep[] HttpPipelineAppend {get;set;}
+        /// <summary>SendAsync Pipeline Steps to be prepended to the front of the pipeline</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "SendAsync Pipeline Steps to be prepended to the front of the pipeline")]
+        [System.Management.Automation.ValidateNotNull]
+        public Microsoft.Rest.ClientRuntime.SendAsyncStep[] HttpPipelinePrepend {get;set;}
+        /// <summary>The network_security_rule kind metadata</summary>
+        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The network_security_rule kind metadata")]
+        public Nutanix.Powershell.Models.INetworkSecurityRuleMetadata Metadata
+        {
+            set
+            {
+                BodyBody.Metadata = value;
+            }
+        }
+        /// <summary>
+        /// <see cref="IEventListener" /> cancellation delegate. Stops the cmdlet when called.
+        /// </summary>
+         System.Action Microsoft.Rest.ClientRuntime.IEventListener.Cancel => _cancellationTokenSource.Cancel;
+        /// <summary><see cref="IEventListener" /> cancellation token.</summary>
+         System.Threading.CancellationToken Microsoft.Rest.ClientRuntime.IEventListener.Token => _cancellationTokenSource.Token;
+        /// <summary>HELP MESSAGE MISSING</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
+        public string NetworkSecurityRuleDescription
+        {
+            set
+            {
+                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                BodyBody.Spec.Description = value;
+            }
+        }
+        /// <summary>HELP MESSAGE MISSING</summary>
+        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING")]
+        public string NetworkSecurityRuleName
+        {
+            set
+            {
+                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                BodyBody.Spec.Name = value;
+            }
+        }
+        /// <summary>Type of deployment of the rule.</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Type of deployment of the rule.")]
+        public string NetworkSecurityRuleResourcesAppRuleAction
+        {
+            set
+            {
+                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                BodyBody.Spec.Resources.AppRule = BodyBody.Spec.Resources.AppRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesAppRule();
+                BodyBody.Spec.Resources.AppRule.Action = value;
+            }
+        }
+        /// <summary>HELP MESSAGE MISSING</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
+        public Nutanix.Powershell.Models.INetworkRule[] NetworkSecurityRuleResourcesAppRuleInboundAllowList
+        {
+            set
+            {
+                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                BodyBody.Spec.Resources.AppRule = BodyBody.Spec.Resources.AppRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesAppRule();
+                BodyBody.Spec.Resources.AppRule.InboundAllowList = value;
+            }
+        }
+        /// <summary>HELP MESSAGE MISSING</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
+        public Nutanix.Powershell.Models.INetworkRule[] NetworkSecurityRuleResourcesAppRuleOutboundAllowList
+        {
+            set
+            {
+                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                BodyBody.Spec.Resources.AppRule = BodyBody.Spec.Resources.AppRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesAppRule();
+                BodyBody.Spec.Resources.AppRule.OutboundAllowList = value;
+            }
+        }
+        /// <summary>Type of action.</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Type of action.")]
+        public string NetworkSecurityRuleResourcesIsolationRuleAction
+        {
+            set
+            {
+                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                BodyBody.Spec.Resources.IsolationRule = BodyBody.Spec.Resources.IsolationRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesIsolationRule();
+                BodyBody.Spec.Resources.IsolationRule.Action = value;
+            }
+        }
+        /// <summary>Type of action.</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Type of action.")]
+        public string NetworkSecurityRuleResourcesQuarantineRuleAction
+        {
+            set
+            {
+                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                BodyBody.Spec.Resources.QuarantineRule = BodyBody.Spec.Resources.QuarantineRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesQuarantineRule();
+                BodyBody.Spec.Resources.QuarantineRule.Action = value;
+            }
+        }
+        /// <summary>HELP MESSAGE MISSING</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
+        public Nutanix.Powershell.Models.INetworkRule[] NetworkSecurityRuleResourcesQuarantineRuleInboundAllowList
+        {
+            set
+            {
+                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                BodyBody.Spec.Resources.QuarantineRule = BodyBody.Spec.Resources.QuarantineRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesQuarantineRule();
+                BodyBody.Spec.Resources.QuarantineRule.InboundAllowList = value;
+            }
+        }
+        /// <summary>HELP MESSAGE MISSING</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
+        public Nutanix.Powershell.Models.INetworkRule[] NetworkSecurityRuleResourcesQuarantineRuleOutboundAllowList
+        {
+            set
+            {
+                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                BodyBody.Spec.Resources.QuarantineRule = BodyBody.Spec.Resources.QuarantineRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesQuarantineRule();
+                BodyBody.Spec.Resources.QuarantineRule.OutboundAllowList = value;
+            }
+        }
+        /// <summary>
+        /// The instance of the <see cref="Microsoft.Rest.ClientRuntime.HttpPipeline" /> that the remote call will use.
+        /// </summary>
+        private Microsoft.Rest.ClientRuntime.HttpPipeline Pipeline {get;set;}
+        /// <summary>The URI for the proxy server to use</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The URI for the proxy server to use")]
+        public System.Uri Proxy {get;set;}
+        /// <summary>Credentials for a proxy server to use for the remote call</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Credentials for a proxy server to use for the remote call")]
+        [System.Management.Automation.ValidateNotNull]
+        public System.Management.Automation.PSCredential ProxyCredential {get;set;}
+         /// <summary>The Username for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow = true, HelpMessage = "The Username for authentication")]
+        public string Username { get; set; }
+
+        /// <summary>The Password for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow = true, HelpMessage = "The Password for authentication")]
+        public System.Security.SecureString Password { get; set; }
+
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow = true, HelpMessage = "Skip the ssl validation")]
+        public System.Management.Automation.SwitchParameter SkipSSL { get; set; }
+
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow = true, HelpMessage = "A PSCredental with username and password")]
+        [System.Management.Automation.ValidateNotNull]
+        public Nutanix.Powershell.Models.NutanixCredential Credential { get; set; }
+
+        /// <summary>The Username for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow = true, HelpMessage = "The Username for authentication")]
+        public string Server { get; set; }
+
+        /// <summary>The Username for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow = true, HelpMessage = "The Username for authentication")]
+        public string Port { get; set; }
+
+        /// <summary>The Username for authentication</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow = true, HelpMessage = "The Username for authentication")]
+        public string Protocol { get; set; }
+        /// <summary>Use the default credentials for the proxy</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Use the default credentials for the proxy")]
+        public System.Management.Automation.SwitchParameter ProxyUseDefaultCredentials {get;set;}
+        /// <summary>Default policy for communication within target group.</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Default policy for communication within target group.")]
+        public string TargetGroupDefaultInternalPolicy
+        {
+            set
+            {
+                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                BodyBody.Spec.Resources.AppRule = BodyBody.Spec.Resources.AppRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesAppRule();
+                BodyBody.Spec.Resources.AppRule.TargetGroup = BodyBody.Spec.Resources.AppRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
+                BodyBody.Spec.Resources.AppRule.TargetGroup.DefaultInternalPolicy = value;
+            }
+        }
+        /// <summary>Default policy for communication within target group.</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Default policy for communication within target group.")]
+        public string TargetGroupDefaultInternalPolicy1
+        {
+            set
+            {
+                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                BodyBody.Spec.Resources.QuarantineRule = BodyBody.Spec.Resources.QuarantineRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesQuarantineRule();
+                BodyBody.Spec.Resources.QuarantineRule.TargetGroup = BodyBody.Spec.Resources.QuarantineRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
+                BodyBody.Spec.Resources.QuarantineRule.TargetGroup.DefaultInternalPolicy = value;
+            }
+        }
+        /// <summary>Way to identify the object for which rule is applied.</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Way to identify the object for which rule is applied.")]
+        public string TargetGroupPeerSpecificationType
+        {
+            set
+            {
+                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                BodyBody.Spec.Resources.AppRule = BodyBody.Spec.Resources.AppRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesAppRule();
+                BodyBody.Spec.Resources.AppRule.TargetGroup = BodyBody.Spec.Resources.AppRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
+                BodyBody.Spec.Resources.AppRule.TargetGroup.PeerSpecificationType = value;
+            }
+        }
+        /// <summary>Way to identify the object for which rule is applied.</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Way to identify the object for which rule is applied.")]
+        public string TargetGroupPeerSpecificationType1
+        {
+            set
+            {
+                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                BodyBody.Spec.Resources.QuarantineRule = BodyBody.Spec.Resources.QuarantineRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesQuarantineRule();
+                BodyBody.Spec.Resources.QuarantineRule.TargetGroup = BodyBody.Spec.Resources.QuarantineRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
+                BodyBody.Spec.Resources.QuarantineRule.TargetGroup.PeerSpecificationType = value;
+            }
+        }
+        /// <summary>
+        /// (overrides the default BeginProcessing method in System.Management.Automation.PSCmdlet)
+        /// </summary>
+
+        protected override void BeginProcessing()
+        {
+            Module.Instance.SetProxyConfiguration(Proxy, ProxyCredential, ProxyUseDefaultCredentials);
+        }
+        /// <summary>Creates a duplicate instance of this cmdlet (via JSON serialization).</summary>
+        /// <returns>
+        /// a duplicate instance of NewSecurityRule_SecurityRuleApiVersionMetadataSpecExpanded
+        /// </returns>
+        public Nutanix.Powershell.Cmdlets.NewSecurityRule_SecurityRuleApiVersionMetadataSpecExpanded Clone()
+        {
+            var clone = FromJson(this.ToJson(null, Microsoft.Rest.ClientRuntime.SerializationMode.IncludeAll));
+            clone.HttpPipelinePrepend = this.HttpPipelinePrepend;
+            clone.HttpPipelineAppend = this.HttpPipelineAppend;
+            return clone;
+        }
+        /// <summary>Performs clean-up after the command execution</summary>
+
+        protected override void EndProcessing()
+        {
+        }
+        /// <summary>
+        /// Deserializes a <see cref="Carbon.Json.JsonNode" /> into a new instance of this class.
+        /// </summary>
+        /// <param name="node">a <see cref="Carbon.Json.JsonNode" /> to deserialize from.</param>
+        /// <returns>an instance of NewSecurityRule_SecurityRuleApiVersionMetadataSpecExpanded.</returns>
+        public static Nutanix.Powershell.Cmdlets.NewSecurityRule_SecurityRuleApiVersionMetadataSpecExpanded FromJson(Carbon.Json.JsonNode node)
+        {
+            return node is Carbon.Json.JsonObject json ? new NewSecurityRule_SecurityRuleApiVersionMetadataSpecExpanded(json) : null;
+        }
+        /// <summary>
+        /// Creates a new instance of this cmdlet, deserializing the content from a json string.
+        /// </summary>
+        /// <param name="jsonText">a string containing a JSON serialized instance of this cmdlet.</param>
+        /// <returns>
+        /// returns a new instance of the <see cref="NewSecurityRule_SecurityRuleApiVersionMetadataSpecExpanded" /> cmdlet
+        /// </returns>
+        public static Nutanix.Powershell.Cmdlets.NewSecurityRule_SecurityRuleApiVersionMetadataSpecExpanded FromJsonString(string jsonText) => string.IsNullOrEmpty(jsonText) ? null : FromJson(Carbon.Json.JsonObject.Parse(jsonText));
+        /// <summary>Handles/Dispatches events during the call to the REST service.</summary>
+        /// <param name="id">The message id</param>
+        /// <param name="token">The message cancellation token. When this call is cancelled, this should be <c>true</c></param>
+        /// <param name="messageData">Detailed message data for the message event.</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the message is completed.
+        /// </returns>
+         async System.Threading.Tasks.Task Microsoft.Rest.ClientRuntime.IEventListener.Signal(string id, System.Threading.CancellationToken token, System.Func<Microsoft.Rest.ClientRuntime.EventData> messageData)
+        {
+            using( NoSynchronizationContext )
+            {
+                if (token.IsCancellationRequested)
+                {
+                    return ;
+                }
+                switch ( id )
+                {
+                    case Microsoft.Rest.ClientRuntime.Events.Verbose:
+                    {
+                        WriteVerbose($"{messageData().Message ?? System.String.Empty}");
+                        return ;
+                    }
+                    case Microsoft.Rest.ClientRuntime.Events.Warning:
+                    {
+                        WriteWarning($"{messageData().Message ?? System.String.Empty}");
+                        return ;
+                    }
+                    case Microsoft.Rest.ClientRuntime.Events.Information:
+                    {
+                        var data = messageData();
+                        WriteInformation(data, new[] { data.Message });
+                        return ;
+                    }
+                    case Microsoft.Rest.ClientRuntime.Events.Debug:
+                    {
+                        WriteDebug($"{messageData().Message ?? System.String.Empty}");
+                        return ;
+                    }
+                    case Microsoft.Rest.ClientRuntime.Events.Error:
+                    {
+                        WriteError(new System.Management.Automation.ErrorRecord( new System.Exception(messageData().Message), string.Empty, System.Management.Automation.ErrorCategory.NotSpecified, null ) );
+                        return ;
+                    }
+                }
+                WriteDebug($"{id}: {messageData().Message ?? System.String.Empty}");
+            }
+        }
+        /// <summary>
+        /// Intializes a new instance of the <see cref="NewSecurityRule_SecurityRuleApiVersionMetadataSpecExpanded" /> cmdlet class.
+        /// </summary>
+        public NewSecurityRule_SecurityRuleApiVersionMetadataSpecExpanded()
+        {
+        }
+        /// <summary>Constructor for deserialization.</summary>
+        /// <param name="json">a <see cref="Carbon.Json.JsonObject" /> to deserialize from.</param>
+        internal NewSecurityRule_SecurityRuleApiVersionMetadataSpecExpanded(Carbon.Json.JsonObject json)
+        {
+            // deserialize the contents
+            _bodyBody = If( json?.PropertyT<Carbon.Json.JsonObject>("BodyBody"), out var __jsonBodyBody) ? Nutanix.Powershell.Models.NetworkSecurityRuleIntentInput.FromJson(__jsonBodyBody) : BodyBody;
+        }
+        /// <summary>Performs execution of the command.</summary>
+
+        protected override void ProcessRecord()
+        {
+            ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletProcessRecordStart).Wait(); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
+            try
+            {
+                // work
+                if (ShouldProcess($"Call remote 'createSecurityRule' operation"))
+                {
+                    using( var asyncCommandRuntime = new Microsoft.Rest.ClientRuntime.PowerShell.AsyncCommandRuntime(this, ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token) )
+                    {
+                        asyncCommandRuntime.Wait( ProcessRecordAsync(),((Microsoft.Rest.ClientRuntime.IEventListener)this).Token);
+                    }
+                }
+            }
+            catch(System.AggregateException aggregateException)
+            {
+                // unroll the inner exceptions to get the root cause
+                foreach( var innerException in aggregateException.Flatten().InnerExceptions )
+                {
+                    ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletException, $"{innerException.GetType().Name} - {innerException.Message} : {innerException.StackTrace}").Wait(); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
+                    // Write exception out to error channel.
+                    WriteError( new System.Management.Automation.ErrorRecord(innerException,string.Empty, System.Management.Automation.ErrorCategory.NotSpecified, null) );
+                }
+            }
+            catch(System.Exception exception)
+            {
+                ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletException, $"{exception.GetType().Name} - {exception.Message} : {exception.StackTrace}").Wait(); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
+                // Write exception out to error channel.
+                WriteError( new System.Management.Automation.ErrorRecord(exception,string.Empty, System.Management.Automation.ErrorCategory.NotSpecified, null) );
+            }
+        }
+        /// <summary>Performs execution of the command, working asynchronously if required.</summary>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
+        /// </returns>
+        protected async System.Threading.Tasks.Task ProcessRecordAsync()
+        {
+            using( NoSynchronizationContext )
+            {
+                await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletGetPipeline); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
+                Pipeline = Nutanix.Powershell.Module.Instance.CreatePipeline(this.MyInvocation.BoundParameters);
+                Pipeline.Prepend(HttpPipelinePrepend);
+                Pipeline.Append(HttpPipelineAppend);
+                // get the client instance
+                await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
+                await this.Client.CreateSecurityRule(BodyBody, onAccepted, onDefault, this, Pipeline, Credential);
+                await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
+            }
+        }
+        /// <summary>Interrupts currently running code within the command.</summary>
+
+        protected override void StopProcessing()
+        {
+            ((Microsoft.Rest.ClientRuntime.IEventListener)this).Cancel();
+            base.StopProcessing();
+        }
+        /// <summary>
+        /// Serializes the state of this cmdlet to a <see cref="Carbon.Json.JsonNode" /> object.
+        /// </summary>
+        /// <param name="container">The <see cref="Carbon.Json.JsonObject"/> container to serialize this object into. If the caller
+        /// passes in <c>null</c>, a new instance will be created and returned to the caller.</param>
+        /// <param name="serializationMode">Allows the caller to choose the depth of the serialization. See <see cref="Microsoft.Rest.ClientRuntime.SerializationMode"/>.</param>
+        /// <returns>
+        /// a serialized instance of <see cref="NewSecurityRule_SecurityRuleApiVersionMetadataSpecExpanded" /> as a <see cref="Carbon.Json.JsonNode"
+        /// />.
+        /// </returns>
+        public Carbon.Json.JsonNode ToJson(Carbon.Json.JsonObject container, Microsoft.Rest.ClientRuntime.SerializationMode serializationMode)
+        {
+            // serialization method
+            container = container ?? new Carbon.Json.JsonObject();
+            AddIf( null != BodyBody ? (Carbon.Json.JsonNode) BodyBody.ToJson(null) : null, "BodyBody" ,container.Add );
+            return container;
+        }
+        /// <summary>a delegate that is called when the remote service returns 202 (Accepted).</summary>
+        /// <param name="responseMessage">the raw response message as an System.Net.Http.HttpResponseMessage.</param>
+        /// <param name="response">the body result as a <see cref="Nutanix.Powershell.Models.INetworkSecurityRuleIntentResponse" />
+        /// from the remote call</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
+        /// </returns>
+        private async System.Threading.Tasks.Task onAccepted(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.INetworkSecurityRuleIntentResponse> response)
+        {
+            using( NoSynchronizationContext )
+            {
+                // onAccepted - response for 202 / application/json
+                // (await response) // should be Nutanix.Powershell.Models.INetworkSecurityRuleIntentResponse
+                WriteObject(await response);
+            }
+        }
+        /// <summary>
+        /// a delegate that is called when the remote service returns default (any response code not handled elsewhere).
+        /// </summary>
+        /// <param name="responseMessage">the raw response message as an System.Net.Http.HttpResponseMessage.</param>
+        /// <param name="response">the body result as a <see cref="Nutanix.Powershell.Models.INetworkSecurityRuleStatus" /> from the
+        /// remote call</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
+        /// </returns>
+        private async System.Threading.Tasks.Task onDefault(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.INetworkSecurityRuleStatus> response)
+        {
+            using( NoSynchronizationContext )
+            {
+                // Error Response : default
+                WriteError(new System.Management.Automation.ErrorRecord(new System.Exception($"The service encountered an unexpected result: {responseMessage.StatusCode}"), responseMessage.StatusCode.ToString(), System.Management.Automation.ErrorCategory.InvalidOperation, new { BodyBody}));
+            }
+        }
+    }
+}
