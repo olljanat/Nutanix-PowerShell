@@ -363,6 +363,9 @@ namespace Nutanix.Powershell.Cmdlets
         /// <summary>Use the default credentials for the proxy</summary>
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Use the default credentials for the proxy")]
         public System.Management.Automation.SwitchParameter ProxyUseDefaultCredentials {get;set;}
+
+        [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "Run the command asynchronous")]
+        public System.Management.Automation.SwitchParameter Async {get; set;}
         /// <summary>Default policy for communication within target group.</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Default policy for communication within target group.")]
         public string TargetGroupDefaultInternalPolicy
@@ -569,7 +572,14 @@ namespace Nutanix.Powershell.Cmdlets
                 }
                 // get the client instance
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                await this.Client.CreateSecurityRule(BodyBody, onAccepted, onDefault, this, Pipeline, Credential);
+                if (this.Async.ToBool())
+                {
+                    await this.Client.CreateSecurityRule_Sync(BodyBody, onAccepted, onDefault, onOK, this, Pipeline, Credential);
+                } 
+                else 
+                {
+                    await this.Client.CreateSecurityRule(BodyBody, onAccepted, onDefault, this, Pipeline, Credential);
+                }
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }
         }
@@ -628,6 +638,23 @@ namespace Nutanix.Powershell.Cmdlets
             {
                 // Error Response : default
                 WriteError(new System.Management.Automation.ErrorRecord(new System.Exception($"The service encountered an unexpected result: {responseMessage.StatusCode}"), responseMessage.StatusCode.ToString(), System.Management.Automation.ErrorCategory.InvalidOperation, new { BodyBody}));
+            }
+        }
+
+        /// <summary>a delegate that is called when the remote service returns 200 (OK).</summary>
+        /// <param name="responseMessage">the raw response message as an System.Net.Http.HttpResponseMessage.</param>
+        /// <param name="response">the body result as a <see cref="Nutanix.Powershell.Models.INetworkSecurityRuleIntentResponse" />
+        /// from the remote call</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
+        /// </returns>
+        private async System.Threading.Tasks.Task onOK(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.INetworkSecurityRuleIntentResponse> response)
+        {
+            using( NoSynchronizationContext )
+            {
+                // onOK - response for 200 / application/json
+                // (await response) // should be Nutanix.Powershell.Models.INetworkSecurityRuleIntentResponse
+                WriteObject(await response);
             }
         }
     }

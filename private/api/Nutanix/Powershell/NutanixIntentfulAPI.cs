@@ -3957,6 +3957,35 @@ namespace Nutanix.Powershell
                 await this.CreateSecurityRule_Call(request,onAccepted,onDefault,eventListener,sender);
             }
         }
+        public async System.Threading.Tasks.Task CreateSecurityRule_Sync(Nutanix.Powershell.Models.INetworkSecurityRuleIntentInput body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.INetworkSecurityRuleIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.INetworkSecurityRuleStatus>, System.Threading.Tasks.Task> onDefault, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.INetworkSecurityRuleIntentResponse>, System.Threading.Tasks.Task> onOK, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // construct URL
+                var _url = new System.Uri((
+                        credential.Uri.ToString()
+                        + "/api/nutanix/v3//network_security_rules"
+                        ).TrimEnd('?','&'));
+
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new System.Net.Http.HttpRequestMessage(Microsoft.Rest.ClientRuntime.Method.Post, _url);
+                var byteArray = System.Text.Encoding.ASCII.GetBytes($"{credential.Username}:{CreateString(credential.Password)}");
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", System.Convert.ToBase64String(byteArray));
+
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // set body content
+                request.Content = new System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", System.Text.Encoding.UTF8);
+                request.Content.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.CreateSecurityRule_Call_Sync(request,onAccepted,onDefault,onOK,eventListener,sender,credential);
+            }
+        }
         /// <summary>Actual wire call for <see cref="CreateSecurityRule" /> method.</summary>
         /// <param name="request">the prepared HttpRequestMessage to send.</param>
         /// <param name="onAccepted">a delegate that is called when the remote service returns 202 (Accepted).</param>
@@ -4001,6 +4030,68 @@ namespace Nutanix.Powershell
                     _response?.Dispose();
                     request?.Dispose();
                 }
+            }
+        }
+
+        /// <summary>Actual wire call for <see cref="CreateSecurityRule" /> method.</summary>
+        /// <param name="request">the prepared HttpRequestMessage to send.</param>
+        /// <param name="onAccepted">a delegate that is called when the remote service returns 202 (Accepted).</param>
+        /// <param name="onDefault">a delegate that is called when the remote service returns default (any response code not handled
+        /// elsewhere).</param>
+        /// <param name="eventListener">an <see cref="Microsoft.Rest.ClientRuntime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an Microsoft.Rest.ClientRuntime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async System.Threading.Tasks.Task CreateSecurityRule_Call_Sync(System.Net.Http.HttpRequestMessage request, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.INetworkSecurityRuleIntentResponse>, System.Threading.Tasks.Task> onAccepted, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.INetworkSecurityRuleStatus>, System.Threading.Tasks.Task> onDefault, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.INetworkSecurityRuleIntentResponse>, System.Threading.Tasks.Task> onOK,Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential)
+        {
+                       using( NoSynchronizationContext )
+            {
+                System.Net.Http.HttpResponseMessage _response = null;
+                Nutanix.Powershell.Models.INetworkSecurityRuleIntentResponse _ruleTask = null;
+
+                try
+                {
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeCall, request); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    _response = await sender.SendAsync(request, eventListener);
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    var _contentType = _response.Content.Headers.ContentType?.MediaType;
+                    switch ( _response.StatusCode )
+                    {
+                        case System.Net.HttpStatusCode.Accepted:
+                        {
+                            await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            _ruleTask = await _response.Content.ReadAsStringAsync().ContinueWith( body => Nutanix.Powershell.Models.NetworkSecurityRuleIntentResponse.FromJson(Carbon.Json.JsonNode.Parse(body.Result)) );
+                            break;
+                        }
+                        default:
+                        {
+                            await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onDefault(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => Nutanix.Powershell.Models.NetworkSecurityRuleStatus.FromJson(Carbon.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                    }
+                }
+                finally
+                {
+                    // finally statements
+                    await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.Finally, request, _response);
+                    _response?.Dispose();
+                    request?.Dispose();
+                }
+
+                var retry = new RetryWithExponentialBackoff(100,200,600000);
+                await retry.RunAsync(async () =>
+                {
+                    var _task = await GetTaskStatus(_ruleTask.Status.ExecutionContext.TaskUuid, eventListener, sender, credential);
+                    if (_task.State !=  "SUCCEEDED")
+                    {
+                        throw new System.ApplicationException("Status is not completed", new System.Exception($"Status is {_task.State}"));
+                    }
+
+                });
+
+                await this.GetSecurityRule(_ruleTask.Metadata.Uuid, onOK, onDefault, eventListener, sender, credential);
             }
         }
         /// <summary>

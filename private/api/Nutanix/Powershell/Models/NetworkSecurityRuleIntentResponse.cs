@@ -49,10 +49,10 @@ namespace Nutanix.Powershell.Models
             }
         }
         /// <summary>Backing field for <see cref="Status" /> property.</summary>
-        private Nutanix.Powershell.Models.INetworkSecurityRuleDefStatus _status;
+        private Nutanix.Powershell.Models.IVmDefStatus _status;
 
         /// <summary>Network security rule status</summary>
-        public Nutanix.Powershell.Models.INetworkSecurityRuleDefStatus Status
+        public Nutanix.Powershell.Models.IVmDefStatus Status
         {
             get
             {
@@ -87,6 +87,6 @@ namespace Nutanix.Powershell.Models
         string ApiVersion { get; set; }
         Nutanix.Powershell.Models.INetworkSecurityRuleMetadata Metadata { get; set; }
         Nutanix.Powershell.Models.INetworkSecurityRule Spec { get; set; }
-        Nutanix.Powershell.Models.INetworkSecurityRuleDefStatus Status { get; set; }
+        Nutanix.Powershell.Models.IVmDefStatus Status { get; set; }
     }
 }
