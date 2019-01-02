@@ -342,7 +342,7 @@ namespace Nutanix.Powershell.Cmdlets
 
                 // if neither length nor offset is given, get every instance on the account
                 if (Length == 0 && Offset == 0) {
-                    await this.Client.GetVms_All(GetEntitiesRequest, onOK2, onDefault, this, Pipeline, Credential);
+                    await this.Client.ListAllVms(GetEntitiesRequest, onOK2, onDefault, this, Pipeline, Credential);
                 } else {
                     await this.Client.GetVms(GetEntitiesRequest, onOK, onDefault, this, Pipeline, Credential);
                 }
