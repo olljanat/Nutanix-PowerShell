@@ -1801,7 +1801,7 @@ namespace Nutanix.Powershell
             }
         }
 
-        public async System.Threading.Tasks.Task ListAllImages(Nutanix.Powershell.Models.IImageListMetadata body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageIntentResource[]>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IVmStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential)
+        public async System.Threading.Tasks.Task ListAllImages(Nutanix.Powershell.Models.IImageListMetadata body, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageIntentResource[]>, System.Threading.Tasks.Task> onOK, System.Func<System.Net.Http.HttpResponseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageStatus>, System.Threading.Tasks.Task> onDefault, Microsoft.Rest.ClientRuntime.IEventListener eventListener, Microsoft.Rest.ClientRuntime.ISendAsync sender, Nutanix.Powershell.Models.NutanixCredential credential)
         {
 
             // set the body to fetch the first
@@ -1871,7 +1871,7 @@ namespace Nutanix.Powershell
                             {
                                 hasNext = false;
                                 await eventListener.Signal(Microsoft.Rest.ClientRuntime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                                await onDefault(_response,_response.Content.ReadAsStringAsync().ContinueWith( respBody => Nutanix.Powershell.Models.VmStatus.FromJson(Carbon.Json.JsonNode.Parse(respBody.Result)) ));
+                                await onDefault(_response,_response.Content.ReadAsStringAsync().ContinueWith( respBody => Nutanix.Powershell.Models.ImageStatus.FromJson(Carbon.Json.JsonNode.Parse(respBody.Result)) ));
                                 break;
                             }
                         }

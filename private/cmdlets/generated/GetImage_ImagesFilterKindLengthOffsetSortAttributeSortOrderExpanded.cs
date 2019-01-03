@@ -52,6 +52,13 @@ namespace Nutanix.Powershell.Cmdlets
             {
                 GetEntitiesRequestBody.Length = value;
             }
+            get
+            {
+                if (GetEntitiesRequestBody.Length.HasValue){
+                    return GetEntitiesRequestBody.Length.Value;
+                }
+                return 0;
+            }
         }
         /// <summary>
         /// <see cref="IEventListener" /> cancellation delegate. Stops the cmdlet when called.
@@ -66,6 +73,13 @@ namespace Nutanix.Powershell.Cmdlets
             set
             {
                 GetEntitiesRequestBody.Offset = value;
+            }
+            get
+            {
+                if (GetEntitiesRequestBody.Offset.HasValue){
+                    return GetEntitiesRequestBody.Offset.Value;
+                }
+                return 0;
             }
         }
         /// <summary>
@@ -321,7 +335,11 @@ namespace Nutanix.Powershell.Cmdlets
                     Credential = new Nutanix.Powershell.Models.NutanixCredential(url, Username, Password);
                 }
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                await this.Client.GetImages(GetEntitiesRequestBody, onOK, onDefault, this, Pipeline, Credential);
+                if (Length == 0 && Offset == 0) {
+                    await this.Client.ListAllImages(GetEntitiesRequestBody, onOKList, onDefault, this, Pipeline, Credential);
+                } else {
+                    await this.Client.GetImages(GetEntitiesRequestBody, onOK, onDefault, this, Pipeline, Credential);
+                }
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }
         }
@@ -373,6 +391,15 @@ namespace Nutanix.Powershell.Cmdlets
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
         /// </returns>
         private async System.Threading.Tasks.Task onOK(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageListIntentResponse> response)
+        {
+            using( NoSynchronizationContext )
+            {
+                // onOK - response for 200 / application/json
+                // (await response) // should be Nutanix.Powershell.Models.IImageListIntentResponse
+                WriteObject(await response);
+            }
+        }
+         private async System.Threading.Tasks.Task onOKList(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.IImageIntentResource[]> response)
         {
             using( NoSynchronizationContext )
             {
