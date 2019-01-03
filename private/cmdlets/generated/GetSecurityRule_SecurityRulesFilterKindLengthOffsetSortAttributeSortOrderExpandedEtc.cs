@@ -61,6 +61,13 @@ namespace Nutanix.Powershell.Cmdlets
             {
                 GetEntitiesRequestBody.Length = value;
             }
+            get
+            {
+                if (GetEntitiesRequestBody.Length.HasValue){
+                    return GetEntitiesRequestBody.Length.Value;
+                }
+                return 0;
+            }
         }
         /// <summary>
         /// <see cref="IEventListener" /> cancellation delegate. Stops the cmdlet when called.
@@ -75,6 +82,13 @@ namespace Nutanix.Powershell.Cmdlets
             set
             {
                 GetEntitiesRequestBody.Offset = value;
+            }
+            get
+            {
+                if (GetEntitiesRequestBody.Offset.HasValue){
+                    return GetEntitiesRequestBody.Offset.Value;
+                }
+                return 0;
             }
         }
         /// <summary>
@@ -294,7 +308,11 @@ namespace Nutanix.Powershell.Cmdlets
                 }
                 // get the client instance
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                await this.Client.ListSecurityRules(GetEntitiesRequestBody, onOK, onDefault, this, Pipeline, Credential);
+                if (Length == 0 && Offset == 0) {
+                    await this.Client.ListAllSecurityRules(GetEntitiesRequestBody, onOKList, onDefault, this, Pipeline, Credential);
+                } else {
+                    await this.Client.ListSecurityRules(GetEntitiesRequestBody, onOK, onDefault, this, Pipeline, Credential);
+                }
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }
         }
@@ -347,6 +365,22 @@ namespace Nutanix.Powershell.Cmdlets
         /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
         /// </returns>
         private async System.Threading.Tasks.Task onOK(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.INetworkSecurityRuleListIntentResponse> response)
+        {
+            using( NoSynchronizationContext )
+            {
+                // onOK - response for 200 / application/json
+                // (await response) // should be Nutanix.Powershell.Models.INetworkSecurityRuleListIntentResponse
+                WriteObject(await response);
+            }
+        }
+        /// <summary>a delegate that is called when the remote service returns 200 (OK).</summary>
+        /// <param name="responseMessage">the raw response message as an System.Net.Http.HttpResponseMessage.</param>
+        /// <param name="response">the body result as a <see cref="Nutanix.Powershell.Models.INetworkSecurityRuleListIntentResponse"
+        /// /> from the remote call</param>
+        /// <returns>
+        /// A <see cref="System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
+        /// </returns>
+        private async System.Threading.Tasks.Task onOKList(System.Net.Http.HttpResponseMessage responseMessage, System.Threading.Tasks.Task<Nutanix.Powershell.Models.INetworkSecurityRuleIntentResource[]> response)
         {
             using( NoSynchronizationContext )
             {
