@@ -49,7 +49,7 @@ namespace Nutanix.Powershell.Models
             }
         }
         /// <summary>Backing field for <see cref="Status" /> property.</summary>
-        private Nutanix.Powershell.Models.IClusterDefStatus _status;
+        private Nutanix.Powershell.Models.IVmDefStatus _status;
 
         /// <summary>
         /// Cluster status definition. A Nutanix cluster is comprised of three or
@@ -59,7 +59,7 @@ namespace Nutanix.Powershell.Models
         /// runs on each node in the cluster. The CVM enables each node to share
         /// local storage from all nodes in the cluster.
         /// </summary>
-        public Nutanix.Powershell.Models.IClusterDefStatus Status
+        public Nutanix.Powershell.Models.IVmDefStatus Status
         {
             get
             {
@@ -94,6 +94,6 @@ namespace Nutanix.Powershell.Models
         string ApiVersion { get; set; }
         Nutanix.Powershell.Models.IClusterMetadata Metadata { get; set; }
         Nutanix.Powershell.Models.ICluster Spec { get; set; }
-        Nutanix.Powershell.Models.IClusterDefStatus Status { get; set; }
+        Nutanix.Powershell.Models.IVmDefStatus Status { get; set; }
     }
 }
