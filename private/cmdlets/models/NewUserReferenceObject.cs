@@ -10,14 +10,6 @@ namespace Nutanix.Powershell.ModelCmdlets
     {
         /// <summary>Backing field for <see cref="UserReference" /></summary>
         private Nutanix.Powershell.Models.IUserReference _userReference = new Nutanix.Powershell.Models.UserReference();
-        /// <summary>The kind name</summary>
-        public string Kind
-        {
-            set
-            {
-                _userReference.Kind = value;
-            }
-        }
         /// <summary>HELP MESSAGE MISSING</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string Name

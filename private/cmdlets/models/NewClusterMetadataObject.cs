@@ -19,33 +19,6 @@ namespace Nutanix.Powershell.ModelCmdlets
                 _clusterMetadata.Categories = value;
             }
         }
-        /// <summary>UTC date and time in RFC-3339 format when cluster was created</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "UTC date and time in RFC-3339 format when cluster was created")]
-        public System.DateTime CreationTime
-        {
-            set
-            {
-                _clusterMetadata.CreationTime = value;
-            }
-        }
-        /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The kind name")]
-        public string Kind
-        {
-            set
-            {
-                _clusterMetadata.Kind = value;
-            }
-        }
-        /// <summary>UTC date and time in RFC-3339 format when cluster was last updated</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "UTC date and time in RFC-3339 format when cluster was last updated")]
-        public System.DateTime LastUpdateTime
-        {
-            set
-            {
-                _clusterMetadata.LastUpdateTime = value;
-            }
-        }
         /// <summary>cluster name</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "cluster name")]
         public string Name
@@ -53,16 +26,6 @@ namespace Nutanix.Powershell.ModelCmdlets
             set
             {
                 _clusterMetadata.Name = value;
-            }
-        }
-        /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The kind name")]
-        public string ProjectReferenceKind
-        {
-            set
-            {
-                _clusterMetadata.ProjectReference = _clusterMetadata.ProjectReference ?? new Nutanix.Powershell.Models.ProjectReference();
-                _clusterMetadata.ProjectReference.Kind = value;
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
@@ -103,16 +66,6 @@ namespace Nutanix.Powershell.ModelCmdlets
                 _clusterMetadata.SpecVersion = value;
             }
         }
-        /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The kind name")]
-        public string UserReferenceKind
-        {
-            set
-            {
-                _clusterMetadata.OwnerReference = _clusterMetadata.OwnerReference ?? new Nutanix.Powershell.Models.UserReference();
-                _clusterMetadata.OwnerReference.Kind = value;
-            }
-        }
         /// <summary>HELP MESSAGE MISSING</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string UserReferenceName
@@ -146,6 +99,11 @@ namespace Nutanix.Powershell.ModelCmdlets
 
         protected override void ProcessRecord()
         {
+            _clusterMetadata.ProjectReference = _clusterMetadata.ProjectReference ?? new Nutanix.Powershell.Models.ProjectReference();
+            _clusterMetadata.OwnerReference.Kind = "owner_reference";
+            _clusterMetadata.ProjectReference = _clusterMetadata.ProjectReference ?? new Nutanix.Powershell.Models.ProjectReference();
+            _clusterMetadata.ProjectReference.Kind = "project_reference";
+            _clusterMetadata.Kind = "cluster";
             WriteObject(_clusterMetadata);
         }
     }

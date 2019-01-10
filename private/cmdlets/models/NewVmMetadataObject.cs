@@ -26,14 +26,6 @@ namespace Nutanix.Powershell.ModelCmdlets
                 _vmMetadata.CreationTime = value;
             }
         }
-        /// <summary>The kind name</summary>
-        public string Kind
-        {
-            set
-            {
-                _vmMetadata.Kind = value;
-            }
-        }
         /// <summary>UTC date and time in RFC-3339 format when vm was last updated</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "UTC date and time in RFC-3339 format when vm was last updated")]
         public System.DateTime LastUpdateTime

@@ -8,28 +8,19 @@ namespace Nutanix.Powershell.Cmdlets
     {
         /// <summary>The <see cref="System.Threading.CancellationTokenSource" /> for this operation.</summary>
         private System.Threading.CancellationTokenSource _cancellationTokenSource = new System.Threading.CancellationTokenSource();
-        /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
-        public string ApiVersion
-        {
-            set
-            {
-                BodyBody.ApiVersion = value;
-            }
-        }
-        /// <summary>Backing field for <see cref="BodyBody" /> property.</summary>
-        private Nutanix.Powershell.Models.INetworkSecurityRuleIntentInput _bodyBody= new Nutanix.Powershell.Models.NetworkSecurityRuleIntentInput();
+        /// <summary>Backing field for <see cref="Body" /> property.</summary>
+        private Nutanix.Powershell.Models.INetworkSecurityRuleIntentInput _body= new Nutanix.Powershell.Models.NetworkSecurityRuleIntentInput();
 
         /// <summary>An intentful representation of a network_security_rule</summary>
-        private Nutanix.Powershell.Models.INetworkSecurityRuleIntentInput BodyBody
+        private Nutanix.Powershell.Models.INetworkSecurityRuleIntentInput Body
         {
             get
             {
-                return this._bodyBody;
+                return this._body;
             }
             set
             {
-                this._bodyBody = value;
+                this._body = value;
             }
         }
         /// <summary>List of kinds associated with this filter.</summary>
@@ -38,12 +29,12 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
-                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
-                BodyBody.Spec.Resources.AppRule = BodyBody.Spec.Resources.AppRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesAppRule();
-                BodyBody.Spec.Resources.AppRule.TargetGroup = BodyBody.Spec.Resources.AppRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
-                BodyBody.Spec.Resources.AppRule.TargetGroup.Filter = BodyBody.Spec.Resources.AppRule.TargetGroup.Filter ?? new Nutanix.Powershell.Models.CategoryFilter();
-                BodyBody.Spec.Resources.AppRule.TargetGroup.Filter.KindList = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                Body.Spec.Resources = Body.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                Body.Spec.Resources.AppRule = Body.Spec.Resources.AppRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesAppRule();
+                Body.Spec.Resources.AppRule.TargetGroup = Body.Spec.Resources.AppRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
+                Body.Spec.Resources.AppRule.TargetGroup.Filter = Body.Spec.Resources.AppRule.TargetGroup.Filter ?? new Nutanix.Powershell.Models.CategoryFilter();
+                Body.Spec.Resources.AppRule.TargetGroup.Filter.KindList = value;
             }
         }
         /// <summary>List of kinds associated with this filter.</summary>
@@ -52,11 +43,11 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
-                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
-                BodyBody.Spec.Resources.IsolationRule = BodyBody.Spec.Resources.IsolationRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesIsolationRule();
-                BodyBody.Spec.Resources.IsolationRule.FirstEntityFilter = BodyBody.Spec.Resources.IsolationRule.FirstEntityFilter ?? new Nutanix.Powershell.Models.CategoryFilter();
-                BodyBody.Spec.Resources.IsolationRule.FirstEntityFilter.KindList = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                Body.Spec.Resources = Body.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                Body.Spec.Resources.IsolationRule = Body.Spec.Resources.IsolationRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesIsolationRule();
+                Body.Spec.Resources.IsolationRule.FirstEntityFilter = Body.Spec.Resources.IsolationRule.FirstEntityFilter ?? new Nutanix.Powershell.Models.CategoryFilter();
+                Body.Spec.Resources.IsolationRule.FirstEntityFilter.KindList = value;
             }
         }
         /// <summary>List of kinds associated with this filter.</summary>
@@ -65,11 +56,11 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
-                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
-                BodyBody.Spec.Resources.IsolationRule = BodyBody.Spec.Resources.IsolationRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesIsolationRule();
-                BodyBody.Spec.Resources.IsolationRule.SecondEntityFilter = BodyBody.Spec.Resources.IsolationRule.SecondEntityFilter ?? new Nutanix.Powershell.Models.CategoryFilter();
-                BodyBody.Spec.Resources.IsolationRule.SecondEntityFilter.KindList = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                Body.Spec.Resources = Body.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                Body.Spec.Resources.IsolationRule = Body.Spec.Resources.IsolationRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesIsolationRule();
+                Body.Spec.Resources.IsolationRule.SecondEntityFilter = Body.Spec.Resources.IsolationRule.SecondEntityFilter ?? new Nutanix.Powershell.Models.CategoryFilter();
+                Body.Spec.Resources.IsolationRule.SecondEntityFilter.KindList = value;
             }
         }
         /// <summary>List of kinds associated with this filter.</summary>
@@ -78,12 +69,12 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
-                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
-                BodyBody.Spec.Resources.QuarantineRule = BodyBody.Spec.Resources.QuarantineRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesQuarantineRule();
-                BodyBody.Spec.Resources.QuarantineRule.TargetGroup = BodyBody.Spec.Resources.QuarantineRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
-                BodyBody.Spec.Resources.QuarantineRule.TargetGroup.Filter = BodyBody.Spec.Resources.QuarantineRule.TargetGroup.Filter ?? new Nutanix.Powershell.Models.CategoryFilter();
-                BodyBody.Spec.Resources.QuarantineRule.TargetGroup.Filter.KindList = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                Body.Spec.Resources = Body.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                Body.Spec.Resources.QuarantineRule = Body.Spec.Resources.QuarantineRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesQuarantineRule();
+                Body.Spec.Resources.QuarantineRule.TargetGroup = Body.Spec.Resources.QuarantineRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
+                Body.Spec.Resources.QuarantineRule.TargetGroup.Filter = Body.Spec.Resources.QuarantineRule.TargetGroup.Filter ?? new Nutanix.Powershell.Models.CategoryFilter();
+                Body.Spec.Resources.QuarantineRule.TargetGroup.Filter.KindList = value;
             }
         }
         /// <summary>A list of category key and list of values.</summary>
@@ -92,12 +83,12 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
-                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
-                BodyBody.Spec.Resources.AppRule = BodyBody.Spec.Resources.AppRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesAppRule();
-                BodyBody.Spec.Resources.AppRule.TargetGroup = BodyBody.Spec.Resources.AppRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
-                BodyBody.Spec.Resources.AppRule.TargetGroup.Filter = BodyBody.Spec.Resources.AppRule.TargetGroup.Filter ?? new Nutanix.Powershell.Models.CategoryFilter();
-                BodyBody.Spec.Resources.AppRule.TargetGroup.Filter.Params = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                Body.Spec.Resources = Body.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                Body.Spec.Resources.AppRule = Body.Spec.Resources.AppRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesAppRule();
+                Body.Spec.Resources.AppRule.TargetGroup = Body.Spec.Resources.AppRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
+                Body.Spec.Resources.AppRule.TargetGroup.Filter = Body.Spec.Resources.AppRule.TargetGroup.Filter ?? new Nutanix.Powershell.Models.CategoryFilter();
+                Body.Spec.Resources.AppRule.TargetGroup.Filter.Params = value;
             }
         }
         /// <summary>A list of category key and list of values.</summary>
@@ -106,11 +97,11 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
-                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
-                BodyBody.Spec.Resources.IsolationRule = BodyBody.Spec.Resources.IsolationRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesIsolationRule();
-                BodyBody.Spec.Resources.IsolationRule.FirstEntityFilter = BodyBody.Spec.Resources.IsolationRule.FirstEntityFilter ?? new Nutanix.Powershell.Models.CategoryFilter();
-                BodyBody.Spec.Resources.IsolationRule.FirstEntityFilter.Params = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                Body.Spec.Resources = Body.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                Body.Spec.Resources.IsolationRule = Body.Spec.Resources.IsolationRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesIsolationRule();
+                Body.Spec.Resources.IsolationRule.FirstEntityFilter = Body.Spec.Resources.IsolationRule.FirstEntityFilter ?? new Nutanix.Powershell.Models.CategoryFilter();
+                Body.Spec.Resources.IsolationRule.FirstEntityFilter.Params = value;
             }
         }
         /// <summary>A list of category key and list of values.</summary>
@@ -119,11 +110,11 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
-                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
-                BodyBody.Spec.Resources.IsolationRule = BodyBody.Spec.Resources.IsolationRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesIsolationRule();
-                BodyBody.Spec.Resources.IsolationRule.SecondEntityFilter = BodyBody.Spec.Resources.IsolationRule.SecondEntityFilter ?? new Nutanix.Powershell.Models.CategoryFilter();
-                BodyBody.Spec.Resources.IsolationRule.SecondEntityFilter.Params = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                Body.Spec.Resources = Body.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                Body.Spec.Resources.IsolationRule = Body.Spec.Resources.IsolationRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesIsolationRule();
+                Body.Spec.Resources.IsolationRule.SecondEntityFilter = Body.Spec.Resources.IsolationRule.SecondEntityFilter ?? new Nutanix.Powershell.Models.CategoryFilter();
+                Body.Spec.Resources.IsolationRule.SecondEntityFilter.Params = value;
             }
         }
         /// <summary>A list of category key and list of values.</summary>
@@ -132,12 +123,12 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
-                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
-                BodyBody.Spec.Resources.QuarantineRule = BodyBody.Spec.Resources.QuarantineRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesQuarantineRule();
-                BodyBody.Spec.Resources.QuarantineRule.TargetGroup = BodyBody.Spec.Resources.QuarantineRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
-                BodyBody.Spec.Resources.QuarantineRule.TargetGroup.Filter = BodyBody.Spec.Resources.QuarantineRule.TargetGroup.Filter ?? new Nutanix.Powershell.Models.CategoryFilter();
-                BodyBody.Spec.Resources.QuarantineRule.TargetGroup.Filter.Params = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                Body.Spec.Resources = Body.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                Body.Spec.Resources.QuarantineRule = Body.Spec.Resources.QuarantineRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesQuarantineRule();
+                Body.Spec.Resources.QuarantineRule.TargetGroup = Body.Spec.Resources.QuarantineRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
+                Body.Spec.Resources.QuarantineRule.TargetGroup.Filter = Body.Spec.Resources.QuarantineRule.TargetGroup.Filter ?? new Nutanix.Powershell.Models.CategoryFilter();
+                Body.Spec.Resources.QuarantineRule.TargetGroup.Filter.Params = value;
             }
         }
         /// <summary>The type of the filter being used.</summary>
@@ -146,12 +137,12 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
-                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
-                BodyBody.Spec.Resources.AppRule = BodyBody.Spec.Resources.AppRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesAppRule();
-                BodyBody.Spec.Resources.AppRule.TargetGroup = BodyBody.Spec.Resources.AppRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
-                BodyBody.Spec.Resources.AppRule.TargetGroup.Filter = BodyBody.Spec.Resources.AppRule.TargetGroup.Filter ?? new Nutanix.Powershell.Models.CategoryFilter();
-                BodyBody.Spec.Resources.AppRule.TargetGroup.Filter.Type = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                Body.Spec.Resources = Body.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                Body.Spec.Resources.AppRule = Body.Spec.Resources.AppRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesAppRule();
+                Body.Spec.Resources.AppRule.TargetGroup = Body.Spec.Resources.AppRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
+                Body.Spec.Resources.AppRule.TargetGroup.Filter = Body.Spec.Resources.AppRule.TargetGroup.Filter ?? new Nutanix.Powershell.Models.CategoryFilter();
+                Body.Spec.Resources.AppRule.TargetGroup.Filter.Type = value;
             }
         }
         /// <summary>The type of the filter being used.</summary>
@@ -160,11 +151,11 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
-                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
-                BodyBody.Spec.Resources.IsolationRule = BodyBody.Spec.Resources.IsolationRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesIsolationRule();
-                BodyBody.Spec.Resources.IsolationRule.FirstEntityFilter = BodyBody.Spec.Resources.IsolationRule.FirstEntityFilter ?? new Nutanix.Powershell.Models.CategoryFilter();
-                BodyBody.Spec.Resources.IsolationRule.FirstEntityFilter.Type = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                Body.Spec.Resources = Body.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                Body.Spec.Resources.IsolationRule = Body.Spec.Resources.IsolationRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesIsolationRule();
+                Body.Spec.Resources.IsolationRule.FirstEntityFilter = Body.Spec.Resources.IsolationRule.FirstEntityFilter ?? new Nutanix.Powershell.Models.CategoryFilter();
+                Body.Spec.Resources.IsolationRule.FirstEntityFilter.Type = value;
             }
         }
         /// <summary>The type of the filter being used.</summary>
@@ -173,11 +164,11 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
-                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
-                BodyBody.Spec.Resources.IsolationRule = BodyBody.Spec.Resources.IsolationRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesIsolationRule();
-                BodyBody.Spec.Resources.IsolationRule.SecondEntityFilter = BodyBody.Spec.Resources.IsolationRule.SecondEntityFilter ?? new Nutanix.Powershell.Models.CategoryFilter();
-                BodyBody.Spec.Resources.IsolationRule.SecondEntityFilter.Type = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                Body.Spec.Resources = Body.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                Body.Spec.Resources.IsolationRule = Body.Spec.Resources.IsolationRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesIsolationRule();
+                Body.Spec.Resources.IsolationRule.SecondEntityFilter = Body.Spec.Resources.IsolationRule.SecondEntityFilter ?? new Nutanix.Powershell.Models.CategoryFilter();
+                Body.Spec.Resources.IsolationRule.SecondEntityFilter.Type = value;
             }
         }
         /// <summary>The type of the filter being used.</summary>
@@ -186,12 +177,12 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
-                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
-                BodyBody.Spec.Resources.QuarantineRule = BodyBody.Spec.Resources.QuarantineRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesQuarantineRule();
-                BodyBody.Spec.Resources.QuarantineRule.TargetGroup = BodyBody.Spec.Resources.QuarantineRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
-                BodyBody.Spec.Resources.QuarantineRule.TargetGroup.Filter = BodyBody.Spec.Resources.QuarantineRule.TargetGroup.Filter ?? new Nutanix.Powershell.Models.CategoryFilter();
-                BodyBody.Spec.Resources.QuarantineRule.TargetGroup.Filter.Type = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                Body.Spec.Resources = Body.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                Body.Spec.Resources.QuarantineRule = Body.Spec.Resources.QuarantineRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesQuarantineRule();
+                Body.Spec.Resources.QuarantineRule.TargetGroup = Body.Spec.Resources.QuarantineRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
+                Body.Spec.Resources.QuarantineRule.TargetGroup.Filter = Body.Spec.Resources.QuarantineRule.TargetGroup.Filter ?? new Nutanix.Powershell.Models.CategoryFilter();
+                Body.Spec.Resources.QuarantineRule.TargetGroup.Filter.Type = value;
             }
         }
         /// <summary>The reference to the client API class.</summary>
@@ -210,7 +201,7 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Metadata = value;
+                Body.Metadata = value;
             }
         }
         /// <summary>
@@ -225,8 +216,8 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
-                BodyBody.Spec.Description = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                Body.Spec.Description = value;
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
@@ -235,8 +226,8 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
-                BodyBody.Spec.Name = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                Body.Spec.Name = value;
             }
         }
         /// <summary>Type of deployment of the rule.</summary>
@@ -245,10 +236,10 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
-                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
-                BodyBody.Spec.Resources.AppRule = BodyBody.Spec.Resources.AppRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesAppRule();
-                BodyBody.Spec.Resources.AppRule.Action = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                Body.Spec.Resources = Body.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                Body.Spec.Resources.AppRule = Body.Spec.Resources.AppRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesAppRule();
+                Body.Spec.Resources.AppRule.Action = value;
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
@@ -257,10 +248,10 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
-                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
-                BodyBody.Spec.Resources.AppRule = BodyBody.Spec.Resources.AppRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesAppRule();
-                BodyBody.Spec.Resources.AppRule.InboundAllowList = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                Body.Spec.Resources = Body.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                Body.Spec.Resources.AppRule = Body.Spec.Resources.AppRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesAppRule();
+                Body.Spec.Resources.AppRule.InboundAllowList = value;
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
@@ -269,10 +260,10 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
-                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
-                BodyBody.Spec.Resources.AppRule = BodyBody.Spec.Resources.AppRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesAppRule();
-                BodyBody.Spec.Resources.AppRule.OutboundAllowList = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                Body.Spec.Resources = Body.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                Body.Spec.Resources.AppRule = Body.Spec.Resources.AppRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesAppRule();
+                Body.Spec.Resources.AppRule.OutboundAllowList = value;
             }
         }
         /// <summary>Type of action.</summary>
@@ -281,10 +272,10 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
-                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
-                BodyBody.Spec.Resources.IsolationRule = BodyBody.Spec.Resources.IsolationRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesIsolationRule();
-                BodyBody.Spec.Resources.IsolationRule.Action = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                Body.Spec.Resources = Body.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                Body.Spec.Resources.IsolationRule = Body.Spec.Resources.IsolationRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesIsolationRule();
+                Body.Spec.Resources.IsolationRule.Action = value;
             }
         }
         /// <summary>Type of action.</summary>
@@ -293,10 +284,10 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
-                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
-                BodyBody.Spec.Resources.QuarantineRule = BodyBody.Spec.Resources.QuarantineRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesQuarantineRule();
-                BodyBody.Spec.Resources.QuarantineRule.Action = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                Body.Spec.Resources = Body.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                Body.Spec.Resources.QuarantineRule = Body.Spec.Resources.QuarantineRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesQuarantineRule();
+                Body.Spec.Resources.QuarantineRule.Action = value;
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
@@ -305,10 +296,10 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
-                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
-                BodyBody.Spec.Resources.QuarantineRule = BodyBody.Spec.Resources.QuarantineRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesQuarantineRule();
-                BodyBody.Spec.Resources.QuarantineRule.InboundAllowList = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                Body.Spec.Resources = Body.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                Body.Spec.Resources.QuarantineRule = Body.Spec.Resources.QuarantineRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesQuarantineRule();
+                Body.Spec.Resources.QuarantineRule.InboundAllowList = value;
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
@@ -317,10 +308,10 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
-                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
-                BodyBody.Spec.Resources.QuarantineRule = BodyBody.Spec.Resources.QuarantineRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesQuarantineRule();
-                BodyBody.Spec.Resources.QuarantineRule.OutboundAllowList = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                Body.Spec.Resources = Body.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                Body.Spec.Resources.QuarantineRule = Body.Spec.Resources.QuarantineRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesQuarantineRule();
+                Body.Spec.Resources.QuarantineRule.OutboundAllowList = value;
             }
         }
         /// <summary>
@@ -343,11 +334,11 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
-                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
-                BodyBody.Spec.Resources.AppRule = BodyBody.Spec.Resources.AppRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesAppRule();
-                BodyBody.Spec.Resources.AppRule.TargetGroup = BodyBody.Spec.Resources.AppRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
-                BodyBody.Spec.Resources.AppRule.TargetGroup.DefaultInternalPolicy = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                Body.Spec.Resources = Body.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                Body.Spec.Resources.AppRule = Body.Spec.Resources.AppRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesAppRule();
+                Body.Spec.Resources.AppRule.TargetGroup = Body.Spec.Resources.AppRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
+                Body.Spec.Resources.AppRule.TargetGroup.DefaultInternalPolicy = value;
             }
         }
         /// <summary>Default policy for communication within target group.</summary>
@@ -356,11 +347,11 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
-                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
-                BodyBody.Spec.Resources.QuarantineRule = BodyBody.Spec.Resources.QuarantineRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesQuarantineRule();
-                BodyBody.Spec.Resources.QuarantineRule.TargetGroup = BodyBody.Spec.Resources.QuarantineRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
-                BodyBody.Spec.Resources.QuarantineRule.TargetGroup.DefaultInternalPolicy = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                Body.Spec.Resources = Body.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                Body.Spec.Resources.QuarantineRule = Body.Spec.Resources.QuarantineRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesQuarantineRule();
+                Body.Spec.Resources.QuarantineRule.TargetGroup = Body.Spec.Resources.QuarantineRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
+                Body.Spec.Resources.QuarantineRule.TargetGroup.DefaultInternalPolicy = value;
             }
         }
         /// <summary>Way to identify the object for which rule is applied.</summary>
@@ -369,11 +360,11 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
-                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
-                BodyBody.Spec.Resources.AppRule = BodyBody.Spec.Resources.AppRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesAppRule();
-                BodyBody.Spec.Resources.AppRule.TargetGroup = BodyBody.Spec.Resources.AppRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
-                BodyBody.Spec.Resources.AppRule.TargetGroup.PeerSpecificationType = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                Body.Spec.Resources = Body.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                Body.Spec.Resources.AppRule = Body.Spec.Resources.AppRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesAppRule();
+                Body.Spec.Resources.AppRule.TargetGroup = Body.Spec.Resources.AppRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
+                Body.Spec.Resources.AppRule.TargetGroup.PeerSpecificationType = value;
             }
         }
         /// <summary>Way to identify the object for which rule is applied.</summary>
@@ -382,11 +373,11 @@ namespace Nutanix.Powershell.Cmdlets
         {
             set
             {
-                BodyBody.Spec = BodyBody.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
-                BodyBody.Spec.Resources = BodyBody.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
-                BodyBody.Spec.Resources.QuarantineRule = BodyBody.Spec.Resources.QuarantineRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesQuarantineRule();
-                BodyBody.Spec.Resources.QuarantineRule.TargetGroup = BodyBody.Spec.Resources.QuarantineRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
-                BodyBody.Spec.Resources.QuarantineRule.TargetGroup.PeerSpecificationType = value;
+                Body.Spec = Body.Spec ?? new Nutanix.Powershell.Models.NetworkSecurityRule();
+                Body.Spec.Resources = Body.Spec.Resources ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResources();
+                Body.Spec.Resources.QuarantineRule = Body.Spec.Resources.QuarantineRule ?? new Nutanix.Powershell.Models.NetworkSecurityRuleResourcesQuarantineRule();
+                Body.Spec.Resources.QuarantineRule.TargetGroup = Body.Spec.Resources.QuarantineRule.TargetGroup ?? new Nutanix.Powershell.Models.TargetGroup();
+                Body.Spec.Resources.QuarantineRule.TargetGroup.PeerSpecificationType = value;
             }
         }
          /// <summary>The Username for authentication</summary>
@@ -558,6 +549,7 @@ namespace Nutanix.Powershell.Cmdlets
         /// </returns>
         protected async System.Threading.Tasks.Task ProcessRecordAsync()
         {
+            Body.ApiVersion = "3.1";
             using( NoSynchronizationContext )
             {
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletGetPipeline); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
@@ -572,7 +564,7 @@ namespace Nutanix.Powershell.Cmdlets
                 }
                 // get the client instance
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletBeforeAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                await this.Client.UpdateSecurityRule(Uuid, BodyBody, onAccepted, onDefault, this, Pipeline, Credential);
+                await this.Client.UpdateSecurityRule(Uuid, Body, onAccepted, onDefault, this, Pipeline, Credential);
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletAfterAPICall); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }
             }
         }
@@ -589,7 +581,7 @@ namespace Nutanix.Powershell.Cmdlets
         {
             // deserialize the contents
             _uuid = If( json?.PropertyT<Carbon.Json.JsonString>("Uuid"), out var __jsonUuid) ? (string)__jsonUuid : (string)Uuid;
-            _bodyBody = If( json?.PropertyT<Carbon.Json.JsonObject>("BodyBody"), out var __jsonBodyBody) ? Nutanix.Powershell.Models.NetworkSecurityRuleIntentInput.FromJson(__jsonBodyBody) : BodyBody;
+            _body = If( json?.PropertyT<Carbon.Json.JsonObject>("Body"), out var __jsonBody) ? Nutanix.Powershell.Models.NetworkSecurityRuleIntentInput.FromJson(__jsonBody) : Body;
         }
         /// <summary>Interrupts currently running code within the command.</summary>
 
@@ -613,7 +605,7 @@ namespace Nutanix.Powershell.Cmdlets
             // serialization method
             container = container ?? new Carbon.Json.JsonObject();
             AddIf( null != Uuid ? (Carbon.Json.JsonNode) new Carbon.Json.JsonString(Uuid) : null, "Uuid" ,container.Add );
-            AddIf( null != BodyBody ? (Carbon.Json.JsonNode) BodyBody.ToJson(null) : null, "BodyBody" ,container.Add );
+            AddIf( null != Body ? (Carbon.Json.JsonNode) Body.ToJson(null) : null, "Body" ,container.Add );
             return container;
         }
         /// <summary>a delegate that is called when the remote service returns 202 (Accepted).</summary>
@@ -646,7 +638,7 @@ namespace Nutanix.Powershell.Cmdlets
             using( NoSynchronizationContext )
             {
                 // Error Response : default
-                WriteError(new System.Management.Automation.ErrorRecord(new System.Exception($"The service encountered an unexpected result: {responseMessage.StatusCode}"), responseMessage.StatusCode.ToString(), System.Management.Automation.ErrorCategory.InvalidOperation, new { Uuid,BodyBody}));
+                WriteError(new System.Management.Automation.ErrorRecord(new System.Exception($"The service encountered an unexpected result: {responseMessage.StatusCode}"), responseMessage.StatusCode.ToString(), System.Management.Automation.ErrorCategory.InvalidOperation, new { Uuid,Body}));
             }
         }
     }

@@ -8,15 +8,6 @@ namespace Nutanix.Powershell.ModelCmdlets
     {
         /// <summary>Backing field for <see cref="Vm" /></summary>
         private Nutanix.Powershell.Models.IVm _vm = new Nutanix.Powershell.Models.Vm();
-        /// <summary>The kind name</summary>
-        public string AvailabilityZoneReferenceKind
-        {
-            set
-            {
-                _vm.AvailabilityZoneReference = _vm.AvailabilityZoneReference ?? new Nutanix.Powershell.Models.AvailabilityZoneReference();
-                _vm.AvailabilityZoneReference.Kind = value;
-            }
-        }
         /// <summary>HELP MESSAGE MISSING</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string AvailabilityZoneReferenceName
@@ -37,15 +28,6 @@ namespace Nutanix.Powershell.ModelCmdlets
                 _vm.AvailabilityZoneReference = _vm.AvailabilityZoneReference ?? new Nutanix.Powershell.Models.AvailabilityZoneReference();
                 _vm.AvailabilityZoneReference.Uuid = value;
                 _vm.AvailabilityZoneReference.Kind = "availability_zone";
-            }
-        }
-        /// <summary>The kind name</summary>
-        public string ClusterReferenceKind
-        {
-            set
-            {
-                _vm.ClusterReference = _vm.ClusterReference ?? new Nutanix.Powershell.Models.ClusterReference();
-                _vm.ClusterReference.Kind = value;
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
@@ -100,6 +82,10 @@ namespace Nutanix.Powershell.ModelCmdlets
         protected override void ProcessRecord()
         {
             _vm.ClusterReference.Kind = "cluster";
+            _vm.AvailabilityZoneReference = _vm.AvailabilityZoneReference ?? new Nutanix.Powershell.Models.AvailabilityZoneReference();
+            _vm.AvailabilityZoneReference.Kind = "availability_zone";
+            _vm.ClusterReference = _vm.ClusterReference ?? new Nutanix.Powershell.Models.ClusterReference();
+            _vm.ClusterReference.Kind = "cluster_reference";
             WriteObject(_vm);
         }
     }

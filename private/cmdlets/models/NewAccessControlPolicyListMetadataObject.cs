@@ -19,15 +19,6 @@ namespace Nutanix.Powershell.ModelCmdlets
                 _accessControlPolicyListMetadata.Filter = value;
             }
         }
-        /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "The kind name")]
-        public string Kind
-        {
-            set
-            {
-                _accessControlPolicyListMetadata.Kind = value;
-            }
-        }
         /// <summary>The number of records to retrieve relative to the offset</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "The number of records to retrieve relative to the offset")]
         public int Length
@@ -59,6 +50,7 @@ namespace Nutanix.Powershell.ModelCmdlets
 
         protected override void ProcessRecord()
         {
+            _accessControlPolicyListMetadata.Kind = "access_control_list";
             WriteObject(_accessControlPolicyListMetadata);
         }
     }

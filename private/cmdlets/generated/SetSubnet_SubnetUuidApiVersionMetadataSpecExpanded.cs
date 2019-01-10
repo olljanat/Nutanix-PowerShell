@@ -41,15 +41,6 @@ namespace Nutanix.Powershell.Cmdlets
         /// <summary>The Username for authentication</summary>
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "The Proocol used on the server (http/https)")]
         public string Protocol {get; set;}
-        /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
-        public string ApiVersion
-        {
-            set
-            {
-                Body.ApiVersion = value;
-            }
-        }
         /// <summary>Backing field for <see cref="Body" /> property.</summary>
         private Nutanix.Powershell.Models.ISubnetIntentInput _body= new Nutanix.Powershell.Models.SubnetIntentInput();
 
@@ -254,6 +245,7 @@ namespace Nutanix.Powershell.Cmdlets
         /// </returns>
         protected async System.Threading.Tasks.Task ProcessRecordAsync()
         {
+            Body.ApiVersion = "3.1";
             using( NoSynchronizationContext )
             {
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletGetPipeline); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }

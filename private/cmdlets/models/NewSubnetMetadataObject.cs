@@ -46,16 +46,6 @@ namespace Nutanix.Powershell.ModelCmdlets
                 _subnetMetadata.Name = value;
             }
         }
-        /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "The kind name")]
-        public string ProjectReferenceKind
-        {
-            set
-            {
-                _subnetMetadata.ProjectReference = _subnetMetadata.ProjectReference ?? new Nutanix.Powershell.Models.ProjectReference();
-                _subnetMetadata.ProjectReference.Kind = value;
-            }
-        }
         /// <summary>HELP MESSAGE MISSING</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string ProjectReferenceName
@@ -94,16 +84,6 @@ namespace Nutanix.Powershell.ModelCmdlets
                 _subnetMetadata.SpecVersion = value;
             }
         }
-        /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "The kind name")]
-        public string UserReferenceKind
-        {
-            set
-            {
-                _subnetMetadata.OwnerReference = _subnetMetadata.OwnerReference ?? new Nutanix.Powershell.Models.UserReference();
-                _subnetMetadata.OwnerReference.Kind = value;
-            }
-        }
         /// <summary>HELP MESSAGE MISSING</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string UserReferenceName
@@ -137,7 +117,11 @@ namespace Nutanix.Powershell.ModelCmdlets
 
         protected override void ProcessRecord()
         {
+            _subnetMetadata.ProjectReference = _subnetMetadata.ProjectReference ?? new Nutanix.Powershell.Models.ProjectReference();
+            _subnetMetadata.ProjectReference.Kind = "project_reference";
             _subnetMetadata.Kind = "subnet";
+            _subnetMetadata.OwnerReference = _subnetMetadata.OwnerReference ?? new Nutanix.Powershell.Models.UserReference();
+            _subnetMetadata.OwnerReference.Kind = "owner_reference";
             WriteObject(_subnetMetadata);
         }
     }

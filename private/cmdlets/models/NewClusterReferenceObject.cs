@@ -10,14 +10,6 @@ namespace Nutanix.Powershell.ModelCmdlets
     {
         /// <summary>Backing field for <see cref="ClusterReference" /></summary>
         private Nutanix.Powershell.Models.IClusterReference _clusterReference = new Nutanix.Powershell.Models.ClusterReference();
-        /// <summary>The kind name</summary>
-        public string Kind
-        {
-            set
-            {
-                _clusterReference.Kind = value;
-            }
-        }
         /// <summary>HELP MESSAGE MISSING</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string Name

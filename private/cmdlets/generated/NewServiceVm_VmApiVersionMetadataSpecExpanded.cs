@@ -8,15 +8,6 @@ namespace Nutanix.Powershell.Cmdlets
     {
         /// <summary>The <see cref="System.Threading.CancellationTokenSource" /> for this operation.</summary>
         private System.Threading.CancellationTokenSource _cancellationTokenSource = new System.Threading.CancellationTokenSource();
-        /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
-        public string ApiVersion
-        {
-            set
-            {
-                Body.ApiVersion = value;
-            }
-        }
         /// <summary>Backing field for Body property</summary>
         private Nutanix.Powershell.Models.IVmIntentInput _body= new Nutanix.Powershell.Models.VmIntentInput();
 
@@ -42,8 +33,7 @@ namespace Nutanix.Powershell.Cmdlets
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "SendAsync Pipeline Steps to be prepended to the front of the pipeline")]
         [System.Management.Automation.ValidateNotNull]
         public Microsoft.Rest.ClientRuntime.SendAsyncStep[] HttpPipelinePrepend {get;set;}
-        /// <summary>The vm kind metadata</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The vm kind metadata")]
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Describes the image metadata object.")]
         public Nutanix.Powershell.Models.IVmMetadata Metadata
         {
             set

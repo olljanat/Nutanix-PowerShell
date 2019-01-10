@@ -44,15 +44,6 @@ namespace Nutanix.Powershell.Cmdlets
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "SendAsync Pipeline Steps to be prepended to the front of the pipeline")]
         [System.Management.Automation.ValidateNotNull]
         public Microsoft.Rest.ClientRuntime.SendAsyncStep[] HttpPipelinePrepend {get;set;}
-        /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "The kind name")]
-        public string Kind
-        {
-            set
-            {
-                GetEntitiesRequestBody.Kind = value;
-            }
-        }
         /// <summary>The number of records to retrieve relative to the offset</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "The number of records to retrieve relative to the offset")]
         public int Length
@@ -296,6 +287,7 @@ namespace Nutanix.Powershell.Cmdlets
         /// </returns>
         protected async System.Threading.Tasks.Task ProcessRecordAsync()
         {
+            GetEntitiesRequestBody.Kind = "category_value";
             using( NoSynchronizationContext )
             {
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletGetPipeline); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }

@@ -28,14 +28,6 @@ namespace Nutanix.Powershell.ModelCmdlets
                 _vmRecoveryPointMetadata.CreationTime = value;
             }
         }
-        /// <summary>The kind name</summary>
-        public string Kind
-        {
-            set
-            {
-                _vmRecoveryPointMetadata.Kind = value;
-            }
-        }
         /// <summary>UTC date and time in RFC-3339 format when vm_recovery_point was last updated</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "UTC date and time in RFC-3339 format when vm_recovery_point was last updated")]
         public System.DateTime LastUpdateTime
@@ -52,15 +44,6 @@ namespace Nutanix.Powershell.ModelCmdlets
             set
             {
                 _vmRecoveryPointMetadata.Name = value;
-            }
-        }
-        /// <summary>The kind name</summary>
-        public string ProjectReferenceKind
-        {
-            set
-            {
-                _vmRecoveryPointMetadata.ProjectReference = _vmRecoveryPointMetadata.ProjectReference ?? new Nutanix.Powershell.Models.ProjectReference();
-                _vmRecoveryPointMetadata.ProjectReference.Kind = value;
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
@@ -101,16 +84,6 @@ namespace Nutanix.Powershell.ModelCmdlets
                 _vmRecoveryPointMetadata.SpecVersion = value;
             }
         }
-        /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The kind name")]
-        public string UserReferenceKind
-        {
-            set
-            {
-                _vmRecoveryPointMetadata.OwnerReference = _vmRecoveryPointMetadata.OwnerReference ?? new Nutanix.Powershell.Models.UserReference();
-                _vmRecoveryPointMetadata.OwnerReference.Kind = value;
-            }
-        }
         /// <summary>HELP MESSAGE MISSING</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string UserReferenceName
@@ -144,9 +117,12 @@ namespace Nutanix.Powershell.ModelCmdlets
 
         protected override void ProcessRecord()
         {
+            _vmRecoveryPointMetadata.ProjectReference = _vmRecoveryPointMetadata.ProjectReference ?? new Nutanix.Powershell.Models.ProjectReference();
+            _vmRecoveryPointMetadata.ProjectReference.Kind = "project_reference";
             _vmRecoveryPointMetadata.ProjectReference.Kind = "project";
             _vmRecoveryPointMetadata.Kind = "metadata";
             _vmRecoveryPointMetadata.OwnerReference.Kind = "owner";
+            _vmRecoveryPointMetadata.Kind = "recovery_point";
             WriteObject(_vmRecoveryPointMetadata);
         }
     }

@@ -8,15 +8,6 @@ namespace Nutanix.Powershell.Cmdlets
     {
         /// <summary>The <see cref="System.Threading.CancellationTokenSource" /> for this operation.</summary>
         private System.Threading.CancellationTokenSource _cancellationTokenSource = new System.Threading.CancellationTokenSource();
-        /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
-        public string ApiVersion
-        {
-            set
-            {
-                Body.ApiVersion = value;
-            }
-        }
         /// <summary>Backing field for <see cref="Body" /> property.</summary>
         private Nutanix.Powershell.Models.INetworkSecurityRuleIntentInput _body= new Nutanix.Powershell.Models.NetworkSecurityRuleIntentInput();
 
@@ -204,15 +195,7 @@ namespace Nutanix.Powershell.Cmdlets
         [System.Management.Automation.Parameter(Mandatory = false, DontShow= true, HelpMessage = "SendAsync Pipeline Steps to be prepended to the front of the pipeline")]
         [System.Management.Automation.ValidateNotNull]
         public Microsoft.Rest.ClientRuntime.SendAsyncStep[] HttpPipelinePrepend {get;set;}
-        /// <summary>The network_security_rule kind metadata</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The network_security_rule kind metadata")]
-        public Nutanix.Powershell.Models.INetworkSecurityRuleMetadata Metadata
-        {
-            set
-            {
-                Body.Metadata = value;
-            }
-        }
+
         /// <summary>
         /// <see cref="IEventListener" /> cancellation delegate. Stops the cmdlet when called.
         /// </summary>
@@ -468,6 +451,7 @@ namespace Nutanix.Powershell.Cmdlets
         /// </returns>
          async System.Threading.Tasks.Task Microsoft.Rest.ClientRuntime.IEventListener.Signal(string id, System.Threading.CancellationToken token, System.Func<Microsoft.Rest.ClientRuntime.EventData> messageData)
         {
+            Body.ApiVersion = "3.1";
             using( NoSynchronizationContext )
             {
                 if (token.IsCancellationRequested)
@@ -575,8 +559,8 @@ namespace Nutanix.Powershell.Cmdlets
                 if (this.Async.ToBool())
                 {
                     await this.Client.CreateSecurityRule_Sync(Body, onAccepted, onDefault, onOK, this, Pipeline, Credential);
-                } 
-                else 
+                }
+                else
                 {
                     await this.Client.CreateSecurityRule(Body, onAccepted, onDefault, this, Pipeline, Credential);
                 }

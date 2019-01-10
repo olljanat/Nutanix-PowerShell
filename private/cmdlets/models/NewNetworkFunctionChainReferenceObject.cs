@@ -10,15 +10,6 @@ namespace Nutanix.Powershell.ModelCmdlets
     {
         /// <summary>Backing field for <see cref="NetworkFunctionChainReference" /></summary>
         private Nutanix.Powershell.Models.INetworkFunctionChainReference _networkFunctionChainReference = new Nutanix.Powershell.Models.NetworkFunctionChainReference();
-        /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The kind name")]
-        public string Kind
-        {
-            set
-            {
-                _networkFunctionChainReference.Kind = value;
-            }
-        }
         /// <summary>HELP MESSAGE MISSING</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string Name
@@ -41,6 +32,7 @@ namespace Nutanix.Powershell.ModelCmdlets
 
         protected override void ProcessRecord()
         {
+            _networkFunctionChainReference.Kind = "network_function_chain_reference";
             WriteObject(_networkFunctionChainReference);
         }
     }

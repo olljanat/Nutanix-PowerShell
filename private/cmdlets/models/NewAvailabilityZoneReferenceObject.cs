@@ -10,14 +10,6 @@ namespace Nutanix.Powershell.ModelCmdlets
     {
         /// <summary>Backing field for <see cref="AvailabilityZoneReference" /></summary>
         private Nutanix.Powershell.Models.IAvailabilityZoneReference _availabilityZoneReference = new Nutanix.Powershell.Models.AvailabilityZoneReference();
-        /// <summary>The kind name</summary>
-        public string Kind
-        {
-            set
-            {
-                _availabilityZoneReference.Kind = value;
-            }
-        }
         /// <summary>HELP MESSAGE MISSING</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string Name

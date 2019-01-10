@@ -8,15 +8,6 @@ namespace Nutanix.Powershell.Cmdlets
     {
         /// <summary>The <see cref="System.Threading.CancellationTokenSource" /> for this operation.</summary>
         private System.Threading.CancellationTokenSource _cancellationTokenSource = new System.Threading.CancellationTokenSource();
-        /// <summary>API version.</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "API version.")]
-        public string ApiVersion
-        {
-            set
-            {
-                SpecBody.ApiVersion = value;
-            }
-        }
         /// <summary>The reference to the client API class.</summary>
         public Nutanix.Powershell.NutanixIntentfulAPI Client => Nutanix.Powershell.Module.Instance.ClientAPI;
         /// <summary>Description of the category value.</summary>
@@ -274,6 +265,7 @@ namespace Nutanix.Powershell.Cmdlets
         /// </returns>
         protected async System.Threading.Tasks.Task ProcessRecordAsync()
         {
+            SpecBody.ApiVersion = "3.1";
             using( NoSynchronizationContext )
             {
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletGetPipeline); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }

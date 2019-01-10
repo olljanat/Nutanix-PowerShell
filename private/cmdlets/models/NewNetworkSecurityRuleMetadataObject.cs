@@ -28,15 +28,6 @@ namespace Nutanix.Powershell.ModelCmdlets
                 _networkSecurityRuleMetadata.CreationTime = value;
             }
         }
-        /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The kind name")]
-        public string Kind
-        {
-            set
-            {
-                _networkSecurityRuleMetadata.Kind = value;
-            }
-        }
         /// <summary>
         /// UTC date and time in RFC-3339 format when network_security_rule was last updated
         /// </summary>
@@ -55,16 +46,6 @@ namespace Nutanix.Powershell.ModelCmdlets
             set
             {
                 _networkSecurityRuleMetadata.Name = value;
-            }
-        }
-        /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The kind name")]
-        public string ProjectReferenceKind
-        {
-            set
-            {
-                _networkSecurityRuleMetadata.ProjectReference = _networkSecurityRuleMetadata.ProjectReference ?? new Nutanix.Powershell.Models.ProjectReference();
-                _networkSecurityRuleMetadata.ProjectReference.Kind = value;
             }
         }
         /// <summary>HELP MESSAGE MISSING</summary>
@@ -105,16 +86,6 @@ namespace Nutanix.Powershell.ModelCmdlets
                 _networkSecurityRuleMetadata.SpecVersion = value;
             }
         }
-        /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "The kind name")]
-        public string UserReferenceKind
-        {
-            set
-            {
-                _networkSecurityRuleMetadata.OwnerReference = _networkSecurityRuleMetadata.OwnerReference ?? new Nutanix.Powershell.Models.UserReference();
-                _networkSecurityRuleMetadata.OwnerReference.Kind = value;
-            }
-        }
         /// <summary>HELP MESSAGE MISSING</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string UserReferenceName
@@ -148,6 +119,11 @@ namespace Nutanix.Powershell.ModelCmdlets
 
         protected override void ProcessRecord()
         {
+            _networkSecurityRuleMetadata.Kind = "security_rule";
+            _networkSecurityRuleMetadata.ProjectReference = _networkSecurityRuleMetadata.ProjectReference ?? new Nutanix.Powershell.Models.ProjectReference();
+            _networkSecurityRuleMetadata.ProjectReference.Kind = "project_reference";
+            _networkSecurityRuleMetadata.OwnerReference = _networkSecurityRuleMetadata.OwnerReference ?? new Nutanix.Powershell.Models.UserReference();
+            _networkSecurityRuleMetadata.OwnerReference.Kind = "owner_reference";
             WriteObject(_networkSecurityRuleMetadata);
         }
     }

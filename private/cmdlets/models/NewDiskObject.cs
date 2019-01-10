@@ -10,24 +10,13 @@ namespace Nutanix.Powershell.ModelCmdlets
     {
         /// <summary>Backing field for <see cref="VmDisk" /></summary>
         private Nutanix.Powershell.Models.IVmDisk _disk = new Nutanix.Powershell.Models.VmDisk();
-
-        /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
-        public string DataSourceReferenceKind
-        {
-            set
-            {
-                _disk.DataSourceReference = _disk.DataSourceReference ?? new Nutanix.Powershell.Models.Reference();
-                _disk.DataSourceReference.Kind = value;
-            }
-        }
         /// <summary>HELP MESSAGE MISSING</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string DataSourceReferenceName
         {
             set
             {
-                _disk.DataSourceReference = _disk.DataSourceReference ?? new Nutanix.Powershell.Models.Reference();                
+                _disk.DataSourceReference = _disk.DataSourceReference ?? new Nutanix.Powershell.Models.Reference();
                 _disk.DataSourceReference.Name = value;
             }
         }
@@ -38,11 +27,11 @@ namespace Nutanix.Powershell.ModelCmdlets
         {
             set
             {
-                _disk.DataSourceReference = _disk.DataSourceReference ?? new Nutanix.Powershell.Models.Reference();                
+                _disk.DataSourceReference = _disk.DataSourceReference ?? new Nutanix.Powershell.Models.Reference();
                 _disk.DataSourceReference.Uuid = value;
             }
         }
-        
+
         /// <summary>HELP MESSAGE MISSING</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string DeviceType
@@ -99,6 +88,8 @@ namespace Nutanix.Powershell.ModelCmdlets
 
         protected override void ProcessRecord()
         {
+            _disk.DataSourceReference = _disk.DataSourceReference ?? new Nutanix.Powershell.Models.Reference();
+            _disk.DataSourceReference.Kind = "value";
             WriteObject(_disk);
         }
     }

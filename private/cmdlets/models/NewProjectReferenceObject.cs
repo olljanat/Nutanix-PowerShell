@@ -10,14 +10,6 @@ namespace Nutanix.Powershell.ModelCmdlets
     {
         /// <summary>Backing field for <see cref="ProjectReference" /></summary>
         private Nutanix.Powershell.Models.IProjectReference _projectReference = new Nutanix.Powershell.Models.ProjectReference();
-        /// <summary>The kind name</summary>
-        public string Kind
-        {
-            set
-            {
-                _projectReference.Kind = value;
-            }
-        }
         /// <summary>HELP MESSAGE MISSING</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string Name

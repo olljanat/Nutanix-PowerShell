@@ -8,15 +8,6 @@ namespace Nutanix.Powershell.Cmdlets
     {
         /// <summary>The <see cref="System.Threading.CancellationTokenSource" /> for this operation.</summary>
         private System.Threading.CancellationTokenSource _cancellationTokenSource = new System.Threading.CancellationTokenSource();
-        /// <summary>API version.</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "API version.")]
-        public string ApiVersion
-        {
-            set
-            {
-                QueryBody.ApiVersion = value;
-            }
-        }
         /// <summary>List of kinds associated with this filter.</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "List of kinds associated with this filter.")]
         public string[] CategoryFilterKindList
@@ -291,6 +282,7 @@ namespace Nutanix.Powershell.Cmdlets
         /// </returns>
         protected async System.Threading.Tasks.Task ProcessRecordAsync()
         {
+            QueryBody.ApiVersion = "3.1";
             using( NoSynchronizationContext )
             {
                 await ((Microsoft.Rest.ClientRuntime.IEventListener)this).Signal(Microsoft.Rest.ClientRuntime.Events.CmdletGetPipeline); if( ((Microsoft.Rest.ClientRuntime.IEventListener)this).Token.IsCancellationRequested ) { return; }

@@ -19,15 +19,6 @@ namespace Nutanix.Powershell.ModelCmdlets
                 _taskListMetadata.Filter = value;
             }
         }
-        /// <summary>The kind name</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "The kind name")]
-        public string Kind
-        {
-            set
-            {
-                _taskListMetadata.Kind = value;
-            }
-        }
         /// <summary>The number of records to retrieve relative to the offset</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "The number of records to retrieve relative to the offset")]
         public int Length
@@ -68,6 +59,7 @@ namespace Nutanix.Powershell.ModelCmdlets
 
         protected override void ProcessRecord()
         {
+            _taskListMetadata.Kind = "task";
             WriteObject(_taskListMetadata);
         }
     }

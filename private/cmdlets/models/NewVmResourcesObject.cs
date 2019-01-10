@@ -168,16 +168,6 @@ namespace Nutanix.Powershell.ModelCmdlets
         }
         /// <summary>HELP MESSAGE MISSING</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
-        public string ReferenceKind
-        {
-            set
-            {
-                _vmResources.ParentReference = _vmResources.ParentReference ?? new Nutanix.Powershell.Models.Reference();
-                _vmResources.ParentReference.Kind = value;
-            }
-        }
-        /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         public string ReferenceName
         {
             set
@@ -275,6 +265,8 @@ namespace Nutanix.Powershell.ModelCmdlets
 
         protected override void ProcessRecord()
         {
+            _vmResources.ParentReference = _vmResources.ParentReference ?? new Nutanix.Powershell.Models.Reference();
+            _vmResources.ParentReference.Kind = "parent_reference";
             WriteObject(_vmResources);
         }
     }
