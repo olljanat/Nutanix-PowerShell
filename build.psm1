@@ -633,11 +633,7 @@ function New-PSOptions {
     }
     Write-Verbose "Using configuration '$Configuration'"
 
-    $PowerShellDir = if (!$Environment.IsWindows) {
-        "powershell-unix"
-    } else {
-        "powershell-win-core"
-    }
+    $PowerShellDir = "Nutanix.PowerShell.SDK"
     $Top = [IO.Path]::Combine($PSScriptRoot, "src", $PowerShellDir)
     Write-Verbose "Top project directory is $Top"
 
