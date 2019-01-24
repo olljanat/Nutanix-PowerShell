@@ -344,17 +344,10 @@ Fix steps:
     # handle Restore
     Restore-PSPackage -Options $Options -Force:$Restore
 
-    # handle ResGen
-    # Heuristic to run ResGen on the fresh machine
-    if ($ResGen -or -not (Test-Path "$PSScriptRoot/src/Microsoft.PowerShell.ConsoleHost/gen")) {
-        Write-Log "Run ResGen (generating C# bindings for resx files)"
-        Start-ResGen
-    }
-
     # Handle TypeGen
     # .inc file name must be different for Windows and Linux to allow build on Windows and WSL.
     $incFileName = "powershell_$($Options.Runtime).inc"
-    if ($TypeGen -or -not (Test-Path "$PSScriptRoot/src/TypeCatalogGen/$incFileName")) {
+    if ($TypeGen) {
         Write-Log "Run TypeGen (generating CorePsTypeCatalog.cs)"
         Start-TypeGen -IncFileName $incFileName
     }
@@ -496,7 +489,7 @@ function Restore-PSPackage
 
     if (-not $ProjectDirs)
     {
-        $ProjectDirs = @($Options.Top, "$PSScriptRoot/src/TypeCatalogGen", "$PSScriptRoot/src/ResGen", "$PSScriptRoot/src/Modules")
+        $ProjectDirs = @($Options.Top, "$PSScriptRoot/src/Nutanix.PowerShell.SDK")
     }
 
     if ($Force -or (-not (Test-Path "$($Options.Top)/obj/project.assets.json"))) {
@@ -1856,31 +1849,7 @@ function Start-TypeGen
 
     Push-Location "$PSScriptRoot/src/Microsoft.PowerShell.SDK"
     try {
-        $ps_inc_file = "$PSScriptRoot/src/TypeCatalogGen/$IncFileName"
-        dotnet msbuild .\Microsoft.PowerShell.SDK.csproj /t:_GetDependencies "/property:DesignTimeBuild=true;_DependencyFile=$ps_inc_file" /nologo
-    } finally {
-        Pop-Location
-    }
-
-    Push-Location "$PSScriptRoot/src/TypeCatalogGen"
-    try {
-        dotnet run ../System.Management.Automation/CoreCLR/CorePsTypeCatalog.cs $IncFileName
-    } finally {
-        Pop-Location
-    }
-}
-
-function Start-ResGen
-{
-    [CmdletBinding()]
-    param()
-
-    # Add .NET CLI tools to PATH
-    Find-Dotnet
-
-    Push-Location "$PSScriptRoot/src/ResGen"
-    try {
-        Start-NativeExecution { dotnet run } | Write-Verbose
+        dotnet msbuild .\Microsoft.PowerShell.SDK.csproj /t:_GetDependencies "/property:DesignTimeBuild=true" /nologo
     } finally {
         Pop-Location
     }
