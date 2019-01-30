@@ -6,7 +6,7 @@ mono: none
 git:
   depth: 1
 
-dotnet: 2.2.103
+dotnet: 2.2
 
 script: dotnet build
 
@@ -28,7 +28,7 @@ matrix:
 # which is expensive and unneeded for build agents.
 env:
   global:
-    - CACHE_VERSION=netcoreapp.2.2-sdk.2.2.103
+    - CACHE_VERSION=netcoreapp.2.2-sdk.2.2
     - POWERSHELL_TELEMETRY_OPTOUT=1
     - DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
 
